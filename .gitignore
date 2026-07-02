@@ -11,3 +11,4 @@ out/
 .env.development
 *.pem
 *.key
+*.tsbuildinfo
