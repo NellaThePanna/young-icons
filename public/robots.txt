@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap: https://[domain-TBC]/sitemap.xml
+# Update domain before launch
