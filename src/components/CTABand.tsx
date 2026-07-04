@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Link from "next/link"
 import { CLASSCARD_URL } from "@/lib/config"
 
@@ -25,6 +26,10 @@ export default function CTABand({
   secondaryHref,
 }: CTABandProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+  const subRef = useRef<HTMLParagraphElement>(null)
+  const ctaRowRef = useRef<HTMLDivElement>(null)
+  const splitRef = useRef<SplitText | null>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -35,14 +40,33 @@ export default function CTABand({
       once: true,
       invalidateOnRefresh: true,
       onEnter: () => {
-        gsap.from(sectionRef.current, {
+        const split = new SplitText(headlineRef.current, { type: "words" })
+        splitRef.current = split
+
+        const tl = gsap.timeline()
+
+        tl.from(split.words, {
           opacity: 0,
           y: prefersReduced ? 0 : 24,
           duration: prefersReduced ? 0.01 : 0.8,
           ease: "power2.out",
+          stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
         })
+
+        tl.from(
+          [subRef.current, ctaRowRef.current].filter(Boolean),
+          {
+            opacity: 0,
+            y: prefersReduced ? 0 : 24,
+            duration: prefersReduced ? 0.01 : 0.8,
+            ease: "power2.out",
+          },
+          prefersReduced ? "<" : "-=0.4"
+        )
       },
     })
+
+    return () => splitRef.current?.revert()
   }, { scope: sectionRef })
 
   const isExternal = !href
@@ -58,6 +82,8 @@ export default function CTABand({
     >
       <div className="mx-auto" style={{ maxWidth: "640px" }}>
         <h2
+          ref={headlineRef}
+          aria-label={headline}
           className={`text-3xl md:text-4xl lg:text-5xl tracking-tight ${sub ? "mb-4" : "mb-8"}`}
           style={{
             fontFamily: "var(--font-display)",
@@ -69,6 +95,7 @@ export default function CTABand({
         </h2>
         {sub && (
           <p
+            ref={subRef}
             className="text-base md:text-lg mb-8"
             style={{
               fontFamily: "var(--font-body)",
@@ -78,7 +105,7 @@ export default function CTABand({
             {sub}
           </p>
         )}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div ref={ctaRowRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           {isExternal ? (
             <a
               href={resolvedHref}

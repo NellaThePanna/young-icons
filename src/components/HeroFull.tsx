@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import Link from "next/link"
+import { SplitText } from "gsap/SplitText"
 import { CLASSCARD_URL } from "@/lib/config"
 import { HOME_HERO } from "@/content/home"
 
@@ -29,15 +30,31 @@ export default function HeroFull({
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const targets = [h1Ref.current, subRef.current, ctasRef.current].filter(Boolean)
 
-    gsap.from(targets, {
+    const split = new SplitText(h1Ref.current, { type: "words" })
+    const tl = gsap.timeline()
+
+    tl.from(split.words, {
       opacity: 0,
-      y: prefersReduced ? 0 : 40,
+      y: prefersReduced ? 0 : 24,
       duration: prefersReduced ? 0.01 : 0.8,
       ease: "power2.out",
-      stagger: 0.1,
+      stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
     })
+
+    tl.from(
+      [subRef.current, ctasRef.current],
+      {
+        opacity: 0,
+        y: prefersReduced ? 0 : 40,
+        duration: prefersReduced ? 0.01 : 0.8,
+        ease: "power2.out",
+        stagger: prefersReduced ? 0 : 0.1,
+      },
+      prefersReduced ? "<" : "-=0.4"
+    )
+
+    return () => split.revert()
   }, { scope: containerRef })
 
   return (
@@ -49,6 +66,7 @@ export default function HeroFull({
       <div className="max-w-4xl w-full mx-auto text-center">
         <h1
           ref={h1Ref}
+          aria-label={h1}
           className="text-5xl md:text-7xl lg:text-8xl tracking-tight mb-6"
           style={{
             fontFamily: "var(--font-display)",

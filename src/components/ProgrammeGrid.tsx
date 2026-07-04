@@ -35,6 +35,7 @@ export default function ProgrammeGrid({ cards, heading }: ProgrammeGridProps) {
         gsap.from(cardEls, {
           opacity: 0,
           y: prefersReduced ? 0 : 32,
+          scale: prefersReduced ? 1 : 0.96,
           duration: prefersReduced ? 0.01 : 0.5,
           ease: "power2.out",
           stagger: { amount: prefersReduced ? 0 : 0.3, from: "start" },

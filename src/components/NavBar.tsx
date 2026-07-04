@@ -1,15 +1,30 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 import Link from "next/link"
 import { CLASSCARD_URL } from "@/lib/config"
 import { NAV_LINKS } from "@/content/home"
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
+
+  useGSAP(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    gsap.from(headerRef.current, {
+      opacity: 0,
+      y: prefersReduced ? 0 : -16,
+      duration: prefersReduced ? 0.01 : 0.6,
+      ease: "power2.out",
+    })
+  }, { scope: headerRef })
 
   return (
     <header
+      ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         backgroundColor: "var(--color-black)",
