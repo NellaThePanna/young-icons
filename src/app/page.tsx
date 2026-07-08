@@ -5,6 +5,7 @@ import MarqueeStrip from "@/components/MarqueeStrip"
 import ExploreCards from "@/components/ExploreCards"
 import WhoWeAre from "@/components/WhoWeAre"
 import StatsBlock from "@/components/StatsBlock"
+import ActivityCarousel from "@/components/ActivityCarousel"
 import TrustBar from "@/components/TrustBar"
 import ProgrammeGrid from "@/components/ProgrammeGrid"
 import DirectAnswer from "@/components/DirectAnswer"
@@ -60,6 +61,7 @@ export default function HomePage() {
         <ExploreCards />
         <WhoWeAre />
         <StatsBlock />
+        <ActivityCarousel />
         <TrustBar />
         <ProgrammeGrid
           cards={HOME_PROGRAMME_CARDS}

@@ -109,6 +109,23 @@ export const HOME_STATS = [
   },
 ] as const
 
+export const ACTIVITIES_SECTION = {
+  smallHeading: "WHAT GETS US MOVING",
+  heading: "SOMETHING FOR EVERY ICON.",
+} as const
+
+export const HOME_ACTIVITIES = [
+  { name: "MULTI-SPORTS", image: "/images/placeholder/ball-skills.jpg" },
+  { name: "FOOTBALL", image: "/images/placeholder/ball-skills.jpg" },
+  { name: "BALLET", image: "/images/placeholder/ballet-ribbon.jpg" },
+  { name: "GYMNASTICS", image: "/images/placeholder/obstacle-course.jpg" },
+  { name: "KARATE", image: "/images/placeholder/karate-crawl.jpg" },
+  { name: "TENNIS", image: "/images/placeholder/tennis-rackets.jpg" },
+  { name: "BASKETBALL", image: "/images/placeholder/nursery-basketball.jpg" },
+  { name: "RUGBY", image: "/images/placeholder/ball-skills.jpg" },
+  { name: "BOXING", image: "/images/placeholder/karate-crawl.jpg" },
+] as const
+
 export const HOME_PROGRAMME_CARDS = [
   {
     name: "Nurseries",
