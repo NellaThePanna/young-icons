@@ -206,7 +206,7 @@ export default function ComingSoonPage({
                 className="text-lg text-center"
                 style={{ fontFamily: "var(--font-body)", color: "var(--color-white)" }}
               >
-                THANK YOU — WE'LL LET YOU KNOW.
+                THANK YOU — WE&apos;LL LET YOU KNOW.
               </p>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">

@@ -10,7 +10,6 @@ import {
   CONTACT_FORM,
   CONTACT_NAP,
   CONTACT_DIRECT_QAS,
-  CONTACT_SOCIAL,
 } from "@/content/contact"
 
 export const metadata: Metadata = {
