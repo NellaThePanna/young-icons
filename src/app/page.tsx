@@ -8,6 +8,7 @@ import StatsBlock from "@/components/StatsBlock"
 import ActivityCarousel from "@/components/ActivityCarousel"
 import PartnerLogos from "@/components/PartnerLogos"
 import TestimonialSlider from "@/components/TestimonialSlider"
+import FinalCTA from "@/components/FinalCTA"
 import TrustBar from "@/components/TrustBar"
 import ProgrammeGrid from "@/components/ProgrammeGrid"
 import DirectAnswer from "@/components/DirectAnswer"
@@ -66,6 +67,7 @@ export default function HomePage() {
         <ActivityCarousel />
         <PartnerLogos />
         <TestimonialSlider />
+        <FinalCTA />
         <TrustBar />
         <ProgrammeGrid
           cards={HOME_PROGRAMME_CARDS}

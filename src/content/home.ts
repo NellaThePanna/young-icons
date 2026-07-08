@@ -218,6 +218,15 @@ export const HOME_CTA_BAND = {
   cta: "Book Free Trial",
 } as const
 
+export const FINAL_CTA = {
+  smallHeading: "READY TO MOVE?",
+  heading: "LET'S GET MOVING.",
+  sub: "Find a Young Icons class or discover how we can work with your nursery or school.",
+  ctaPrimary: "FIND A CLASS",
+  ctaSecondary: "WORK WITH US",
+  image: "/images/placeholder/ball-skills.jpg",
+} as const
+
 export const NAV_LINKS = [
   { label: "Nurseries", href: "/nurseries" },
   { label: "Schools", href: "/schools" },
