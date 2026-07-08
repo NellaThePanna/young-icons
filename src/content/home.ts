@@ -116,14 +116,14 @@ export const ACTIVITIES_SECTION = {
 
 export const HOME_ACTIVITIES = [
   { name: "MULTI-SPORTS", image: "/images/placeholder/ball-skills.jpg" },
-  { name: "FOOTBALL", image: "/images/placeholder/ball-skills.jpg" },
+  { name: "FOOTBALL", image: "/images/placeholder/activity-football.png" },
   { name: "BALLET", image: "/images/placeholder/ballet-ribbon.jpg" },
   { name: "GYMNASTICS", image: "/images/placeholder/obstacle-course.jpg" },
   { name: "KARATE", image: "/images/placeholder/karate-crawl.jpg" },
   { name: "TENNIS", image: "/images/placeholder/tennis-rackets.jpg" },
   { name: "BASKETBALL", image: "/images/placeholder/nursery-basketball.jpg" },
-  { name: "RUGBY", image: "/images/placeholder/ball-skills.jpg" },
-  { name: "BOXING", image: "/images/placeholder/karate-crawl.jpg" },
+  { name: "RUGBY", image: "/images/placeholder/activity-rugby.png" },
+  { name: "BOXING", image: "/images/placeholder/activity-boxing.png" },
 ] as const
 
 export const HOME_PROGRAMME_CARDS = [

@@ -157,7 +157,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Book Free Trial
+              FIND A CLASS
             </a>
           </div>
         </div>

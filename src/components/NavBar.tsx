@@ -81,7 +81,7 @@ export default function NavBar() {
             textDecoration: "none",
           }}
         >
-          Book Free Trial
+          FIND A CLASS
         </a>
 
         <button
@@ -162,7 +162,7 @@ export default function NavBar() {
               textDecoration: "none",
             }}
           >
-            Book Free Trial
+            FIND A CLASS
           </a>
         </div>
       )}
