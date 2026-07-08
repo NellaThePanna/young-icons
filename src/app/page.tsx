@@ -4,6 +4,7 @@ import HeroHome from "@/components/HeroHome"
 import MarqueeStrip from "@/components/MarqueeStrip"
 import ExploreCards from "@/components/ExploreCards"
 import WhoWeAre from "@/components/WhoWeAre"
+import StatsBlock from "@/components/StatsBlock"
 import TrustBar from "@/components/TrustBar"
 import ProgrammeGrid from "@/components/ProgrammeGrid"
 import DirectAnswer from "@/components/DirectAnswer"
@@ -58,6 +59,7 @@ export default function HomePage() {
         <MarqueeStrip />
         <ExploreCards />
         <WhoWeAre />
+        <StatsBlock />
         <TrustBar />
         <ProgrammeGrid
           cards={HOME_PROGRAMME_CARDS}

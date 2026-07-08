@@ -85,6 +85,30 @@ export const PHILOSOPHY = [
   },
 ] as const
 
+export const HOME_STATS = [
+  {
+    value: "50+",
+    label: "EDUCATIONAL FACILITIES",
+    isNumeric: true,
+  },
+  {
+    value: "900+",
+    label: "CHILDREN MOVING EVERY WEEK",
+    isNumeric: true,
+    unconfirmed: true,
+  },
+  {
+    value: "2–18",
+    label: "AGES WE SUPPORT",
+    isNumeric: false,
+  },
+  {
+    value: "DUBAI +\nABU DHABI",
+    label: "ACROSS THE UAE",
+    isNumeric: false,
+  },
+] as const
+
 export const HOME_PROGRAMME_CARDS = [
   {
     name: "Nurseries",
