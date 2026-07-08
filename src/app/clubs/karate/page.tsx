@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import ComingSoonPage from "@/components/ComingSoonPage"
 
 export const metadata: Metadata = {
-  title: "Young Icons Ballet — Coming Soon | Young Icons",
+  title: "Young Icons Karate — Coming Soon | Young Icons",
   description:
-    "A new Young Icons Ballet experience is coming soon to Dubai. Register your interest to be the first to know.",
+    "A new Young Icons Karate experience is coming soon to Dubai. Register your interest to be the first to know.",
 }
 
 const localBusinessSchema = {
@@ -24,7 +24,7 @@ const localBusinessSchema = {
   email: "[CLIENT: email required]",
 }
 
-export default function BalletPage() {
+export default function KaratePage() {
   return (
     <>
       <script
@@ -32,12 +32,12 @@ export default function BalletPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       <ComingSoonPage
-        smallHeading="YOUNG ICONS BALLET"
-        words={["MOVE.", "CREATE.", "GROW."]}
+        smallHeading="YOUNG ICONS KARATE"
+        words={["FOCUS.", "DISCIPLINE.", "GROW."]}
         wordColors={["white", "white", "green"]}
-        sub="A new Young Icons Ballet experience is coming soon to Dubai."
-        image="/images/placeholder/ballet-ribbon.jpg"
-        programmeName="Ballet"
+        sub="A new Young Icons Karate experience is coming soon to Dubai."
+        image="/images/placeholder/karate-crawl.jpg"
+        programmeName="Karate"
       />
     </>
   )
