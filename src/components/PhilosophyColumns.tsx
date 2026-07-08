@@ -55,7 +55,7 @@ export default function PhilosophyColumns({ items, bg = "black" }: PhilosophyCol
                     zIndex: isLast ? 1 : "auto",
                   }}
                 >
-                  <Image src={item.image} alt="" fill className="object-cover" />
+                  <Image src={item.image} alt="" fill sizes="(max-width: 768px) 80vw, 25vw" className="object-cover" />
                 </div>
               )}
               <p

@@ -106,6 +106,7 @@ export default function CampsAbout() {
               src={CAMPS_ABOUT.image}
               alt=""
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>

@@ -93,6 +93,7 @@ export default function ExploreCards() {
                 src={card.image}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 80vw, 25vw"
                 className="object-cover"
               />
             </div>

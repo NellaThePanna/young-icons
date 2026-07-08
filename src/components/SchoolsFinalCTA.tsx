@@ -42,7 +42,7 @@ export default function SchoolsFinalCTA() {
       style={{ minHeight: "70vh" }}
     >
       <div className="absolute inset-0">
-        <Image src={SCHOOLS_FINAL_CTA.image} alt="" fill className="object-cover" />
+        <Image src={SCHOOLS_FINAL_CTA.image} alt="" fill sizes="100vw" className="object-cover" />
       </div>
       <div
         className="absolute inset-0"

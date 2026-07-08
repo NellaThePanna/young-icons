@@ -78,6 +78,7 @@ export default function WhoWeAre() {
                 src={WHO_WE_ARE.imageLarge}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

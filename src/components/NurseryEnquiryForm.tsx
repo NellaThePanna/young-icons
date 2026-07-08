@@ -108,7 +108,7 @@ export default function NurseryEnquiryForm() {
           className="enquiry-item relative flex flex-col justify-end overflow-hidden"
           style={{ minHeight: "420px", borderRadius: "var(--radius-lg)" }}
         >
-          <Image src={NURSERY_ENQUIRY_CTA.image} alt="" fill className="object-cover" />
+          <Image src={NURSERY_ENQUIRY_CTA.image} alt="" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
           <div
             className="absolute inset-0"
             style={{ backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }}

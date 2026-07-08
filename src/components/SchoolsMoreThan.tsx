@@ -139,6 +139,7 @@ export default function SchoolsMoreThan() {
             src={SCHOOLS_MORE_THAN.image}
             alt=""
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
           />
         </div>

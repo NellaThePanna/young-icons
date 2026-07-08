@@ -80,6 +80,7 @@ export default function ActivityCarousel() {
                 src={activity.image}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 80vw, 25vw"
                 className="object-cover"
               />
             </div>

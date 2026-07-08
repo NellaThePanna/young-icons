@@ -107,6 +107,7 @@ export default function EarlyYearsDifferent() {
               src={EARLY_YEARS.imageSmall}
               alt=""
               fill
+              sizes="(max-width: 768px) 80vw, 25vw"
               className="object-cover"
             />
           </div>
