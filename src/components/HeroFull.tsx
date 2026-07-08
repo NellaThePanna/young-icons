@@ -6,7 +6,6 @@ import gsap from "gsap"
 import Link from "next/link"
 import { SplitText } from "gsap/SplitText"
 import { CLASSCARD_URL } from "@/lib/config"
-import { HOME_HERO } from "@/content/home"
 
 interface HeroFullProps {
   h1?: string
@@ -17,9 +16,9 @@ interface HeroFullProps {
 }
 
 export default function HeroFull({
-  h1 = HOME_HERO.h1,
-  sub = HOME_HERO.sub,
-  ctaPrimary = HOME_HERO.ctaPrimary,
+  h1 = "Young Icons Sports Academy",
+  sub = "Dubai's trusted kids sports academy. Qualified coaches. Ages 3–14.",
+  ctaPrimary = "Book Free Trial",
   ctaSecondary,
   ctaSecondaryHref,
 }: HeroFullProps = {}) {

@@ -1,8 +1,12 @@
 export const HOME_HERO = {
-  h1: "Young Icons Sports Academy",
-  sub: "Dubai's trusted kids sports academy. Qualified coaches. Ages 3–14.",
-  ctaPrimary: "Book Free Trial",
-  ctaSecondary: "View Programmes",
+  smallHeading: "SPORT. MOVEMENT. DEVELOPMENT.",
+  words: ["PLAY.", "LEARN.", "GROW."],
+  wordColors: ["white", "white", "green"],
+  sub: "Specialist sports and movement experiences for nurseries, schools and children across the UAE.",
+  ctaPrimary: "FIND A CLASS",
+  ctaSecondary: "WORK WITH US",
+  videoSrc: "",
+  imageFallback: "/images/placeholder/nursery-basketball.jpg",
 } as const
 
 export const HOME_TRUST_CHIPS = [
@@ -84,9 +88,11 @@ export const HOME_CTA_BAND = {
 } as const
 
 export const NAV_LINKS = [
+  { label: "Nurseries", href: "/nurseries" },
+  { label: "Schools", href: "/schools" },
+  { label: "Clubs", href: "/clubs/multi-sports" },
+  { label: "Camps", href: "/camps" },
   { label: "About", href: "/about/who-we-are" },
-  { label: "Programmes", href: "/about/what-we-do" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ] as const
 

@@ -12,3 +12,4 @@ out/
 *.pem
 *.key
 *.tsbuildinfo
+.reality-check-tmp/

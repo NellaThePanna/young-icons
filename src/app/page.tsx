@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
-import HeroFull from "@/components/HeroFull"
+import HeroHome from "@/components/HeroHome"
 import TrustBar from "@/components/TrustBar"
 import ProgrammeGrid from "@/components/ProgrammeGrid"
 import DirectAnswer from "@/components/DirectAnswer"
 import Testimonials from "@/components/Testimonials"
 import CTABand from "@/components/CTABand"
 import Footer from "@/components/Footer"
-import { HOME_PROGRAMME_CARDS, HOME_DIRECT_ANSWER_QAS, HOME_CTA_BAND } from "@/content/home"
+import { HOME_HERO, HOME_PROGRAMME_CARDS, HOME_DIRECT_ANSWER_QAS, HOME_CTA_BAND } from "@/content/home"
 
 export const metadata: Metadata = {
   title: "Young Icons Sports Academy Dubai | Free Trial",
@@ -42,7 +42,16 @@ export default function HomePage() {
       />
       <NavBar />
       <main>
-        <HeroFull />
+        <HeroHome
+          smallHeading={HOME_HERO.smallHeading}
+          words={HOME_HERO.words}
+          wordColors={HOME_HERO.wordColors}
+          sub={HOME_HERO.sub}
+          ctaPrimary={HOME_HERO.ctaPrimary}
+          ctaSecondary={HOME_HERO.ctaSecondary}
+          videoSrc={HOME_HERO.videoSrc}
+          imageFallback={HOME_HERO.imageFallback}
+        />
         <TrustBar />
         <ProgrammeGrid
           cards={HOME_PROGRAMME_CARDS}
