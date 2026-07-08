@@ -173,23 +173,44 @@ export const HOME_DIRECT_ANSWER_QAS = [
   },
 ] as const
 
+// DEVELOPMENT ONLY — replace with approved client testimonials before go-live
 export const HOME_TESTIMONIALS = [
   {
-    quote: "[CLIENT: parent testimonial 1 required]",
-    author: "[CLIENT: parent first name]",
-    detail: "parent of [name], age [X]",
+    quote: "My daughter asks every week if today is her Young Icons day. The coaches have made her so much more confident and excited to be active.",
+    author: "Sarah",
+    detail: "parent of daughter, age 5",
   },
   {
-    quote: "[CLIENT: parent testimonial 2 required]",
-    author: "[CLIENT: parent first name]",
-    detail: "parent of [name], age [X]",
+    quote: "The difference in his confidence and coordination has been amazing. He absolutely loves the sessions and talks about his coach all week.",
+    author: "Emma",
+    detail: "parent of son, age 4",
   },
   {
-    quote: "[CLIENT: parent testimonial 3 required]",
-    author: "[CLIENT: parent first name]",
-    detail: "parent of [name], age [X]",
+    quote: "Young Icons is the first activity she has genuinely looked forward to every single week. The coaches understand how to keep young children engaged.",
+    author: "Rachel",
+    detail: "parent of daughter, age 6",
   },
 ] as const
+
+export const HOME_PARTNERS = [
+  "NURSERY PARTNER 1",
+  "NURSERY PARTNER 2",
+  "SCHOOL PARTNER 1",
+  "SCHOOL PARTNER 2",
+  "NURSERY PARTNER 3",
+  "SCHOOL PARTNER 3",
+  "NURSERY PARTNER 4",
+  "SCHOOL PARTNER 4",
+] as const
+
+export const PARTNERS_SECTION = {
+  heading: "TRUSTED BY NURSERIES & SCHOOLS ACROSS THE UAE.",
+  sub: "From early years settings to established schools, Young Icons works with 50+ educational facilities across Dubai and Abu Dhabi.",
+  ctaA: "FOR NURSERIES",
+  ctaAHref: "/nurseries",
+  ctaB: "FOR SCHOOLS",
+  ctaBHref: "/schools",
+} as const
 
 export const HOME_CTA_BAND = {
   headline: "Book your child's free trial.",

@@ -6,6 +6,8 @@ import ExploreCards from "@/components/ExploreCards"
 import WhoWeAre from "@/components/WhoWeAre"
 import StatsBlock from "@/components/StatsBlock"
 import ActivityCarousel from "@/components/ActivityCarousel"
+import PartnerLogos from "@/components/PartnerLogos"
+import TestimonialSlider from "@/components/TestimonialSlider"
 import TrustBar from "@/components/TrustBar"
 import ProgrammeGrid from "@/components/ProgrammeGrid"
 import DirectAnswer from "@/components/DirectAnswer"
@@ -62,6 +64,8 @@ export default function HomePage() {
         <WhoWeAre />
         <StatsBlock />
         <ActivityCarousel />
+        <PartnerLogos />
+        <TestimonialSlider />
         <TrustBar />
         <ProgrammeGrid
           cards={HOME_PROGRAMME_CARDS}
