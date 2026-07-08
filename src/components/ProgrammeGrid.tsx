@@ -59,6 +59,7 @@ export default function ProgrammeGrid({ cards, heading }: ProgrammeGridProps) {
               fontFamily: "var(--font-display)",
               fontWeight: "var(--font-weight-bold)",
               color: "var(--color-black)",
+              textTransform: "uppercase",
             }}
           >
             {heading}
@@ -91,6 +92,7 @@ export default function ProgrammeGrid({ cards, heading }: ProgrammeGridProps) {
                   fontFamily: "var(--font-display)",
                   fontWeight: "var(--font-weight-bold)",
                   color: "var(--color-black)",
+                  textTransform: "uppercase",
                 }}
               >
                 {card.name}

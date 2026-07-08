@@ -89,6 +89,7 @@ export default function CTABand({
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
             color: "var(--color-white)",
+            textTransform: "uppercase",
           }}
         >
           {headline}

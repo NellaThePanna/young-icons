@@ -49,6 +49,7 @@ export default function HeroPage({ h1, sub, intro, bg = "black" }: HeroPageProps
             fontWeight: "var(--font-weight-bold)",
             color: isBlack ? "var(--color-white)" : "var(--color-black)",
             lineHeight: 1.08,
+            textTransform: "uppercase",
           }}
         >
           {h1}

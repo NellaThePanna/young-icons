@@ -73,6 +73,7 @@ export default function HeroFull({
             fontWeight: "var(--font-weight-bold)",
             color: "var(--color-white)",
             lineHeight: 1.05,
+            textTransform: "uppercase",
           }}
         >
           {h1}

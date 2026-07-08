@@ -76,6 +76,7 @@ export default function ThreePillars({ pillars, bg = "black" }: ThreePillarsProp
                 fontFamily: "var(--font-display)",
                 fontWeight: "var(--font-weight-bold)",
                 color: textPrimary,
+                textTransform: "uppercase",
               }}
             >
               {pillar.heading}
