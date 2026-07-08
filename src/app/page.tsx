@@ -9,13 +9,8 @@ import ActivityCarousel from "@/components/ActivityCarousel"
 import PartnerLogos from "@/components/PartnerLogos"
 import TestimonialSlider from "@/components/TestimonialSlider"
 import FinalCTA from "@/components/FinalCTA"
-import TrustBar from "@/components/TrustBar"
-import ProgrammeGrid from "@/components/ProgrammeGrid"
-import DirectAnswer from "@/components/DirectAnswer"
-import Testimonials from "@/components/Testimonials"
-import CTABand from "@/components/CTABand"
 import Footer from "@/components/Footer"
-import { HOME_HERO, HOME_PROGRAMME_CARDS, HOME_DIRECT_ANSWER_QAS, HOME_CTA_BAND } from "@/content/home"
+import { HOME_HERO } from "@/content/home"
 
 export const metadata: Metadata = {
   title: "Young Icons Sports Academy Dubai | Free Trial",
@@ -68,21 +63,6 @@ export default function HomePage() {
         <PartnerLogos />
         <TestimonialSlider />
         <FinalCTA />
-        <TrustBar />
-        <ProgrammeGrid
-          cards={HOME_PROGRAMME_CARDS}
-          heading="Our Programmes"
-        />
-        <DirectAnswer
-          qas={HOME_DIRECT_ANSWER_QAS}
-          ariaLabel="About Young Icons Sports Academy"
-        />
-        <Testimonials />
-        <CTABand
-          headline={HOME_CTA_BAND.headline}
-          sub={HOME_CTA_BAND.sub}
-          cta={HOME_CTA_BAND.cta}
-        />
       </main>
       <Footer />
     </>
