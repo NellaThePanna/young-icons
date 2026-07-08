@@ -6,7 +6,19 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { NURSERY_ACTIVITIES } from "@/content/nurseries-about"
 
-export default function NurseryActivities() {
+interface NurseryActivitiesProps {
+  activities: readonly string[]
+  heading?: string
+  headingLine2?: string
+  body?: string
+}
+
+export default function NurseryActivities({
+  activities,
+  heading = NURSERY_ACTIVITIES.heading,
+  headingLine2 = NURSERY_ACTIVITIES.headingLine2,
+  body = NURSERY_ACTIVITIES.body,
+}: NurseryActivitiesProps) {
   const sectionRef = useRef<HTMLElement>(null)
 
   useGSAP(() => {
@@ -53,24 +65,26 @@ export default function NurseryActivities() {
             lineHeight: 1.1,
           }}
         >
-          <span className="block">{NURSERY_ACTIVITIES.heading}</span>
-          <span className="block">{NURSERY_ACTIVITIES.headingLine2}</span>
+          <span className="block">{heading}</span>
+          {headingLine2 && <span className="block">{headingLine2}</span>}
         </h2>
-        <p
-          className="mx-auto"
-          style={{
-            fontFamily: "var(--font-body)",
-            color: "rgba(0,0,0,0.65)",
-            maxWidth: "640px",
-            lineHeight: 1.6,
-          }}
-        >
-          {NURSERY_ACTIVITIES.body}
-        </p>
+        {body && (
+          <p
+            className="mx-auto"
+            style={{
+              fontFamily: "var(--font-body)",
+              color: "rgba(0,0,0,0.65)",
+              maxWidth: "640px",
+              lineHeight: 1.6,
+            }}
+          >
+            {body}
+          </p>
+        )}
       </div>
 
       <div className="mx-auto flex flex-wrap items-center justify-center gap-4" style={{ maxWidth: "900px" }}>
-        {NURSERY_ACTIVITIES.activities.map((activity) => (
+        {activities.map((activity) => (
           <span
             key={activity}
             className="nursery-activities-item inline-flex items-center whitespace-nowrap rounded-full"

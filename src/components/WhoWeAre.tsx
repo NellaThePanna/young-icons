@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { WHO_WE_ARE, PHILOSOPHY } from "@/content/home"
+import PhilosophyColumns from "@/components/PhilosophyColumns"
 
 export default function WhoWeAre() {
   return (
@@ -101,66 +102,7 @@ export default function WhoWeAre() {
         </div>
       </section>
 
-      <section
-        className="px-6"
-        style={{
-          backgroundColor: "var(--color-black)",
-          paddingTop: "80px",
-          paddingBottom: "80px",
-        }}
-      >
-        <div
-          className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8"
-          style={{ maxWidth: "1280px" }}
-        >
-          {PHILOSOPHY.map((item, i) => {
-            const isLast = i === PHILOSOPHY.length - 1
-            return (
-              <div key={item.word}>
-                <h3
-                  className="mb-6"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: "var(--font-weight-bold)",
-                    fontSize: "clamp(3rem, 6vw, 5rem)",
-                    color: "var(--color-academy-green)",
-                    textTransform: "uppercase",
-                    lineHeight: 1,
-                  }}
-                >
-                  {item.word}
-                </h3>
-                <div
-                  className="relative w-full"
-                  style={{
-                    height: "320px",
-                    marginBottom: isLast ? "-60px" : 0,
-                    zIndex: isLast ? 1 : "auto",
-                  }}
-                >
-                  <Image
-                    src={item.image}
-                    alt=""
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <p
-                  className="mt-4"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    color: "rgba(255,255,255,0.7)",
-                    fontSize: "0.875rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {item.caption}
-                </p>
-              </div>
-            )
-          })}
-        </div>
-      </section>
+      <PhilosophyColumns items={PHILOSOPHY} bg="black" />
     </>
   )
 }

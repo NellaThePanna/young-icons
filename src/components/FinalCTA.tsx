@@ -9,7 +9,29 @@ import Link from "next/link"
 import { CLASSCARD_URL } from "@/lib/config"
 import { FINAL_CTA } from "@/content/home"
 
-export default function FinalCTA() {
+interface FinalCTAProps {
+  smallHeading?: string
+  headingWhite?: string
+  headingGreen?: string
+  sub?: string
+  ctaPrimary?: string
+  ctaSecondary?: string
+  image?: string
+  href?: string
+  secondaryHref?: string
+}
+
+export default function FinalCTA({
+  smallHeading = FINAL_CTA.smallHeading,
+  headingWhite = FINAL_CTA.heading,
+  headingGreen = "",
+  sub = FINAL_CTA.sub,
+  ctaPrimary = FINAL_CTA.ctaPrimary,
+  ctaSecondary = FINAL_CTA.ctaSecondary,
+  image = FINAL_CTA.image,
+  href = CLASSCARD_URL,
+  secondaryHref = "/schools",
+}: FinalCTAProps) {
   const sectionRef = useRef<HTMLElement>(null)
 
   useGSAP(() => {
@@ -41,7 +63,7 @@ export default function FinalCTA() {
       style={{ minHeight: "70vh" }}
     >
       <div className="absolute inset-0">
-        <Image src={FINAL_CTA.image} alt="" fill className="object-cover" />
+        <Image src={image} alt="" fill className="object-cover" />
       </div>
       <div
         className="absolute inset-0"
@@ -50,19 +72,21 @@ export default function FinalCTA() {
       />
 
       <div className="relative text-center" style={{ zIndex: 2, maxWidth: "780px" }}>
-        <p
-          className="final-cta-item mb-4"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontWeight: "var(--font-weight-medium)",
-            fontSize: "0.875rem",
-            color: "var(--color-academy-green)",
-            textTransform: "uppercase",
-            letterSpacing: "0.15em",
-          }}
-        >
-          {FINAL_CTA.smallHeading}
-        </p>
+        {smallHeading && (
+          <p
+            className="final-cta-item mb-4"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontWeight: "var(--font-weight-medium)",
+              fontSize: "0.875rem",
+              color: "var(--color-academy-green)",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+            }}
+          >
+            {smallHeading}
+          </p>
+        )}
 
         <h2
           className="final-cta-item mb-6"
@@ -70,12 +94,18 @@ export default function FinalCTA() {
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
             fontSize: "clamp(3rem, 6vw, 5rem)",
-            color: "var(--color-white)",
             textTransform: "uppercase",
             lineHeight: 1.05,
           }}
         >
-          {FINAL_CTA.heading}
+          <span className="block" style={{ color: "var(--color-white)" }}>
+            {headingWhite}
+          </span>
+          {headingGreen && (
+            <span className="block" style={{ color: "var(--color-academy-green)" }}>
+              {headingGreen}
+            </span>
+          )}
         </h2>
 
         <p
@@ -87,12 +117,12 @@ export default function FinalCTA() {
             lineHeight: 1.6,
           }}
         >
-          {FINAL_CTA.sub}
+          {sub}
         </p>
 
         <div className="final-cta-item flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href={CLASSCARD_URL}
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
@@ -104,21 +134,23 @@ export default function FinalCTA() {
               textDecoration: "none",
             }}
           >
-            {FINAL_CTA.ctaPrimary}
+            {ctaPrimary}
           </a>
-          <Link
-            href="/schools"
-            className="rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontWeight: "var(--font-weight-bold)",
-              color: "var(--color-white)",
-              border: "1.5px solid rgba(255,255,255,0.3)",
-              textDecoration: "none",
-            }}
-          >
-            {FINAL_CTA.ctaSecondary}
-          </Link>
+          {ctaSecondary && (
+            <Link
+              href={secondaryHref}
+              className="rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-white)",
+                border: "1.5px solid rgba(255,255,255,0.3)",
+                textDecoration: "none",
+              }}
+            >
+              {ctaSecondary}
+            </Link>
+          )}
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import EarlyYearsDifferent from "@/components/EarlyYearsDifferent"
 import MovementStartsHere from "@/components/MovementStartsHere"
 import NurseryActivities from "@/components/NurseryActivities"
 import StatsBlock from "@/components/StatsBlock"
+import { NURSERY_ACTIVITIES } from "@/content/nurseries-about"
 import NurseryEnquiryForm from "@/components/NurseryEnquiryForm"
 import Footer from "@/components/Footer"
 
@@ -43,7 +44,7 @@ export default function NurseriesPage() {
         <NurseryHero />
         <EarlyYearsDifferent />
         <MovementStartsHere />
-        <NurseryActivities />
+        <NurseryActivities activities={NURSERY_ACTIVITIES.activities} />
         <StatsBlock />
         <NurseryEnquiryForm />
       </main>
