@@ -1,1 +1,1 @@
-export const CLASSCARD_URL = 'https://classcard.app/[TBC]'
+export const CLASSCARD_URL = 'https://allinonesports.classcard.app/en/?view=Grid'

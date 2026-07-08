@@ -33,9 +33,9 @@ export const CONTACT_FORM = {
 export const CONTACT_NAP = {
   name: "Young Icons Sports Academy",
   address: "[CLIENT: full Dubai address required]",
-  phone: "[CLIENT: phone required]",
+  phone: "+971 55 172 6530",
   email: "[CLIENT: email required]",
-  whatsappNumber: "[CLIENT: WhatsApp number — digits only, no + or spaces]",
+  whatsappNumber: "971551726530",
   whatsappMessage: "Hi, I'd like to find out more about Young Icons Sports Academy.",
   mapsEmbedUrl: "[CLIENT: Google Maps embed URL required]",
   cta: "WhatsApp Chat",
