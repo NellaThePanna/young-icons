@@ -1,20 +1,20 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Plus_Jakarta_Sans } from 'next/font/google'
+import { Anton, Inter } from 'next/font/google'
 import './globals.css'
 import '@/styles/tokens.css'
 import LenisProvider from '@/components/providers/LenisProvider'
 
-const spaceGrotesk = Space_Grotesk({
+const anton = Anton({
   subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-space-grotesk',
+  weight: ['400'],
+  variable: '--font-display',
   display: 'swap',
 })
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
-  variable: '--font-plus-jakarta-sans',
+  variable: '--font-body',
   display: 'swap',
 })
 
@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${plusJakartaSans.variable}`}>
+      <body className={`${anton.variable} ${inter.variable}`}>
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

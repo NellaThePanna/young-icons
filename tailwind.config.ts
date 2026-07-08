@@ -16,8 +16,8 @@ const config: Config = {
         'warm-off-white': '#f5f5f2',
       },
       fontFamily: {
-        'space-grotesk': ['Space Grotesk', 'sans-serif'],
-        'plus-jakarta-sans': ['Plus Jakarta Sans', 'sans-serif'],
+        'anton': ['Anton', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
       fontWeight: {
         regular: '400',
