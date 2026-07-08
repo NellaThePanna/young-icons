@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import HeroHome from "@/components/HeroHome"
 import MarqueeStrip from "@/components/MarqueeStrip"
+import ExploreCards from "@/components/ExploreCards"
 import TrustBar from "@/components/TrustBar"
 import ProgrammeGrid from "@/components/ProgrammeGrid"
 import DirectAnswer from "@/components/DirectAnswer"
@@ -54,6 +55,7 @@ export default function HomePage() {
           imageFallback={HOME_HERO.imageFallback}
         />
         <MarqueeStrip />
+        <ExploreCards />
         <TrustBar />
         <ProgrammeGrid
           cards={HOME_PROGRAMME_CARDS}

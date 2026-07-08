@@ -16,6 +16,47 @@ export const HOME_TRUST_CHIPS = [
   "Free Trial Available",
 ] as const
 
+export const EXPLORE_SECTION = {
+  smallHeading: "EXPLORE YOUNG ICONS",
+  heading: "FIND YOUR WAY TO MOVE.",
+  sub: "From first movements to school activities, clubs and holiday experiences, discover where Young Icons fits into your child's journey.",
+} as const
+
+export const EXPLORE_CARDS = [
+  {
+    label: "EARLY YEARS",
+    heading: "AGES 2–6",
+    sub: "Movement and sport for the youngest children.",
+    cta: "FIND A CLASS",
+    href: "/nurseries",
+    image: "/images/placeholder/nursery-basketball.jpg",
+  },
+  {
+    label: "SCHOOLS",
+    heading: "ASA & PE SUPPORT",
+    sub: "Specialist sports delivered at your school.",
+    cta: "WORK WITH US",
+    href: "/schools",
+    image: "/images/placeholder/tennis-rackets.jpg",
+  },
+  {
+    label: "CLUBS & ACADEMIES",
+    heading: "PARENT BOOKABLE",
+    sub: "Weekly clubs bookable through Classcard.",
+    cta: "FIND A CLASS",
+    href: "/clubs/multi-sports",
+    image: "/images/placeholder/ball-skills.jpg",
+  },
+  {
+    label: "HOLIDAY CAMPS",
+    heading: "SCHOOL HOLIDAYS",
+    sub: "Action-packed days across Dubai and Abu Dhabi.",
+    cta: "EXPLORE CAMPS",
+    href: "/camps",
+    image: "/images/placeholder/obstacle-course.jpg",
+  },
+] as const
+
 export const HOME_PROGRAMME_CARDS = [
   {
     name: "Nurseries",
