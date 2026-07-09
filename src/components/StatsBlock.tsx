@@ -40,9 +40,17 @@ export default function StatsBlock() {
             gsap.to(counter, {
               val: target,
               duration: 2,
-              ease: "power1.out",
+              ease: "power2.out",
               onUpdate: () => {
-                el.textContent = Math.round(counter.val) + suffix
+                el.textContent = String(Math.round(counter.val))
+              },
+              onComplete: () => {
+                el.textContent = target + suffix
+                gsap.from(el, {
+                  scale: 1.3,
+                  duration: 0.3,
+                  ease: "power2.out",
+                })
               },
             })
           })

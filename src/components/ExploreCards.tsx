@@ -24,6 +24,8 @@ export default function ExploreCards() {
         gsap.from(cards, {
           opacity: 0,
           y: prefersReduced ? 0 : 40,
+          rotateX: prefersReduced ? 0 : 2,
+          transformOrigin: "top center",
           duration: prefersReduced ? 0.01 : 0.7,
           ease: "power2.out",
           stagger: prefersReduced ? 0 : 0.12,
@@ -36,7 +38,7 @@ export default function ExploreCards() {
     <section
       ref={sectionRef}
       className="py-20 px-6"
-      style={{ backgroundColor: "var(--color-warm-off-white)" }}
+      style={{ backgroundColor: "var(--color-warm-off-white)", perspective: "1000px" }}
     >
       <div className="mx-auto mb-12" style={{ maxWidth: "1280px" }}>
         <p
