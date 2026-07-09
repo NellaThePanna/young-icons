@@ -63,7 +63,14 @@ export default function FinalCTA({
       style={{ minHeight: "70vh" }}
     >
       <div className="absolute inset-0">
-        <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
+        <Image
+          src={image}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "center 20%" }}
+        />
       </div>
       <div
         className="absolute inset-0"
