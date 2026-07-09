@@ -9,6 +9,8 @@ import { ACTIVITIES_SECTION, HOME_ACTIVITIES } from "@/content/home"
 
 export default function ActivityCarousel() {
   const sectionRef = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const tickRef = useRef<(() => void) | null>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -29,7 +31,31 @@ export default function ActivityCarousel() {
         })
       },
     })
+
+    if (!prefersReduced && trackRef.current) {
+      const track = trackRef.current
+      const tick = () => {
+        track.scrollLeft += 0.5
+        if (track.scrollLeft >= track.scrollWidth - track.clientWidth) {
+          track.scrollLeft = 0
+        }
+      }
+      tickRef.current = tick
+      gsap.ticker.add(tick)
+
+      return () => {
+        gsap.ticker.remove(tick)
+      }
+    }
   }, { scope: sectionRef })
+
+  const handleMouseEnter = () => {
+    if (tickRef.current) gsap.ticker.remove(tickRef.current)
+  }
+
+  const handleMouseLeave = () => {
+    if (tickRef.current) gsap.ticker.add(tickRef.current)
+  }
 
   return (
     <section
@@ -66,6 +92,9 @@ export default function ActivityCarousel() {
       </div>
 
       <div
+        ref={trackRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className="no-scrollbar mx-auto flex gap-4 overflow-x-auto"
         style={{ maxWidth: "1280px", paddingBottom: "16px" }}
       >

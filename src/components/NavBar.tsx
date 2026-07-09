@@ -43,7 +43,9 @@ export default function NavBar() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         backgroundColor: isTransparent ? "transparent" : "var(--color-black)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: isTransparent
+          ? "none"
+          : "1px solid rgba(255,255,255,0.08)",
         transition: "background-color 0.3s ease",
       }}
     >
