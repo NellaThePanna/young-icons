@@ -5,7 +5,7 @@ export const MULTI_HERO = {
   sub: "Weekly coached sessions across multiple sports. For children who want to try everything.",
   ctaPrimary: "FIND A CLUB",
   ctaSecondary: "BOOK NOW",
-  image: "/images/placeholder/ball-skills.jpg",
+  image: "/images/placeholder/tennis-rackets.jpg",
 } as const
 
 export const MULTI_WHAT = {

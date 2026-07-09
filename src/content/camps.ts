@@ -4,7 +4,7 @@ export const CAMPS_HERO = {
   headingGreen: "LET'S MOVE.",
   sub: "Action-packed sports and movement days across Dubai and Abu Dhabi. Every school holiday.",
   ctaPrimary: "FIND YOUR CAMP",
-  image: "/images/placeholder/ball-skills.jpg",
+  image: "/images/placeholder/karate-crawl.jpg",
 } as const
 
 export const CAMPS_ABOUT = {
@@ -38,5 +38,5 @@ export const CAMPS_CTA = {
   headingGreen: "CAMP?",
   sub: "Find your Young Icons holiday camp and book through Classcard.",
   ctaPrimary: "FIND YOUR CAMP",
-  image: "/images/placeholder/karate-crawl.jpg",
+  image: "/images/placeholder/ball-skills.jpg",
 } as const
