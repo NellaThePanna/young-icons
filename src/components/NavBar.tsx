@@ -1,15 +1,19 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { CLASSCARD_URL } from "@/lib/config"
 import { NAV_LINKS } from "@/content/home"
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
+  const pathname = usePathname()
+  const isHomepage = pathname === "/"
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -22,13 +26,25 @@ export default function NavBar() {
     })
   }, { scope: headerRef })
 
+  useEffect(() => {
+    if (!isHomepage) return
+
+    const handleScroll = () => setScrolled(window.scrollY > 80)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isHomepage])
+
+  const isTransparent = isHomepage && !scrolled
+
   return (
     <header
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        backgroundColor: "var(--color-black)",
+        backgroundColor: isTransparent ? "transparent" : "var(--color-black)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
+        transition: "background-color 0.3s ease",
       }}
     >
       <nav

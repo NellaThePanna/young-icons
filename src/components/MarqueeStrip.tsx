@@ -11,7 +11,7 @@ function MarqueeTrack() {
             className="flex items-center whitespace-nowrap"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(1.5rem, 3vw, 2rem)",
+              fontSize: "clamp(3rem, 6vw, 5rem)",
               color: "var(--color-black)",
               textTransform: "uppercase",
             }}
@@ -29,7 +29,7 @@ export default function MarqueeStrip() {
   return (
     <div
       className="overflow-hidden"
-      style={{ backgroundColor: "var(--color-academy-green)", padding: "14px 0" }}
+      style={{ backgroundColor: "var(--color-academy-green)", padding: "20px 0" }}
       aria-hidden="true"
     >
       <div className="flex">
