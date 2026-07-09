@@ -61,7 +61,14 @@ export default function SchoolsHero() {
       className="relative flex flex-col items-center justify-center px-6 pt-16 overflow-hidden"
       style={{ minHeight: "100vh", backgroundColor: "var(--color-black)" }}
     >
-      <Image src={SCHOOLS_HERO.image} alt="" fill priority className="object-cover" />
+      <Image
+        src={SCHOOLS_HERO.image}
+        alt=""
+        fill
+        priority
+        className="object-cover"
+        style={{ objectPosition: "center 25%" }}
+      />
 
       <div
         className="absolute inset-0"

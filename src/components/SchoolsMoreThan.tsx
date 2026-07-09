@@ -157,6 +157,7 @@ export default function SchoolsMoreThan() {
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
+            style={{ objectPosition: "center 30%" }}
           />
         </div>
       </div>

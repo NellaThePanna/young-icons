@@ -50,7 +50,15 @@ export default function NurseryHero() {
       className="relative flex flex-col items-center justify-center px-6 pt-16 overflow-hidden"
       style={{ minHeight: "100vh", backgroundColor: "var(--color-black)" }}
     >
-      <Image src={NURSERY_HERO.image} alt="" fill priority sizes="100vw" className="object-cover" />
+      <Image
+        src={NURSERY_HERO.image}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+        style={{ objectPosition: "center 20%" }}
+      />
 
       <div
         className="absolute inset-0"

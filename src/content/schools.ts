@@ -15,7 +15,7 @@ export const SCHOOLS_MORE_THAN = {
   body: "From one specialist activity to a wider after-school programme, Young Icons helps schools create more opportunities for students to move, play and develop.",
   statement1: "ONE PARTNER.",
   statement2: "MULTIPLE ACTIVITIES.",
-  image: "/images/placeholder/ball-skills.jpg",
+  image: "/images/placeholder/karate-crawl.jpg",
 } as const
 
 export const SCHOOLS_ASA = {
@@ -43,7 +43,7 @@ export const SCHOOLS_PE = {
   body: "Every school is different. Young Icons can provide tailored PE and sports support built around your students, timetable and school requirements.",
   body2: "From structured sports programmes and specialist coaching to additional PE delivery, we can build the right level of support for your school.",
   statement: "YOUR STUDENTS. YOUR SCHOOL. YOUR PROGRAMME.",
-  image: "/images/placeholder/ball-skills.jpg",
+  image: "/images/placeholder/nursery-basketball.jpg",
 } as const
 
 export const SCHOOLS_FORM = {
