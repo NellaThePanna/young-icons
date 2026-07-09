@@ -1,18 +1,47 @@
 "use client"
 
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import Link from "next/link"
 import { WHO_WE_ARE, PHILOSOPHY } from "@/content/home"
 import PhilosophyColumns from "@/components/PhilosophyColumns"
 
 export default function WhoWeAre() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useGSAP(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top 80%",
+      once: true,
+      invalidateOnRefresh: true,
+      onEnter: () => {
+        gsap.from(sectionRef.current, {
+          opacity: 0,
+          y: prefersReduced ? 0 : 40,
+          rotateX: prefersReduced ? 0 : 2,
+          transformOrigin: "top center",
+          duration: prefersReduced ? 0.01 : 0.8,
+          ease: "power2.out",
+        })
+      },
+    })
+  }, { scope: sectionRef })
+
   return (
     <>
       <section
+        ref={sectionRef}
         className="px-6"
         style={{
           backgroundColor: "var(--color-warm-off-white)",
           overflow: "visible",
+          perspective: "1000px",
           paddingTop: "80px",
           paddingBottom: "80px",
         }}
