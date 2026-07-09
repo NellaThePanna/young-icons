@@ -20,7 +20,7 @@
 }
 
 .marquee-track {
-  animation: marquee 20s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

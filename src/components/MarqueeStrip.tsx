@@ -11,7 +11,7 @@ function MarqueeTrack() {
             className="flex items-center whitespace-nowrap"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(3rem, 6vw, 5rem)",
+              fontSize: "clamp(2rem, 4vw, 3rem)",
               color: "var(--color-black)",
               textTransform: "uppercase",
             }}

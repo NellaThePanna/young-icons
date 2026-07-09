@@ -30,12 +30,38 @@ export default function HeroHome({
   imageFallback,
 }: HeroHomeProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([])
   const subRef = useRef<HTMLParagraphElement>(null)
   const ctasRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (mediaRef.current && !prefersReduced) {
+      gsap.to(mediaRef.current, {
+        yPercent: -25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      })
+    }
+
+    if (glowRef.current && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect()
+      gsap.set(glowRef.current, {
+        xPercent: -50,
+        yPercent: -50,
+        x: rect.width / 2,
+        y: rect.height / 2,
+      })
+    }
 
     const splits = wordRefs.current
       .filter((el): el is HTMLSpanElement => el !== null)
@@ -66,6 +92,20 @@ export default function HeroHome({
     return () => splits.forEach((split) => split.revert())
   }, { scope: containerRef })
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current || !glowRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    gsap.to(glowRef.current, {
+      x,
+      y,
+      duration: 0.6,
+      ease: "power2.out",
+    })
+  }
+
   const fullHeading = words.join(" ")
 
   return (
@@ -73,30 +113,57 @@ export default function HeroHome({
       ref={containerRef}
       className="relative flex flex-col items-center justify-center px-6 pt-16 overflow-hidden"
       style={{ minHeight: "100vh", backgroundColor: "var(--color-black)" }}
+      onMouseMove={
+        typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches
+          ? handleMouseMove
+          : undefined
+      }
     >
-      {videoSrc ? (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          src={videoSrc}
-        />
-      ) : (
-        <Image
-          src={imageFallback}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-      )}
+      <div
+        ref={mediaRef}
+        className="absolute overflow-hidden"
+        style={{ top: "-55%", bottom: "-55%", left: 0, right: 0 }}
+      >
+        {videoSrc ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            src={videoSrc}
+          />
+        ) : (
+          <Image
+            src={imageFallback}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
+      </div>
 
       <div
         className="absolute inset-0"
         style={{ backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }}
+        aria-hidden="true"
+      />
+
+      <div
+        ref={glowRef}
+        className="absolute"
+        style={{
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(26,122,71,0.15) 0%, transparent 70%)",
+          pointerEvents: "none",
+          zIndex: 3,
+          left: 0,
+          top: 0,
+        }}
         aria-hidden="true"
       />
 

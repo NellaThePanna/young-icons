@@ -9,6 +9,7 @@ import { SCHOOLS_MORE_THAN } from "@/content/schools"
 
 export default function SchoolsMoreThan() {
   const sectionRef = useRef<HTMLElement>(null)
+  const greenBlockRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -29,6 +30,20 @@ export default function SchoolsMoreThan() {
         })
       },
     })
+
+    if (!prefersReduced) {
+      gsap.from(greenBlockRef.current, {
+        clipPath: "inset(0 100% 0 0)",
+        duration: 0.8,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: greenBlockRef.current,
+          start: "top 80%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
+      })
+    }
   }, { scope: sectionRef })
 
   return (
@@ -47,6 +62,7 @@ export default function SchoolsMoreThan() {
         style={{ maxWidth: "1280px" }}
       >
         <div
+          ref={greenBlockRef}
           className="schools-more-than-item"
           style={{
             backgroundColor: "var(--color-academy-green)",

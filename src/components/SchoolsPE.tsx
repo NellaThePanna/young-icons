@@ -11,6 +11,7 @@ const STATEMENT_COLORS = ["white", "green", "white"] as const
 
 export default function SchoolsPE() {
   const sectionRef = useRef<HTMLElement>(null)
+  const greenBlockRef = useRef<HTMLDivElement>(null)
 
   const statementLines = SCHOOLS_PE.statement
     .split(".")
@@ -36,6 +37,20 @@ export default function SchoolsPE() {
         })
       },
     })
+
+    if (!prefersReduced) {
+      gsap.from(greenBlockRef.current, {
+        clipPath: "inset(0 100% 0 0)",
+        duration: 0.8,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: greenBlockRef.current,
+          start: "top 80%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
+      })
+    }
   }, { scope: sectionRef })
 
   return (
@@ -134,6 +149,7 @@ export default function SchoolsPE() {
         </div>
 
         <div
+          ref={greenBlockRef}
           className="schools-pe-item relative"
           style={{
             backgroundColor: "var(--color-academy-green)",

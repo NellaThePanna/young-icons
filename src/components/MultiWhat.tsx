@@ -11,6 +11,7 @@ const STATEMENT_COLORS = ["black", "white", "black"] as const
 
 export default function MultiWhat() {
   const sectionRef = useRef<HTMLElement>(null)
+  const greenBlockRef = useRef<HTMLDivElement>(null)
 
   const statements = [MULTI_WHAT.statement1, MULTI_WHAT.statement2, MULTI_WHAT.statement3]
 
@@ -33,6 +34,20 @@ export default function MultiWhat() {
         })
       },
     })
+
+    if (!prefersReduced) {
+      gsap.from(greenBlockRef.current, {
+        clipPath: "inset(0 100% 0 0)",
+        duration: 0.8,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: greenBlockRef.current,
+          start: "top 80%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
+      })
+    }
   }, { scope: sectionRef })
 
   return (
@@ -51,6 +66,7 @@ export default function MultiWhat() {
         style={{ maxWidth: "1280px" }}
       >
         <div
+          ref={greenBlockRef}
           className="multi-what-item"
           style={{
             backgroundColor: "var(--color-academy-green)",

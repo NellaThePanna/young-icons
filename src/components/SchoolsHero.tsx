@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import Image from "next/image"
+import { SplitText } from "gsap/SplitText"
 import { SCHOOLS_HERO } from "@/content/schools"
 
 export default function SchoolsHero() {
@@ -17,14 +18,16 @@ export default function SchoolsHero() {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
     const lines = lineRefs.current.filter((el): el is HTMLSpanElement => el !== null)
+    const splits = lines.map((el) => new SplitText(el, { type: "words" }))
+    const allWords = splits.flatMap((split) => split.words)
     const tl = gsap.timeline()
 
-    tl.from(lines, {
+    tl.from(allWords, {
       opacity: 0,
       y: prefersReduced ? 0 : 24,
       duration: prefersReduced ? 0.01 : 0.8,
       ease: "power2.out",
-      stagger: prefersReduced ? 0 : 0.15,
+      stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
     })
 
     tl.from(
@@ -48,6 +51,8 @@ export default function SchoolsHero() {
         yoyo: true,
       })
     }
+
+    return () => splits.forEach((split) => split.revert())
   }, { scope: containerRef })
 
   return (
@@ -80,6 +85,7 @@ export default function SchoolsHero() {
         </p>
 
         <h1
+          aria-label={`${SCHOOLS_HERO.headingWhite} ${SCHOOLS_HERO.headingGreen}`}
           className="tracking-tight mb-6"
           style={{
             fontFamily: "var(--font-display)",
