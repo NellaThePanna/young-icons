@@ -141,6 +141,7 @@ export default function HeroHome({
             priority
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: "center 60%" }}
           />
         )}
       </div>
@@ -158,7 +159,7 @@ export default function HeroHome({
           width: "600px",
           height: "600px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(26,122,71,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(26,122,71,0.35) 0%, transparent 70%)",
           pointerEvents: "none",
           zIndex: 3,
           left: 0,
