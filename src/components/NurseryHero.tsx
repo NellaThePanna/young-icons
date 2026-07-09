@@ -57,7 +57,7 @@ export default function NurseryHero() {
         priority
         sizes="100vw"
         className="object-cover"
-        style={{ objectPosition: "center 20%" }}
+        style={{ objectPosition: "center 35%" }}
       />
 
       <div
