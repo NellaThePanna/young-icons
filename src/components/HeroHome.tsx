@@ -141,7 +141,7 @@ export default function HeroHome({
             priority
             sizes="100vw"
             className="object-cover"
-            style={{ objectPosition: "center 85%" }}
+            style={{ objectPosition: "center 30%" }}
           />
         )}
       </div>

@@ -6,7 +6,7 @@ export const HOME_HERO = {
   ctaPrimary: "FIND A CLASS",
   ctaSecondary: "WORK WITH US",
   videoSrc: "",
-  imageFallback: "/images/placeholder/ball-skills.jpg",
+  imageFallback: "/images/placeholder/nursery-basketball.jpg",
 } as const
 
 export const HOME_TRUST_CHIPS = [
