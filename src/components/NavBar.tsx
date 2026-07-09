@@ -6,11 +6,33 @@ import gsap from "gsap"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { CLASSCARD_URL } from "@/lib/config"
-import { NAV_LINKS } from "@/content/home"
+import { NAV_LINKS, type NavItem } from "@/content/home"
+
+function Chevron({ className }: { className?: string }) {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+      className={className}
+      style={{ display: "inline-block", marginLeft: 4, verticalAlign: "middle" }}
+    >
+      <path
+        d="M2 3.5L5 6.5L8 3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<Record<string, boolean>>({})
   const headerRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
   const isHomepage = pathname === "/"
@@ -36,6 +58,12 @@ export default function NavBar() {
   }, [isHomepage])
 
   const isTransparent = isHomepage && !scrolled
+
+  const isActive = (link: NavItem) =>
+    pathname === link.href || (link.dropdown?.some((d) => pathname === d.href) ?? false)
+
+  const toggleMobileDropdown = (label: string) =>
+    setMobileDropdownOpen((prev) => ({ ...prev, [label]: !prev[label] }))
 
   return (
     <header
@@ -68,22 +96,66 @@ export default function NavBar() {
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-medium)",
-                  color: "rgba(255,255,255,0.75)",
-                  textDecoration: "none",
-                }}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link)
+            return (
+              <li key={link.href} className="relative group">
+                <Link
+                  href={link.href}
+                  className="text-sm inline-flex items-center"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontWeight: "var(--font-weight-medium)",
+                    color: active ? "var(--color-academy-green)" : "rgba(255,255,255,0.75)",
+                    textDecoration: "none",
+                    borderBottom: active
+                      ? "2px solid var(--color-academy-green)"
+                      : "2px solid transparent",
+                    paddingBottom: 4,
+                  }}
+                >
+                  {link.label}
+                  {link.dropdown && (
+                    <Chevron className="transition-transform duration-200 group-hover:rotate-180" />
+                  )}
+                </Link>
+
+                {link.dropdown && (
+                  <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
+                    <ul
+                      className="list-none m-0 p-0"
+                      style={{
+                        minWidth: 220,
+                        paddingTop: 8,
+                        paddingBottom: 8,
+                        backgroundColor: "var(--color-white)",
+                        borderRadius: "var(--radius-md)",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+                      }}
+                    >
+                      {link.dropdown.map((item) => (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            className="block text-sm hover:text-[var(--color-academy-green)]"
+                            style={{
+                              padding: "12px 16px",
+                              fontFamily: "var(--font-body)",
+                              fontWeight: "var(--font-weight-regular)",
+                              color: "var(--color-black)",
+                              textDecoration: "none",
+                            }}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            )
+          })}
         </ul>
 
         <a
@@ -148,23 +220,76 @@ export default function NavBar() {
           }}
         >
           <ul className="flex flex-col gap-6 list-none m-0 p-0">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-lg"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontWeight: "var(--font-weight-medium)",
-                    color: "var(--color-white)",
-                    textDecoration: "none",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link)
+
+              if (!link.dropdown) {
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="text-lg"
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontWeight: "var(--font-weight-medium)",
+                        color: active ? "var(--color-academy-green)" : "var(--color-white)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              }
+
+              const expanded = !!mobileDropdownOpen[link.label]
+
+              return (
+                <li key={link.href}>
+                  <button
+                    onClick={() => toggleMobileDropdown(link.label)}
+                    aria-expanded={expanded}
+                    className="flex items-center justify-between w-full text-lg"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontWeight: "var(--font-weight-medium)",
+                      color: active ? "var(--color-academy-green)" : "var(--color-white)",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                  >
+                    {link.label}
+                    <Chevron className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+                  </button>
+
+                  {expanded && (
+                    <ul className="flex flex-col gap-4 list-none m-0" style={{ marginTop: 16, paddingLeft: 16 }}>
+                      {link.dropdown.map((item) => (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className="text-base block"
+                            style={{
+                              fontFamily: "var(--font-body)",
+                              fontWeight: "var(--font-weight-regular)",
+                              color: pathname === item.href ? "var(--color-academy-green)" : "rgba(255,255,255,0.75)",
+                              textDecoration: "none",
+                            }}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              )
+            })}
           </ul>
           <a
             href={CLASSCARD_URL}

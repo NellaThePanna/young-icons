@@ -227,12 +227,44 @@ export const FINAL_CTA = {
   image: "/images/placeholder/ball-skills.jpg",
 } as const
 
-export const NAV_LINKS = [
+export type NavDropdownItem = { label: string; href: string }
+export type NavItem = {
+  label: string
+  href: string
+  dropdown?: NavDropdownItem[]
+}
+
+export const NAV_LINKS: NavItem[] = [
   { label: "Nurseries", href: "/nurseries" },
-  { label: "Schools", href: "/schools" },
-  { label: "Clubs", href: "/clubs/multi-sports" },
+  {
+    label: "Schools",
+    href: "/schools",
+    dropdown: [
+      { label: "Schools Overview", href: "/schools" },
+      { label: "After-School Activity", href: "/schools/asa" },
+      { label: "Facility Management", href: "/facility-management" },
+    ],
+  },
+  {
+    label: "Clubs",
+    href: "/clubs/multi-sports",
+    dropdown: [
+      { label: "Multi-Sports", href: "/clubs/multi-sports" },
+      { label: "Ballet — Coming Soon", href: "/clubs/ballet" },
+      { label: "Karate — Coming Soon", href: "/clubs/karate" },
+    ],
+  },
   { label: "Camps", href: "/camps" },
-  { label: "About", href: "/about/who-we-are" },
+  {
+    label: "About",
+    href: "/about/who-we-are",
+    dropdown: [
+      { label: "Who We Are", href: "/about/who-we-are" },
+      { label: "What We Do", href: "/about/what-we-do" },
+      { label: "Meet the Team", href: "/about/meet-the-team" },
+    ],
+  },
+  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ] as const
 
