@@ -6,7 +6,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import Link from "next/link"
-import { EXPLORE_SECTION, EXPLORE_CARDS } from "@/content/home"
+import { EXPLORE_CARDS } from "@/content/home"
 
 // TUNE: ratio ≈ 1x / 4x / 7.5x (exp07 parallax concept), capped so travel stays ≤40px
 const PARALLAX_TRAVEL = [5, 20, 38] as const
@@ -63,48 +63,9 @@ export default function EditorialMosaic() {
   return (
     <section
       ref={sectionRef}
-      className="pt-20 pb-0"
+      className="pt-0 pb-0"
       style={{ backgroundColor: "var(--color-black)" }}
     >
-      <div className="mx-auto mb-12 px-6" style={{ maxWidth: "1280px" }}>
-        <p
-          className="mb-3"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontWeight: "var(--font-weight-medium)",
-            fontSize: "0.875rem",
-            color: "var(--color-academy-green)",
-            textTransform: "uppercase",
-            letterSpacing: "0.15em",
-          }}
-        >
-          {EXPLORE_SECTION.smallHeading}
-        </p>
-        <h2
-          className="mb-4"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(2rem, 4vw, 3rem)",
-            color: "var(--color-white)",
-            textTransform: "uppercase",
-            lineHeight: 1.1,
-          }}
-        >
-          {EXPLORE_SECTION.heading}
-        </h2>
-        <p
-          style={{
-            fontFamily: "var(--font-body)",
-            color: "rgba(255,255,255,0.65)",
-            maxWidth: "640px",
-            lineHeight: 1.6,
-          }}
-        >
-          {EXPLORE_SECTION.sub}
-        </p>
-      </div>
-
       <div className="mosaic-grid mx-auto" style={{ maxWidth: "1280px" }}>
         {EXPLORE_CARDS.map((card, i) => (
           <Link
