@@ -31,7 +31,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${anton.variable} ${inter.variable}`}>
+      {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject data-gr-* attributes on body before React hydrates */}
+      <body className={`${anton.variable} ${inter.variable}`} suppressHydrationWarning>
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
