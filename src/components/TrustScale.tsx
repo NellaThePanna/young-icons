@@ -29,6 +29,7 @@ function MapPin() {
 
 export default function TrustScale() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const ctaBandRef = useRef<HTMLElement>(null)
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([])
   const headingRef = useRef<HTMLHeadingElement>(null)
   const ctaHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -43,7 +44,7 @@ export default function TrustScale() {
       once: true,
       invalidateOnRefresh: true,
       onEnter: () => {
-        const items = sectionRef.current?.querySelectorAll(".stat-item, .trust-item, .cta-band-item") ?? []
+        const items = sectionRef.current?.querySelectorAll(".stat-item, .trust-item") ?? []
         gsap.from(items, {
           opacity: 0,
           y: prefersReduced ? 0 : 20,
@@ -53,9 +54,8 @@ export default function TrustScale() {
         })
 
         if (!prefersReduced) {
-          ;[headingRef.current, ctaHeadingRef.current].forEach((el) => {
-            if (!el) return
-            const split = new SplitText(el, { type: "words" })
+          if (headingRef.current) {
+            const split = new SplitText(headingRef.current, { type: "words" })
             splits.push(split)
             gsap.from(split.words, {
               opacity: 0,
@@ -64,7 +64,7 @@ export default function TrustScale() {
               ease: "power2.out",
               stagger: { amount: 0.35, from: "start" },
             })
-          })
+          }
 
           HOME_STATS.forEach((stat, i) => {
             if (!stat.isNumeric) return
@@ -90,6 +90,37 @@ export default function TrustScale() {
                 })
               },
             })
+          })
+        }
+      },
+    })
+
+    // Own trigger: the CTA band sits far below the top-anchored trigger above and
+    // was firing (and finishing) while still off-screen, so its word reveal never read.
+    ScrollTrigger.create({
+      trigger: ctaBandRef.current,
+      start: "top 80%",
+      once: true,
+      invalidateOnRefresh: true,
+      onEnter: () => {
+        const items = ctaBandRef.current?.querySelectorAll(".cta-band-item") ?? []
+        gsap.from(items, {
+          opacity: 0,
+          y: prefersReduced ? 0 : 20,
+          duration: prefersReduced ? 0.01 : 0.7,
+          ease: "power2.out",
+          stagger: prefersReduced ? 0 : 0.1,
+        })
+
+        if (!prefersReduced && ctaHeadingRef.current) {
+          const split = new SplitText(ctaHeadingRef.current, { type: "words" })
+          splits.push(split)
+          gsap.from(split.words, {
+            opacity: 0,
+            y: 24,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: { amount: 0.35, from: "start" },
           })
         }
       },
@@ -218,6 +249,7 @@ export default function TrustScale() {
       </section>
 
       <section
+        ref={ctaBandRef}
         className="px-6"
         style={{ backgroundColor: "var(--color-near-black)" }}
       >

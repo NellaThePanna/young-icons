@@ -57,7 +57,7 @@ export default function EditorialMosaic() {
               duration: 0.5,
               ease: "power2.out",
               stagger: 0.04,
-              delay: i * 0.12 + 0.2,
+              delay: i * 0.12 + 0.4,
             })
           })
         }
