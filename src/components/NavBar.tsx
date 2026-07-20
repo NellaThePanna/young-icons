@@ -1,12 +1,15 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { CLASSCARD_URL } from "@/lib/config"
 import { NAV_LINKS, type NavItem } from "@/content/home"
+
+const SCROLL_THRESHOLD = 80
 
 function Chevron({ className }: { className?: string }) {
   return (
@@ -48,14 +51,19 @@ export default function NavBar() {
     })
   }, { scope: headerRef })
 
-  useEffect(() => {
-    if (!isHomepage) return
+  useGSAP(() => {
+    if (!isHomepage) {
+      setScrolled(false)
+      return
+    }
 
-    const handleScroll = () => setScrolled(window.scrollY > 80)
-    handleScroll()
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [isHomepage])
+    const trigger = ScrollTrigger.create({
+      start: 0,
+      onUpdate: (self) => setScrolled(self.scroll() > SCROLL_THRESHOLD),
+    })
+
+    return () => trigger.kill()
+  }, { scope: headerRef, dependencies: [isHomepage] })
 
   const isTransparent = isHomepage && !scrolled
 
@@ -70,11 +78,11 @@ export default function NavBar() {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        backgroundColor: isTransparent ? "transparent" : "var(--color-black)",
+        backgroundColor: isTransparent ? "transparent" : "var(--color-nav-dark)",
         borderBottom: isTransparent
-          ? "none"
+          ? "1px solid transparent"
           : "1px solid rgba(255,255,255,0.08)",
-        transition: "background-color 0.3s ease",
+        transition: "background-color 0.3s ease, border-color 0.3s ease",
       }}
     >
       <nav
