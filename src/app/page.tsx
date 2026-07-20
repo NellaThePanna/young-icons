@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import HeroHome from "@/components/HeroHome"
 import MarqueeStrip from "@/components/MarqueeStrip"
-import ExploreCards from "@/components/ExploreCards"
+import EditorialMosaic from "@/components/EditorialMosaic"
 import WhoWeAre from "@/components/WhoWeAre"
 import StatsBlock from "@/components/StatsBlock"
 import ActivityCarousel from "@/components/ActivityCarousel"
@@ -54,7 +54,7 @@ export default function HomePage() {
           imageFallback={HOME_HERO.imageFallback}
         />
         <MarqueeStrip />
-        <ExploreCards />
+        <EditorialMosaic />
         <WhoWeAre />
         <StatsBlock />
         <ActivityCarousel />
