@@ -135,11 +135,70 @@
 
 .mosaic-card-cta {
   opacity: 0.7;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .mosaic-card:hover .mosaic-card-cta {
   opacity: 1;
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mosaic-card:hover .mosaic-card-cta {
+    transform: none;
+  }
+}
+
+.btn-cta {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cta:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition-duration: 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta:hover,
+  .btn-cta:active {
+    transform: none;
+  }
+}
+
+.link-arrow {
+  display: inline-flex;
+  transition: transform 0.25s ease;
+}
+
+.link-arrow:hover {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-arrow:hover {
+    transform: none;
+  }
+}
+
+.trust-logo-pill {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.trust-logo-pill:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 1px var(--color-academy-green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-logo-pill:hover {
+    transform: none;
+  }
 }
 
 .no-scrollbar {

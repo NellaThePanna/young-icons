@@ -68,8 +68,8 @@ export default function TrustScale() {
                 el.textContent = target + suffix
                 gsap.from(el, {
                   scale: 1.3,
-                  duration: 0.3,
-                  ease: "power2.out",
+                  duration: 0.5,
+                  ease: "back.out(2)",
                 })
               },
             })
@@ -189,7 +189,7 @@ export default function TrustScale() {
               {group.map((name) => (
                 <span
                   key={name}
-                  className="inline-flex items-center whitespace-nowrap rounded-full"
+                  className="trust-logo-pill inline-flex items-center whitespace-nowrap rounded-full"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize: "13px",

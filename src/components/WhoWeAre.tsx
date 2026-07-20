@@ -115,7 +115,7 @@ export default function WhoWeAre() {
             </p>
             <Link
               href={WHO_WE_ARE.ctaHref}
-              className="who-item"
+              className="who-item link-arrow"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-bold)",

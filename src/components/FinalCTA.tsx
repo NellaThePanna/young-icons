@@ -132,7 +132,7 @@ export default function FinalCTA({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
+            className="btn-cta rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
@@ -146,7 +146,7 @@ export default function FinalCTA({
           {ctaSecondary && (
             <Link
               href={secondaryHref}
-              className="rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
+              className="btn-cta rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-bold)",

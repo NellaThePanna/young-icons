@@ -56,6 +56,17 @@ export default function HeroHome({
         x: rect.width / 2,
         y: rect.height / 2,
       })
+
+      if (!prefersReduced) {
+        gsap.to(glowRef.current, {
+          scale: 1.12,
+          opacity: 0.85,
+          duration: 2.6,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        })
+      }
     }
 
     const splits = wordRefs.current
@@ -157,7 +168,7 @@ export default function HeroHome({
           borderRadius: "50%",
           background: "radial-gradient(circle, rgba(26,122,71,0.35) 0%, transparent 70%)",
           pointerEvents: "none",
-          zIndex: 3,
+          zIndex: 1,
           left: 0,
           top: 0,
         }}
@@ -198,7 +209,7 @@ export default function HeroHome({
             href={CLASSCARD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full px-8 py-4 text-base text-center"
+            className="btn-cta rounded-full px-8 py-4 text-base text-center"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
@@ -211,7 +222,7 @@ export default function HeroHome({
           </a>
           <Link
             href="/schools"
-            className="rounded-full px-8 py-4 text-base text-center"
+            className="btn-cta rounded-full px-8 py-4 text-base text-center"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
