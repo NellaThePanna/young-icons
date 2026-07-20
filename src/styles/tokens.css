@@ -5,6 +5,7 @@
   --color-academy-green: #1a7a47;
   --color-gulf-blue: #0d6e9b;
   --color-warm-off-white: #f5f5f2;
+  --color-near-black: #0c0e0c;
 
   /* Typography — families (reference next/font CSS vars set in layout.tsx) */
   --font-display: 'Anton', sans-serif;

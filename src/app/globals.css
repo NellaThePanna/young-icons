@@ -186,21 +186,6 @@
   }
 }
 
-.trust-logo-pill {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.trust-logo-pill:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 0 1px var(--color-academy-green);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .trust-logo-pill:hover {
-    transform: none;
-  }
-}
-
 .no-scrollbar {
   scrollbar-width: none;
 }

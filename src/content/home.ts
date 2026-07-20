@@ -96,11 +96,13 @@ export const HOME_STATS = [
     isNumeric: true,
     unconfirmed: true,
   },
-  // CLIENT-TO-CONFIRM: Rev 3 forbids naming cities — was value "DUBAI +\nABU DHABI" / label "ACROSS THE UAE"
+  // CLIENT-TO-CONFIRM: Rev 3 written brief forbids naming cities. If approved, swap to:
+  // { value: "DUBAI &\nABU DHABI", label: "", isNumeric: false, icon: true }
   {
-    value: "ACROSS THE\nUAE",
+    value: "ACROSS THE UAE",
     label: "",
     isNumeric: false,
+    icon: true,
   },
 ] as const
 
@@ -208,12 +210,22 @@ export const HOME_PARTNERS = [
 ] as const
 
 export const PARTNERS_SECTION = {
-  heading: "TRUSTED BY NURSERIES & SCHOOLS ACROSS THE UAE.",
-  sub: "From early years settings to established schools, Young Icons partners with 45+ educational facilities across the UAE.",
+  eyebrow: "TRUSTED ACROSS THE UAE",
+  heading: "PARTNERING WITH LEADING NURSERIES & SCHOOLS",
+  sub: "We are proud to work alongside forward-thinking nurseries and schools, delivering high quality children's sports and movement programmes.",
+  // CLIENT-TO-CONFIRM: Rev 3 written brief forbids naming cities. If approved, swap sub with:
+  // "We are proud to work alongside forward-thinking nurseries and schools across Dubai and Abu Dhabi, delivering high quality children's sports and movement programmes."
   ctaA: "FOR NURSERIES",
   ctaAHref: "/nurseries",
   ctaB: "FOR SCHOOLS",
   ctaBHref: "/schools",
+} as const
+
+export const PARTNERING_CTA = {
+  heading: "READY TO BRING MOVEMENT TO YOUR SCHOOL?",
+  sub: "Let's work together to inspire every child to play, learn and grow.",
+  cta: "GET IN TOUCH",
+  ctaHref: "/contact",
 } as const
 
 export const HOME_CTA_BAND = {
