@@ -22,9 +22,9 @@ interface FinalCTAProps {
 }
 
 export default function FinalCTA({
-  smallHeading = FINAL_CTA.smallHeading,
-  headingWhite = FINAL_CTA.heading,
-  headingGreen = "",
+  smallHeading = "",
+  headingWhite = FINAL_CTA.headingWhite,
+  headingGreen = FINAL_CTA.headingGreen,
   sub = FINAL_CTA.sub,
   ctaPrimary = FINAL_CTA.ctaPrimary,
   ctaSecondary = FINAL_CTA.ctaSecondary,

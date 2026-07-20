@@ -223,8 +223,8 @@ export const HOME_CTA_BAND = {
 } as const
 
 export const FINAL_CTA = {
-  smallHeading: "READY TO MOVE?",
-  heading: "LET'S GET MOVING.",
+  headingWhite: "READY TO",
+  headingGreen: "MOVE?",
   sub: "Find a Young Icons class or discover how we can work with your nursery or school.",
   ctaPrimary: "FIND A CLASS",
   ctaSecondary: "WORK WITH US",

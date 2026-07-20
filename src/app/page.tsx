@@ -6,7 +6,7 @@ import WhoWeAre from "@/components/WhoWeAre"
 import TrustScale from "@/components/TrustScale"
 import FinalCTA from "@/components/FinalCTA"
 import Footer from "@/components/Footer"
-import { HOME_HERO } from "@/content/home"
+import { HOME_HERO, FINAL_CTA } from "@/content/home"
 
 export const metadata: Metadata = {
   title: "Young Icons Sports Academy Dubai | Free Trial",
@@ -52,7 +52,15 @@ export default function HomePage() {
         <EditorialMosaic />
         <WhoWeAre />
         <TrustScale />
-        <FinalCTA />
+        <FinalCTA
+          smallHeading=""
+          headingWhite={FINAL_CTA.headingWhite}
+          headingGreen={FINAL_CTA.headingGreen}
+          sub={FINAL_CTA.sub}
+          ctaPrimary={FINAL_CTA.ctaPrimary}
+          ctaSecondary={FINAL_CTA.ctaSecondary}
+          image={FINAL_CTA.image}
+        />
       </main>
       <Footer />
     </>
