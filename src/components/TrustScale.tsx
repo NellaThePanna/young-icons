@@ -182,11 +182,10 @@ export default function TrustScale() {
             {logoSlots.map((name) => (
               <div
                 key={name}
-                className="flex items-center justify-center px-4 py-8"
+                className="partner-logo flex items-center justify-center px-4 py-8"
                 style={{
                   fontFamily: "var(--font-body)",
                   fontSize: "11px",
-                  color: "rgba(0,0,0,0.3)",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
                   textAlign: "center",

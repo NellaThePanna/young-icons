@@ -194,6 +194,104 @@
   display: none;
 }
 
+.partner-logo {
+  color: rgba(0, 0, 0, 0.3);
+  transition: color 0.35s ease, transform 0.35s ease;
+}
+
+.partner-logo:hover {
+  color: var(--color-academy-green);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-logo:hover {
+    transform: none;
+  }
+}
+
+.footer-link-row {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 10px 0;
+  padding-left: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: color 0.25s ease, padding-left 0.25s ease, border-color 0.25s ease;
+}
+
+.footer-link-row:hover {
+  color: var(--color-white);
+  padding-left: 8px;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-link-row:hover {
+    padding-left: 0;
+  }
+}
+
+.footer-contact-row {
+  transition: transform 0.25s ease;
+}
+
+.footer-contact-row:hover {
+  transform: translateX(4px);
+}
+
+.footer-contact-row svg {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.footer-contact-row:hover svg {
+  transform: scale(1.15);
+}
+
+.footer-contact-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-contact-row:hover .footer-contact-link {
+  color: var(--color-white);
+}
+
+.footer-legal-link {
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: color 0.25s ease, background-size 0.25s ease;
+}
+
+.footer-legal-link:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background-size: 100% 1px;
+}
+
+.footer-social-icon {
+  display: inline-flex;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.footer-social-icon:hover {
+  color: var(--color-academy-green);
+  transform: translateY(-3px) scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-social-icon:hover,
+  .footer-contact-row:hover,
+  .footer-contact-row:hover svg {
+    transform: none;
+  }
+}
+
 @keyframes arrow-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }

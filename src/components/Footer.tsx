@@ -1,9 +1,15 @@
+"use client"
+
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
 import { FOOTER_NAP, FOOTER_BRAND, FOOTER_LINKS, FOOTER_SOCIAL } from "@/content/home"
 
 function IconRow({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="footer-contact-row flex items-center gap-3">
       <span style={{ color: "var(--color-academy-green)", flexShrink: 0 }}>{icon}</span>
       {children}
     </div>
@@ -75,16 +81,12 @@ function LinkedInIcon() {
 }
 
 const linkRowStyle: React.CSSProperties = {
-  display: "block",
   fontFamily: "var(--font-body)",
   fontSize: "0.875rem",
-  color: "rgba(255,255,255,0.7)",
-  textDecoration: "none",
-  padding: "10px 0",
-  borderBottom: "1px solid rgba(255,255,255,0.08)",
 }
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null)
   const whatsappHref = `https://wa.me/${FOOTER_NAP.whatsappNumber}?text=${encodeURIComponent(FOOTER_NAP.whatsappMessage)}`
   const year = new Date().getFullYear()
 
@@ -94,13 +96,34 @@ export default function Footer() {
     LinkedIn: <LinkedInIcon />,
   }
 
+  useGSAP(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    ScrollTrigger.create({
+      trigger: footerRef.current,
+      start: "top 92%",
+      once: true,
+      invalidateOnRefresh: true,
+      onEnter: () => {
+        const items = footerRef.current?.querySelectorAll(".footer-item") ?? []
+        gsap.from(items, {
+          opacity: 0,
+          y: prefersReduced ? 0 : 24,
+          duration: prefersReduced ? 0.01 : 0.6,
+          ease: "power2.out",
+          stagger: prefersReduced ? 0 : 0.08,
+        })
+      },
+    })
+  }, { scope: footerRef })
+
   return (
-    <footer style={{ backgroundColor: "var(--color-near-black)" }}>
+    <footer ref={footerRef} style={{ backgroundColor: "var(--color-near-black)" }}>
       <div className="mx-auto px-6 py-16" style={{ maxWidth: "1280px" }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
 
           {/* Brand */}
-          <div>
+          <div className="footer-item">
             <div className="flex items-center gap-3 mb-3">
               <span
                 aria-hidden="true"
@@ -163,7 +186,7 @@ export default function Footer() {
           </div>
 
           {/* Pages */}
-          <nav aria-label="Footer navigation">
+          <nav className="footer-item" aria-label="Footer navigation">
             <p
               className="mb-2"
               style={{
@@ -180,7 +203,7 @@ export default function Footer() {
             <ul className="list-none m-0 p-0">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={linkRowStyle}>
+                  <Link href={link.href} className="footer-link-row" style={linkRowStyle}>
                     {link.label}
                   </Link>
                 </li>
@@ -189,7 +212,7 @@ export default function Footer() {
           </nav>
 
           {/* Contact */}
-          <div>
+          <div className="footer-item">
             <p
               className="mb-4"
               style={{
@@ -212,7 +235,8 @@ export default function Footer() {
               <IconRow icon={<MailIcon />}>
                 <a
                   href={FOOTER_NAP.email.startsWith("[") ? undefined : `mailto:${FOOTER_NAP.email}`}
-                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
+                  className="footer-contact-link"
+                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem" }}
                 >
                   {FOOTER_NAP.email}
                 </a>
@@ -220,7 +244,8 @@ export default function Footer() {
               <IconRow icon={<PhoneIcon />}>
                 <a
                   href={`tel:${FOOTER_NAP.phone}`}
-                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
+                  className="footer-contact-link"
+                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem" }}
                 >
                   {FOOTER_NAP.phone}
                 </a>
@@ -230,7 +255,8 @@ export default function Footer() {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
+                  className="footer-contact-link"
+                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem" }}
                 >
                   {FOOTER_NAP.phone}
                 </a>
@@ -240,7 +266,7 @@ export default function Footer() {
         </div>
 
         {/* Follow us */}
-        <div className="mb-12">
+        <div className="footer-item mb-12">
           <p
             className="mb-4"
             style={{
@@ -262,19 +288,19 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                style={{ color: "rgba(255,255,255,0.75)" }}
+                className="footer-social-icon"
               >
                 {socialIcons[social.label]}
               </a>
             ))}
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={{ color: "rgba(255,255,255,0.75)" }}>
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="footer-social-icon">
               <WhatsAppIcon />
             </a>
           </div>
         </div>
 
         <div
-          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm"
+          className="footer-item pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm"
           style={{
             borderTop: "1px solid rgba(255,255,255,0.08)",
             fontFamily: "var(--font-body)",
@@ -283,9 +309,9 @@ export default function Footer() {
         >
           <span>© {year} Young Icons Sports Academy. All rights reserved.</span>
           <span>
-            <a href="#" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>Privacy Policy</a>
+            <a href="#" className="footer-legal-link">Privacy Policy</a>
             {" | "}
-            <a href="#" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>Terms &amp; Conditions</a>
+            <a href="#" className="footer-legal-link">Terms &amp; Conditions</a>
           </span>
         </div>
       </div>
