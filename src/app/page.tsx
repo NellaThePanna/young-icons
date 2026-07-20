@@ -1,12 +1,9 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import HeroHome from "@/components/HeroHome"
-import MarqueeStrip from "@/components/MarqueeStrip"
 import EditorialMosaic from "@/components/EditorialMosaic"
 import WhoWeAre from "@/components/WhoWeAre"
 import TrustScale from "@/components/TrustScale"
-import ActivityCarousel from "@/components/ActivityCarousel"
-import TestimonialSlider from "@/components/TestimonialSlider"
 import FinalCTA from "@/components/FinalCTA"
 import Footer from "@/components/Footer"
 import { HOME_HERO } from "@/content/home"
@@ -52,12 +49,9 @@ export default function HomePage() {
           videoSrc={HOME_HERO.videoSrc}
           imageFallback={HOME_HERO.imageFallback}
         />
-        <MarqueeStrip />
         <EditorialMosaic />
         <WhoWeAre />
         <TrustScale />
-        <ActivityCarousel />
-        <TestimonialSlider />
         <FinalCTA />
       </main>
       <Footer />
