@@ -287,8 +287,33 @@ export const NAV_LINKS: NavItem[] = [
 export const FOOTER_NAP = {
   name: "Young Icons Sports Academy",
   address: "[CLIENT: full Dubai address required]",
+  locationLine: "Dubai • Abu Dhabi / United Arab Emirates",
   phone: "+971 55 172 6530",
-  email: "[CLIENT: email address required]",
+  // CLIENT-TO-CONFIRM: do not publish info@youngicons.ae — unverified mockup guess
+  email: "[CLIENT: email TBC]",
   whatsappNumber: "971551726530",
   whatsappMessage: "Hi, I'd like to find out more about Young Icons Sports Academy.",
 } as const
+
+export const FOOTER_BRAND = {
+  wordmark: "YOUNG ICONS",
+  motto: "PLAY • LEARN • GROW",
+  tagline:
+    "Specialist sports and movement programmes for nurseries, schools and communities across the UAE.",
+} as const
+
+export const FOOTER_LINKS = [
+  { label: "Nurseries", href: "/nurseries" },
+  { label: "Schools", href: "/schools" },
+  { label: "Clubs", href: "/clubs/multi-sports" },
+  { label: "Holiday Camps", href: "/camps" },
+  { label: "Facility Management", href: "/facility-management" },
+  { label: "About Us", href: "/about/who-we-are" },
+  { label: "Contact", href: "/contact" },
+] as const
+
+export const FOOTER_SOCIAL = [
+  { label: "Instagram", href: "[CLIENT: Instagram URL]" },
+  { label: "Facebook", href: "[CLIENT: Facebook URL]" },
+  { label: "LinkedIn", href: "[CLIENT: LinkedIn URL]" },
+] as const

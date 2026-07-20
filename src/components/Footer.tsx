@@ -1,101 +1,186 @@
 import Link from "next/link"
-import { CLASSCARD_URL } from "@/lib/config"
-import { NAV_LINKS, FOOTER_NAP } from "@/content/home"
+import { FOOTER_NAP, FOOTER_BRAND, FOOTER_LINKS, FOOTER_SOCIAL } from "@/content/home"
+
+function IconRow({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span style={{ color: "var(--color-academy-green)", flexShrink: 0 }}>{icon}</span>
+      {children}
+    </div>
+  )
+}
+
+function LocationIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  )
+}
+
+function MailIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 6 8 7 8-7" />
+    </svg>
+  )
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path d="M4 5c0 8.28 6.72 15 15 15l2-4-5-3-2 2c-2.5-1.2-4.3-3-5.5-5.5l2-2-3-5-4 2Z" />
+    </svg>
+  )
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path d="M20.5 3.5A10 10 0 0 0 3.9 15.6L2.5 21.5l6-1.4A10 10 0 1 0 20.5 3.5Z" />
+      <path d="M8.3 8.6c.3-.7.6-.7 1-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.7.4.9 1.6 2.1 2.5 2.5.3.1.5 0 .7-.1l.6-.5c.2-.2.4-.2.7-.1l1.9.8c.4.2.5.5.5.7v.6c0 .4 0 .7-.7 1-1.2.6-3 .3-5-1.7s-2.3-3.8-1.7-5Z" />
+    </svg>
+  )
+}
+
+function InstagramIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function FacebookIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path d="M14 21v-7h2.5l.5-3H14V9c0-.9.3-1.5 1.7-1.5H17V4.8c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9V11H8.5v3H11v7Z" />
+    </svg>
+  )
+}
+
+function LinkedInIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <line x1="7.5" y1="10" x2="7.5" y2="16.5" />
+      <circle cx="7.5" cy="6.8" r="0.2" fill="currentColor" />
+      <path d="M11.5 16.5V12.5c0-1.2.8-2 2-2s2 .8 2 2v4" />
+    </svg>
+  )
+}
+
+const linkRowStyle: React.CSSProperties = {
+  display: "block",
+  fontFamily: "var(--font-body)",
+  fontSize: "0.875rem",
+  color: "rgba(255,255,255,0.7)",
+  textDecoration: "none",
+  padding: "10px 0",
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
+}
 
 export default function Footer() {
   const whatsappHref = `https://wa.me/${FOOTER_NAP.whatsappNumber}?text=${encodeURIComponent(FOOTER_NAP.whatsappMessage)}`
   const year = new Date().getFullYear()
 
-  return (
-    <footer
-      style={{
-        backgroundColor: "var(--color-black)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-      }}
-    >
-      <div className="mx-auto px-6 py-16" style={{ maxWidth: "1280px" }}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+  const socialIcons: Record<string, React.ReactNode> = {
+    Instagram: <InstagramIcon />,
+    Facebook: <FacebookIcon />,
+    LinkedIn: <LinkedInIcon />,
+  }
 
-          {/* Logo + machine-readable NAP */}
+  return (
+    <footer style={{ backgroundColor: "var(--color-near-black)" }}>
+      <div className="mx-auto px-6 py-16" style={{ maxWidth: "1280px" }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+
+          {/* Brand */}
           <div>
-            <Link
-              href="/"
-              className="block text-lg tracking-tight mb-6"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: "var(--font-weight-bold)",
-                color: "var(--color-white)",
-                textDecoration: "none",
-              }}
-            >
-              Young Icons
-            </Link>
-            <address
-              className="not-italic text-sm leading-loose"
-              style={{ fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.55)" }}
-              itemScope
-              itemType="https://schema.org/LocalBusiness"
-            >
-              <span itemProp="name" style={{ display: "block" }}>
-                {FOOTER_NAP.name}
+            <div className="flex items-center gap-3 mb-3">
+              <span
+                aria-hidden="true"
+                className="inline-flex items-center justify-center flex-shrink-0"
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "var(--radius-sm)",
+                  backgroundColor: "var(--color-academy-green)",
+                  fontFamily: "var(--font-display)",
+                  fontWeight: "var(--font-weight-bold)",
+                  color: "var(--color-white)",
+                  fontSize: "16px",
+                }}
+              >
+                Y
               </span>
               <span
-                itemProp="address"
-                itemScope
-                itemType="https://schema.org/PostalAddress"
-                style={{ display: "block" }}
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: "var(--font-weight-bold)",
+                  fontSize: "1.125rem",
+                  color: "var(--color-white)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.02em",
+                }}
               >
-                <span itemProp="streetAddress">{FOOTER_NAP.address}</span>
+                {FOOTER_BRAND.wordmark}
               </span>
-              <a
-                href={`tel:${FOOTER_NAP.phone}`}
-                itemProp="telephone"
-                style={{
-                  display: "block",
-                  color: "rgba(255,255,255,0.55)",
-                  textDecoration: "none",
-                }}
-              >
-                {FOOTER_NAP.phone}
-              </a>
-              <a
-                href={`mailto:${FOOTER_NAP.email}`}
-                itemProp="email"
-                style={{
-                  display: "block",
-                  color: "rgba(255,255,255,0.55)",
-                  textDecoration: "none",
-                }}
-              >
-                {FOOTER_NAP.email}
-              </a>
-            </address>
-          </div>
-
-          {/* Nav links */}
-          <nav aria-label="Footer navigation">
+            </div>
             <p
-              className="text-xs uppercase tracking-widest mb-4"
+              className="mb-4"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-medium)",
-                color: "rgba(255,255,255,0.4)",
+                fontSize: "0.75rem",
+                color: "var(--color-academy-green)",
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
+              }}
+            >
+              {FOOTER_BRAND.motto}
+            </p>
+            <div
+              aria-hidden="true"
+              className="mb-4"
+              style={{ width: 40, height: 2, backgroundColor: "var(--color-academy-green)" }}
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "0.875rem",
+                color: "rgba(255,255,255,0.55)",
+                lineHeight: 1.6,
+                maxWidth: "320px",
+              }}
+            >
+              {FOOTER_BRAND.tagline}
+            </p>
+          </div>
+
+          {/* Pages */}
+          <nav aria-label="Footer navigation">
+            <p
+              className="mb-2"
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: "var(--font-weight-medium)",
+                fontSize: "0.75rem",
+                color: "var(--color-academy-green)",
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
               }}
             >
               Pages
             </p>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
+            <ul className="list-none m-0 p-0">
+              {FOOTER_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm"
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      color: "rgba(255,255,255,0.65)",
-                      textDecoration: "none",
-                    }}
-                  >
+                  <Link href={link.href} style={linkRowStyle}>
                     {link.label}
                   </Link>
                 </li>
@@ -103,74 +188,105 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Social + CTA */}
+          {/* Contact */}
           <div>
             <p
-              className="text-xs uppercase tracking-widest mb-4"
+              className="mb-4"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-medium)",
-                color: "rgba(255,255,255,0.4)",
+                fontSize: "0.75rem",
+                color: "var(--color-academy-green)",
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
               }}
             >
-              Connect
+              Contact
             </p>
-            <div className="flex flex-col gap-3 mb-8">
-              <a
-                href="[CLIENT: Instagram URL]"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm"
-                style={{ fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.65)", textDecoration: "none" }}
-              >
-                Instagram
-              </a>
-              <a
-                href="[CLIENT: Facebook URL]"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm"
-                style={{ fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.65)", textDecoration: "none" }}
-              >
-                Facebook
-              </a>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm"
-                style={{ fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.65)", textDecoration: "none" }}
-              >
-                WhatsApp
-              </a>
+            <div className="flex flex-col gap-4">
+              <IconRow icon={<LocationIcon />}>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
+                  {FOOTER_NAP.locationLine}
+                </span>
+              </IconRow>
+              <IconRow icon={<MailIcon />}>
+                <a
+                  href={FOOTER_NAP.email.startsWith("[") ? undefined : `mailto:${FOOTER_NAP.email}`}
+                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
+                >
+                  {FOOTER_NAP.email}
+                </a>
+              </IconRow>
+              <IconRow icon={<PhoneIcon />}>
+                <a
+                  href={`tel:${FOOTER_NAP.phone}`}
+                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
+                >
+                  {FOOTER_NAP.phone}
+                </a>
+              </IconRow>
+              <IconRow icon={<WhatsAppIcon />}>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
+                >
+                  {FOOTER_NAP.phone}
+                </a>
+              </IconRow>
             </div>
-            <a
-              href={CLASSCARD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-full px-5 py-2 text-sm"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontWeight: "var(--font-weight-bold)",
-                color: "var(--color-white)",
-                backgroundColor: "var(--color-academy-green)",
-                textDecoration: "none",
-              }}
-            >
-              FIND A CLASS
+          </div>
+        </div>
+
+        {/* Follow us */}
+        <div className="mb-12">
+          <p
+            className="mb-4"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontWeight: "var(--font-weight-medium)",
+              fontSize: "0.75rem",
+              color: "var(--color-academy-green)",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+            }}
+          >
+            Follow Us
+          </p>
+          <div className="flex items-center gap-4">
+            {FOOTER_SOCIAL.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                style={{ color: "rgba(255,255,255,0.75)" }}
+              >
+                {socialIcons[social.label]}
+              </a>
+            ))}
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={{ color: "rgba(255,255,255,0.75)" }}>
+              <WhatsAppIcon />
             </a>
           </div>
         </div>
 
         <div
-          className="mt-16 pt-6 text-sm"
+          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm"
           style={{
             borderTop: "1px solid rgba(255,255,255,0.08)",
             fontFamily: "var(--font-body)",
             color: "rgba(255,255,255,0.35)",
           }}
         >
-          © {year} Young Icons Sports Academy. All rights reserved.
+          <span>© {year} Young Icons Sports Academy. All rights reserved.</span>
+          <span>
+            <a href="#" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>Privacy Policy</a>
+            {" | "}
+            <a href="#" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>Terms &amp; Conditions</a>
+          </span>
         </div>
       </div>
     </footer>
