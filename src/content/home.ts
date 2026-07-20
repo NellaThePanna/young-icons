@@ -189,24 +189,18 @@ export const HOME_TESTIMONIALS = [
   },
 ] as const
 
-// Placeholder logo slots — real logos come from Luke later
+// Names from client mockup — replace with approved logo files from Luke when supplied (Asana task logged).
 export const HOME_PARTNERS = [
-  "NURSERY PARTNER 1",
-  "NURSERY PARTNER 2",
-  "SCHOOL PARTNER 1",
-  "SCHOOL PARTNER 2",
-  "NURSERY PARTNER 3",
-  "SCHOOL PARTNER 3",
-  "NURSERY PARTNER 4",
-  "SCHOOL PARTNER 4",
-  "NURSERY PARTNER 5",
-  "NURSERY PARTNER 6",
-  "SCHOOL PARTNER 5",
-  "SCHOOL PARTNER 6",
-  "NURSERY PARTNER 7",
-  "SCHOOL PARTNER 7",
-  "NURSERY PARTNER 8",
-  "SCHOOL PARTNER 8",
+  "British Orchard Nursery",
+  "Kids Academy",
+  "Little Dreamers Nursery",
+  "Swiss International Scientific School",
+  "Citizens School",
+  "Blossom Nursery",
+  "Hummingbird Nursery",
+  "Great Minds",
+  "Tappy Toes Nursery",
+  "First Path Montessori",
 ] as const
 
 export const PARTNERS_SECTION = {

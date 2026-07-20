@@ -7,8 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
 import { HOME_STATS, PARTNERS_SECTION, PARTNERING_CTA, HOME_PARTNERS } from "@/content/home"
 
-const LOGO_GRID_SIZE = 10
-
 function MapPin() {
   return (
     <svg
@@ -31,7 +29,6 @@ function MapPin() {
 export default function TrustScale() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const logoSlots = HOME_PARTNERS.slice(0, LOGO_GRID_SIZE)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -175,20 +172,21 @@ export default function TrustScale() {
             ))}
           </div>
 
+          {/* Text wordmarks stand in for logo files — replace with approved logo assets from Luke when supplied (Asana task logged) */}
           <div
             className="trust-item grid grid-cols-2 sm:grid-cols-5 divide-x divide-y sm:divide-y-0 mx-auto"
             style={{ maxWidth: "1100px", borderColor: "rgba(0,0,0,0.08)" }}
           >
-            {logoSlots.map((name) => (
+            {HOME_PARTNERS.map((name) => (
               <div
                 key={name}
                 className="partner-logo flex items-center justify-center px-4 py-8"
                 style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "11px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
+                  fontSize: "13px",
+                  letterSpacing: "0.04em",
                   textAlign: "center",
+                  lineHeight: 1.3,
                 }}
                 aria-label={name}
               >
