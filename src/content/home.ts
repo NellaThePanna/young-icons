@@ -57,8 +57,9 @@ export const EXPLORE_CARDS = [
 
 export const WHO_WE_ARE = {
   smallHeading: "THIS IS YOUNG ICONS",
-  heading: "BUILT FOR THE WAY CHILDREN MOVE.",
-  body: "Young Icons is a UAE-based sports and movement provider working with nurseries, schools, clubs and holiday camps across Dubai and Abu Dhabi. Founded by Luke Hannon, a UK-qualified PE teacher with 15+ years experience, every programme is built around structured coaching, qualified staff and genuine development.",
+  headingWhite: "BUILT FOR THE WAY CHILDREN",
+  headingGreen: "MOVE.",
+  body: "Age-appropriate coaching that builds skills, confidence and a lifelong love of movement.",
   cta: "MEET YOUNG ICONS",
   ctaHref: "/about/who-we-are",
   imageLarge: "/images/placeholder/ball-skills.jpg",

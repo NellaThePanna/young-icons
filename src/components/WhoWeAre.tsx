@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Image from "next/image"
 import Link from "next/link"
 import { WHO_WE_ARE, PHILOSOPHY } from "@/content/home"
@@ -11,6 +12,7 @@ import PhilosophyColumns from "@/components/PhilosophyColumns"
 
 export default function WhoWeAre() {
   const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -21,14 +23,33 @@ export default function WhoWeAre() {
       once: true,
       invalidateOnRefresh: true,
       onEnter: () => {
-        gsap.from(sectionRef.current, {
-          opacity: 0,
-          y: prefersReduced ? 0 : 40,
-          rotateX: prefersReduced ? 0 : 2,
-          transformOrigin: "top center",
-          duration: prefersReduced ? 0.01 : 0.8,
-          ease: "power2.out",
-        })
+        const split = headingRef.current
+          ? new SplitText(headingRef.current, { type: "words" })
+          : null
+        const items = sectionRef.current?.querySelectorAll(".who-item") ?? []
+        const tl = gsap.timeline()
+
+        if (split) {
+          tl.from(split.words, {
+            opacity: 0,
+            y: prefersReduced ? 0 : 24,
+            duration: prefersReduced ? 0.01 : 0.8,
+            ease: "power2.out",
+            stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
+          })
+        }
+
+        tl.from(
+          items,
+          {
+            opacity: 0,
+            y: prefersReduced ? 0 : 40,
+            duration: prefersReduced ? 0.01 : 0.8,
+            ease: "power2.out",
+            stagger: prefersReduced ? 0 : 0.1,
+          },
+          prefersReduced ? "<" : "-=0.4"
+        )
       },
     })
   }, { scope: sectionRef })
@@ -65,20 +86,24 @@ export default function WhoWeAre() {
               {WHO_WE_ARE.smallHeading}
             </p>
             <h2
+              ref={headingRef}
               className="mb-6"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: "var(--font-weight-bold)",
-                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
                 color: "var(--color-black)",
                 textTransform: "uppercase",
-                lineHeight: 1.1,
+                lineHeight: 1.05,
               }}
             >
-              {WHO_WE_ARE.heading}
+              {WHO_WE_ARE.headingWhite}{" "}
+              <span style={{ color: "var(--color-academy-green)" }}>
+                {WHO_WE_ARE.headingGreen}
+              </span>
             </h2>
             <p
-              className="mb-8"
+              className="who-item mb-8"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "rgba(0,0,0,0.7)",
@@ -90,6 +115,7 @@ export default function WhoWeAre() {
             </p>
             <Link
               href={WHO_WE_ARE.ctaHref}
+              className="who-item"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-bold)",
@@ -101,7 +127,7 @@ export default function WhoWeAre() {
             </Link>
           </div>
 
-          <div className="relative">
+          <div className="who-item relative">
             <div className="relative w-full" style={{ height: "400px" }}>
               <Image
                 src={WHO_WE_ARE.imageLarge}
