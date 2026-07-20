@@ -85,7 +85,7 @@
 .mosaic-grid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 
 .mosaic-grid > a {
@@ -97,7 +97,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 280px 280px;
-    gap: 24px;
+    gap: 0;
   }
 
   .mosaic-grid > a {

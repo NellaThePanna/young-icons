@@ -63,10 +63,10 @@ export default function EditorialMosaic() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 px-6"
-      style={{ backgroundColor: "var(--color-warm-off-white)" }}
+      className="pt-20 pb-0"
+      style={{ backgroundColor: "var(--color-black)" }}
     >
-      <div className="mx-auto mb-12" style={{ maxWidth: "1280px" }}>
+      <div className="mx-auto mb-12 px-6" style={{ maxWidth: "1280px" }}>
         <p
           className="mb-3"
           style={{
@@ -86,7 +86,7 @@ export default function EditorialMosaic() {
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
             fontSize: "clamp(2rem, 4vw, 3rem)",
-            color: "var(--color-black)",
+            color: "var(--color-white)",
             textTransform: "uppercase",
             lineHeight: 1.1,
           }}
@@ -96,7 +96,7 @@ export default function EditorialMosaic() {
         <p
           style={{
             fontFamily: "var(--font-body)",
-            color: "rgba(0,0,0,0.65)",
+            color: "rgba(255,255,255,0.65)",
             maxWidth: "640px",
             lineHeight: 1.6,
           }}
@@ -111,7 +111,6 @@ export default function EditorialMosaic() {
             key={card.label}
             href={card.href}
             className={`mosaic-card group relative block overflow-hidden ${MOSAIC_LAYOUT[i]}`}
-            style={{ borderRadius: "var(--radius-lg)" }}
           >
             <div
               ref={(el) => { imageRefs.current[i] = el }}
@@ -130,15 +129,14 @@ export default function EditorialMosaic() {
             </div>
 
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 flex flex-col justify-end"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)",
+                  "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 35%, transparent 65%)",
+                padding: "28px",
+                zIndex: 2,
               }}
-              aria-hidden="true"
-            />
-
-            <div className="absolute bottom-0" style={{ padding: "28px", zIndex: 2 }}>
+            >
               <p
                 className="mb-1"
                 style={{
