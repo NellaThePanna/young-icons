@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Link from "next/link"
 import { HOME_STATS, PARTNERS_SECTION, PARTNERING_CTA, HOME_PARTNERS } from "@/content/home"
 
@@ -29,9 +30,12 @@ function MapPin() {
 export default function TrustScale() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([])
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const ctaHeadingRef = useRef<HTMLHeadingElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const splits: SplitText[] = []
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -42,13 +46,26 @@ export default function TrustScale() {
         const items = sectionRef.current?.querySelectorAll(".stat-item, .trust-item, .cta-band-item") ?? []
         gsap.from(items, {
           opacity: 0,
-          y: prefersReduced ? 0 : 30,
+          y: prefersReduced ? 0 : 20,
           duration: prefersReduced ? 0.01 : 0.7,
           ease: "power2.out",
           stagger: prefersReduced ? 0 : 0.1,
         })
 
         if (!prefersReduced) {
+          ;[headingRef.current, ctaHeadingRef.current].forEach((el) => {
+            if (!el) return
+            const split = new SplitText(el, { type: "words" })
+            splits.push(split)
+            gsap.from(split.words, {
+              opacity: 0,
+              y: 24,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: { amount: 0.35, from: "start" },
+            })
+          })
+
           HOME_STATS.forEach((stat, i) => {
             if (!stat.isNumeric) return
             const el = valueRefs.current[i]
@@ -77,6 +94,8 @@ export default function TrustScale() {
         }
       },
     })
+
+    return () => splits.forEach((split) => split.revert())
   }, { scope: sectionRef })
 
   return (
@@ -105,7 +124,8 @@ export default function TrustScale() {
           </p>
 
           <h2
-            className="trust-item mx-auto mb-6"
+            ref={headingRef}
+            className="mx-auto mb-6"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: "var(--font-weight-bold)",
@@ -205,8 +225,9 @@ export default function TrustScale() {
           className="mx-auto flex flex-col md:flex-row items-center justify-between gap-8"
           style={{ maxWidth: "1280px", paddingTop: "56px", paddingBottom: "56px" }}
         >
-          <div className="cta-band-item text-center md:text-left">
+          <div className="text-center md:text-left">
             <h3
+              ref={ctaHeadingRef}
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: "var(--font-weight-bold)",
@@ -220,6 +241,7 @@ export default function TrustScale() {
               {PARTNERING_CTA.heading}
             </h3>
             <p
+              className="cta-band-item"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "rgba(255,255,255,0.6)",

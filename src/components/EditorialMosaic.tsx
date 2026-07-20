@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Image from "next/image"
 import Link from "next/link"
 import { EXPLORE_CARDS } from "@/content/home"
@@ -24,9 +25,11 @@ const MOSAIC_LAYOUT = [
 export default function EditorialMosaic() {
   const sectionRef = useRef<HTMLElement>(null)
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
+  const headingRefs = useRef<(HTMLHeadingElement | null)[]>([])
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const splits: SplitText[] = []
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -42,6 +45,22 @@ export default function EditorialMosaic() {
           ease: "power2.out",
           stagger: prefersReduced ? 0 : 0.12,
         })
+
+        if (!prefersReduced) {
+          headingRefs.current.forEach((el, i) => {
+            if (!el) return
+            const split = new SplitText(el, { type: "words" })
+            splits.push(split)
+            gsap.from(split.words, {
+              opacity: 0,
+              y: 12,
+              duration: 0.5,
+              ease: "power2.out",
+              stagger: 0.04,
+              delay: i * 0.12 + 0.2,
+            })
+          })
+        }
       },
     })
 
@@ -61,6 +80,8 @@ export default function EditorialMosaic() {
         })
       })
     }
+
+    return () => splits.forEach((split) => split.revert())
   }, { scope: sectionRef })
 
   return (
@@ -115,6 +136,7 @@ export default function EditorialMosaic() {
                 {card.label}
               </p>
               <h3
+                ref={(el) => { headingRefs.current[i] = el }}
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: "var(--font-weight-bold)",

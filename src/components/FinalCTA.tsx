@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Image from "next/image"
 import Link from "next/link"
 import { CLASSCARD_URL } from "@/lib/config"
@@ -33,10 +34,13 @@ export default function FinalCTA({
   secondaryHref = "/schools",
 }: FinalCTAProps) {
   const sectionRef = useRef<HTMLElement>(null)
+  const headingLineRefs = useRef<(HTMLSpanElement | null)[]>([])
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReduced) return
+
+    const splits: SplitText[] = []
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -47,13 +51,28 @@ export default function FinalCTA({
         const items = sectionRef.current?.querySelectorAll(".final-cta-item") ?? []
         gsap.from(items, {
           opacity: 0,
-          y: 32,
+          y: 20,
           duration: 0.8,
           ease: "power2.out",
           stagger: 0.12,
         })
+
+        const lineSplits = headingLineRefs.current
+          .filter((el): el is HTMLSpanElement => el !== null)
+          .map((el) => new SplitText(el, { type: "words" }))
+        splits.push(...lineSplits)
+        const words = lineSplits.flatMap((split) => split.words)
+        gsap.from(words, {
+          opacity: 0,
+          y: 24,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: { amount: 0.35, from: "start" },
+        })
       },
     })
+
+    return () => splits.forEach((split) => split.revert())
   }, { scope: sectionRef })
 
   return (
@@ -96,7 +115,7 @@ export default function FinalCTA({
         )}
 
         <h2
-          className="final-cta-item mb-6"
+          className="mb-6"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
@@ -105,11 +124,19 @@ export default function FinalCTA({
             lineHeight: 1.05,
           }}
         >
-          <span className="block" style={{ color: "var(--color-white)" }}>
+          <span
+            ref={(el) => { headingLineRefs.current[0] = el }}
+            className="block"
+            style={{ color: "var(--color-white)" }}
+          >
             {headingWhite}
           </span>
           {headingGreen && (
-            <span className="block" style={{ color: "var(--color-academy-green)" }}>
+            <span
+              ref={(el) => { headingLineRefs.current[1] = el }}
+              className="block"
+              style={{ color: "var(--color-academy-green)" }}
+            >
               {headingGreen}
             </span>
           )}
