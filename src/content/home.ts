@@ -1,11 +1,9 @@
 export const HOME_HERO = {
-  smallHeading: "SPORT. MOVEMENT. DEVELOPMENT.",
-  words: ["PLAY.", "LEARN.", "GROW."],
+  words: ["SPORT.", "MOVEMENT.", "FOR EVERY CHILD."],
   wordColors: ["white", "white", "green"],
-  sub: "Specialist sports and movement experiences for nurseries, schools and children across the UAE.",
   ctaPrimary: "FIND A CLASS",
   ctaSecondary: "WORK WITH US",
-  videoSrc: "",
+  videoSrc: "/videos/hero-loop.mp4",
   imageFallback: "/images/placeholder/nursery-basketball.jpg",
 } as const
 

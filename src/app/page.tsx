@@ -46,10 +46,8 @@ export default function HomePage() {
       <NavBar />
       <main>
         <HeroHome
-          smallHeading={HOME_HERO.smallHeading}
           words={HOME_HERO.words}
           wordColors={HOME_HERO.wordColors}
-          sub={HOME_HERO.sub}
           ctaPrimary={HOME_HERO.ctaPrimary}
           ctaSecondary={HOME_HERO.ctaSecondary}
           videoSrc={HOME_HERO.videoSrc}

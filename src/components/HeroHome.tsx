@@ -9,10 +9,8 @@ import { SplitText } from "gsap/SplitText"
 import { CLASSCARD_URL } from "@/lib/config"
 
 interface HeroHomeProps {
-  smallHeading: string
   words: readonly string[]
   wordColors: readonly string[]
-  sub: string
   ctaPrimary: string
   ctaSecondary: string
   videoSrc: string
@@ -20,10 +18,8 @@ interface HeroHomeProps {
 }
 
 export default function HeroHome({
-  smallHeading,
   words,
   wordColors,
-  sub,
   ctaPrimary,
   ctaSecondary,
   videoSrc,
@@ -33,7 +29,6 @@ export default function HeroHome({
   const mediaRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const subRef = useRef<HTMLParagraphElement>(null)
   const ctasRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
@@ -78,13 +73,12 @@ export default function HeroHome({
     })
 
     tl.from(
-      [subRef.current, ctasRef.current],
+      ctasRef.current,
       {
         opacity: 0,
         y: prefersReduced ? 0 : 40,
         duration: prefersReduced ? 0.01 : 0.8,
         ease: "power2.out",
-        stagger: prefersReduced ? 0 : 0.1,
       },
       prefersReduced ? "<" : "-=0.4"
     )
@@ -131,6 +125,8 @@ export default function HeroHome({
             muted
             loop
             playsInline
+            preload="metadata"
+            poster={imageFallback}
             src={videoSrc}
           />
         ) : (
@@ -168,28 +164,14 @@ export default function HeroHome({
         aria-hidden="true"
       />
 
-      <div className="relative max-w-4xl w-full mx-auto text-center" style={{ zIndex: 2 }}>
-        <p
-          className="mb-4"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontWeight: "var(--font-weight-medium)",
-            fontSize: "0.875rem",
-            color: "var(--color-academy-green)",
-            textTransform: "uppercase",
-            letterSpacing: "0.15em",
-          }}
-        >
-          {smallHeading}
-        </p>
-
+      <div className="relative max-w-5xl w-full mx-auto text-center" style={{ zIndex: 2 }}>
         <h1
           aria-label={fullHeading}
-          className="tracking-tight mb-6"
+          className="tracking-tight mb-10"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
-            lineHeight: 1.05,
+            lineHeight: 0.92,
             textTransform: "uppercase",
           }}
         >
@@ -199,7 +181,7 @@ export default function HeroHome({
               ref={(el) => { wordRefs.current[i] = el }}
               className="block"
               style={{
-                fontSize: "clamp(4rem, 9vw, 7rem)",
+                fontSize: "clamp(3.5rem, 11vw, 9.5rem)",
                 color:
                   wordColors[i] === "green"
                     ? "var(--color-academy-green)"
@@ -210,20 +192,6 @@ export default function HeroHome({
             </span>
           ))}
         </h1>
-
-        <p
-          ref={subRef}
-          className="text-lg md:text-xl mx-auto"
-          style={{
-            fontFamily: "var(--font-body)",
-            color: "rgba(255,255,255,0.7)",
-            maxWidth: "560px",
-            lineHeight: 1.6,
-            marginBottom: "var(--space-12)",
-          }}
-        >
-          {sub}
-        </p>
 
         <div ref={ctasRef} className="flex flex-wrap items-center justify-center gap-4">
           <a
