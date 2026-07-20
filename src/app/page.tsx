@@ -4,9 +4,8 @@ import HeroHome from "@/components/HeroHome"
 import MarqueeStrip from "@/components/MarqueeStrip"
 import EditorialMosaic from "@/components/EditorialMosaic"
 import WhoWeAre from "@/components/WhoWeAre"
-import StatsBlock from "@/components/StatsBlock"
+import TrustScale from "@/components/TrustScale"
 import ActivityCarousel from "@/components/ActivityCarousel"
-import PartnerLogos from "@/components/PartnerLogos"
 import TestimonialSlider from "@/components/TestimonialSlider"
 import FinalCTA from "@/components/FinalCTA"
 import Footer from "@/components/Footer"
@@ -56,9 +55,8 @@ export default function HomePage() {
         <MarqueeStrip />
         <EditorialMosaic />
         <WhoWeAre />
-        <StatsBlock />
+        <TrustScale />
         <ActivityCarousel />
-        <PartnerLogos />
         <TestimonialSlider />
         <FinalCTA />
       </main>

@@ -86,24 +86,20 @@ export const PHILOSOPHY = [
 
 export const HOME_STATS = [
   {
-    value: "50+",
-    label: "EDUCATIONAL FACILITIES",
+    value: "45+",
+    label: "EDUCATIONAL PARTNERS",
     isNumeric: true,
   },
   {
     value: "900+",
-    label: "CHILDREN MOVING EVERY WEEK",
+    label: "CHILDREN EVERY WEEK",
     isNumeric: true,
     unconfirmed: true,
   },
+  // CLIENT-TO-CONFIRM: Rev 3 forbids naming cities — was value "DUBAI +\nABU DHABI" / label "ACROSS THE UAE"
   {
-    value: "2–18",
-    label: "AGES WE SUPPORT",
-    isNumeric: false,
-  },
-  {
-    value: "DUBAI +\nABU DHABI",
-    label: "ACROSS THE UAE",
+    value: "ACROSS THE\nUAE",
+    label: "",
     isNumeric: false,
   },
 ] as const
@@ -191,6 +187,7 @@ export const HOME_TESTIMONIALS = [
   },
 ] as const
 
+// Placeholder logo slots — real logos come from Luke later
 export const HOME_PARTNERS = [
   "NURSERY PARTNER 1",
   "NURSERY PARTNER 2",
@@ -200,11 +197,19 @@ export const HOME_PARTNERS = [
   "SCHOOL PARTNER 3",
   "NURSERY PARTNER 4",
   "SCHOOL PARTNER 4",
+  "NURSERY PARTNER 5",
+  "NURSERY PARTNER 6",
+  "SCHOOL PARTNER 5",
+  "SCHOOL PARTNER 6",
+  "NURSERY PARTNER 7",
+  "SCHOOL PARTNER 7",
+  "NURSERY PARTNER 8",
+  "SCHOOL PARTNER 8",
 ] as const
 
 export const PARTNERS_SECTION = {
   heading: "TRUSTED BY NURSERIES & SCHOOLS ACROSS THE UAE.",
-  sub: "From early years settings to established schools, Young Icons works with 50+ educational facilities across Dubai and Abu Dhabi.",
+  sub: "From early years settings to established schools, Young Icons partners with 45+ educational facilities across the UAE.",
   ctaA: "FOR NURSERIES",
   ctaAHref: "/nurseries",
   ctaB: "FOR SCHOOLS",
