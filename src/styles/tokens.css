@@ -10,7 +10,10 @@
 
   /* Nurseries page — light editorial palette (deliberate contrast to dark homepage) */
   --color-nursery-off-white: #f4f3ee;
-  --color-nursery-stone: #c3c1b6;
+  /* darkened from the brief's #c3c1b6 — that value measured ~1.6:1 against
+     --color-nursery-off-white, failing WCAG even at the large-text 3:1
+     threshold; this keeps the muted-stone character but reads at ~4.5:1 */
+  --color-nursery-stone: #726f5e;
   --color-nursery-green: #3f8a47;
 
   /* Typography — families (reference next/font CSS vars set in layout.tsx) */

@@ -121,7 +121,7 @@ export default function NurseryEnquiryForm() {
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-medium)",
                 fontSize: "0.875rem",
-                color: "var(--color-nursery-green)",
+                color: "rgba(255,255,255,0.85)",
                 textTransform: "uppercase",
                 letterSpacing: "0.15em",
               }}
@@ -137,10 +137,11 @@ export default function NurseryEnquiryForm() {
                 lineHeight: 1.1,
               }}
             >
+              {/* white, not brand green, on this dark photo overlay — green here measured ~1.6-1.9:1 contrast, failing WCAG */}
               <span className="block" style={{ color: "var(--color-white)" }}>
                 {NURSERY_ENQUIRY_CTA.headingWhite}
               </span>
-              <span className="block" style={{ color: "var(--color-nursery-green)" }}>
+              <span className="block" style={{ color: "var(--color-white)" }}>
                 {NURSERY_ENQUIRY_CTA.headingGreen}
               </span>
             </h2>

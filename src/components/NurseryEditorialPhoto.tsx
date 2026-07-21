@@ -45,6 +45,7 @@ export default function NurseryEditorialPhoto() {
           src={NURSERY_EDITORIAL_PHOTO.image}
           alt={NURSERY_EDITORIAL_PHOTO.alt}
           fill
+          priority
           sizes="100vw"
           className="object-cover"
         />
