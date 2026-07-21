@@ -23,6 +23,10 @@
   animation: marquee 35s linear infinite;
 }
 
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation-play-state: paused;
@@ -318,6 +322,20 @@
   outline-offset: -2px;
 }
 
+.approach-row-button svg {
+  transition: scale 0.25s ease;
+}
+
+.approach-row-button:hover svg {
+  scale: 1.15;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approach-row-button:hover svg {
+    scale: 1;
+  }
+}
+
 .why-grid {
   display: flex;
   flex-direction: column;
@@ -355,9 +373,39 @@
   outline-offset: 2px;
 }
 
+.why-card[aria-selected="false"]:hover {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .why-card {
     transition: none;
+  }
+}
+
+.nursery-field {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nursery-field:focus-visible {
+  outline: none;
+  border-color: var(--color-nursery-green);
+  box-shadow: 0 0 0 3px rgba(63, 138, 71, 0.15);
+}
+
+.nursery-submit {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.nursery-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(63, 138, 71, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nursery-submit:hover {
+    transform: none;
   }
 }
 

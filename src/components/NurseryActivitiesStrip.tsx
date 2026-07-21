@@ -30,7 +30,7 @@ function ActivitiesTrack() {
 export default function NurseryActivitiesStrip() {
   return (
     <div
-      className="overflow-hidden"
+      className="marquee-strip overflow-hidden"
       style={{ backgroundColor: "var(--color-nav-dark)", padding: "36px 0" }}
       aria-label={`Activities: ${NURSERY_ACTIVITIES_STRIP.join(", ")}`}
     >

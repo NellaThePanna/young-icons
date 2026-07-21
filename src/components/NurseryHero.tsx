@@ -9,6 +9,7 @@ import { NURSERY_HERO_V2 } from "@/content/nurseries-about"
 export default function NurseryHero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const headingRef = useRef<HTMLSpanElement>(null)
+  const periodRef = useRef<HTMLSpanElement>(null)
   const paraRefs = useRef<(HTMLParagraphElement | null)[]>([])
 
   useGSAP(() => {
@@ -28,6 +29,18 @@ export default function NurseryHero() {
       ease: "power2.out",
       stagger: { amount: 0.35, from: "start" },
     })
+
+    // signature brand moment: the green period lands with a little stamp after the words settle.
+    // scale only (not opacity) since SplitText already fades/slides it in as the last word.
+    tl.from(
+      periodRef.current,
+      {
+        scale: 0.4,
+        duration: 0.5,
+        ease: "back.out(3)",
+      },
+      "-=0.55"
+    )
 
     tl.from(
       paras,
@@ -84,7 +97,7 @@ export default function NurseryHero() {
         >
           <span ref={headingRef} className="block">
             {NURSERY_HERO_V2.headingBlack}
-            <span style={{ color: "var(--color-nursery-green)" }}>.</span>
+            <span ref={periodRef} style={{ color: "var(--color-nursery-green)", display: "inline-block" }}>.</span>
           </span>
         </h1>
 
