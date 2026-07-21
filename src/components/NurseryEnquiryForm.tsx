@@ -79,14 +79,14 @@ export default function NurseryEnquiryForm() {
     fontFamily: "var(--font-body)",
     fontSize: "0.75rem",
     letterSpacing: "0.1em",
-    color: "rgba(255,255,255,0.5)",
+    color: "rgba(0,0,0,0.5)",
   }
 
   const inputStyle = {
     fontFamily: "var(--font-body)",
-    color: "var(--color-white)",
-    backgroundColor: "transparent",
-    border: "1px solid rgba(255,255,255,0.2)",
+    color: "var(--color-black)",
+    backgroundColor: "var(--color-white)",
+    border: "1px solid rgba(0,0,0,0.15)",
   }
 
   return (
@@ -95,7 +95,7 @@ export default function NurseryEnquiryForm() {
       id="enquiry"
       className="px-6"
       style={{
-        backgroundColor: "var(--color-black)",
+        backgroundColor: "var(--color-nursery-off-white)",
         paddingTop: "80px",
         paddingBottom: "80px",
       }}
@@ -121,7 +121,7 @@ export default function NurseryEnquiryForm() {
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-medium)",
                 fontSize: "0.875rem",
-                color: "var(--color-academy-green)",
+                color: "var(--color-nursery-green)",
                 textTransform: "uppercase",
                 letterSpacing: "0.15em",
               }}
@@ -140,7 +140,7 @@ export default function NurseryEnquiryForm() {
               <span className="block" style={{ color: "var(--color-white)" }}>
                 {NURSERY_ENQUIRY_CTA.headingWhite}
               </span>
-              <span className="block" style={{ color: "var(--color-academy-green)" }}>
+              <span className="block" style={{ color: "var(--color-nursery-green)" }}>
                 {NURSERY_ENQUIRY_CTA.headingGreen}
               </span>
             </h2>
@@ -152,7 +152,7 @@ export default function NurseryEnquiryForm() {
             <p
               role="status"
               className="text-lg"
-              style={{ fontFamily: "var(--font-body)", color: "var(--color-white)" }}
+              style={{ fontFamily: "var(--font-body)", color: "var(--color-black)" }}
             >
               {NURSERY_FORM.successMessage}
             </p>
@@ -311,7 +311,7 @@ export default function NurseryEnquiryForm() {
                 <p
                   role="alert"
                   className="text-sm"
-                  style={{ fontFamily: "var(--font-body)", color: "var(--color-white)" }}
+                  style={{ fontFamily: "var(--font-body)", color: "var(--color-black)" }}
                 >
                   {NURSERY_FORM.errorMessage}
                 </p>
@@ -325,7 +325,7 @@ export default function NurseryEnquiryForm() {
                   fontFamily: "var(--font-body)",
                   fontWeight: "var(--font-weight-bold)",
                   color: "var(--color-white)",
-                  backgroundColor: "var(--color-academy-green)",
+                  backgroundColor: "var(--color-nursery-green)",
                   opacity: isSubmitting ? 0.6 : 1,
                   cursor: isSubmitting ? "not-allowed" : "pointer",
                   border: "none",
