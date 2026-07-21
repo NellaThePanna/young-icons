@@ -61,6 +61,38 @@ export const NURSERY_EDITORIAL_PHOTO = {
   alt: "Children moving through a nursery obstacle course",
 } as const
 
+export const APPROACH_ROWS = [
+  {
+    id: "play",
+    number: "01",
+    word: "PLAY",
+    // CLIENT-TO-CONFIRM: questionnaire said "approx 2–6" overall for the nursery age range —
+    // using the per-stage bands from EARLY_YEARS above until client confirms exact ages for this page
+    ages: "AGES 1–3",
+    body: "First movement, balance and coordination through guided, joyful play. Sessions built around curiosity — children learn to move before they know they're learning.",
+    chips: ["MOVEMENT", "BALANCE", "COORDINATION"],
+    image: "/images/placeholder/ball-skills.jpg",
+  },
+  {
+    id: "learn",
+    number: "02",
+    word: "LEARN",
+    ages: "AGES 3–4",
+    body: "Developing fundamental movement, coordination and early sports skills through active learning, with measurable developmental goals for every session.",
+    chips: ["FUNDAMENTALS", "EARLY SPORTS SKILLS", "ACTIVE LEARNING"],
+    image: "/images/placeholder/karate-crawl.jpg",
+  },
+  {
+    id: "grow",
+    number: "03",
+    word: "GROW",
+    ages: "AGES 4–6",
+    body: "Building confidence, teamwork and a wider range of sports skills through progressive activities that prepare children for school sport and beyond.",
+    chips: ["CONFIDENCE", "TEAMWORK", "PROGRESSION"],
+    image: "/images/placeholder/ballet-ribbon.jpg",
+  },
+] as const
+
 export const NURSERY_FORM = {
   fields: {
     nurseryName: "Nursery Name",

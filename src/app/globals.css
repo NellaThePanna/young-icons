@@ -292,6 +292,32 @@
   }
 }
 
+.approach-panel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .approach-panel-grid {
+    grid-template-columns: 2fr 3fr;
+    gap: 3rem;
+  }
+}
+
+.approach-row-button {
+  transition: background-color 0.25s ease;
+}
+
+.approach-row-button:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.approach-row-button:focus-visible {
+  outline: 2px solid var(--color-nursery-green);
+  outline-offset: -2px;
+}
+
 @keyframes arrow-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
