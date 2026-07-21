@@ -1,11 +1,10 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import NurseryHero from "@/components/NurseryHero"
-import EarlyYearsDifferent from "@/components/EarlyYearsDifferent"
-import MovementStartsHere from "@/components/MovementStartsHere"
-import NurseryActivities from "@/components/NurseryActivities"
-import StatsBlock from "@/components/StatsBlock"
-import { NURSERY_ACTIVITIES } from "@/content/nurseries-about"
+import NurseryEditorialPhoto from "@/components/NurseryEditorialPhoto"
+import ApproachRows from "@/components/ApproachRows"
+import WhyYoungIcons from "@/components/WhyYoungIcons"
+import NurseryActivitiesStrip from "@/components/NurseryActivitiesStrip"
 import NurseryEnquiryForm from "@/components/NurseryEnquiryForm"
 import Footer from "@/components/Footer"
 
@@ -42,10 +41,10 @@ export default function NurseriesPage() {
       <NavBar />
       <main>
         <NurseryHero />
-        <EarlyYearsDifferent />
-        <MovementStartsHere />
-        <NurseryActivities activities={NURSERY_ACTIVITIES.activities} />
-        <StatsBlock />
+        <NurseryEditorialPhoto />
+        <ApproachRows />
+        <WhyYoungIcons />
+        <NurseryActivitiesStrip />
         <NurseryEnquiryForm />
       </main>
       <Footer />
