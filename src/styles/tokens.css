@@ -8,6 +8,11 @@
   --color-near-black: #0c0e0c;
   --color-nav-dark: #101210;
 
+  /* Nurseries page — light editorial palette (deliberate contrast to dark homepage) */
+  --color-nursery-off-white: #f4f3ee;
+  --color-nursery-stone: #c3c1b6;
+  --color-nursery-green: #3f8a47;
+
   /* Typography — families (reference next/font CSS vars set in layout.tsx) */
   --font-display: 'Anton', sans-serif;
   --font-body: 'Inter', sans-serif;

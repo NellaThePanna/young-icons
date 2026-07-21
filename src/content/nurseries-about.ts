@@ -45,6 +45,17 @@ export const NURSERY_ENQUIRY_CTA = {
   image: "/images/placeholder/ball-skills.jpg",
 } as const
 
+// v2 light editorial rebuild — see NURSERY_HERO / EARLY_YEARS / MOVEMENT_ABC / NURSERY_ACTIVITIES above for the prior dark-hero page version (components kept, unused).
+
+export const NURSERY_HERO_V2 = {
+  smallHeading: "NURSERIES & EARLY YEARS",
+  headingBlack: "WE LEARN DIFFERENTLY",
+  paragraphs: [
+    "Specialist Early Years movement, sports and physical education designed around how young children develop.",
+    "One trusted partner for every stage of their journey.",
+  ],
+} as const
+
 export const NURSERY_FORM = {
   fields: {
     nurseryName: "Nursery Name",
