@@ -132,6 +132,10 @@ export const WHY_YOUNG_ICONS = [
   },
 ] as const
 
+export const NURSERY_ACTIVITIES_STRIP = [
+  "FOOTBALL", "GYMNASTICS", "BALLET", "MULTI-SPORTS", "KARATE", "TENNIS", "BASKETBALL",
+] as const
+
 export const NURSERY_FORM = {
   fields: {
     nurseryName: "Nursery Name",
