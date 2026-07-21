@@ -56,6 +56,11 @@ export const NURSERY_HERO_V2 = {
   ],
 } as const
 
+export const NURSERY_EDITORIAL_PHOTO = {
+  image: "/images/placeholder/obstacle-course.jpg",
+  alt: "Children moving through a nursery obstacle course",
+} as const
+
 export const NURSERY_FORM = {
   fields: {
     nurseryName: "Nursery Name",
