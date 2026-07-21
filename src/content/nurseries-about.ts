@@ -93,6 +93,45 @@ export const APPROACH_ROWS = [
   },
 ] as const
 
+export const WHY_YOUNG_ICONS = [
+  {
+    id: "one-partner",
+    number: "01",
+    label: "ONE PARTNER",
+    eyebrow: "ONE PARTNER",
+    heading: "EVERY ACTIVITY, ONE RELATIONSHIP.",
+    body: "One agreement, one coordination point, one accountable team for every movement programme in your nursery.",
+    chips: ["PE CURRICULUM", "LEARNING OUTCOMES", "PROGRESS REPORTS", "CERTIFICATES & REWARDS"],
+  },
+  {
+    id: "multiple-activities",
+    number: "02",
+    label: "MULTIPLE ACTIVITIES",
+    eyebrow: "MULTIPLE ACTIVITIES",
+    heading: "FROM BALLET TO BALL SKILLS.",
+    body: "Football, gymnastics, ballet, multi-sports and more — delivered by one qualified coaching team.",
+    chips: ["FOOTBALL", "GYMNASTICS", "BALLET", "MULTI-SPORTS"],
+  },
+  {
+    id: "tailored-programmes",
+    number: "03",
+    label: "TAILORED PROGRAMMES",
+    eyebrow: "TAILORED PROGRAMMES",
+    heading: "DESIGNED AROUND YOUR NURSERY, YOUR CHILDREN AND YOUR GOALS.",
+    body: "Every programme is tailored to your timetable, age groups and learning objectives, ensuring every session supports children's development while fitting seamlessly into your nursery.",
+    chips: ["PE CURRICULUM", "LEARNING OUTCOMES", "PROGRESS REPORTS", "CERTIFICATES & REWARDS"],
+  },
+  {
+    id: "fully-managed",
+    number: "04",
+    label: "FULLY MANAGED",
+    eyebrow: "FULLY MANAGED",
+    heading: "WE HANDLE EVERYTHING.",
+    body: "Registration, attendance, parent communication and quality assurance — managed end to end by Young Icons.",
+    chips: ["DIGITAL REGISTRATION", "ATTENDANCE", "PARENT COMMS", "QA"],
+  },
+] as const
+
 export const NURSERY_FORM = {
   fields: {
     nurseryName: "Nursery Name",
