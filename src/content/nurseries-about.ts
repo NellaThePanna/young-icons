@@ -101,7 +101,6 @@ export const WHY_YOUNG_ICONS = [
     eyebrow: "ONE PARTNER",
     heading: "EVERY ACTIVITY, ONE RELATIONSHIP.",
     body: "One agreement, one coordination point, one accountable team for every movement programme in your nursery.",
-    chips: ["PE CURRICULUM", "LEARNING OUTCOMES", "PROGRESS REPORTS", "CERTIFICATES & REWARDS"],
   },
   {
     id: "multiple-activities",
@@ -110,7 +109,6 @@ export const WHY_YOUNG_ICONS = [
     eyebrow: "MULTIPLE ACTIVITIES",
     heading: "FROM BALLET TO BALL SKILLS.",
     body: "Football, gymnastics, ballet, multi-sports and more — delivered by one qualified coaching team.",
-    chips: ["FOOTBALL", "GYMNASTICS", "BALLET", "MULTI-SPORTS"],
   },
   {
     id: "tailored-programmes",
@@ -119,7 +117,6 @@ export const WHY_YOUNG_ICONS = [
     eyebrow: "TAILORED PROGRAMMES",
     heading: "DESIGNED AROUND YOUR NURSERY, YOUR CHILDREN AND YOUR GOALS.",
     body: "Every programme is tailored to your timetable, age groups and learning objectives, ensuring every session supports children's development while fitting seamlessly into your nursery.",
-    chips: ["PE CURRICULUM", "LEARNING OUTCOMES", "PROGRESS REPORTS", "CERTIFICATES & REWARDS"],
   },
   {
     id: "fully-managed",
@@ -127,9 +124,28 @@ export const WHY_YOUNG_ICONS = [
     label: "FULLY MANAGED",
     eyebrow: "FULLY MANAGED",
     heading: "WE HANDLE EVERYTHING.",
-    body: "Registration, attendance, parent communication and quality assurance — managed end to end by Young Icons.",
-    chips: ["DIGITAL REGISTRATION", "ATTENDANCE", "PARENT COMMS", "QA"],
+    body: "Registration, attendance, parent communication and quality assurance, managed end to end by Young Icons.",
   },
+] as const
+
+export const WHY_YOUNG_ICONS_PHOTO = "/images/placeholder/nursery-basketball.jpg"
+
+export const WHY_CHOOSE_US = {
+  heading: "WHY NURSERIES CHOOSE US",
+  checklist: [
+    "Qualified, DBS-checked coaching team",
+    "Digital registration & attendance",
+    "Termly progress reports for every child",
+  ],
+  cta: "WORK WITH US",
+} as const
+
+// CLIENT-TO-CONFIRM: captions are placeholder copy pending client sign-off
+export const WHY_PROOF_ROW = [
+  { label: "Digital Registration", caption: "Every child registered and tracked online." },
+  { label: "Attendance", caption: "Live attendance logged every session." },
+  { label: "Parent Comms", caption: "Regular updates sent straight to parents." },
+  { label: "Quality Assurance", caption: "Ongoing coach observations and reviews." },
 ] as const
 
 export const NURSERY_ACTIVITIES_STRIP = [

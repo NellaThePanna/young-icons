@@ -4,13 +4,36 @@ import { useRef, useState, type KeyboardEvent } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { WHY_YOUNG_ICONS } from "@/content/nurseries-about"
+import Image from "next/image"
+import {
+  WHY_YOUNG_ICONS,
+  WHY_YOUNG_ICONS_PHOTO,
+  WHY_CHOOSE_US,
+  WHY_PROOF_ROW,
+} from "@/content/nurseries-about"
+
+function CheckIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  )
+}
 
 export default function WhyYoungIcons() {
   const sectionRef = useRef<HTMLElement>(null)
   const detailRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([])
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(WHY_YOUNG_ICONS.length - 1)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -82,13 +105,13 @@ export default function WhyYoungIcons() {
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontSize: "clamp(2rem, 4.2vw, 3.125rem)",
             textTransform: "uppercase",
             lineHeight: 1.1,
           }}
         >
           <span style={{ color: "var(--color-black)" }}>WHY </span>
-          <span style={{ color: "var(--color-nursery-green)" }}>YOUNG ICONS.</span>
+          <span style={{ color: "var(--color-academy-green)" }}>YOUNG ICONS.</span>
         </h2>
 
         <div className="why-item why-grid">
@@ -115,8 +138,7 @@ export default function WhyYoungIcons() {
                     padding: "16px 20px",
                     border: "none",
                     cursor: "pointer",
-                    whiteSpace: "nowrap",
-                    backgroundColor: isActive ? "var(--color-nursery-green)" : "var(--color-white)",
+                    backgroundColor: isActive ? "var(--color-academy-green)" : "var(--color-white)",
                     color: isActive ? "var(--color-white)" : "var(--color-black)",
                     opacity: isActive ? 1 : 0.75,
                     transform: isActive ? "translateX(4px)" : "translateX(0)",
@@ -128,70 +150,149 @@ export default function WhyYoungIcons() {
             })}
           </div>
 
-          <div
-            id="why-panel"
-            ref={detailRef}
-            role="tabpanel"
-            aria-labelledby={`why-tab-${active.id}`}
-            className="rounded-lg"
-            style={{ backgroundColor: "var(--color-white)", padding: "40px" }}
-          >
-            <p
-              className="mb-3"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontWeight: "var(--font-weight-medium)",
-                fontSize: "0.8rem",
-                color: "var(--color-nursery-green)",
-                textTransform: "uppercase",
-                letterSpacing: "0.15em",
-              }}
-            >
-              {active.eyebrow}
-            </p>
-            <h3
-              className="mb-4"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: "var(--font-weight-bold)",
-                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                color: "var(--color-black)",
-                textTransform: "uppercase",
-                lineHeight: 1.15,
-              }}
-            >
-              {active.heading}
-            </h3>
-            <div style={{ width: 48, height: 2, backgroundColor: "var(--color-nursery-green)", marginBottom: 20 }} />
-            <p
-              className="mb-6"
-              style={{
-                fontFamily: "var(--font-body)",
-                color: "rgba(0,0,0,0.7)",
-                lineHeight: 1.7,
-                maxWidth: "520px",
-              }}
-            >
-              {active.body}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {active.chips.map((chip) => (
-                <span
-                  key={chip}
-                  className="inline-flex items-center rounded-full"
+          <div className="why-content">
+            <div className="why-detail-grid">
+              <div
+                id="why-panel"
+                ref={detailRef}
+                role="tabpanel"
+                aria-labelledby={`why-tab-${active.id}`}
+                className="why-panel-text rounded-lg"
+                style={{ backgroundColor: "var(--color-white)", padding: "40px" }}
+              >
+                <p
+                  className="mb-3"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-medium)",
-                    fontSize: "0.7rem",
-                    color: "var(--color-black)",
+                    fontSize: "11px",
+                    color: "var(--color-academy-green)",
                     textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                    border: "1.5px solid rgba(0,0,0,0.15)",
-                    padding: "8px 16px",
+                    letterSpacing: "0.15em",
                   }}
                 >
-                  {chip}
-                </span>
+                  {active.eyebrow}
+                </p>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: "var(--font-weight-bold)",
+                    fontSize: "clamp(1.375rem, 2.3vw, 1.875rem)",
+                    color: "var(--color-black)",
+                    textTransform: "uppercase",
+                    lineHeight: 1.15,
+                  }}
+                >
+                  {active.heading}
+                </h3>
+                <div style={{ width: 32, height: 4, backgroundColor: "var(--color-academy-green)", marginBottom: 20 }} />
+                <p
+                  className="mb-8"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "14px",
+                    color: "#5a584f",
+                    lineHeight: 1.7,
+                    maxWidth: "480px",
+                  }}
+                >
+                  {active.body}
+                </p>
+
+                <h4
+                  className="mb-4"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: "var(--font-weight-bold)",
+                    fontSize: "16px",
+                    color: "var(--color-black)",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {WHY_CHOOSE_US.heading}
+                </h4>
+                <ul className="flex flex-col gap-3 mb-8">
+                  {WHY_CHOOSE_US.checklist.map((line) => (
+                    <li key={line} className="flex items-center gap-3">
+                      <span
+                        className="flex-shrink-0 inline-flex items-center justify-center rounded-full"
+                        style={{
+                          width: 20,
+                          height: 20,
+                          backgroundColor: "var(--color-academy-green)",
+                          color: "var(--color-white)",
+                        }}
+                      >
+                        <CheckIcon />
+                      </span>
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#5a584f" }}>
+                        {line}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#enquiry"
+                  className="btn-cta inline-flex items-center"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontWeight: "var(--font-weight-bold)",
+                    fontSize: "13px",
+                    color: "var(--color-white)",
+                    backgroundColor: "var(--color-academy-green)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    padding: "14px 28px",
+                    borderRadius: "6px",
+                    textDecoration: "none",
+                  }}
+                >
+                  {WHY_CHOOSE_US.cta} →
+                </a>
+              </div>
+
+              <div className="why-photo relative" style={{ aspectRatio: "330 / 430", borderRadius: "12px", overflow: "hidden" }}>
+                <Image
+                  src={WHY_YOUNG_ICONS_PHOTO}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 330px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "48px", paddingTop: "32px" }}>
+              {WHY_PROOF_ROW.map((item) => (
+                <div key={item.label} className="flex flex-col items-center text-center gap-3">
+                  <span
+                    className="inline-flex items-center justify-center rounded-full"
+                    style={{
+                      width: 44,
+                      height: 44,
+                      border: "1.5px solid var(--color-academy-green)",
+                      color: "var(--color-academy-green)",
+                    }}
+                  >
+                    <CheckIcon />
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontWeight: "var(--font-weight-bold)",
+                      fontSize: "13px",
+                      color: "var(--color-black)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.03em",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5a584f", lineHeight: 1.5 }}>
+                    {item.caption}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
