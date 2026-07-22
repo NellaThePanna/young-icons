@@ -239,6 +239,27 @@ export default function WhyYoungIcons() {
                           sizes="(max-width: 768px) 33vw, 160px"
                           className="object-cover"
                         />
+                        {chip.comingSoon && (
+                          <span
+                            className="absolute"
+                            style={{
+                              top: 6,
+                              left: 6,
+                              zIndex: 1,
+                              fontFamily: "var(--font-body)",
+                              fontWeight: "var(--font-weight-bold)",
+                              fontSize: "9px",
+                              color: "var(--color-white)",
+                              backgroundColor: "var(--color-black)",
+                              textTransform: "uppercase",
+                              letterSpacing: "0.04em",
+                              padding: "3px 7px",
+                              borderRadius: "999px",
+                            }}
+                          >
+                            Coming Soon
+                          </span>
+                        )}
                       </div>
                       <p
                         className="mt-3"

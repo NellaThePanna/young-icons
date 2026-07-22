@@ -144,31 +144,37 @@ export const MULTIPLE_ACTIVITIES_CHIPS = [
     label: "Football",
     caption: "Build skills, confidence and teamwork.",
     image: "/images/placeholder/activity-football.png",
+    comingSoon: false,
   },
   {
     label: "Gymnastics",
     caption: "Develop strength, coordination and flexibility.",
     image: "/images/placeholder/activity-boxing.png",
+    comingSoon: true,
   },
   {
     label: "Ballet",
     caption: "Encourage creativity, rhythm and expression.",
     image: "/images/placeholder/ballet-ribbon.jpg",
+    comingSoon: false,
   },
   {
     label: "Karate",
     caption: "Build discipline, focus and self-confidence.",
     image: "/images/placeholder/karate-crawl.jpg",
+    comingSoon: false,
   },
   {
     label: "Tennis",
     caption: "Introduce racket skills through fun and play.",
     image: "/images/placeholder/tennis-rackets.jpg",
+    comingSoon: false,
   },
   {
     label: "Multi-sports",
     caption: "A variety of games that build movement and teamwork.",
     image: "/images/placeholder/activity-rugby.png",
+    comingSoon: true,
   },
 ] as const
 
