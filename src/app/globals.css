@@ -388,6 +388,72 @@
   }
 }
 
+.why-multi-hero-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.why-multi-hero {
+  width: 100%;
+  max-width: 279px;
+  aspect-ratio: 279 / 214;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .why-multi-hero-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2.2rem;
+  }
+
+  .why-multi-hero {
+    flex: 0 0 279px;
+  }
+
+  .why-multi-detail {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+.why-multi-chip-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 16px;
+  margin-top: 40px;
+}
+
+@media (min-width: 640px) {
+  .why-multi-chip-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .why-multi-chip-row {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+}
+
+.why-multi-chip-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.why-multi-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 460px;
+  margin: 40px auto 0;
+}
+
 .why-card {
   white-space: nowrap;
   transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;

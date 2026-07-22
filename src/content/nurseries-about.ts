@@ -107,8 +107,8 @@ export const WHY_YOUNG_ICONS = [
     number: "02",
     label: "MULTIPLE ACTIVITIES",
     eyebrow: "MULTIPLE ACTIVITIES",
-    heading: "FROM BALLET TO BALL SKILLS.",
-    body: "Football, gymnastics, ballet, multi-sports and more — delivered by one qualified coaching team.",
+    heading: "A WORLD OF ACTIVITIES. ALL IN ONE PLACE.",
+    body: "From ball skills to ballet, our specialist coaches deliver a wide range of engaging activities that help children move, learn and grow.",
   },
   {
     id: "tailored-programmes",
@@ -129,6 +129,48 @@ export const WHY_YOUNG_ICONS = [
 ] as const
 
 export const WHY_YOUNG_ICONS_PHOTO = "/images/placeholder/nursery-basketball.jpg"
+
+export const MULTIPLE_ACTIVITIES_TAB = {
+  heroImage: "/images/placeholder/nursery-basketball.jpg",
+  footerNote: "Plus many more! We tailor our activities to suit your nursery and place in your core.",
+} as const
+
+// CLIENT-TO-CONFIRM: no dedicated Gymnastics or Multi-sports photography exists in the repo yet.
+// Football/Ballet/Karate/Tennis reuse their exact matching assets from the original activity set;
+// Gymnastics and Multi-sports stand in with the closest unused placeholder photos (boxing, rugby)
+// until real Young Icons photography arrives — swap these two first.
+export const MULTIPLE_ACTIVITIES_CHIPS = [
+  {
+    label: "Football",
+    caption: "Build skills, confidence and teamwork.",
+    image: "/images/placeholder/activity-football.png",
+  },
+  {
+    label: "Gymnastics",
+    caption: "Develop strength, coordination and flexibility.",
+    image: "/images/placeholder/activity-boxing.png",
+  },
+  {
+    label: "Ballet",
+    caption: "Encourage creativity, rhythm and expression.",
+    image: "/images/placeholder/ballet-ribbon.jpg",
+  },
+  {
+    label: "Karate",
+    caption: "Build discipline, focus and self-confidence.",
+    image: "/images/placeholder/karate-crawl.jpg",
+  },
+  {
+    label: "Tennis",
+    caption: "Introduce racket skills through fun and play.",
+    image: "/images/placeholder/tennis-rackets.jpg",
+  },
+  {
+    label: "Multi-sports",
+    caption: "A variety of games that build movement and teamwork.",
+    image: "/images/placeholder/activity-rugby.png",
+  },
+] as const
 
 export const WHY_CHOOSE_US = {
   heading: "WHY NURSERIES CHOOSE US",
