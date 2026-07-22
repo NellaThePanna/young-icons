@@ -105,11 +105,167 @@ function ShieldIcon() {
   )
 }
 
+function BookIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 5h7v15H4z" />
+      <path d="M20 5h-7v15h7z" />
+    </svg>
+  )
+}
+
+function TargetIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  )
+}
+
+function ChartIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 20V10" />
+      <path d="M12 20V4" />
+      <path d="M19 20v-7" />
+    </svg>
+  )
+}
+
+function MedalIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="15" r="5" />
+      <path d="M9 10L6 3M15 10l3-7" />
+    </svg>
+  )
+}
+
+function StaffingIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="9" cy="8" r="3" />
+      <path d="M4 20c0-3 2-5 5-5s5 2 5 5" />
+      <path d="M17 8a2 2 0 1 0 0-4" />
+      <path d="M20 20c0-2.5-1.5-4-3-4.5" />
+    </svg>
+  )
+}
+
+function EquipmentIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="5" y="9" width="14" height="10" rx="2" />
+      <path d="M9 9V7a3 3 0 0 1 6 0v2" />
+    </svg>
+  )
+}
+
+function SafetyIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 8v8M8 12h8" />
+    </svg>
+  )
+}
+
+function ReportIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7 3h8l4 4v14H7z" />
+      <path d="M15 3v4h4" />
+      <path d="M10 12h6M10 16h6" />
+    </svg>
+  )
+}
+
 const WHY_PROOF_ROW_ICONS: Record<string, typeof SignupIcon> = {
   "Digital Registration": SignupIcon,
   "Attendance": CalCheckIcon,
   "Parent Comms": ChatIcon,
   "Quality Assurance": ShieldIcon,
+  "PE Curriculum": BookIcon,
+  "Learning Outcomes": TargetIcon,
+  "Progress Reports": ChartIcon,
+  "Certificates & Rewards": MedalIcon,
+  "Staffing & Cover": StaffingIcon,
+  "Equipment & Setup": EquipmentIcon,
+  "Health & Safety": SafetyIcon,
+  "Reporting & Admin": ReportIcon,
 }
 
 function StarIcon() {
@@ -483,41 +639,43 @@ export default function WhyYoungIcons() {
               </div>
             )}
 
-            <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "48px", paddingTop: "32px" }}>
-              {WHY_PROOF_ROW.map((item) => {
-                const ProofIcon = WHY_PROOF_ROW_ICONS[item.label]
-                return (
-                <div key={item.label} className="flex flex-col items-center text-center gap-3">
-                  <span
-                    className="inline-flex items-center justify-center rounded-full"
-                    style={{
-                      width: 44,
-                      height: 44,
-                      border: "1.5px solid var(--color-academy-green)",
-                      color: "var(--color-academy-green)",
-                    }}
-                  >
-                    <ProofIcon />
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontWeight: "var(--font-weight-bold)",
-                      fontSize: "13px",
-                      color: "var(--color-black)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.03em",
-                    }}
-                  >
-                    {item.label}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5a584f", lineHeight: 1.5 }}>
-                    {item.caption}
-                  </span>
-                </div>
-                )
-              })}
-            </div>
+            {WHY_PROOF_ROW[active.id] && (
+              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "48px", paddingTop: "32px" }}>
+                {WHY_PROOF_ROW[active.id].map((item) => {
+                  const ProofIcon = WHY_PROOF_ROW_ICONS[item.label]
+                  return (
+                  <div key={item.label} className="flex flex-col items-center text-center gap-3">
+                    <span
+                      className="inline-flex items-center justify-center rounded-full"
+                      style={{
+                        width: 44,
+                        height: 44,
+                        border: "1.5px solid var(--color-academy-green)",
+                        color: "var(--color-academy-green)",
+                      }}
+                    >
+                      <ProofIcon />
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontWeight: "var(--font-weight-bold)",
+                        fontSize: "13px",
+                        color: "var(--color-black)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.03em",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5a584f", lineHeight: 1.5 }}>
+                      {item.caption}
+                    </span>
+                  </div>
+                  )
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>

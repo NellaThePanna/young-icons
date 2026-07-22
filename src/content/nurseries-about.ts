@@ -188,13 +188,29 @@ export const WHY_CHOOSE_US = {
   cta: "WORK WITH US",
 } as const
 
-// CLIENT-TO-CONFIRM: captions are placeholder copy pending client sign-off
-export const WHY_PROOF_ROW = [
-  { label: "Digital Registration", caption: "Every child registered and tracked online." },
-  { label: "Attendance", caption: "Live attendance logged every session." },
-  { label: "Parent Comms", caption: "Regular updates sent straight to parents." },
-  { label: "Quality Assurance", caption: "Ongoing coach observations and reviews." },
-] as const
+// CLIENT-TO-CONFIRM: captions are placeholder copy pending client sign-off.
+// Keyed by WHY_YOUNG_ICONS tab id. "multiple-activities" has no entry — that tab
+// shows no proof row at all.
+export const WHY_PROOF_ROW: Record<string, { label: string; caption: string }[]> = {
+  "one-partner": [
+    { label: "Digital Registration", caption: "Every child registered and tracked online." },
+    { label: "Attendance", caption: "Live attendance logged every session." },
+    { label: "Parent Comms", caption: "Regular updates sent straight to parents." },
+    { label: "Quality Assurance", caption: "Ongoing coach observations and reviews." },
+  ],
+  "tailored-programmes": [
+    { label: "PE Curriculum", caption: "Structured lesson plans with clear learning objectives." },
+    { label: "Learning Outcomes", caption: "Every programme has measurable developmental goals." },
+    { label: "Progress Reports", caption: "Track each child's progress throughout the year." },
+    { label: "Certificates & Rewards", caption: "Celebrate achievement with reports, certificates and medals." },
+  ],
+  "fully-managed": [
+    { label: "Staffing & Cover", caption: "Qualified substitute coaches always available." },
+    { label: "Equipment & Setup", caption: "All kit provided, set up and packed away." },
+    { label: "Health & Safety", caption: "Risk assessments and safeguarding built in." },
+    { label: "Reporting & Admin", caption: "Invoicing and paperwork handled end to end." },
+  ],
+}
 
 export const NURSERY_ACTIVITIES_STRIP = [
   "FOOTBALL", "GYMNASTICS", "BALLET", "MULTI-SPORTS", "KARATE", "TENNIS", "BASKETBALL",
