@@ -253,6 +253,87 @@ function ReportIcon() {
   )
 }
 
+function PeopleIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="9" cy="7" r="3" />
+      <path d="M15 11a3 3 0 1 0-2-5" />
+      <path d="M3 20c0-3 3-5 6-5s6 2 6 5" />
+    </svg>
+  )
+}
+
+function ActivitiesIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="7" cy="8" r="3" />
+      <circle cx="16" cy="9" r="2.5" />
+      <circle cx="12" cy="16" r="3" />
+    </svg>
+  )
+}
+
+function PuzzleIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M10 4h4v3a2 2 0 1 0 4 0V4h2v6h-3a2 2 0 1 0 0 4h3v6h-6v-3a2 2 0 1 0-4 0v3H4v-6h3a2 2 0 1 0 0-4H4V4h6z" />
+    </svg>
+  )
+}
+
+function ClipIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="6" y="4" width="12" height="17" rx="2" />
+      <path d="M9 4h6v3H9z" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  )
+}
+
+const WHY_RAIL_ICONS: Record<string, typeof PeopleIcon> = {
+  "one-partner": PeopleIcon,
+  "multiple-activities": ActivitiesIcon,
+  "tailored-programmes": PuzzleIcon,
+  "fully-managed": ClipIcon,
+}
+
 const WHY_PROOF_ROW_ICONS: Record<string, typeof SignupIcon> = {
   "Digital Registration": SignupIcon,
   "Attendance": CalCheckIcon,
@@ -372,6 +453,7 @@ export default function WhyYoungIcons() {
           <div className="why-rail no-scrollbar" role="tablist" aria-label="Why Young Icons">
             {WHY_YOUNG_ICONS.map((item, i) => {
               const isActive = i === activeIndex
+              const RailIcon = WHY_RAIL_ICONS[item.id]
               return (
                 <button
                   key={item.id}
@@ -385,6 +467,9 @@ export default function WhyYoungIcons() {
                   onKeyDown={(e) => handleKeyDown(e, i)}
                   className="why-card flex-shrink-0 text-left rounded-lg"
                   style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-bold)",
                     fontSize: "0.8rem",
@@ -398,7 +483,10 @@ export default function WhyYoungIcons() {
                     transform: isActive ? "translateX(4px)" : "translateX(0)",
                   }}
                 >
-                  {item.number} {item.label}
+                  <span>{item.number} {item.label}</span>
+                  <span style={{ marginLeft: "auto", color: isActive ? "var(--color-white)" : "var(--color-academy-green)" }}>
+                    <RailIcon />
+                  </span>
                 </button>
               )
             })}

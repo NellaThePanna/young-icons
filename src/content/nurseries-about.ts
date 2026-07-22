@@ -188,7 +188,7 @@ export const WHY_CHOOSE_US = {
   cta: "WORK WITH US",
 } as const
 
-// CLIENT-TO-CONFIRM: captions are placeholder copy pending client sign-off.
+// Captions are client-approved as of 2026-07-22.
 // Keyed by WHY_YOUNG_ICONS tab id. "multiple-activities" has no entry — that tab
 // shows no proof row at all.
 export const WHY_PROOF_ROW: Record<string, { label: string; caption: string }[]> = {
