@@ -31,6 +31,87 @@ function CheckIcon() {
   )
 }
 
+function SignupIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="9" cy="8" r="3" />
+      <path d="M4 20c0-3 2-5 5-5s5 2 5 5" />
+      <path d="M17 8v6M14 11h6" />
+    </svg>
+  )
+}
+
+function CalCheckIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <path d="M8 3v4M16 3v4M4 10h16" />
+      <path d="M8.5 15l2 2 4-4" />
+    </svg>
+  )
+}
+
+function ChatIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 5h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H10l-4 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" />
+      <path d="M8 9h8M8 12h5" />
+    </svg>
+  )
+}
+
+function ShieldIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 3l7 3v6c0 4-3 7-7 8-4-1-7-4-7-8V6z" />
+      <path d="M8.5 12l2 2 4-4" />
+    </svg>
+  )
+}
+
+const WHY_PROOF_ROW_ICONS: Record<string, typeof SignupIcon> = {
+  "Digital Registration": SignupIcon,
+  "Attendance": CalCheckIcon,
+  "Parent Comms": ChatIcon,
+  "Quality Assurance": ShieldIcon,
+}
+
 function StarIcon() {
   return (
     <svg
@@ -403,7 +484,9 @@ export default function WhyYoungIcons() {
             )}
 
             <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "48px", paddingTop: "32px" }}>
-              {WHY_PROOF_ROW.map((item) => (
+              {WHY_PROOF_ROW.map((item) => {
+                const ProofIcon = WHY_PROOF_ROW_ICONS[item.label]
+                return (
                 <div key={item.label} className="flex flex-col items-center text-center gap-3">
                   <span
                     className="inline-flex items-center justify-center rounded-full"
@@ -414,7 +497,7 @@ export default function WhyYoungIcons() {
                       color: "var(--color-academy-green)",
                     }}
                   >
-                    <CheckIcon />
+                    <ProofIcon />
                   </span>
                   <span
                     style={{
@@ -432,7 +515,8 @@ export default function WhyYoungIcons() {
                     {item.caption}
                   </span>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>
