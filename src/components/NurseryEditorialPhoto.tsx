@@ -34,7 +34,7 @@ export default function NurseryEditorialPhoto() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ height: "60vh", minHeight: "420px" }}
+      style={{ height: "480px" }}
     >
       <div
         ref={imageRef}
@@ -48,6 +48,7 @@ export default function NurseryEditorialPhoto() {
           priority
           sizes="100vw"
           className="object-cover"
+          style={{ objectPosition: "50% 33%" }}
         />
       </div>
     </section>

@@ -60,12 +60,12 @@ export default function NurseryHero() {
   return (
     <div
       ref={containerRef}
-      className="px-6 pt-32 pb-20 md:pt-40 md:pb-28"
+      className="px-6 pt-6 pb-16"
       style={{ backgroundColor: "var(--color-nursery-off-white)" }}
     >
       <div className="mx-auto" style={{ maxWidth: "1120px" }}>
         <p
-          className="mb-4"
+          className="mb-3.5"
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: "var(--font-weight-medium)",
@@ -85,11 +85,11 @@ export default function NurseryHero() {
           <span className="block">WE ARE NEW HERE.</span>
         */}
         <h1
-          className="tracking-tight mb-10"
+          className="tracking-tight mb-0"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(3rem, 9vw, 7.5rem)",
+            fontSize: "clamp(2.25rem, 3.75vw, 3.375rem)",
             lineHeight: 0.98,
             color: "var(--color-black)",
             textTransform: "uppercase",
@@ -101,7 +101,7 @@ export default function NurseryHero() {
           </span>
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
           {NURSERY_HERO_V2.paragraphs.map((paragraph, i) => (
             <p
               key={paragraph}
