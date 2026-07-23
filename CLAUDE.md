@@ -34,6 +34,8 @@ Unresolved: unclear whether `nova-deploy`'s hardcoded gate actually calls these 
 4. Every orchestrator prompt states Scope / Goal / Constraints / Verification / Report-back before the task body — see prompt scaffold below. This is how we stop the back-and-forth.
 5. Never mark anything done without real execution confirmation: commit hash, `tsc` result, or a screenshot. An instruction being given is not confirmation.
 6. No hallucinated specifics. If two docs conflict, stop and ask — don't silently pick one (see `tokens.css` rule above for the one standing exception: it's always authoritative over prose docs).
+7. Cowork's sandbox git view (its own bash tool, reading the connected folder) is NOT authoritative for git state. It can return a bogus picture (phantom branches, missing history) that doesn't match the real repo. Before flagging any git-state concern to the client — detached HEAD, missing branch, unfinished merge, anything alarming — verify it via the orchestrator's real local terminal first. Don't escalate off a sandbox-only reading. (Logged 2026-07-23 after a false alarm: Cowork's bash tool reported a zero-commit "young-i" branch that never existed on the real disk.)
+8. A task is not done without a real commit hash on the correct branch. "Left uncommitted, pending" is not complete, even if verification (tsc, screenshots) passed. Commit each scoped change immediately after its own verification, not batched with the next task.
 
 ## Prompt scaffold
 
@@ -56,17 +58,29 @@ REPORT BACK: [exactly what to tell Cowork — file paths, hashes, before/after]
 
 DECIDED 2026-07-22: WHY YOUNG ICONS uses `--color-warm-off-white` (`#f5f5f2`), the general brand token — not the page-scoped nursery one. Update `design/approved/why-young-icons-section.html`'s `--off` value to match on next touch.
 
-## Work trees
+## Work trees — when to actually use one
 
-Recommended pattern for section-by-section work: one worktree per in-progress section, main stays stable.
+A branch is a label on commit history — only one can be checked out in a folder at a time; switching means your files on disk change too, and uncommitted work has to be stashed first. A worktree is a second folder, same repo, with a DIFFERENT branch checked out simultaneously — no switching, no stashing, both alive at once.
+
+Trigger rule (checked automatically by a SessionStart hook, see below — the hook surfaces the signal, you make the call):
+- Uncommitted work exists AND the next task is unrelated to it → use a worktree, don't stash.
+- Next task is a continuation of the same uncommitted work → ignore the hook, just keep going, no worktree needed.
+- Untracked files sitting idle don't count — they aren't disturbed by staying on the same branch, only branch-switching risk triggers this rule.
+- Default for this project: sequential, one section at a time, committed before the next starts — most sessions won't need one. Reach for it the moment two genuinely different pieces of work need to be alive at once (e.g. an experimental redesign you might throw away, while a confirmed fix still needs finishing).
+
 ```
 git worktree add ../young-icons-<section> -b fix/<section>
-# work, build, verify in that folder
-git checkout main && git merge fix/<section>
+# work, build, verify in that folder — young-icons-v2 is untouched, its dev server keeps running
+git checkout young-icons-v2 && git merge fix/<section>
 git worktree remove ../young-icons-<section>
 git branch -d fix/<section>
 ```
-Optional, not mandatory — adopt once more than one section is realistically in flight at a time, or when a section is experimental enough that you want a clean way to abandon it without a stash/reset dance.
+
+(Corrected 2026-07-23: there is no branch literally named `main` in this repo — `young-icons-v2` is the real, live, connected branch. Confirmed via `git rev-parse --abbrev-ref HEAD` and `git branch -a -vv`.)
+
+### SessionStart hook — worktree advisor
+
+`.claude/hooks/SessionStart.ps1` includes a git status check that flags uncommitted work at the start of every session (already created — see the hook file itself for the exact script). It flags the signal (uncommitted work exists), not the decision — intent detection is unreliable, the human call is not.
 
 ## Open items (2026-07-22)
 
