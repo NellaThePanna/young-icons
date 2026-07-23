@@ -436,13 +436,14 @@ export default function WhyYoungIcons() {
     >
       <div className="mx-auto" style={{ maxWidth: "1120px" }}>
         <h2
-          className="why-item mb-10"
+          className="why-item"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
             fontSize: "clamp(2rem, 4.2vw, 3.125rem)",
             textTransform: "uppercase",
             lineHeight: 1.1,
+            marginBottom: "24px",
           }}
         >
           <span style={{ color: "var(--color-black)" }}>WHY </span>
@@ -500,7 +501,7 @@ export default function WhyYoungIcons() {
                 role="tabpanel"
                 aria-labelledby={`why-tab-${active.id}`}
                 className="why-multi rounded-lg"
-                style={{ backgroundColor: "var(--color-white)", padding: "40px" }}
+                style={{ backgroundColor: "var(--color-white)", padding: "32px" }}
               >
                 <div className="why-multi-hero-row">
                   <div className="why-multi-hero relative">
@@ -621,7 +622,7 @@ export default function WhyYoungIcons() {
                   role="tabpanel"
                   aria-labelledby={`why-tab-${active.id}`}
                   className="why-panel-text rounded-lg"
-                  style={{ backgroundColor: "var(--color-white)", padding: "40px" }}
+                  style={{ backgroundColor: "var(--color-white)", padding: "32px" }}
                 >
                   <p
                     className="mb-3"
@@ -728,7 +729,7 @@ export default function WhyYoungIcons() {
             )}
 
             {WHY_PROOF_ROW[active.id] && (
-              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "48px", paddingTop: "32px" }}>
+              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "32px", paddingTop: "24px" }}>
                 {WHY_PROOF_ROW[active.id].map((item) => {
                   const ProofIcon = WHY_PROOF_ROW_ICONS[item.label]
                   return (
