@@ -60,7 +60,7 @@ export default function NurseryHero() {
   return (
     <div
       ref={containerRef}
-      className="px-6 pt-6 pb-16"
+      className="px-6 pt-[88px] pb-16"
       style={{ backgroundColor: "var(--color-nursery-off-white)" }}
     >
       <div className="mx-auto" style={{ maxWidth: "1120px" }}>
