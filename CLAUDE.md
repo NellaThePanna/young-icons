@@ -36,6 +36,12 @@ Unresolved: unclear whether `nova-deploy`'s hardcoded gate actually calls these 
 6. No hallucinated specifics. If two docs conflict, stop and ask — don't silently pick one (see `tokens.css` rule above for the one standing exception: it's always authoritative over prose docs).
 7. Cowork's sandbox git view (its own bash tool, reading the connected folder) is NOT authoritative for git state. It can return a bogus picture (phantom branches, missing history) that doesn't match the real repo. Before flagging any git-state concern to the client — detached HEAD, missing branch, unfinished merge, anything alarming — verify it via the orchestrator's real local terminal first. Don't escalate off a sandbox-only reading. (Logged 2026-07-23 after a false alarm: Cowork's bash tool reported a zero-commit "young-i" branch that never existed on the real disk.)
 8. A task is not done without a real commit hash on the correct branch. "Left uncommitted, pending" is not complete, even if verification (tsc, screenshots) passed. Commit each scoped change immediately after its own verification, not batched with the next task.
+9. `NavBar` is `position: fixed; top:0` — it's removed from document flow and permanently overlays whatever sits at the top of every page (see Layout constants below). Any prompt that touches the top padding/spacing of a hero or top-of-page section MUST explicitly state the nav's real height as a hard floor and require a screenshot confirming the full heading/label is clear of the nav, not just report the padding number in isolation. (Logged 2026-07-23 after the hero compaction fix set padding below the nav height, hiding the label and clipping the heading behind it — caught by the client from a screenshot, not by verification.)
+
+## Layout constants — fixed nav
+
+`src/components/NavBar.tsx`: `header` is `position: fixed; top:0; left:0; right:0; z-50`. Inner `nav` is `h-16` = **64px**, plus a 1px bottom border once scrolled/on any non-homepage page (nav is only transparent on `/` before scrolling — every other page, including `/nurseries`, renders it solid dark at full height from the first paint). Effective real height to clear: **~65px**, same at every breakpoint (no responsive height change in the component).
+Any top-of-page section's padding-top must be ≥ 65px + whatever breathing room is wanted below the nav — never just the breathing-room number alone.
 
 ## Prompt scaffold
 
