@@ -88,7 +88,11 @@ git branch -d fix/<section>
 
 `.claude/hooks/SessionStart.ps1` includes a git status check that flags uncommitted work at the start of every session (already created — see the hook file itself for the exact script). It flags the signal (uncommitted work exists), not the decision — intent detection is unreliable, the human call is not.
 
-## Open items (2026-07-22)
+## Open items (updated 2026-07-27)
 
-- Rail tab icons (01 ONE PARTNER / 02 MULTIPLE ACTIVITIES / 03 TAILORED PROGRAMMES / 04 FULLY MANAGED) were never implemented on the buttons themselves — separate from any of the Fix 1/2/3 work
-- Fix 3 (Tailored Programmes tab content) not started — hero image found (`public/images/placeholder/obstacle-course.jpg`), needs a compliant design artifact next, not a code-snippet prompt
+- DONE, verified live 2026-07-27: rail tab icons (all 4 tabs) — commit `42905ea`. Tab-specific proof rows (incl. Tailored Programmes) — commit `d58a0e3`. Confirmed via direct browser screenshot, not just code inspection. Matching Asana tasks closed.
+- WHY_YOUNG_ICONS spacing rhythm — done, commit `2b3885e`, merged to young-icons-v2 at `5daf231`.
+- Hero compaction + photo crop + nav clearance — done, merged to young-icons-v2 at `5daf231`.
+- H2 title resize (~75% scale) — done, commit `56ab106`.
+- Multiple Activities tab restructure (hero size, detail column width, footer alignment) — in progress, prompt sent, awaiting orchestrator report.
+- Compaction pass on the other 3 WHY_YOUNG_ICONS tabs (One Partner, Tailored Programmes, Fully Managed) — not started, waiting on client to dial in values via `why-icons-drag-editor.html`.
