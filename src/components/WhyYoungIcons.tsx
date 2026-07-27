@@ -440,7 +440,7 @@ export default function WhyYoungIcons() {
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(2rem, 4.2vw, 3.125rem)",
+            fontSize: "clamp(1.5rem, 3.2vw, 2.35rem)",
             textTransform: "uppercase",
             lineHeight: 1.1,
             marginBottom: "24px",
