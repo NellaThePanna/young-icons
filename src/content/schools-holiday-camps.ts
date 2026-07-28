@@ -1,7 +1,13 @@
 export const SCHOOLS_CAMPS_HERO = {
   headingLine1: "HOLIDAY",
   headingLine2: "CAMPS",
-  image: "/images/placeholder/activity-football.png",
+  image: "/images/placeholder/holiday-camps-hero.jpg",
+} as const
+
+export const SCHOOLS_CAMPS_INTRO = {
+  headingLine1: "SPORT. GAMES. CREATIVITY.",
+  headingLine2: "NEW FRIENDSHIPS.",
+  body: "Our holiday camps are designed to keep children active, engaged and having fun throughout the school holidays.",
 } as const
 
 export const SCHOOLS_CAMPS_ABOUT = {
