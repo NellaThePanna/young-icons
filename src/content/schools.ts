@@ -1,11 +1,11 @@
 export const SCHOOLS_HERO = {
-  smallHeading: "SCHOOLS & EDUCATION",
-  headingWhite: "MORE SPORT.",
-  headingGreen: "MORE OPPORTUNITY.",
-  sub: "Specialist sports, activities and PE support built around your school and your students.",
-  ctaPrimary: "WORK WITH YOUNG ICONS",
-  ctaSecondary: "EXPLORE SCHOOL SERVICES",
-  image: "/images/placeholder/tennis-rackets.jpg",
+  eyebrow: "FOR SCHOOLS",
+  headingLine1: "ONE PARTNER.",
+  headingLine2Green: "COMPLETE",
+  headingLine3: "PROGRAMME.",
+  body: "We manage your school's complete activity programme—from planning and staffing to parent bookings, attendance and programme delivery.",
+  scrollLabel: "SCROLL TO EXPLORE",
+  image: "/images/placeholder/obstacle-course.jpg",
 } as const
 
 export const SCHOOLS_MORE_THAN = {
