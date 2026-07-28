@@ -9,12 +9,13 @@ export const SCHOOLS_HERO = {
 } as const
 
 export const SCHOOLS_MORE_THAN = {
-  word: "MORE.",
-  headingBlack: "MORE THAN AN",
-  headingGreen: "AFTER-SCHOOL CLUB.",
-  body: "From one specialist activity to a wider after-school programme, Young Icons helps schools create more opportunities for students to move, play and develop.",
-  statement1: "ONE PARTNER.",
-  statement2: "MULTIPLE ACTIVITIES.",
+  eyebrow: "YOU TEACH.",
+  headingBlack: "WE MANAGE",
+  headingGreen: "THE REST.",
+  body: "Young Icons becomes one trusted partner for your school's complete activity programme.",
+  list: ["Planning", "Staffing", "Parent Bookings", "Attendance", "Communication", "Programme Delivery"],
+  closingLine1: "We deliver the programme.",
+  closingLine2: "You focus on education.",
   image: "/images/placeholder/karate-crawl.jpg",
 } as const
 
