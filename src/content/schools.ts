@@ -37,34 +37,6 @@ export const SCHOOLS_TRUST_BAR = {
   link: "SEE ALL PARTNERS",
 } as const
 
-export const SCHOOLS_ASA = {
-  smallHeading: "AFTER-SCHOOL ACTIVITIES",
-  headingBlack: "BUILT AROUND",
-  headingGreen: "YOUR SCHOOL.",
-  body: "Choose the activities your students need. We provide the specialist coaches, programme delivery and operational support.",
-  activities: [
-    "FOOTBALL", "BASKETBALL", "TENNIS", "BALLET",
-    "GYMNASTICS", "KARATE", "MULTI-SPORTS",
-    "BOXING & FITNESS", "RUGBY", "BADMINTON",
-  ],
-  features: [
-    { heading: "SPECIALIST COACHES", body: "Qualified coaches for every activity, experienced working with school-age children." },
-    { heading: "PARENT BOOKINGS", body: "Digital booking and payment through Classcard — no admin burden on your school." },
-    { heading: "ATTENDANCE MANAGEMENT", body: "We handle registers, attendance tracking and parent communications." },
-    { heading: "PROGRAMME SUPPORT", body: "From scheduling to safeguarding, we manage the operational side so you don't have to." },
-  ],
-} as const
-
-export const SCHOOLS_PE = {
-  smallHeading: "PE & SPORTS SUPPORT",
-  headingBlack: "BUILT AROUND",
-  headingGreen: "YOUR STUDENTS.",
-  body: "Every school is different. Young Icons can provide tailored PE and sports support built around your students, timetable and school requirements.",
-  body2: "From structured sports programmes and specialist coaching to additional PE delivery, we can build the right level of support for your school.",
-  statement: "YOUR STUDENTS. YOUR SCHOOL. YOUR PROGRAMME.",
-  image: "/images/placeholder/nursery-basketball.jpg",
-} as const
-
 export const SCHOOLS_FORM = {
   fields: {
     fullName: "Full Name",

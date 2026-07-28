@@ -3,9 +3,6 @@ import NavBar from "@/components/NavBar"
 import SchoolsHero from "@/components/SchoolsHero"
 import SchoolsMoreThan from "@/components/SchoolsMoreThan"
 import SchoolsTrustBar from "@/components/SchoolsTrustBar"
-import SchoolsASA from "@/components/SchoolsASA"
-import StatsBlock from "@/components/StatsBlock"
-import SchoolsPE from "@/components/SchoolsPE"
 import SchoolsEnquiryCTA from "@/components/SchoolsEnquiryCTA"
 import Footer from "@/components/Footer"
 
@@ -44,9 +41,6 @@ export default function SchoolsPage() {
         <SchoolsHero />
         <SchoolsMoreThan />
         <SchoolsTrustBar />
-        <SchoolsASA />
-        <StatsBlock />
-        <SchoolsPE />
         <SchoolsEnquiryCTA />
       </main>
       <Footer />
