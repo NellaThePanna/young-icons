@@ -80,10 +80,9 @@ export const SCHOOLS_FORM = {
 } as const
 
 export const SCHOOLS_FINAL_CTA = {
-  headingWhite: "LET'S BUILD MORE",
-  headingGreen: "FOR YOUR STUDENTS.",
-  body: "From after-school activities to PE and sports support, let's build the right programme for your school.",
-  ctaPrimary: "WORK WITH YOUNG ICONS",
-  ctaSecondary: "WHATSAPP US",
-  image: "/images/placeholder/ball-skills.jpg",
+  headingBlack: "LET'S BUILD YOUR",
+  headingGreen: "PROGRAMME.",
+  body: "Let's work together to create an activity programme that supports your school, your staff and your students.",
+  ctaPrimary: "Book a Meeting",
+  ctaSecondary: "WhatsApp Us",
 } as const

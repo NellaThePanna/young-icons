@@ -6,8 +6,7 @@ import SchoolsTrustBar from "@/components/SchoolsTrustBar"
 import SchoolsASA from "@/components/SchoolsASA"
 import StatsBlock from "@/components/StatsBlock"
 import SchoolsPE from "@/components/SchoolsPE"
-import SchoolsFinalCTA from "@/components/SchoolsFinalCTA"
-import SchoolEnquiryForm from "@/components/SchoolEnquiryForm"
+import SchoolsEnquiryCTA from "@/components/SchoolsEnquiryCTA"
 import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
@@ -48,8 +47,7 @@ export default function SchoolsPage() {
         <SchoolsASA />
         <StatsBlock />
         <SchoolsPE />
-        <SchoolsFinalCTA />
-        <SchoolEnquiryForm />
+        <SchoolsEnquiryCTA />
       </main>
       <Footer />
     </>
