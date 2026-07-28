@@ -19,6 +19,24 @@ export const SCHOOLS_MORE_THAN = {
   image: "/images/placeholder/karate-crawl.jpg",
 } as const
 
+export const SCHOOLS_TRUST_BAR = {
+  label: "TRUSTED PARTNER TO",
+  stats: [
+    { line1: "45+", line2: "SCHOOLS" },
+    { line1: "18,000+", line2: "CHILDREN EVERY WEEK" },
+    { line1: "ACROSS THE UAE", line2: "AND GROWING" },
+  ],
+  partners: [
+    "Swiss International Scientific School",
+    "Citizens School",
+    "Dubai British School Jumeirah Park",
+    "Ambassadors International School",
+    "Nad Al Sheba",
+    "Fairgreen International School",
+  ],
+  link: "SEE ALL PARTNERS",
+} as const
+
 export const SCHOOLS_ASA = {
   smallHeading: "AFTER-SCHOOL ACTIVITIES",
   headingBlack: "BUILT AROUND",
