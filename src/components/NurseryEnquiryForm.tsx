@@ -96,17 +96,17 @@ export default function NurseryEnquiryForm() {
       className="px-6"
       style={{
         backgroundColor: "var(--color-nursery-off-white)",
-        paddingTop: "80px",
-        paddingBottom: "80px",
+        paddingTop: "48px",
+        paddingBottom: "48px",
       }}
     >
       <div
-        className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16"
+        className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
         style={{ maxWidth: "1280px" }}
       >
         <div
           className="enquiry-item relative flex flex-col justify-end overflow-hidden"
-          style={{ minHeight: "420px", borderRadius: "var(--radius-lg)" }}
+          style={{ minHeight: "320px", borderRadius: "var(--radius-lg)" }}
         >
           <Image src={NURSERY_ENQUIRY_CTA.image} alt="" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
           <div
@@ -158,8 +158,8 @@ export default function NurseryEnquiryForm() {
               {NURSERY_FORM.successMessage}
             </p>
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="nurseryName" className="uppercase" style={labelStyle}>
                     {NURSERY_FORM.fields.nurseryName}
@@ -171,7 +171,7 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.nurseryName}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-3 text-base"
+                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
                     style={inputStyle}
                   />
                 </div>
@@ -187,13 +187,13 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.contactName}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-3 text-base"
+                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
                     style={inputStyle}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="jobRole" className="uppercase" style={labelStyle}>
                     {NURSERY_FORM.fields.jobRole}
@@ -205,7 +205,7 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.jobRole}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-3 text-base"
+                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
                     style={inputStyle}
                   />
                 </div>
@@ -220,7 +220,7 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.location}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-3 text-base"
+                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
                     style={inputStyle}
                   >
                     <option value="" disabled>
@@ -235,7 +235,7 @@ export default function NurseryEnquiryForm() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="email" className="uppercase" style={labelStyle}>
                     {NURSERY_FORM.fields.email}
@@ -247,7 +247,7 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-3 text-base"
+                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
                     style={inputStyle}
                   />
                 </div>
@@ -263,7 +263,7 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-3 text-base"
+                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
                     style={inputStyle}
                   />
                 </div>
@@ -279,7 +279,7 @@ export default function NurseryEnquiryForm() {
                   required
                   value={formData.interestedIn}
                   onChange={handleChange}
-                  className="nursery-field rounded-lg px-4 py-3 text-base"
+                  className="nursery-field rounded-lg px-4 py-2.5 text-base"
                   style={inputStyle}
                 >
                   <option value="" disabled>
@@ -303,7 +303,7 @@ export default function NurseryEnquiryForm() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="nursery-field rounded-lg px-4 py-3 text-base"
+                  className="nursery-field rounded-lg px-4 py-2.5 text-base"
                   style={inputStyle}
                 />
               </div>

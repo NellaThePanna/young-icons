@@ -212,10 +212,6 @@ export const WHY_PROOF_ROW: Record<string, { label: string; caption: string }[]>
   ],
 }
 
-export const NURSERY_ACTIVITIES_STRIP = [
-  "FOOTBALL", "GYMNASTICS", "BALLET", "MULTI-SPORTS", "KARATE", "TENNIS", "BASKETBALL",
-] as const
-
 export const NURSERY_FORM = {
   fields: {
     nurseryName: "Nursery Name",

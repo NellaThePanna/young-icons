@@ -4,7 +4,6 @@ import NurseryHero from "@/components/NurseryHero"
 import NurseryEditorialPhoto from "@/components/NurseryEditorialPhoto"
 import ApproachRows from "@/components/ApproachRows"
 import WhyYoungIcons from "@/components/WhyYoungIcons"
-import NurseryActivitiesStrip from "@/components/NurseryActivitiesStrip"
 import NurseryEnquiryForm from "@/components/NurseryEnquiryForm"
 import Footer from "@/components/Footer"
 
@@ -44,7 +43,6 @@ export default function NurseriesPage() {
         <NurseryEditorialPhoto />
         <ApproachRows />
         <WhyYoungIcons />
-        <NurseryActivitiesStrip />
         <NurseryEnquiryForm />
       </main>
       <Footer />
