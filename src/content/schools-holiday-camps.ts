@@ -1,7 +1,7 @@
 export const SCHOOLS_CAMPS_HERO = {
-  h1: "Dubai Kids Sports Holiday Camp",
-  sub: "Structured full and half-day sessions across the school holidays.",
-  ctaPrimary: "Book Now",
+  headingLine1: "HOLIDAY",
+  headingLine2: "CAMPS",
+  image: "/images/placeholder/activity-football.png",
 } as const
 
 export const SCHOOLS_CAMPS_ABOUT = {

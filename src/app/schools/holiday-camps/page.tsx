@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
-import HeroFull from "@/components/HeroFull"
+import HolidayCampsHero from "@/components/HolidayCampsHero"
 import TwoColumn from "@/components/TwoColumn"
 import DirectAnswer from "@/components/DirectAnswer"
 import ThreePillars from "@/components/ThreePillars"
@@ -69,11 +69,7 @@ export default function SchoolsHolidayCampsPage() {
       />
       <NavBar />
       <main>
-        <HeroFull
-          h1={SCHOOLS_CAMPS_HERO.h1}
-          sub={SCHOOLS_CAMPS_HERO.sub}
-          ctaPrimary={SCHOOLS_CAMPS_HERO.ctaPrimary}
-        />
+        <HolidayCampsHero />
         <TwoColumn
           headline={SCHOOLS_CAMPS_ABOUT.headline}
           paragraphs={SCHOOLS_CAMPS_ABOUT.paragraphs}
