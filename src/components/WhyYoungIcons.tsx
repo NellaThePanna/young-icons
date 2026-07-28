@@ -430,8 +430,8 @@ export default function WhyYoungIcons() {
       className="px-6"
       style={{
         backgroundColor: "var(--color-nursery-off-white)",
-        paddingTop: "60px",
-        paddingBottom: "60px",
+        paddingTop: "0px",
+        paddingBottom: "13px",
       }}
     >
       <div className="mx-auto" style={{ maxWidth: "1120px" }}>
@@ -443,7 +443,7 @@ export default function WhyYoungIcons() {
             fontSize: "clamp(1.5rem, 3.2vw, 2.35rem)",
             textTransform: "uppercase",
             lineHeight: 1.1,
-            marginBottom: "24px",
+            marginBottom: "0px",
           }}
         >
           <span style={{ color: "var(--color-black)" }}>WHY </span>
@@ -729,7 +729,7 @@ export default function WhyYoungIcons() {
             )}
 
             {WHY_PROOF_ROW[active.id] && (
-              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "32px", paddingTop: "24px" }}>
+              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "8px", paddingTop: "0px" }}>
                 {WHY_PROOF_ROW[active.id].map((item) => {
                   const ProofIcon = WHY_PROOF_ROW_ICONS[item.label]
                   return (
