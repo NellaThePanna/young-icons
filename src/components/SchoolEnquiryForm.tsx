@@ -6,26 +6,20 @@ import gsap from "gsap"
 import { SCHOOLS_FORM } from "@/content/schools"
 
 type FormState = {
+  fullName: string
   schoolName: string
-  contactName: string
-  jobRole: string
   email: string
   phone: string
-  location: string
-  interestedIn: string
   message: string
 }
 
 type Status = "idle" | "submitting" | "success" | "error"
 
 const EMPTY_FORM: FormState = {
+  fullName: "",
   schoolName: "",
-  contactName: "",
-  jobRole: "",
   email: "",
   phone: "",
-  location: "",
-  interestedIn: "",
   message: "",
 }
 
@@ -46,7 +40,7 @@ export default function SchoolEnquiryForm() {
   }, { scope: sectionRef })
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -112,6 +106,22 @@ export default function SchoolEnquiryForm() {
           <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
             <div className="enquiry-item grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-2">
+                <label htmlFor="fullName" className="uppercase" style={labelStyle}>
+                  {SCHOOLS_FORM.fields.fullName}
+                </label>
+                <input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  required
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className="rounded-lg px-4 py-3 text-base"
+                  style={inputStyle}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
                 <label htmlFor="schoolName" className="uppercase" style={labelStyle}>
                   {SCHOOLS_FORM.fields.schoolName}
                 </label>
@@ -125,64 +135,6 @@ export default function SchoolEnquiryForm() {
                   className="rounded-lg px-4 py-3 text-base"
                   style={inputStyle}
                 />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label htmlFor="contactName" className="uppercase" style={labelStyle}>
-                  {SCHOOLS_FORM.fields.contactName}
-                </label>
-                <input
-                  id="contactName"
-                  name="contactName"
-                  type="text"
-                  required
-                  value={formData.contactName}
-                  onChange={handleChange}
-                  className="rounded-lg px-4 py-3 text-base"
-                  style={inputStyle}
-                />
-              </div>
-            </div>
-
-            <div className="enquiry-item grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="jobRole" className="uppercase" style={labelStyle}>
-                  {SCHOOLS_FORM.fields.jobRole}
-                </label>
-                <input
-                  id="jobRole"
-                  name="jobRole"
-                  type="text"
-                  required
-                  value={formData.jobRole}
-                  onChange={handleChange}
-                  className="rounded-lg px-4 py-3 text-base"
-                  style={inputStyle}
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label htmlFor="location" className="uppercase" style={labelStyle}>
-                  {SCHOOLS_FORM.fields.location}
-                </label>
-                <select
-                  id="location"
-                  name="location"
-                  required
-                  value={formData.location}
-                  onChange={handleChange}
-                  className="rounded-lg px-4 py-3 text-base"
-                  style={inputStyle}
-                >
-                  <option value="" disabled>
-                    {SCHOOLS_FORM.fields.location}
-                  </option>
-                  {SCHOOLS_FORM.locationOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
               </div>
             </div>
 
@@ -218,30 +170,6 @@ export default function SchoolEnquiryForm() {
                   style={inputStyle}
                 />
               </div>
-            </div>
-
-            <div className="enquiry-item flex flex-col gap-2">
-              <label htmlFor="interestedIn" className="uppercase" style={labelStyle}>
-                {SCHOOLS_FORM.fields.interestedIn}
-              </label>
-              <select
-                id="interestedIn"
-                name="interestedIn"
-                required
-                value={formData.interestedIn}
-                onChange={handleChange}
-                className="rounded-lg px-4 py-3 text-base"
-                style={inputStyle}
-              >
-                <option value="" disabled>
-                  {SCHOOLS_FORM.fields.interestedIn}
-                </option>
-                {SCHOOLS_FORM.interestedInOptions.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <div className="enquiry-item flex flex-col gap-2">

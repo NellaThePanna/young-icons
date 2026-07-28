@@ -48,23 +48,17 @@ export async function POST(req: NextRequest) {
 
   const data = body as Record<string, unknown>
 
+  const fullName = data.fullName
   const schoolName = data.schoolName
-  const contactName = data.contactName
-  const jobRole = data.jobRole
   const email = data.email
   const phone = data.phone
-  const location = data.location
-  const interestedIn = data.interestedIn
   const message = data.message
 
   if (
+    !requireString(fullName) ||
     !requireString(schoolName) ||
-    !requireString(contactName) ||
-    !requireString(jobRole) ||
     !requireString(email) ||
-    !requireString(phone) ||
-    !requireString(location) ||
-    !requireString(interestedIn)
+    !requireString(phone)
   ) {
     return NextResponse.json(
       { error: 'Please check your details and try again.' },

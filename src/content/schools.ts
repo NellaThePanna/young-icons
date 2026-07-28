@@ -67,22 +67,12 @@ export const SCHOOLS_PE = {
 
 export const SCHOOLS_FORM = {
   fields: {
+    fullName: "Full Name",
     schoolName: "School Name",
-    contactName: "Contact Name",
-    jobRole: "Job Role",
     email: "Email Address",
     phone: "Phone Number",
-    location: "Location / Emirate",
-    interestedIn: "Interested In",
-    message: "Message (optional)",
+    message: "Message",
   },
-  locationOptions: ["Dubai", "Abu Dhabi", "Sharjah", "Other"],
-  interestedInOptions: [
-    "After-School Activities",
-    "PE & Sports Support",
-    "Multiple Services",
-    "Other",
-  ],
   submitLabel: "START A CONVERSATION",
   submittingLabel: "Sending...",
   successMessage: "THANK YOU. WE'LL BE IN TOUCH SOON.",
