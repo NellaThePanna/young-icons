@@ -26,24 +26,41 @@ NOT installed under NOVA names, use the real names instead:
 
 Unresolved: unclear whether `nova-deploy`'s hardcoded gate actually calls these unbranded agents or silently no-ops on the missing NOVA name. Flag if you find out either way.
 
+## Orchestrator capabilities — Superpowers plugin (installed 2026-07-28)
+
+The orchestrator (Claude Code, not this Cowork session) has the Superpowers marketplace plugin installed — 14 ambient skills: brainstorming, TDD, systematic-debugging, subagent-driven-development, git-worktrees, code-review, writing-plans, writing-skills, and others. These are ambient skills, not routed agents — they fire based on the task without being named.
+
+What this means when Cowork drafts orchestrator prompts:
+- The SCOPE/GOAL/CONSTRAINTS/VERIFICATION/REPORT-BACK scaffold below still applies — Superpowers layers on top of it, doesn't replace it.
+- `git-worktrees` should now enforce the Work trees section below automatically. If the orchestrator still lands on the wrong branch/worktree after this, that's a real regression worth flagging, not expected behavior.
+- `systematic-debugging` should apply to debugging/investigation prompts without needing step-by-step diagnostic instructions spelled out — trust it, but rule 5 (real verification before acceptance) still applies regardless.
+- If an orchestrator report names a specific skill (e.g. "systematic-debugging identified X"), that's the routing working as intended.
+- `NOVA_INVENTORY.md`, `nova-orchestrator.md`, and `CURRENT_SYSTEM_MAP.md` (referenced in Agents above) live in the user's separate nova-technologies system, NOT in this repo — not reachable from Cowork. Don't attempt to edit them from here; that's orchestrator-side maintenance, already handled on that end.
+- A `system-sync.ps1` hook auto-mirrors CLAUDE.md/agents/ edits into nova-technologies and pushes to GitHub (rate-limited, ~5min). Existing automation on the orchestrator side, not something Cowork triggers.
+
 ## Standing rules
 
 1. Section by section. Never build ahead of what's been explicitly asked for.
 2. New design content (not a restore of already-approved content) → build a compliant HTML artifact (real images from `public/images`, base64-embedded fonts, full drag/scale/width/align/distribute/show-layout toolkit) → client approves → save to `design/approved/` + client Drive → only then write the orchestrator prompt. Pure content/icon swaps on already-approved designs skip the artifact step.
-3. Stitch, Canva, Figma, v0, 21st.dev = photography sourcing only, never layout or composition — per `design/DESIGN-EDIT-RULE.md`. Client can override this case-by-case when explicitly requested for a specific piece of work; it is not a standing exception.
+3. Stitch, Canva, Figma, v0, 21st.dev = photography sourcing only, never layout or composition — per `design/DESIGN-EDIT-RULE.md`. Client can override this case-by-case when explicitly requested for a specific piece of work; it is not a standing exception. Google Stitch specifically: no MCP connector exists for it, and the client runs it externally (outside Cowork) on purpose to avoid burning tokens — Cowork receives its output as uploaded files/screenshots, same as any other reference material, and never calls it directly.
 4. Every orchestrator prompt states Scope / Goal / Constraints / Verification / Report-back before the task body — see prompt scaffold below. This is how we stop the back-and-forth.
 5. Never mark anything done without real execution confirmation: commit hash, `tsc` result, or a screenshot. An instruction being given is not confirmation.
 6. No hallucinated specifics. If two docs conflict, stop and ask — don't silently pick one (see `tokens.css` rule above for the one standing exception: it's always authoritative over prose docs).
 7. Cowork's sandbox git view (its own bash tool, reading the connected folder) is NOT authoritative for git state. It can return a bogus picture (phantom branches, missing history) that doesn't match the real repo. Before flagging any git-state concern to the client — detached HEAD, missing branch, unfinished merge, anything alarming — verify it via the orchestrator's real local terminal first. Don't escalate off a sandbox-only reading. (Logged 2026-07-23 after a false alarm: Cowork's bash tool reported a zero-commit "young-i" branch that never existed on the real disk.)
 8. A task is not done without a real commit hash on the correct branch. "Left uncommitted, pending" is not complete, even if verification (tsc, screenshots) passed. Commit each scoped change immediately after its own verification, not batched with the next task.
 9. `NavBar` is `position: fixed; top:0` — it's removed from document flow and permanently overlays whatever sits at the top of every page (see Layout constants below). Any prompt that touches the top padding/spacing of a hero or top-of-page section MUST explicitly state the nav's real height as a hard floor and require a screenshot confirming the full heading/label is clear of the nav, not just report the padding number in isolation. (Logged 2026-07-23 after the hero compaction fix set padding below the nav height, hiding the label and clipping the heading behind it — caught by the client from a screenshot, not by verification.)
+10. Every Google Stitch prompt opens with the base style block (see Prompt scaffold section below) before the specific ask — no exceptions, same as the orchestrator scaffold is mandatory for Claude Code prompts. This keeps sourced photography consistent in brand/style across sections instead of drifting per-request.
 
 ## Layout constants — fixed nav
 
 `src/components/NavBar.tsx`: `header` is `position: fixed; top:0; left:0; right:0; z-50`. Inner `nav` is `h-16` = **64px**, plus a 1px bottom border once scrolled/on any non-homepage page (nav is only transparent on `/` before scrolling — every other page, including `/nurseries`, renders it solid dark at full height from the first paint). Effective real height to clear: **~65px**, same at every breakpoint (no responsive height change in the component).
 Any top-of-page section's padding-top must be ≥ 65px + whatever breathing room is wanted below the nav — never just the breathing-room number alone.
 
-## Prompt scaffold
+## Prompt scaffold — two kinds, both mandatory
+
+This project uses two different standing scaffolds, for two different tools. Neither is optional.
+
+### 1. Orchestrator prompts (Claude Code)
 
 Every prompt to Claude Code should open with this block before the actual task:
 
@@ -54,6 +71,20 @@ CONSTRAINTS: [brand tokens to preserve, things not to touch, assets to reuse]
 VERIFICATION: [tsc? screenshot? cross-tab check? specific thing to confirm]
 REPORT BACK: [exactly what to tell Cowork — file paths, hashes, before/after]
 ```
+
+### 2. Google Stitch prompts (client runs externally — see rule 3)
+
+Every Stitch prompt — no exceptions — opens with this base style block before the specific ask:
+
+```
+Project: Young Icons Sports Academy — Dubai kids sports academy (ages 3–14).
+Brand: academy green #1A7A47, warm off-white #f5f5f2, black/white, Anton (display) + Inter (body).
+Photography style: real, candid, documentary editorial — not staged stock photography.
+Kids actively mid-motion (running, kicking, coached drills), natural light, real gyms/fields/courts,
+not posed studio shots. Coaches visible and engaged where relevant, not just kids alone.
+```
+
+The specific ask (which section, what crop ratio, what the photo needs to convey) goes after this block, not instead of it. This is rule 10 below — treat it the same as the orchestrator scaffold: mandatory, not a suggestion.
 
 ## Off-white — resolved 2026-07-22
 
@@ -88,11 +119,17 @@ git branch -d fix/<section>
 
 `.claude/hooks/SessionStart.ps1` includes a git status check that flags uncommitted work at the start of every session (already created — see the hook file itself for the exact script). It flags the signal (uncommitted work exists), not the decision — intent detection is unreliable, the human call is not.
 
-## Open items (updated 2026-07-27)
+## Open items (updated 2026-07-28)
 
-- DONE, verified live 2026-07-27: rail tab icons (all 4 tabs) — commit `42905ea`. Tab-specific proof rows (incl. Tailored Programmes) — commit `d58a0e3`. Confirmed via direct browser screenshot, not just code inspection. Matching Asana tasks closed.
-- WHY_YOUNG_ICONS spacing rhythm — done, commit `2b3885e`, merged to young-icons-v2 at `5daf231`.
-- Hero compaction + photo crop + nav clearance — done, merged to young-icons-v2 at `5daf231`.
-- H2 title resize (~75% scale) — done, commit `56ab106`.
-- Multiple Activities tab restructure (hero size, detail column width, footer alignment) — in progress, prompt sent, awaiting orchestrator report.
-- Compaction pass on the other 3 WHY_YOUNG_ICONS tabs (One Partner, Tailored Programmes, Fully Managed) — not started, waiting on client to dial in values via `why-icons-drag-editor.html`.
+DONE, verified live via direct Read/Grep + commit hash, not just orchestrator claim:
+- WHY_YOUNG_ICONS: rail tab icons (`42905ea`), tab-specific proof rows (`d58a0e3`), spacing rhythm (`2b3885e`→merged `5daf231`), Multiple Activities restructure (`63fe6ed`), final aggressive compaction all 4 tabs (`cfb7ebb`), H2 title resize (`56ab106`).
+- Nursery hero compaction + photo crop + nav clearance (merged `5daf231`), activities marquee removed + enquiry section compacted (`ad09a0f`).
+- Schools Overview page rebuilt to match client-approved reference end to end: Hero (`5ffb62b`), We Manage The Rest (`1cbff08`), Trust Bar (`74ad036`), enquiry form reduced to 5 fields (`acac8a6`), Final CTA + enquiry merged into one light section (`98e0b08`), ASA/StatsBlock/PE sections removed (`68af223`).
+- Holiday Camps: moved back under `/schools` per client's new docx (supersedes the July 8 standalone-`/camps` decision — see design/approved/holiday-camps-hero.html for the SVG clip-path hero technique). Hero + intro section live (`3d9e278`).
+
+NOT DONE — see Cowork task list for the live version of this:
+- Holiday Camps camp-cards section — blocked on real dates/ages/times from client, do not invent.
+- Holiday Camps remaining sections (About/FAQ/Pillars/Logistics/CTA) — old generic-template content, needs reconciling against the new design.
+- `/camps` page fate — needs an explicit decision now that Holiday Camps lives under `/schools` again.
+- Docx blank numbered sections — still waiting on client content.
+- Real photography — several sections (Holiday Camps hero, Schools Enquiry CTA) still on stock/placeholder images. Client sourcing via Google Stitch externally (see rule 3).
