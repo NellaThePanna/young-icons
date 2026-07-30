@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
-import HeroPage from "@/components/HeroPage"
-import CoachGrid from "@/components/CoachGrid"
+import TeamHero from "@/components/TeamHero"
+import CoachGallery from "@/components/CoachGallery"
 import DirectAnswer from "@/components/DirectAnswer"
 import TwoColumn from "@/components/TwoColumn"
 import CTABand from "@/components/CTABand"
@@ -46,12 +46,12 @@ export default function MeetTheTeamPage() {
       />
       <NavBar />
       <main>
-        <HeroPage
+        <TeamHero
           h1={MEET_TEAM_HERO.h1}
           sub={MEET_TEAM_HERO.sub}
           intro={MEET_TEAM_HERO.intro}
         />
-        <CoachGrid coaches={MEET_TEAM_COACHES} />
+        <CoachGallery coaches={MEET_TEAM_COACHES} />
         <DirectAnswer
           qas={MEET_TEAM_DIRECT_QAS}
           ariaLabel="Are the coaches at Young Icons qualified"
