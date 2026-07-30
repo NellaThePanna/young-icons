@@ -9,7 +9,7 @@ export const FACILITY_OFFER = {
   headline: "We run the sports programme. You run the facility.",
   paragraphs: [
     "Young Icons provides facilities in Dubai with a managed sports programme — qualified coaching staff, a structured session plan, and scheduling aligned to your venue's calendar.",
-    "[CLIENT: confirm the full scope of the service before this section goes live. Required: does Young Icons provide coaching staff only, or also programme design, scheduling, equipment, and event management? Are there minimum engagement terms? What types of venues are you currently working with?]",
+    "That includes day-to-day scheduling, academy and coaching provision, community and external bookings, and support with the commercial utilisation of your site — alongside sports programme development and coordination with any partner organisations already using the facility.",
     "This suits sports venues that want a ready-built programme without building an internal coaching team, and schools or residential communities that need structured sport without the management overhead.",
   ],
 } as const
@@ -17,14 +17,14 @@ export const FACILITY_OFFER = {
 export const FACILITY_DIRECT_QAS = [
   {
     q: "What does Young Icons' facility management service include?",
-    a: "[CLIENT: service scope required before this block is written. Template: Young Icons provides [list of services] to sports facilities in Dubai. This includes qualified coaching staff, [structured programme design / scheduling / CLIENT: add]. The service is available to [venue types — CLIENT: confirm] on [contract or engagement terms — CLIENT: confirm]. To discuss your facility's requirements, use the contact form below.]",
+    a: "Young Icons provides sports facility programming and operational support to schools and educational sports facilities in Dubai. This includes scheduling, academy and coaching provision, community and external bookings, sports programme development, and partnership coordination — as well as support with the commercial utilisation of school sports facilities. To discuss your facility's requirements, use the contact form below.",
   },
 ] as const
 
 export const FACILITY_PILLARS = [
   {
     heading: "Qualified coaching team",
-    body: "Your facility gets coaches who hold [CLIENT: confirm credential types]. Every coach we place has experience running structured sports programmes for children at venues similar to yours.",
+    body: "Your facility gets access to qualified coaching staff. Every coach we place has experience running structured sports programmes for children at venues similar to yours.",
   },
   {
     heading: "Structured programme",
@@ -32,14 +32,14 @@ export const FACILITY_PILLARS = [
   },
   {
     heading: "Dubai experience",
-    body: "Young Icons operates in Dubai. We understand the school term calendar, the scheduling expectations of Dubai families, and the standards facilities here are held to. [CLIENT: add specific local context if applicable.]",
+    body: "Young Icons operates in Dubai. We understand the school term calendar, the scheduling expectations of Dubai families, and the standards facilities here are held to.",
   },
 ] as const
 
 export const FACILITY_CASE_STUDY = {
-  headline: "In practice.",
+  headline: "Every facility is different.",
   paragraphs: [
-    "[CLIENT: if a facility partnership can be publicly referenced — provide: facility name, the problem they needed to solve, what Young Icons delivered, and a quote from the decision-maker. If nothing can be named at launch, this section is omitted entirely.]",
+    "The right service mix depends on your venue, calendar, and existing community use. Get in touch and we'll talk through what's possible for your site.",
   ],
 } as const
 
