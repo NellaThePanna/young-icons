@@ -50,7 +50,7 @@ export const EXPLORE_CARDS = [
     heading: "SCHOOL HOLIDAYS",
     sub: "Action-packed days across Dubai and Abu Dhabi.",
     cta: "EXPLORE CAMPS",
-    href: "/camps",
+    href: "/schools/holiday-camps",
     image: "/images/placeholder/obstacle-course.jpg",
   },
 ] as const
@@ -253,6 +253,7 @@ export const NAV_LINKS: NavItem[] = [
       { label: "Schools Overview", href: "/schools" },
       { label: "After-School Activity", href: "/schools/asa" },
       { label: "Facility Management", href: "/facility-management" },
+      { label: "Holiday Camps", href: "/schools/holiday-camps" },
     ],
   },
   {
@@ -264,7 +265,6 @@ export const NAV_LINKS: NavItem[] = [
       { label: "Karate — Coming Soon", href: "/clubs/karate" },
     ],
   },
-  { label: "Camps", href: "/camps" },
   {
     label: "About",
     href: "/about/who-we-are",
@@ -300,7 +300,7 @@ export const FOOTER_LINKS = [
   { label: "Nurseries", href: "/nurseries" },
   { label: "Schools", href: "/schools" },
   { label: "Clubs", href: "/clubs/multi-sports" },
-  { label: "Holiday Camps", href: "/camps" },
+  { label: "Holiday Camps", href: "/schools/holiday-camps" },
   { label: "Facility Management", href: "/facility-management" },
   { label: "About Us", href: "/about/who-we-are" },
   { label: "Contact", href: "/contact" },

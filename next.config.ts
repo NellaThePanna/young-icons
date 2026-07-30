@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
   // Explicitly set tracing root to this project directory.
   // Prevents "multiple lockfiles" warning caused by C:\Dev\NOVA\package-lock.json.
   outputFileTracingRoot: path.join(__dirname),
+  async redirects() {
+    return [
+      {
+        source: '/camps',
+        destination: '/schools/holiday-camps',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig
