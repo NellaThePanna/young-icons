@@ -37,10 +37,10 @@ export default function HolidayCampsHero() {
             preserveAspectRatio="xMidYMid slice"
           />
           <clipPath id="hc-right-block">
-            <rect x={720} y={0} width={560} height={720} />
+            <rect x={759} y={0} width={525} height={720} />
           </clipPath>
           <clipPath id="hc-camps-clip">
-            <text x={120} y={555} fontFamily="Anton" fontSize={184}>
+            <text x={106} y={567} fontFamily="Anton" fontSize={215}>
               {SCHOOLS_CAMPS_HERO.headingLine2}
             </text>
           </clipPath>
@@ -50,15 +50,15 @@ export default function HolidayCampsHero() {
 
         <image
           href={SCHOOLS_CAMPS_HERO.image}
-          x={720}
+          x={759}
           y={0}
-          width={560}
+          width={525}
           height={720}
-          preserveAspectRatio="xMidYMid slice"
+          preserveAspectRatio="xMinYMid slice"
           clipPath="url(#hc-right-block)"
         />
 
-        <text x={120} y={356} fontFamily="Anton" fontSize={184} fill="var(--color-black)">
+        <text x={106} y={356} fontFamily="Anton" fontSize={215} fill="var(--color-black)">
           {SCHOOLS_CAMPS_HERO.headingLine1}
         </text>
 
