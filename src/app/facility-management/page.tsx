@@ -1,19 +1,10 @@
+import type { CSSProperties } from "react"
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
-import HeroPage from "@/components/HeroPage"
-import TwoColumn from "@/components/TwoColumn"
-import DirectAnswer from "@/components/DirectAnswer"
-import ThreePillars from "@/components/ThreePillars"
-import CTABand from "@/components/CTABand"
+import FacilityHero from "@/components/FacilityHero"
+import FacilityOverlapSection from "@/components/FacilityOverlapSection"
 import Footer from "@/components/Footer"
-import {
-  FACILITY_HERO,
-  FACILITY_OFFER,
-  FACILITY_DIRECT_QAS,
-  FACILITY_PILLARS,
-  FACILITY_CASE_STUDY,
-  FACILITY_CTA,
-} from "@/content/facility-management"
+import { FACILITY_HERO, FACILITY_CARD_1, FACILITY_CARD_2 } from "@/content/facility-management"
 
 export const metadata: Metadata = {
   title: "Sports Facility Management Dubai | Young Icons",
@@ -38,6 +29,14 @@ const localBusinessSchema = {
   email: "[CLIENT: email required]",
 }
 
+// page-specific tokens from client docx "FACILITY MANAGEMENT PAGE.docx" — not in tokens.css,
+// deliberately distinct from --color-warm-off-white / --color-near-black
+const facilityPageVars = {
+  "--fm-off-white": "#F7F7F5",
+  "--fm-charcoal": "#2B2B2B",
+  "--fm-body-grey": "#D1D5DB",
+} as CSSProperties
+
 export default function FacilityManagementPage() {
   return (
     <>
@@ -46,30 +45,21 @@ export default function FacilityManagementPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       <NavBar />
-      <main>
-        <HeroPage
-          h1={FACILITY_HERO.h1}
-          sub={FACILITY_HERO.sub}
-          intro={FACILITY_HERO.intro}
+      <main style={facilityPageVars}>
+        <FacilityHero heading={FACILITY_HERO.heading} imagePlaceholder={FACILITY_HERO.imagePlaceholder} />
+        <FacilityOverlapSection
+          number={FACILITY_CARD_1.number}
+          heading={FACILITY_CARD_1.heading}
+          body={FACILITY_CARD_1.body}
+          imagePlaceholder={FACILITY_CARD_1.imagePlaceholder}
         />
-        <TwoColumn
-          headline={FACILITY_OFFER.headline}
-          paragraphs={FACILITY_OFFER.paragraphs}
-        />
-        <DirectAnswer
-          qas={FACILITY_DIRECT_QAS}
-          ariaLabel="What does Young Icons facility management service include"
-        />
-        <ThreePillars pillars={FACILITY_PILLARS} bg="off-white" />
-        <TwoColumn
-          headline={FACILITY_CASE_STUDY.headline}
-          paragraphs={FACILITY_CASE_STUDY.paragraphs}
-          bg="black"
-        />
-        <CTABand
-          headline={FACILITY_CTA.headline}
-          cta={FACILITY_CTA.cta}
-          href="/contact"
+        <FacilityOverlapSection
+          reverse
+          wrapperPaddingTop={0}
+          heading={FACILITY_CARD_2.heading}
+          body={FACILITY_CARD_2.body}
+          imagePlaceholder={FACILITY_CARD_2.imagePlaceholder}
+          cta={FACILITY_CARD_2.cta}
         />
       </main>
       <Footer />
