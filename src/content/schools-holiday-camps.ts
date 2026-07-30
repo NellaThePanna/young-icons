@@ -40,11 +40,31 @@ export const SCHOOLS_CAMPS_PILLARS = [
   },
 ] as const
 
-export const SCHOOLS_CAMPS_LOGISTICS = {
-  location: "[CLIENT: camp venue in Dubai required]",
-  sessionTimes: "[CLIENT: upcoming camp dates and availability required]",
-  bookingNote: "Book your child's place through Classcard — spaces are limited.",
-  cta: "Book Now",
+export const SCHOOLS_CAMPS_UPCOMING = {
+  heading: "Upcoming Camps",
+  camps: [
+    {
+      name: "Summer Holiday Camp",
+      venue: "Cedar School",
+      dates: "14 July - 1 August 2025",
+      ages: "Ages 4-12",
+      time: "8:30 AM - 2:00 PM",
+    },
+    {
+      name: "October Camp",
+      venue: "Cedar School",
+      dates: "6 October - 17 October 2025",
+      ages: "Ages 4-12",
+      time: "8:30 AM - 2:00 PM",
+    },
+    {
+      name: "Winter Camp",
+      venue: "Cedar School",
+      dates: "5 January - 16 January 2026",
+      ages: "Ages 4-12",
+      time: "8:30 AM - 2:00 PM",
+    },
+  ],
 } as const
 
 export const SCHOOLS_CAMPS_CTA = {

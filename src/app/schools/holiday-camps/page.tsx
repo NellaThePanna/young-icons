@@ -5,7 +5,7 @@ import HolidayCampsIntro from "@/components/HolidayCampsIntro"
 import TwoColumn from "@/components/TwoColumn"
 import DirectAnswer from "@/components/DirectAnswer"
 import ThreePillars from "@/components/ThreePillars"
-import LogisticsStrip from "@/components/LogisticsStrip"
+import CampCards from "@/components/CampCards"
 import CTABand from "@/components/CTABand"
 import Footer from "@/components/Footer"
 import {
@@ -13,7 +13,7 @@ import {
   SCHOOLS_CAMPS_ABOUT,
   SCHOOLS_CAMPS_DIRECT_QAS,
   SCHOOLS_CAMPS_PILLARS,
-  SCHOOLS_CAMPS_LOGISTICS,
+  SCHOOLS_CAMPS_UPCOMING,
   SCHOOLS_CAMPS_CTA,
 } from "@/content/schools-holiday-camps"
 
@@ -81,11 +81,9 @@ export default function SchoolsHolidayCampsPage() {
           ariaLabel="What happens at a Young Icons holiday camp in Dubai"
         />
         <ThreePillars pillars={SCHOOLS_CAMPS_PILLARS} bg="off-white" />
-        <LogisticsStrip
-          location={SCHOOLS_CAMPS_LOGISTICS.location}
-          sessionTimes={SCHOOLS_CAMPS_LOGISTICS.sessionTimes}
-          bookingNote={SCHOOLS_CAMPS_LOGISTICS.bookingNote}
-          cta={SCHOOLS_CAMPS_LOGISTICS.cta}
+        <CampCards
+          heading={SCHOOLS_CAMPS_UPCOMING.heading}
+          camps={SCHOOLS_CAMPS_UPCOMING.camps}
         />
         <CTABand
           headline={SCHOOLS_CAMPS_CTA.headline}
