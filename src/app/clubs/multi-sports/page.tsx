@@ -1,12 +1,10 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import MultiHero from "@/components/MultiHero"
-import MultiWhat from "@/components/MultiWhat"
-import NurseryActivities from "@/components/NurseryActivities"
-import PhilosophyColumns from "@/components/PhilosophyColumns"
-import MultiLocations from "@/components/MultiLocations"
+import MultiAbout from "@/components/MultiAbout"
+import MultiPhotoBand from "@/components/MultiPhotoBand"
+import MultiLocationCTA from "@/components/MultiLocationCTA"
 import Footer from "@/components/Footer"
-import { MULTI_ACTIVITIES, MULTI_PHILOSOPHY } from "@/content/multi-sports"
 
 export const metadata: Metadata = {
   title: "Multi-Sports Club Dubai | Young Icons",
@@ -41,15 +39,9 @@ export default function MultiSportsPage() {
       <NavBar />
       <main>
         <MultiHero />
-        <MultiWhat />
-        <NurseryActivities
-          activities={MULTI_ACTIVITIES.activities}
-          heading={MULTI_ACTIVITIES.heading}
-          headingLine2={MULTI_ACTIVITIES.headingLine2}
-          body={MULTI_ACTIVITIES.body}
-        />
-        <PhilosophyColumns items={MULTI_PHILOSOPHY} bg="black" />
-        <MultiLocations />
+        <MultiAbout />
+        <MultiPhotoBand />
+        <MultiLocationCTA />
       </main>
       <Footer />
     </>
