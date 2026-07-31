@@ -96,10 +96,8 @@ export const HOME_STATS = [
     isNumeric: true,
     unconfirmed: true,
   },
-  // CLIENT-TO-CONFIRM: Rev 3 written brief forbids naming cities. If approved, swap to:
-  // { value: "DUBAI &\nABU DHABI", label: "", isNumeric: false, icon: true }
   {
-    value: "ACROSS THE UAE",
+    value: "DUBAI & ABU DHABI",
     label: "",
     isNumeric: false,
     icon: true,
@@ -192,15 +190,11 @@ export const HOME_TESTIMONIALS = [
 // Names from client mockup — replace with approved logo files from Luke when supplied (Asana task logged).
 export const HOME_PARTNERS = [
   "British Orchard Nursery",
-  "Kids Academy",
-  "Little Dreamers Nursery",
-  "Swiss International Scientific School",
-  "Citizens School",
   "Blossom Nursery",
-  "Hummingbird Nursery",
-  "Great Minds",
-  "Tappy Toes Nursery",
-  "First Path Montessori",
+  "Dubai British",
+  "Kings School",
+  "Hartland International",
+  "Jumeirah",
 ] as const
 
 export const PARTNERS_SECTION = {

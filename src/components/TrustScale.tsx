@@ -6,7 +6,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SplitText } from "gsap/SplitText"
 import Link from "next/link"
-import { HOME_STATS, PARTNERS_SECTION, PARTNERING_CTA, HOME_PARTNERS } from "@/content/home"
+import { HOME_STATS, PARTNERING_CTA, HOME_PARTNERS } from "@/content/home"
 
 function MapPin() {
   return (
@@ -31,7 +31,6 @@ export default function TrustScale() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const ctaBandRef = useRef<HTMLElement>(null)
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const headingRef = useRef<HTMLHeadingElement>(null)
   const ctaHeadingRef = useRef<HTMLHeadingElement>(null)
 
   useGSAP(() => {
@@ -54,18 +53,6 @@ export default function TrustScale() {
         })
 
         if (!prefersReduced) {
-          if (headingRef.current) {
-            const split = new SplitText(headingRef.current, { type: "words" })
-            splits.push(split)
-            gsap.from(split.words, {
-              opacity: 0,
-              y: 24,
-              duration: 0.8,
-              ease: "power2.out",
-              stagger: { amount: 0.35, from: "start" },
-            })
-          }
-
           HOME_STATS.forEach((stat, i) => {
             if (!stat.isNumeric) return
             const el = valueRefs.current[i]
@@ -134,70 +121,31 @@ export default function TrustScale() {
       <section
         className="px-6"
         style={{
-          backgroundColor: "var(--color-warm-off-white)",
+          backgroundColor: "var(--color-black)",
           paddingTop: "96px",
           paddingBottom: "96px",
         }}
       >
-        <div className="mx-auto text-center" style={{ maxWidth: "1280px" }}>
-          <p
-            className="trust-item mb-4"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontWeight: "var(--font-weight-medium)",
-              fontSize: "0.875rem",
-              color: "var(--color-academy-green)",
-              textTransform: "uppercase",
-              letterSpacing: "0.15em",
-            }}
-          >
-            {PARTNERS_SECTION.eyebrow}
-          </p>
-
-          <h2
-            ref={headingRef}
-            className="mx-auto mb-6"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: "var(--font-weight-bold)",
-              fontSize: "clamp(2.25rem, 5vw, 4rem)",
-              color: "var(--color-black)",
-              textTransform: "uppercase",
-              lineHeight: 1.05,
-              maxWidth: "900px",
-            }}
-          >
-            {PARTNERS_SECTION.heading}
-            <span style={{ color: "var(--color-academy-green)" }}>.</span>
-          </h2>
-
-          <p
-            className="trust-item mx-auto mb-16"
-            style={{
-              fontFamily: "var(--font-body)",
-              color: "rgba(0,0,0,0.6)",
-              maxWidth: "620px",
-              lineHeight: 1.6,
-            }}
-          >
-            {PARTNERS_SECTION.sub}
-          </p>
-
+        <div
+          className="mx-auto flex flex-col md:flex-row items-center gap-7"
+          style={{ maxWidth: "1280px" }}
+        >
           <div
-            className="stat-item grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x mb-20"
-            style={{ borderColor: "rgba(0,0,0,0.1)" }}
+            className="stat-item grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x w-full md:w-[40%]"
+            style={{ borderColor: "rgba(255,255,255,0.12)" }}
           >
             {HOME_STATS.map((stat, i) => (
               <div
                 key={`${stat.value}-${i}`}
-                className="flex flex-col items-center justify-center text-center px-6 py-8"
+                className="flex flex-col items-center justify-center text-center"
+                style={{ padding: "22px 24px" }}
               >
                 <span
                   ref={(el) => { valueRefs.current[i] = el }}
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: "var(--font-weight-bold)",
-                    fontSize: "clamp(1.75rem, 4vw, 3rem)",
+                    fontSize: "clamp(1.75rem, 3.5vw, 2.6875rem)",
                     color: "var(--color-academy-green)",
                     lineHeight: 1,
                   }}
@@ -210,8 +158,8 @@ export default function TrustScale() {
                     className="mt-3"
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontSize: "0.75rem",
-                      color: "rgba(0,0,0,0.5)",
+                      fontSize: "0.8125rem",
+                      color: "rgba(255,255,255,0.6)",
                       textTransform: "uppercase",
                       letterSpacing: "0.1em",
                     }}
@@ -225,19 +173,22 @@ export default function TrustScale() {
 
           {/* Text wordmarks stand in for logo files — replace with approved logo assets from Luke when supplied (Asana task logged) */}
           <div
-            className="trust-item grid grid-cols-2 sm:grid-cols-5 divide-x divide-y sm:divide-y-0 mx-auto"
-            style={{ maxWidth: "1100px", borderColor: "rgba(0,0,0,0.08)" }}
+            className="trust-item grid grid-cols-3 divide-x divide-y w-full md:w-[58%]"
+            style={{ borderColor: "rgba(255,255,255,0.12)" }}
           >
             {HOME_PARTNERS.map((name) => (
               <div
                 key={name}
-                className="partner-logo flex items-center justify-center px-4 py-8"
+                className="partner-logo flex items-center justify-center"
                 style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "13px",
+                  fontSize: "15px",
                   letterSpacing: "0.04em",
                   textAlign: "center",
                   lineHeight: 1.3,
+                  color: "var(--color-white)",
+                  padding: "19px 14px",
+                  minHeight: "76px",
                 }}
                 aria-label={name}
               >
