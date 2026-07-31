@@ -22,7 +22,7 @@ export default function HolidayCampsHero() {
     <section className="w-full" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
       <svg
         ref={svgRef}
-        viewBox="0 150 1280 380"
+        viewBox="0 150 1280 420"
         width="100%"
         style={{ display: "block", height: "auto" }}
       >
@@ -30,17 +30,17 @@ export default function HolidayCampsHero() {
           <image
             id="hc-camps-photo"
             href={SCHOOLS_CAMPS_HERO.image}
-            x={-80}
-            y={50}
-            width={1280}
-            height={960}
+            x={182}
+            y={100}
+            width={1357}
+            height={1018}
             preserveAspectRatio="xMidYMid slice"
           />
           <clipPath id="hc-right-block">
             <rect x={759} y={0} width={525} height={720} />
           </clipPath>
           <clipPath id="hc-camps-clip">
-            <text x={254} y={512} fontFamily="Anton" fontSize={175}>
+            <text x={191} y={550} fontFamily="Anton" fontSize={166}>
               {SCHOOLS_CAMPS_HERO.headingLine2}
             </text>
           </clipPath>
@@ -50,15 +50,15 @@ export default function HolidayCampsHero() {
 
         <image
           href={SCHOOLS_CAMPS_HERO.image}
-          x={753}
-          y={-18}
-          width={525}
-          height={720}
+          x={787}
+          y={-66}
+          width={583}
+          height={799}
           preserveAspectRatio="xMinYMid slice"
           clipPath="url(#hc-right-block)"
         />
 
-        <text x={58} y={348} fontFamily="Anton" fontSize={165} fill="var(--color-black)">
+        <text x={43} y={362} fontFamily="Anton" fontSize={181} fill="var(--color-black)">
           {SCHOOLS_CAMPS_HERO.headingLine1}
         </text>
 
