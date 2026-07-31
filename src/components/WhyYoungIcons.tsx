@@ -470,12 +470,12 @@ export default function WhyYoungIcons() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "12px",
+                    gap: "11px",
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-bold)",
-                    fontSize: "0.8rem",
+                    fontSize: "0.725rem",
                     letterSpacing: "0.03em",
-                    padding: "16px 20px",
+                    padding: "15px 18px",
                     border: "none",
                     cursor: "pointer",
                     backgroundColor: isActive ? "var(--color-academy-green)" : "var(--color-white)",
@@ -622,14 +622,14 @@ export default function WhyYoungIcons() {
                   role="tabpanel"
                   aria-labelledby={`why-tab-${active.id}`}
                   className="why-panel-text rounded-lg"
-                  style={{ backgroundColor: "var(--color-white)", padding: "32px" }}
+                  style={{ backgroundColor: "var(--color-white)", padding: "29px" }}
                 >
                   <p
                     className="mb-3"
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: "var(--font-weight-medium)",
-                      fontSize: "11px",
+                      fontSize: "10px",
                       color: "var(--color-academy-green)",
                       textTransform: "uppercase",
                       letterSpacing: "0.15em",
@@ -642,7 +642,7 @@ export default function WhyYoungIcons() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: "var(--font-weight-bold)",
-                      fontSize: "clamp(1.375rem, 2.3vw, 1.875rem)",
+                      fontSize: "clamp(1.25rem, 2.1vw, 1.7rem)",
                       color: "var(--color-black)",
                       textTransform: "uppercase",
                       lineHeight: 1.15,
@@ -650,15 +650,15 @@ export default function WhyYoungIcons() {
                   >
                     {active.heading}
                   </h3>
-                  <div style={{ width: 32, height: 4, backgroundColor: "var(--color-academy-green)", marginBottom: 20 }} />
+                  <div style={{ width: 29, height: 4, backgroundColor: "var(--color-academy-green)", marginBottom: 18 }} />
                   <p
                     className="mb-8"
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       color: "#5a584f",
                       lineHeight: 1.7,
-                      maxWidth: "480px",
+                      maxWidth: "435px",
                     }}
                   >
                     {active.body}
@@ -669,21 +669,21 @@ export default function WhyYoungIcons() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: "var(--font-weight-bold)",
-                      fontSize: "16px",
+                      fontSize: "15px",
                       color: "var(--color-black)",
                       textTransform: "uppercase",
                     }}
                   >
                     {WHY_CHOOSE_US.heading}
                   </h4>
-                  <ul className="flex flex-col gap-3 mb-8">
+                  <ul className="flex flex-col gap-[11px] mb-8">
                     {WHY_CHOOSE_US.checklist.map((line) => (
                       <li key={line} className="flex items-center gap-3">
                         <span
                           className="flex-shrink-0 inline-flex items-center justify-center rounded-full"
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 18,
+                            height: 18,
                             backgroundColor: "var(--color-academy-green)",
                             color: "var(--color-white)",
                           }}
@@ -702,12 +702,12 @@ export default function WhyYoungIcons() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: "var(--font-weight-bold)",
-                      fontSize: "13px",
+                      fontSize: "12px",
                       color: "var(--color-white)",
                       backgroundColor: "var(--color-academy-green)",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
-                      padding: "14px 28px",
+                      padding: "13px 25px",
                       borderRadius: "6px",
                       textDecoration: "none",
                     }}
@@ -729,7 +729,7 @@ export default function WhyYoungIcons() {
             )}
 
             {WHY_PROOF_ROW[active.id] && (
-              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-8" style={{ borderTop: "1px solid #e3e1d8", marginTop: "8px", paddingTop: "0px" }}>
+              <div className="why-proof-row grid grid-cols-2 lg:grid-cols-4 gap-[29px]" style={{ borderTop: "1px solid #e3e1d8", marginTop: "7px", paddingTop: "22px" }}>
                 {WHY_PROOF_ROW[active.id].map((item) => {
                   const ProofIcon = WHY_PROOF_ROW_ICONS[item.label]
                   return (
@@ -737,8 +737,8 @@ export default function WhyYoungIcons() {
                     <span
                       className="inline-flex items-center justify-center rounded-full"
                       style={{
-                        width: 44,
-                        height: 44,
+                        width: 40,
+                        height: 40,
                         border: "1.5px solid var(--color-academy-green)",
                         color: "var(--color-academy-green)",
                       }}
@@ -749,7 +749,7 @@ export default function WhyYoungIcons() {
                       style={{
                         fontFamily: "var(--font-body)",
                         fontWeight: "var(--font-weight-bold)",
-                        fontSize: "13px",
+                        fontSize: "12px",
                         color: "var(--color-black)",
                         textTransform: "uppercase",
                         letterSpacing: "0.03em",
@@ -757,7 +757,7 @@ export default function WhyYoungIcons() {
                     >
                       {item.label}
                     </span>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5a584f", lineHeight: 1.5 }}>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "#5a584f", lineHeight: 1.5 }}>
                       {item.caption}
                     </span>
                   </div>
