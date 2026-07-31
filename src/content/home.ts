@@ -66,24 +66,6 @@ export const WHO_WE_ARE = {
   imageSmall: "/images/placeholder/obstacle-course.jpg",
 } as const
 
-export const PHILOSOPHY = [
-  {
-    word: "PLAY",
-    caption: "Sessions children genuinely look forward to.",
-    image: "/images/placeholder/nursery-basketball.jpg",
-  },
-  {
-    word: "LEARN",
-    caption: "Age-appropriate coaching that builds skills through movement.",
-    image: "/images/placeholder/tennis-rackets.jpg",
-  },
-  {
-    word: "GROW",
-    caption: "Confidence, coordination and positive relationships with sport.",
-    image: "/images/placeholder/karate-crawl.jpg",
-  },
-] as const
-
 export const HOME_STATS = [
   {
     value: "45+",

@@ -35,31 +35,6 @@ export const MULTI_PHOTO_BAND = {
   image: "/images/placeholder/activity-football.png",
 } as const
 
-// Orphaned by the multi-sports-page.html redesign — no longer rendered anywhere,
-// kept only so MultiWhat.tsx / MultiLocations.tsx still compile pending a delete decision.
-export const MULTI_WHAT = {
-  word: "WHAT.",
-  headingBlack: "WHAT IS",
-  headingGreen: "MULTI-SPORTS?",
-  body: "Young Icons Multi-Sports is a weekly club where your child tries a different sport every session. Football one week, basketball the next — coached sessions that build skills across multiple disciplines.",
-  statement1: "45 MINUTES.",
-  statement2: "DIFFERENT SPORTS.",
-  statement3: "ONE ACTIVE CLUB.",
-  image: "/images/placeholder/obstacle-course.jpg",
-} as const
-
-export const MULTI_LOCATIONS = {
-  smallHeading: "FIND YOUR CLUB",
-  heading: "READY TO TRY",
-  headingGreen: "SOMETHING NEW?",
-  body: "Young Icons Multi-Sports clubs run at venues across Dubai. Find your nearest location and book through Classcard.",
-  cta: "FIND A CLUB",
-  locations: [
-    { name: "CEDAR SCHOOL", area: "Dubai", day: "[CLIENT: confirm]", ages: "[CLIENT: confirm]" },
-    { name: "BVS ISLAND", area: "Dubai", day: "[CLIENT: confirm]", ages: "[CLIENT: confirm]" },
-  ],
-} as const
-
 export const MULTI_LOCATION_CTA = {
   locationEyebrow: "First Location",
   locationHeading: "Dubai Sports City",
