@@ -61,12 +61,12 @@ export default function WhoWeAre() {
         backgroundColor: "var(--color-warm-off-white)",
         overflow: "visible",
         perspective: "1000px",
-        paddingTop: "80px",
-        paddingBottom: "80px",
+        paddingTop: "0px",
+        paddingBottom: "43px",
       }}
     >
       <div
-        className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16"
+        className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-[96px]"
         style={{ maxWidth: "1280px" }}
       >
         <div className="flex flex-col justify-center">
@@ -126,7 +126,7 @@ export default function WhoWeAre() {
         </div>
 
         <div className="who-item relative">
-          <div className="relative w-full" style={{ height: "400px" }}>
+          <div className="relative w-full" style={{ height: "397px" }}>
             <Image
               src={WHO_WE_ARE.imageLarge}
               alt=""
@@ -140,7 +140,7 @@ export default function WhoWeAre() {
             className="absolute"
             style={{
               width: "45%",
-              height: "240px",
+              height: "235px",
               bottom: "-40px",
               left: "-30px",
               zIndex: 2,
