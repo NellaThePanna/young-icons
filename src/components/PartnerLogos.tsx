@@ -1,3 +1,10 @@
+"use client"
+
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Link from "next/link"
 import { PARTNERS_SECTION, HOME_PARTNERS } from "@/content/home"
 
@@ -30,10 +37,54 @@ function PartnerTrack() {
 }
 
 export default function PartnerLogos() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
+
+  useGSAP(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top 80%",
+      once: true,
+      invalidateOnRefresh: true,
+      onEnter: () => {
+        const split = headingRef.current
+          ? new SplitText(headingRef.current, { type: "words" })
+          : null
+        const items = sectionRef.current?.querySelectorAll(".partner-item") ?? []
+        const tl = gsap.timeline()
+
+        if (split) {
+          tl.from(split.words, {
+            opacity: 0,
+            y: prefersReduced ? 0 : 24,
+            duration: prefersReduced ? 0.01 : 0.8,
+            ease: "power2.out",
+            stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
+          })
+        }
+
+        tl.from(
+          items,
+          {
+            opacity: 0,
+            y: prefersReduced ? 0 : 32,
+            duration: prefersReduced ? 0.01 : 0.7,
+            ease: "power2.out",
+            stagger: prefersReduced ? 0 : 0.12,
+          },
+          prefersReduced ? "<" : "-=0.4"
+        )
+      },
+    })
+  }, { scope: sectionRef })
+
   return (
-    <section className="py-20 px-6" style={{ backgroundColor: "var(--color-white)" }}>
+    <section ref={sectionRef} className="py-20 px-6" style={{ backgroundColor: "var(--color-white)" }}>
       <div className="mx-auto mb-12 text-center" style={{ maxWidth: "780px" }}>
         <h2
+          ref={headingRef}
           className="mb-4"
           style={{
             fontFamily: "var(--font-display)",
@@ -47,7 +98,7 @@ export default function PartnerLogos() {
           {PARTNERS_SECTION.heading}
         </h2>
         <p
-          className="mx-auto"
+          className="partner-item mx-auto"
           style={{
             fontFamily: "var(--font-body)",
             color: "rgba(0,0,0,0.65)",
@@ -59,14 +110,14 @@ export default function PartnerLogos() {
         </p>
       </div>
 
-      <div className="overflow-hidden mb-12" aria-hidden="true">
+      <div className="partner-item overflow-hidden mb-12" aria-hidden="true">
         <div className="flex" style={{ gap: "24px" }}>
           <PartnerTrack />
           <PartnerTrack />
         </div>
       </div>
 
-      <div className="mx-auto flex flex-wrap items-center justify-center gap-4" style={{ maxWidth: "780px" }}>
+      <div className="partner-item mx-auto flex flex-wrap items-center justify-center gap-4" style={{ maxWidth: "780px" }}>
         <Link
           href={PARTNERS_SECTION.ctaAHref}
           className="rounded-full px-8 py-4 text-base"

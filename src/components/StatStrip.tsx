@@ -16,6 +16,7 @@ interface StatStripProps {
 
 export default function StatStrip({ stats }: StatStripProps) {
   const sectionRef = useRef<HTMLElement>(null)
+  const valueRefs = useRef<(HTMLParagraphElement | null)[]>([])
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -34,6 +35,28 @@ export default function StatStrip({ stats }: StatStripProps) {
           ease: "power2.out",
           stagger: prefersReduced ? 0 : 0.1,
         })
+
+        if (!prefersReduced) {
+          stats.forEach((stat, i) => {
+            const el = valueRefs.current[i]
+            const match = stat.value.match(/^(\d+)(.*)$/)
+            if (!el || !match) return
+            const target = parseInt(match[1], 10)
+            const suffix = match[2]
+            const counter = { val: 0 }
+            gsap.to(counter, {
+              val: target,
+              duration: 2,
+              ease: "power2.out",
+              onUpdate: () => {
+                el.textContent = String(Math.round(counter.val))
+              },
+              onComplete: () => {
+                el.textContent = target + suffix
+              },
+            })
+          })
+        }
       },
     })
   }, { scope: sectionRef })
@@ -62,6 +85,7 @@ export default function StatStrip({ stats }: StatStripProps) {
             }}
           >
             <p
+              ref={(el) => { valueRefs.current[i] = el }}
               className="text-4xl md:text-5xl tracking-tight mb-2"
               style={{
                 fontFamily: "var(--font-display)",

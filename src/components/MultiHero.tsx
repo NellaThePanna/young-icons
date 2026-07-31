@@ -3,17 +3,36 @@
 import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import { SplitText } from "gsap/SplitText"
 import { MULTI_HERO } from "@/content/multi-sports"
 
+const PARALLAX_TRAVEL_PX = 20
+const IMAGE_OVERHANG_PX = 60
+
 export default function MultiHero() {
   const containerRef = useRef<HTMLElement>(null)
+  const imageWrapRef = useRef<HTMLDivElement>(null)
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([])
   const subRef = useRef<HTMLParagraphElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (!prefersReduced) {
+      gsap.to(imageWrapRef.current, {
+        y: PARALLAX_TRAVEL_PX,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+    }
 
     const lines = lineRefs.current.filter((el): el is HTMLSpanElement => el !== null)
     const splits = lines.map((el) => new SplitText(el, { type: "words" }))
@@ -54,15 +73,23 @@ export default function MultiHero() {
         paddingBottom: "48px",
       }}
     >
-      <Image
-        src={MULTI_HERO.image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-        style={{ objectPosition: "50% 20%" }}
-      />
+      <div
+        ref={imageWrapRef}
+        className="absolute"
+        style={{ top: -IMAGE_OVERHANG_PX, bottom: -IMAGE_OVERHANG_PX, left: 0, right: 0 }}
+      >
+        <div className="relative w-full h-full">
+          <Image
+            src={MULTI_HERO.image}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 20%" }}
+          />
+        </div>
+      </div>
 
       <div
         className="absolute inset-0"
