@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, type ReactNode } from "react"
+import Image from "next/image"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -12,6 +13,13 @@ interface Camp {
   readonly dates: string
   readonly ages: string
   readonly time: string
+}
+
+// nova-debt: stand-in photography, real shoot not sourced yet (tracked separately, task #11) — swap these paths when it arrives
+const CAMP_PHOTOS: Record<string, string> = {
+  "Summer Holiday Camp": "/images/placeholder/activity-football.png",
+  "October Camp": "/images/placeholder/karate-crawl.jpg",
+  "Winter Camp": "/images/placeholder/activity-rugby.png",
 }
 
 interface CampCardsProps {
@@ -97,11 +105,25 @@ export default function CampCards({ heading, camps }: CampCardsProps) {
       style={{ backgroundColor: "var(--color-warm-off-white)" }}
     >
       <div className="mx-auto" style={{ maxWidth: "1120px" }}>
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 700,
+            fontSize: "13px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "var(--color-academy-green)",
+            marginBottom: "8px",
+          }}
+        >
+          Upcoming Camps
+        </p>
         <h2
-          className="mb-10 text-2xl md:text-3xl tracking-tight"
+          className="mb-10 tracking-tight"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
+            fontSize: "2.5rem",
             textTransform: "uppercase",
             color: "var(--color-black)",
           }}
@@ -113,46 +135,81 @@ export default function CampCards({ heading, camps }: CampCardsProps) {
           {camps.map((camp) => (
             <div
               key={camp.name}
-              className="camp-card rounded-lg flex flex-col gap-5"
-              style={{ backgroundColor: "var(--color-white)", padding: "32px" }}
+              className="camp-card rounded-lg overflow-hidden flex flex-col"
+              style={{ backgroundColor: "var(--color-white)" }}
             >
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: "var(--font-weight-bold)",
-                  fontSize: "1.375rem",
-                  textTransform: "uppercase",
-                  color: "var(--color-black)",
-                }}
-              >
-                {camp.name}
-              </h3>
-
-              <div className="flex flex-col gap-3">
-                <InfoRow icon={<PinIcon />} label={camp.venue} />
-                <InfoRow icon={<CalendarIcon />} label={camp.dates} />
-                <InfoRow icon={<PersonIcon />} label={camp.ages} />
-                <InfoRow icon={<ClockIcon />} label={camp.time} />
+              <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+                <Image
+                  src={CAMP_PHOTOS[camp.name]}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
               </div>
 
-              <a
-                href={CLASSCARD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto rounded-full px-6 py-3 text-center"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-bold)",
-                  fontSize: "14px",
-                  color: "var(--color-white)",
-                  backgroundColor: "var(--color-academy-green)",
-                  textDecoration: "none",
-                }}
-              >
-                Register Now
-              </a>
+              <div className="flex flex-col gap-5" style={{ padding: "32px" }}>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: "var(--font-weight-bold)",
+                    fontSize: "1.375rem",
+                    textTransform: "uppercase",
+                    color: "var(--color-black)",
+                  }}
+                >
+                  {camp.name}
+                </h3>
+
+                <div className="flex flex-col gap-3">
+                  <InfoRow icon={<PinIcon />} label={camp.venue} />
+                  <InfoRow icon={<CalendarIcon />} label={camp.dates} />
+                  <InfoRow icon={<PersonIcon />} label={camp.ages} />
+                  <InfoRow icon={<ClockIcon />} label={camp.time} />
+                </div>
+
+                <a
+                  href={CLASSCARD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto rounded-full px-6 py-3 text-center"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontWeight: "var(--font-weight-bold)",
+                    fontSize: "14px",
+                    color: "var(--color-white)",
+                    backgroundColor: "var(--color-academy-green)",
+                    textDecoration: "none",
+                  }}
+                >
+                  Register Now
+                </a>
+              </div>
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-center" style={{ marginTop: "32px" }}>
+          <a
+            href={CLASSCARD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full text-center"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontWeight: 700,
+              fontSize: "14px",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+              color: "var(--color-black)",
+              backgroundColor: "transparent",
+              border: "1.5px solid rgba(0,0,0,0.25)",
+              padding: "12px 24px",
+              textDecoration: "none",
+            }}
+          >
+            Register Your Interest
+          </a>
         </div>
       </div>
     </section>

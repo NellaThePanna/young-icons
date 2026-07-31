@@ -2,17 +2,11 @@ import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import HolidayCampsHero from "@/components/HolidayCampsHero"
 import HolidayCampsIntro from "@/components/HolidayCampsIntro"
-import TwoColumn from "@/components/TwoColumn"
-import DirectAnswer from "@/components/DirectAnswer"
-import ThreePillars from "@/components/ThreePillars"
 import CampCards from "@/components/CampCards"
 import CTABand from "@/components/CTABand"
 import Footer from "@/components/Footer"
 import {
   SCHOOLS_CAMPS_HERO,
-  SCHOOLS_CAMPS_ABOUT,
-  SCHOOLS_CAMPS_DIRECT_QAS,
-  SCHOOLS_CAMPS_PILLARS,
   SCHOOLS_CAMPS_UPCOMING,
   SCHOOLS_CAMPS_CTA,
 } from "@/content/schools-holiday-camps"
@@ -72,15 +66,6 @@ export default function SchoolsHolidayCampsPage() {
       <main>
         <HolidayCampsHero />
         <HolidayCampsIntro />
-        <TwoColumn
-          headline={SCHOOLS_CAMPS_ABOUT.headline}
-          paragraphs={SCHOOLS_CAMPS_ABOUT.paragraphs}
-        />
-        <DirectAnswer
-          qas={SCHOOLS_CAMPS_DIRECT_QAS}
-          ariaLabel="What happens at a Young Icons holiday camp in Dubai"
-        />
-        <ThreePillars pillars={SCHOOLS_CAMPS_PILLARS} bg="off-white" />
         <CampCards
           heading={SCHOOLS_CAMPS_UPCOMING.heading}
           camps={SCHOOLS_CAMPS_UPCOMING.camps}
