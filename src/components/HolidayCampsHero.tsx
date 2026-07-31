@@ -19,7 +19,7 @@ export default function HolidayCampsHero() {
   }, { scope: svgRef })
 
   return (
-    <section className="w-full" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
+    <section className="w-full pt-[88px] lg:pt-0" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
       <svg
         ref={svgRef}
         viewBox="0 150 1280 420"
