@@ -117,7 +117,16 @@ export default function EditorialMosaic() {
               className="absolute inset-0 flex flex-col justify-end"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 35%, transparent 65%)",
+                  "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.32) 35%, transparent 65%)",
+                // Blur is masked to the same shape as the scrim so the photo stays crisp above the
+                // text zone and only reads as frosted glass where the tint actually is.
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                maskImage:
+                  "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
+                WebkitMaskImage:
+                  "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
+                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)",
                 padding: "28px",
                 zIndex: 2,
               }}
