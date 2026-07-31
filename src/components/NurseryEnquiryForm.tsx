@@ -90,7 +90,7 @@ export default function NurseryEnquiryForm() {
     borderBottom: `1px solid ${focusedField === name ? "var(--color-academy-green)" : "rgba(0,0,0,0.18)"}`,
     background: "transparent",
     fontFamily: "var(--font-body)",
-    fontSize: "14px",
+    fontSize: "13px",
     padding: "4px 2px 8px",
     color: "var(--color-black)",
     outline: "none",
@@ -103,20 +103,27 @@ export default function NurseryEnquiryForm() {
       className="px-6"
       style={{
         backgroundColor: "var(--color-white)",
-        borderTop: "4px solid var(--color-academy-green)",
+        borderTop: "2px solid var(--color-academy-green)",
         paddingTop: "48px",
         paddingBottom: "48px",
       }}
     >
       <div
-        className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
+        className="mx-auto grid grid-cols-1 md:grid-cols-[33%_1fr] gap-8 md:gap-10"
         style={{ maxWidth: "1280px", alignItems: "stretch" }}
       >
         <div
-          className="enquiry-item relative flex flex-col justify-end overflow-hidden md:h-full"
-          style={{ minHeight: "320px", borderRadius: "var(--radius-lg)" }}
+          className="enquiry-item relative flex flex-col justify-end overflow-hidden"
+          style={{ height: "347px", borderRadius: "var(--radius-lg)" }}
         >
-          <Image src={NURSERY_ENQUIRY_CTA.image} alt="" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          <Image
+            src={NURSERY_ENQUIRY_CTA.image}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
+            style={{ objectPosition: "31% 9%" }}
+          />
           <div
             className="absolute inset-0"
             style={{ backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }}
@@ -167,7 +174,7 @@ export default function NurseryEnquiryForm() {
             </p>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
-              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "24px 32px" }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "12px 20px" }}>
                 <div>
                   <label htmlFor="nurseryName" style={labelStyle}>
                     {NURSERY_FORM.fields.nurseryName}

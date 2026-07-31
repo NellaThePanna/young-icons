@@ -42,7 +42,7 @@ export const NURSERY_ENQUIRY_CTA = {
   headingWhite: "LET'S GET YOUR",
   headingGreen: "NURSERY MOVING.",
   cta: "START A CONVERSATION",
-  image: "/images/placeholder/ball-skills.jpg",
+  image: "/images/placeholder/obstacle-course.jpg",
 } as const
 
 // v2 light editorial rebuild — see NURSERY_HERO / EARLY_YEARS / MOVEMENT_ABC / NURSERY_ACTIVITIES above for the prior dark-hero page version (components kept, unused).
