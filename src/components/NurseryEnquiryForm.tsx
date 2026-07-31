@@ -34,6 +34,7 @@ export default function NurseryEnquiryForm() {
   const sectionRef = useRef<HTMLElement>(null)
   const [formData, setFormData] = useState<FormState>(EMPTY_FORM)
   const [status, setStatus] = useState<Status>("idle")
+  const [focusedField, setFocusedField] = useState<keyof FormState | null>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -77,17 +78,23 @@ export default function NurseryEnquiryForm() {
 
   const labelStyle = {
     fontFamily: "var(--font-body)",
-    fontSize: "0.75rem",
-    letterSpacing: "0.1em",
+    fontSize: "11px",
     color: "rgba(0,0,0,0.5)",
+    marginBottom: "4px",
+    display: "block",
   }
 
-  const inputStyle = {
+  const getFieldStyle = (name: keyof FormState) => ({
+    width: "100%",
+    border: "none",
+    borderBottom: `1px solid ${focusedField === name ? "var(--color-academy-green)" : "rgba(0,0,0,0.18)"}`,
+    background: "transparent",
     fontFamily: "var(--font-body)",
+    fontSize: "14px",
+    padding: "4px 2px 8px",
     color: "var(--color-black)",
-    backgroundColor: "var(--color-white)",
-    border: "1px solid rgba(0,0,0,0.15)",
-  }
+    outline: "none",
+  })
 
   return (
     <section
@@ -95,17 +102,18 @@ export default function NurseryEnquiryForm() {
       id="enquiry"
       className="px-6"
       style={{
-        backgroundColor: "var(--color-nursery-off-white)",
+        backgroundColor: "var(--color-white)",
+        borderTop: "4px solid var(--color-academy-green)",
         paddingTop: "48px",
         paddingBottom: "48px",
       }}
     >
       <div
         className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
-        style={{ maxWidth: "1280px" }}
+        style={{ maxWidth: "1280px", alignItems: "stretch" }}
       >
         <div
-          className="enquiry-item relative flex flex-col justify-end overflow-hidden"
+          className="enquiry-item relative flex flex-col justify-end overflow-hidden md:h-full"
           style={{ minHeight: "320px", borderRadius: "var(--radius-lg)" }}
         >
           <Image src={NURSERY_ENQUIRY_CTA.image} alt="" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
@@ -158,10 +166,10 @@ export default function NurseryEnquiryForm() {
               {NURSERY_FORM.successMessage}
             </p>
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="nurseryName" className="uppercase" style={labelStyle}>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "24px 32px" }}>
+                <div>
+                  <label htmlFor="nurseryName" style={labelStyle}>
                     {NURSERY_FORM.fields.nurseryName}
                   </label>
                   <input
@@ -171,13 +179,14 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.nurseryName}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                    style={inputStyle}
+                    onFocus={() => setFocusedField("nurseryName")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("nurseryName")}
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="contactName" className="uppercase" style={labelStyle}>
+                <div>
+                  <label htmlFor="contactName" style={labelStyle}>
                     {NURSERY_FORM.fields.contactName}
                   </label>
                   <input
@@ -187,15 +196,14 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.contactName}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                    style={inputStyle}
+                    onFocus={() => setFocusedField("contactName")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("contactName")}
                   />
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="jobRole" className="uppercase" style={labelStyle}>
+                <div>
+                  <label htmlFor="jobRole" style={labelStyle}>
                     {NURSERY_FORM.fields.jobRole}
                   </label>
                   <input
@@ -205,13 +213,14 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.jobRole}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                    style={inputStyle}
+                    onFocus={() => setFocusedField("jobRole")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("jobRole")}
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="location" className="uppercase" style={labelStyle}>
+                <div>
+                  <label htmlFor="location" style={labelStyle}>
                     {NURSERY_FORM.fields.location}
                   </label>
                   <select
@@ -220,8 +229,9 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.location}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                    style={inputStyle}
+                    onFocus={() => setFocusedField("location")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("location")}
                   >
                     <option value="" disabled>
                       {NURSERY_FORM.fields.location}
@@ -233,11 +243,9 @@ export default function NurseryEnquiryForm() {
                     ))}
                   </select>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="uppercase" style={labelStyle}>
+                <div>
+                  <label htmlFor="email" style={labelStyle}>
                     {NURSERY_FORM.fields.email}
                   </label>
                   <input
@@ -247,13 +255,14 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                    style={inputStyle}
+                    onFocus={() => setFocusedField("email")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("email")}
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="phone" className="uppercase" style={labelStyle}>
+                <div>
+                  <label htmlFor="phone" style={labelStyle}>
                     {NURSERY_FORM.fields.phone}
                   </label>
                   <input
@@ -263,49 +272,52 @@ export default function NurseryEnquiryForm() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                    style={inputStyle}
+                    onFocus={() => setFocusedField("phone")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("phone")}
                   />
                 </div>
-              </div>
 
-              <div className="flex flex-col gap-2">
-                <label htmlFor="interestedIn" className="uppercase" style={labelStyle}>
-                  {NURSERY_FORM.fields.interestedIn}
-                </label>
-                <select
-                  id="interestedIn"
-                  name="interestedIn"
-                  required
-                  value={formData.interestedIn}
-                  onChange={handleChange}
-                  className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                  style={inputStyle}
-                >
-                  <option value="" disabled>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <label htmlFor="interestedIn" style={labelStyle}>
                     {NURSERY_FORM.fields.interestedIn}
-                  </option>
-                  {NURSERY_FORM.interestedInOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
+                  </label>
+                  <select
+                    id="interestedIn"
+                    name="interestedIn"
+                    required
+                    value={formData.interestedIn}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField("interestedIn")}
+                    onBlur={() => setFocusedField(null)}
+                    style={getFieldStyle("interestedIn")}
+                  >
+                    <option value="" disabled>
+                      {NURSERY_FORM.fields.interestedIn}
                     </option>
-                  ))}
-                </select>
-              </div>
+                    {NURSERY_FORM.interestedInOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              <div className="flex flex-col gap-2">
-                <label htmlFor="message" className="uppercase" style={labelStyle}>
-                  {NURSERY_FORM.fields.message}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="nursery-field rounded-lg px-4 py-2.5 text-base"
-                  style={inputStyle}
-                />
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <label htmlFor="message" style={labelStyle}>
+                    {NURSERY_FORM.fields.message}
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField("message")}
+                    onBlur={() => setFocusedField(null)}
+                    style={{ ...getFieldStyle("message"), resize: "vertical", padding: "4px 2px 24px" }}
+                  />
+                </div>
               </div>
 
               {status === "error" && (
@@ -321,15 +333,22 @@ export default function NurseryEnquiryForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="nursery-submit rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
                 style={{
                   fontFamily: "var(--font-body)",
                   fontWeight: "var(--font-weight-bold)",
-                  color: "var(--color-white)",
-                  backgroundColor: "var(--color-nursery-green)",
-                  opacity: isSubmitting ? 0.6 : 1,
-                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                  fontSize: "12px",
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  color: "var(--color-academy-green)",
+                  background: "none",
                   border: "none",
+                  padding: 0,
+                  marginTop: "20px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                  opacity: isSubmitting ? 0.6 : 1,
                 }}
               >
                 {isSubmitting ? NURSERY_FORM.submittingLabel : NURSERY_FORM.submitLabel}
