@@ -22,7 +22,7 @@ export default function HolidayCampsHero() {
     <section className="w-full" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
       <svg
         ref={svgRef}
-        viewBox="0 0 1280 720"
+        viewBox="0 150 1280 420"
         width="100%"
         style={{ display: "block", height: "auto" }}
       >
@@ -40,7 +40,7 @@ export default function HolidayCampsHero() {
             <rect x={759} y={0} width={525} height={720} />
           </clipPath>
           <clipPath id="hc-camps-clip">
-            <text x={106} y={567} fontFamily="Anton" fontSize={215}>
+            <text x={106} y={553} fontFamily="Anton" fontSize={215}>
               {SCHOOLS_CAMPS_HERO.headingLine2}
             </text>
           </clipPath>
@@ -58,7 +58,7 @@ export default function HolidayCampsHero() {
           clipPath="url(#hc-right-block)"
         />
 
-        <text x={106} y={356} fontFamily="Anton" fontSize={215} fill="var(--color-black)">
+        <text x={106} y={348} fontFamily="Anton" fontSize={215} fill="var(--color-black)">
           {SCHOOLS_CAMPS_HERO.headingLine1}
         </text>
 
