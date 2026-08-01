@@ -368,6 +368,7 @@ function StarIcon() {
 export default function WhyYoungIcons() {
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
+  const eyebrowUnderlineRef = useRef<HTMLSpanElement>(null)
   const detailRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState(WHY_YOUNG_ICONS.length - 1)
@@ -401,6 +402,15 @@ export default function WhyYoungIcons() {
             duration: 0.5,
             ease: "power2.out",
             stagger: { amount: 0.5, from: "start" },
+          })
+        }
+
+        if (eyebrowUnderlineRef.current) {
+          gsap.from(eyebrowUnderlineRef.current, {
+            scaleX: 0,
+            transformOrigin: "left center",
+            duration: 1,
+            ease: "power2.out",
           })
         }
       },
@@ -543,7 +553,22 @@ export default function WhyYoungIcons() {
                         letterSpacing: "0.15em",
                       }}
                     >
-                      {active.eyebrow}
+                      <span style={{ position: "relative", display: "inline-block" }}>
+                        {active.eyebrow}
+                        <span
+                          ref={eyebrowUnderlineRef}
+                          aria-hidden="true"
+                          style={{
+                            position: "absolute",
+                            left: 0,
+                            bottom: "-4px",
+                            width: "100%",
+                            height: "2px",
+                            borderRadius: "2px",
+                            background: "linear-gradient(90deg, var(--color-academy-green), var(--color-gulf-blue))",
+                          }}
+                        />
+                      </span>
                     </p>
                     <h3
                       className="mb-4"
@@ -653,7 +678,22 @@ export default function WhyYoungIcons() {
                       letterSpacing: "0.15em",
                     }}
                   >
-                    {active.eyebrow}
+                    <span style={{ position: "relative", display: "inline-block" }}>
+                      {active.eyebrow}
+                      <span
+                        ref={eyebrowUnderlineRef}
+                        aria-hidden="true"
+                        style={{
+                          position: "absolute",
+                          left: 0,
+                          bottom: "-4px",
+                          width: "100%",
+                          height: "2px",
+                          borderRadius: "2px",
+                          background: "linear-gradient(90deg, var(--color-academy-green), var(--color-gulf-blue))",
+                        }}
+                      />
+                    </span>
                   </p>
                   <h3
                     className="mb-4"

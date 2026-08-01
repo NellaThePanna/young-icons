@@ -36,6 +36,7 @@ export default function FinalCTA({
   const sectionRef = useRef<HTMLElement>(null)
   const headingLineRefs = useRef<(HTMLSpanElement | null)[]>([])
   const auroraRefs = useRef<(HTMLDivElement | null)[]>([])
+  const eyebrowUnderlineRef = useRef<HTMLSpanElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -87,6 +88,15 @@ export default function FinalCTA({
           ease: "power2.out",
           stagger: { amount: 0.35, from: "start" },
         })
+
+        if (eyebrowUnderlineRef.current) {
+          gsap.from(eyebrowUnderlineRef.current, {
+            scaleX: 0,
+            transformOrigin: "left center",
+            duration: 1,
+            ease: "power2.out",
+          })
+        }
       },
     })
 
@@ -178,7 +188,22 @@ export default function FinalCTA({
               letterSpacing: "0.15em",
             }}
           >
-            {smallHeading}
+            <span style={{ position: "relative", display: "inline-block" }}>
+              {smallHeading}
+              <span
+                ref={eyebrowUnderlineRef}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  bottom: "-4px",
+                  width: "100%",
+                  height: "2px",
+                  borderRadius: "2px",
+                  background: "linear-gradient(90deg, var(--color-academy-green), var(--color-gulf-blue))",
+                }}
+              />
+            </span>
           </p>
         )}
 
