@@ -4,6 +4,7 @@ import { useRef, useState, type KeyboardEvent } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import Image from "next/image"
 import {
   WHY_YOUNG_ICONS,
@@ -366,6 +367,7 @@ function StarIcon() {
 
 export default function WhyYoungIcons() {
   const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const detailRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState(WHY_YOUNG_ICONS.length - 1)
@@ -373,6 +375,8 @@ export default function WhyYoungIcons() {
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReduced) return
+
+    let split: SplitText | null = null
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -387,8 +391,22 @@ export default function WhyYoungIcons() {
           ease: "power2.out",
           stagger: 0.12,
         })
+
+        if (headingRef.current) {
+          split = new SplitText(headingRef.current, { type: "words, chars" })
+          gsap.from(split.chars, {
+            opacity: 0,
+            y: 24,
+            rotation: 4,
+            duration: 0.5,
+            ease: "power2.out",
+            stagger: { amount: 0.5, from: "start" },
+          })
+        }
       },
     })
+
+    return () => split?.revert()
   }, { scope: sectionRef })
 
   const selectItem = (i: number) => {
@@ -436,7 +454,7 @@ export default function WhyYoungIcons() {
     >
       <div className="mx-auto" style={{ maxWidth: "1120px" }}>
         <h2
-          className="why-item"
+          ref={headingRef}
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
