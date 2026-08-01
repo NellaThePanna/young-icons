@@ -30,9 +30,16 @@ export default function HeroHome({
   const glowRef = useRef<HTMLDivElement>(null)
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([])
   const ctasRef = useRef<HTMLDivElement>(null)
+  const curtainLeftRef = useRef<HTMLDivElement>(null)
+  const curtainRightRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const curtains = [curtainLeftRef.current, curtainRightRef.current].filter(Boolean)
+
+    if (prefersReduced) {
+      gsap.set(curtains, { scaleX: 0 })
+    }
 
     if (mediaRef.current && !prefersReduced) {
       gsap.to(mediaRef.current, {
@@ -75,13 +82,25 @@ export default function HeroHome({
     const allWords = splits.flatMap((split) => split.words)
     const tl = gsap.timeline()
 
-    tl.from(allWords, {
-      opacity: 0,
-      y: prefersReduced ? 0 : 24,
-      duration: prefersReduced ? 0.01 : 0.8,
-      ease: "power2.out",
-      stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
-    })
+    if (!prefersReduced) {
+      tl.fromTo(
+        curtains,
+        { scaleX: 1 },
+        { scaleX: 0, duration: 0.9, ease: "expo.out" }
+      )
+    }
+
+    tl.from(
+      allWords,
+      {
+        opacity: 0,
+        y: prefersReduced ? 0 : 24,
+        duration: prefersReduced ? 0.01 : 0.8,
+        ease: "power2.out",
+        stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
+      },
+      prefersReduced ? undefined : "-=0.35"
+    )
 
     tl.from(
       ctasRef.current,
@@ -171,6 +190,29 @@ export default function HeroHome({
           zIndex: 1,
           left: 0,
           top: 0,
+        }}
+        aria-hidden="true"
+      />
+
+      <div
+        ref={curtainLeftRef}
+        className="absolute top-0 bottom-0 left-0"
+        style={{
+          width: "50%",
+          backgroundColor: "var(--color-academy-green)",
+          transformOrigin: "left center",
+          zIndex: 3,
+        }}
+        aria-hidden="true"
+      />
+      <div
+        ref={curtainRightRef}
+        className="absolute top-0 bottom-0 right-0"
+        style={{
+          width: "50%",
+          backgroundColor: "var(--color-academy-green)",
+          transformOrigin: "right center",
+          zIndex: 3,
         }}
         aria-hidden="true"
       />
