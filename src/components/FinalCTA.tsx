@@ -35,9 +35,27 @@ export default function FinalCTA({
 }: FinalCTAProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const headingLineRefs = useRef<(HTMLSpanElement | null)[]>([])
+  const auroraRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (!prefersReduced) {
+      const blobs = auroraRefs.current.filter(Boolean) as HTMLDivElement[]
+      const durations = [4, 5, 4.5]
+      blobs.forEach((blob, i) => {
+        gsap.to(blob, {
+          x: 30,
+          y: -20,
+          scale: 1.15,
+          duration: durations[i % durations.length],
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        })
+      })
+    }
+
     if (prefersReduced) return
 
     const splits: SplitText[] = []
@@ -91,13 +109,63 @@ export default function FinalCTA({
           style={{ objectPosition: "center 20%" }}
         />
       </div>
+
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{ zIndex: 1, pointerEvents: "none" }}
+        aria-hidden="true"
+      >
+        <div
+          ref={(el) => { auroraRefs.current[0] = el }}
+          className="absolute rounded-full"
+          style={{
+            width: "420px",
+            height: "420px",
+            top: "-15%",
+            left: "-8%",
+            backgroundColor: "var(--color-academy-green)",
+            filter: "blur(70px)",
+            opacity: 0.55,
+            mixBlendMode: "screen",
+          }}
+        />
+        <div
+          ref={(el) => { auroraRefs.current[1] = el }}
+          className="absolute rounded-full"
+          style={{
+            width: "460px",
+            height: "460px",
+            bottom: "-18%",
+            right: "-10%",
+            backgroundColor: "var(--color-gulf-blue)",
+            filter: "blur(70px)",
+            opacity: 0.5,
+            mixBlendMode: "screen",
+          }}
+        />
+        <div
+          ref={(el) => { auroraRefs.current[2] = el }}
+          className="absolute rounded-full"
+          style={{
+            width: "360px",
+            height: "360px",
+            top: "35%",
+            left: "38%",
+            backgroundColor: "var(--color-academy-green)",
+            filter: "blur(70px)",
+            opacity: 0.4,
+            mixBlendMode: "screen",
+          }}
+        />
+      </div>
+
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: "rgba(0,0,0,0.6)", zIndex: 1 }}
+        style={{ backgroundColor: "rgba(0,0,0,0.6)", zIndex: 2 }}
         aria-hidden="true"
       />
 
-      <div className="relative text-center" style={{ zIndex: 2, maxWidth: "780px" }}>
+      <div className="relative text-center" style={{ zIndex: 3, maxWidth: "780px" }}>
         {smallHeading && (
           <p
             className="final-cta-item mb-4"
