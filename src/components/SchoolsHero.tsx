@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import Image from "next/image"
 import { SplitText } from "gsap/SplitText"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SCHOOLS_HERO } from "@/content/schools"
 
 export default function SchoolsHero() {
@@ -12,6 +13,8 @@ export default function SchoolsHero() {
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([])
   const bodyRef = useRef<HTMLParagraphElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
+  const accentRef = useRef<HTMLDivElement>(null)
+  const photoBoxRef = useRef<HTMLDivElement>(null)
   const arrowRef = useRef<HTMLSpanElement>(null)
 
   useGSAP(() => {
@@ -49,6 +52,36 @@ export default function SchoolsHero() {
         ease: "power1.inOut",
         repeat: -1,
         yoyo: true,
+      })
+
+      // Scroll depth — 07-scroll-parallax recipe: independent tween per layer,
+      // document.body trigger, exaggerated back/front ratio so it reads by eye.
+      // end is a fixed hero-scale range (not "bottom bottom") since this hero
+      // sits atop several more sections — a whole-document range would spread
+      // the same progress so thin it wouldn't register before the hero scrolls
+      // out of view.
+      gsap.to(accentRef.current, {
+        y: -20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "+=900",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+
+      gsap.to(photoBoxRef.current, {
+        y: -150,
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "+=900",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
       })
     }
 
@@ -128,6 +161,7 @@ export default function SchoolsHero() {
 
         <div ref={mediaRef} className="relative mx-auto lg:mx-0" style={{ width: "100%", maxWidth: "400px" }}>
           <div
+            ref={accentRef}
             aria-hidden="true"
             className="absolute"
             style={{
@@ -141,6 +175,7 @@ export default function SchoolsHero() {
             }}
           />
           <div
+            ref={photoBoxRef}
             className="relative"
             style={{ aspectRatio: "1 / 1", borderRadius: "var(--radius-lg)", overflow: "hidden", zIndex: 1 }}
           >
