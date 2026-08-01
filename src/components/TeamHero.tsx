@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { SplitText } from "gsap/SplitText"
 
 interface TeamHeroProps {
   h1: string
@@ -18,15 +19,54 @@ export default function TeamHero({ h1, sub, intro }: TeamHeroProps) {
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const targets = [h1Ref.current, subRef.current, introRef.current].filter(Boolean)
+    const restTargets = [subRef.current, introRef.current].filter(Boolean)
 
-    gsap.from(targets, {
-      opacity: 0,
-      y: prefersReduced ? 0 : 30,
-      duration: prefersReduced ? 0.01 : 0.7,
-      ease: "power2.out",
-      stagger: 0.1,
-    })
+    if (prefersReduced) {
+      gsap.from([h1Ref.current, ...restTargets], {
+        opacity: 0,
+        y: 0,
+        duration: 0.01,
+        ease: "power2.out",
+        stagger: 0,
+      })
+      return
+    }
+
+    let split: SplitText | null = null
+    const tl = gsap.timeline()
+
+    if (h1Ref.current) {
+      split = new SplitText(h1Ref.current, { type: "words, chars" })
+      gsap.set(split.chars, {
+        opacity: 0,
+        x: () => gsap.utils.random(-90, 90),
+        y: () => gsap.utils.random(-60, 60),
+        rotation: () => gsap.utils.random(-25, 25),
+      })
+      tl.to(split.chars, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        duration: 0.7,
+        ease: "back.out(1.6)",
+        stagger: { amount: 0.5, from: "random" },
+      })
+    }
+
+    tl.from(
+      restTargets,
+      {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.1,
+      },
+      "-=0.2"
+    )
+
+    return () => split?.revert()
   }, { scope: containerRef })
 
   return (
