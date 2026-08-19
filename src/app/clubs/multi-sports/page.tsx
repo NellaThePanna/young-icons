@@ -4,7 +4,7 @@ import MultiHero from "@/components/MultiHero"
 import MultiAbout from "@/components/MultiAbout"
 import MultiPhotoBand from "@/components/MultiPhotoBand"
 import MultiLocationCTA from "@/components/MultiLocationCTA"
-import Footer from "@/components/Footer"
+import MultiFooter from "@/components/MultiFooter"
 
 export const metadata: Metadata = {
   title: "Multi-Sports Club Dubai | Young Icons",
@@ -43,7 +43,7 @@ export default function MultiSportsPage() {
         <MultiPhotoBand />
         <MultiLocationCTA />
       </main>
-      <Footer />
+      <MultiFooter />
     </>
   )
 }

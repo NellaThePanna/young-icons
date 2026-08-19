@@ -1,47 +1,55 @@
 export const MULTI_HERO = {
   headingLines: ["PLAY.", "LEARN.", "GROW."],
-  sub: "Multi-Sports Club",
-  image: "/images/placeholder/ball-skills.jpg",
+  sub: "MULTI-SPORTS CLUB",
+  // Temporary project asset: a landscape approved replacement is still required for an exact match.
+  image: "/images/placeholder/activity-football.png",
 } as const
 
 export const MULTI_ABOUT = {
-  eyebrow: "Multi-Sports Club",
-  body: "Every week brings a new sport, new skills and new challenges. Our coaches create fun, structured sessions that help children build confidence, coordination and a lifelong love of being active.",
+  eyebrow: "MULTI-SPORTS CLUB",
+  headingLines: ["ONE SPORT", "EVERY WEEK.", "SKILLS FOR LIFE."],
+  body:
+    "Our Multi-Sports Club gives children the chance to discover a new sport each week through fun, structured sessions that build confidence, coordination and a lifelong love of being active.",
+  sports: ["FOOTBALL", "TENNIS", "BASKETBALL", "ATHLETICS", "RUGBY", "CRICKET", "+ MORE"],
   cards: [
     {
-      icon: "basketball",
-      heading: "New Sport Every Week",
-      body: "Discover football, tennis, athletics, basketball and more.",
+      icon: "football",
+      heading: "NEW SPORT EVERY WEEK",
+      body: "Discover a variety of sports and activities that keep children engaged, motivated and excited to learn.",
     },
     {
       icon: "sprint",
-      heading: "Build Fundamental Skills",
+      heading: "BUILD FUNDAMENTAL SKILLS",
       body: "Develop agility, balance, coordination and strength through movement and play.",
     },
     {
       icon: "smile",
-      heading: "Learn Through Play",
-      body: "Fun games and challenges that build confidence, teamwork and a positive attitude.",
+      heading: "LEARN THROUGH PLAY",
+      body: "Fun games and challenges that build confidence, teamwork and a positive attitude towards sport and activity.",
     },
     {
       icon: "group",
-      heading: "Small Group Coaching",
-      body: "Qualified coaches provide personalized support in a safe and encouraging environment.",
+      heading: "SMALL GROUP COACHING",
+      body: "Qualified coaches provide personalised attention in a safe, inclusive and supportive environment.",
     },
   ],
 } as const
 
 export const MULTI_PHOTO_BAND = {
-  image: "/images/placeholder/activity-football.png",
+  // Temporary project asset: an approved wide hoops/activity-station scene is still required for an exact match.
+  image: "/images/placeholder/obstacle-course.jpg",
 } as const
 
 export const MULTI_LOCATION_CTA = {
-  locationEyebrow: "First Location",
-  locationHeading: "Dubai Sports City",
-  line1: "Saturday Mornings",
-  line2: "Launching Autumn 2026",
-  ctaHeading: "Ready to Join?",
-  ctaBody: "Be the first to hear when registrations open.",
-  ctaLabel: "Register Interest",
+  locationEyebrow: "OPENING SOON",
+  locationHeading: "OUR FIRST MULTI-SPORTS\nCLUB IS COMING TO DUBAI.",
+  locationBody: "Register your interest and we'll let you know when our first location opens.",
+  ctaEyebrow: "BE THE FIRST TO KNOW.",
+  ctaBody: "Register your interest and be the first to hear when registrations open.",
+  ctaLabel: "REGISTER INTEREST",
   ctaHref: "/contact",
+} as const
+
+export const MULTI_FOOTER = {
+  motto: "PLAY · LEARN · GROW",
 } as const

@@ -3,59 +3,39 @@
 import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import { SplitText } from "gsap/SplitText"
 import { MULTI_HERO } from "@/content/multi-sports"
 
-const PARALLAX_TRAVEL_PX = 20
-const IMAGE_OVERHANG_PX = 60
-
 export default function MultiHero() {
   const containerRef = useRef<HTMLElement>(null)
-  const imageWrapRef = useRef<HTMLDivElement>(null)
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([])
   const subRef = useRef<HTMLParagraphElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const lines = lineRefs.current.filter((element): element is HTMLSpanElement => element !== null)
+    const splits = lines.map((element) => new SplitText(element, { type: "words" }))
+    const words = splits.flatMap((split) => split.words)
+    const timeline = gsap.timeline()
 
-    if (!prefersReduced) {
-      gsap.to(imageWrapRef.current, {
-        y: PARALLAX_TRAVEL_PX,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      })
-    }
-
-    const lines = lineRefs.current.filter((el): el is HTMLSpanElement => el !== null)
-    const splits = lines.map((el) => new SplitText(el, { type: "words" }))
-    const allWords = splits.flatMap((split) => split.words)
-    const tl = gsap.timeline()
-
-    tl.from(allWords, {
+    timeline.from(words, {
       opacity: 0,
-      y: prefersReduced ? 0 : 24,
-      duration: prefersReduced ? 0.01 : 0.8,
+      y: prefersReduced ? 0 : 22,
+      duration: prefersReduced ? 0.01 : 0.7,
       ease: "power2.out",
-      stagger: prefersReduced ? 0 : { amount: 0.35, from: "start" },
+      stagger: prefersReduced ? 0 : { amount: 0.28, from: "start" },
     })
 
-    tl.from(
+    timeline.from(
       subRef.current,
       {
         opacity: 0,
-        y: prefersReduced ? 0 : 20,
-        duration: prefersReduced ? 0.01 : 0.7,
+        y: prefersReduced ? 0 : 16,
+        duration: prefersReduced ? 0.01 : 0.55,
         ease: "power2.out",
       },
-      prefersReduced ? "<" : "-=0.4"
+      prefersReduced ? "<" : "-=0.28"
     )
 
     return () => splits.forEach((split) => split.revert())
@@ -64,60 +44,45 @@ export default function MultiHero() {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden px-6"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        minHeight: "640px",
-        paddingTop: "96px",
-        paddingBottom: "48px",
-      }}
+      className="relative flex overflow-hidden px-6 sm:px-10 lg:px-16"
+      style={{ minHeight: "clamp(560px, 51vw, 700px)", alignItems: "flex-end", paddingBottom: "clamp(48px, 7vw, 100px)" }}
     >
-      <div
-        ref={imageWrapRef}
-        className="absolute"
-        style={{ top: -IMAGE_OVERHANG_PX, bottom: -IMAGE_OVERHANG_PX, left: 0, right: 0 }}
-      >
-        <div className="relative w-full h-full">
-          <Image
-            src={MULTI_HERO.image}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            style={{ objectPosition: "50% 20%" }}
-          />
-        </div>
-      </div>
-
+      <Image
+        src={MULTI_HERO.image}
+        alt="Children taking part in an indoor multi-sports session"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+        style={{ objectPosition: "center 50%" }}
+      />
       <div
         className="absolute inset-0"
-        style={{
-          background: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 100%)",
-        }}
         aria-hidden="true"
+        style={{ background: "linear-gradient(90deg, rgba(5,20,14,0.9) 0%, rgba(5,20,14,0.72) 42%, rgba(5,20,14,0.18) 73%, rgba(5,20,14,0.08) 100%)" }}
       />
 
-      <div className="relative mx-auto w-full" style={{ maxWidth: "1280px", zIndex: 2 }}>
-        <div style={{ maxWidth: "700px" }}>
+      <div className="relative mx-auto w-full" style={{ maxWidth: "1280px", zIndex: 1 }}>
+        <div style={{ maxWidth: "670px" }}>
           <h1
             aria-label={MULTI_HERO.headingLines.join(" ")}
+            className="uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: "var(--font-weight-bold)",
               color: "var(--color-white)",
-              fontSize: "clamp(2.75rem, 8vw, 4rem)",
-              lineHeight: 0.98,
-              textTransform: "uppercase",
-              letterSpacing: "0.01em",
+              fontSize: "clamp(4rem, 7.5vw, 7.5rem)",
+              lineHeight: 0.88,
+              letterSpacing: "0.005em",
               margin: 0,
             }}
           >
-            {MULTI_HERO.headingLines.map((line, i) => (
+            {MULTI_HERO.headingLines.map((line, index) => (
               <span
                 key={line}
-                ref={(el) => { lineRefs.current[i] = el }}
+                ref={(element) => {
+                  lineRefs.current[index] = element
+                }}
                 className="block"
               >
                 {line}
@@ -126,14 +91,14 @@ export default function MultiHero() {
           </h1>
           <p
             ref={subRef}
+            className="uppercase"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
               color: "var(--color-academy-green)",
-              fontSize: "clamp(1rem, 2vw, 1.375rem)",
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              marginTop: "18px",
+              fontSize: "clamp(1rem, 1.8vw, 1.55rem)",
+              letterSpacing: "0.09em",
+              margin: "20px 0 0 0",
             }}
           >
             {MULTI_HERO.sub}
