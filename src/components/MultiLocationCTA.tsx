@@ -54,7 +54,7 @@ export default function MultiLocationCTA() {
     <section
       ref={sectionRef}
       className="px-6 sm:px-10 lg:px-16"
-      style={{ backgroundColor: "var(--color-warm-off-white)", paddingTop: "clamp(64px, 7vw, 96px)", paddingBottom: "clamp(64px, 7vw, 96px)" }}
+      style={{ backgroundColor: "#F3F3ED", paddingTop: "clamp(64px, 7vw, 96px)", paddingBottom: "clamp(64px, 7vw, 96px)" }}
     >
       <div className="mx-auto grid grid-cols-1 divide-y md:grid-cols-2 md:divide-x md:divide-y-0" style={{ maxWidth: "1120px", borderColor: "rgba(27,27,27,0.16)" }}>
         <div className="location-item flex flex-col items-center px-4 pb-12 text-center md:px-12 md:pb-0">
@@ -63,13 +63,13 @@ export default function MultiLocationCTA() {
             {MULTI_LOCATION_CTA.locationEyebrow}
           </p>
           <h2
-            className="whitespace-pre-line uppercase"
+            className="whitespace-pre-line"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
-              fontSize: "clamp(1.65rem, 2.7vw, 2.4rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
+              fontSize: "clamp(1.65rem, 2.55vw, 2.25rem)",
+              lineHeight: 1.08,
+              letterSpacing: "-0.035em",
               color: "var(--color-black)",
               margin: 0,
             }}

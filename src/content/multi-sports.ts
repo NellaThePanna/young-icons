@@ -42,7 +42,7 @@ export const MULTI_PHOTO_BAND = {
 
 export const MULTI_LOCATION_CTA = {
   locationEyebrow: "OPENING SOON",
-  locationHeading: "OUR FIRST MULTI-SPORTS\nCLUB IS COMING TO DUBAI.",
+  locationHeading: "Our first Multi-Sports\nClub is coming to Dubai.",
   locationBody: "Register your interest and we'll let you know when our first location opens.",
   ctaEyebrow: "BE THE FIRST TO KNOW.",
   ctaBody: "Register your interest and be the first to hear when registrations open.",

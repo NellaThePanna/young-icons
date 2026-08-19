@@ -82,7 +82,7 @@ export default function MultiAbout() {
     <section
       ref={sectionRef}
       className="px-6 sm:px-10 lg:px-16"
-      style={{ backgroundColor: "var(--color-warm-off-white)", paddingTop: "clamp(72px, 8vw, 120px)", paddingBottom: "clamp(48px, 5vw, 80px)" }}
+      style={{ backgroundColor: "#F3F3ED", paddingTop: "clamp(72px, 8vw, 120px)", paddingBottom: "clamp(48px, 5vw, 80px)" }}
     >
       <div className="mx-auto" style={{ maxWidth: "1280px" }}>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-24">
@@ -127,22 +127,33 @@ export default function MultiAbout() {
           </div>
         </div>
 
-        <div className="multi-about-item mt-14 flex flex-wrap items-center gap-x-4 gap-y-3 sm:mt-16">
+        <div className="multi-about-item mt-14 grid grid-cols-2 gap-y-3 sm:mt-16 sm:grid-cols-4 lg:grid-cols-7 lg:gap-y-0">
           {MULTI_ABOUT.sports.map((sport, index) => (
-            <span key={sport} className="inline-flex items-center" style={{ color: "var(--color-academy-green)", fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", fontSize: "0.82rem", letterSpacing: "0.1em" }}>
-              {index > 0 && <span className="mr-4" aria-hidden="true">•</span>}
+            <span
+              key={sport}
+              className="flex items-center lg:justify-center"
+              style={{
+                color: "var(--color-academy-green)",
+                fontFamily: "var(--font-body)",
+                fontWeight: "var(--font-weight-bold)",
+                fontSize: "0.78rem",
+                letterSpacing: "0.1em",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {index > 0 && <span className="mr-3" aria-hidden="true">•</span>}
               {sport}
             </span>
           ))}
         </div>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:divide-x" style={{ borderColor: "rgba(27,27,27,0.14)" }}>
           {MULTI_ABOUT.cards.map((card, index) => {
             const Icon = ICONS[card.icon]
             return (
               <div
                 key={card.heading}
-                className={`multi-about-item flex flex-col items-center px-6 py-8 text-center sm:px-8 lg:py-0 ${index > 0 ? "border-t lg:border-l lg:border-t-0" : ""}`}
+                className={`multi-about-item flex min-h-[280px] flex-col items-center px-6 py-8 text-center sm:px-8 lg:min-h-[302px] lg:px-8 lg:py-0 ${index > 0 ? "border-t lg:border-t-0" : ""}`}
                 style={{ borderColor: "rgba(27,27,27,0.14)" }}
               >
                 <div style={{ width: "52px", height: "52px", color: "var(--color-academy-green)", marginBottom: "20px" }}>
@@ -157,7 +168,10 @@ export default function MultiAbout() {
                     lineHeight: 1.25,
                     color: "var(--color-black)",
                     margin: 0,
-                    maxWidth: "160px",
+                    maxWidth: "170px",
+                    minHeight: "3.75em",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
                   {card.heading}
@@ -170,7 +184,8 @@ export default function MultiAbout() {
                     lineHeight: 1.55,
                     color: "rgba(27,27,27,0.74)",
                     margin: 0,
-                    maxWidth: "200px",
+                    maxWidth: "205px",
+                    minHeight: "7.75em",
                   }}
                 >
                   {card.body}

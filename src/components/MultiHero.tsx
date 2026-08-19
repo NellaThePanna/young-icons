@@ -71,9 +71,9 @@ export default function MultiHero() {
               fontFamily: "var(--font-display)",
               fontWeight: "var(--font-weight-bold)",
               color: "var(--color-white)",
-              fontSize: "clamp(4rem, 7.5vw, 7.5rem)",
-              lineHeight: 0.88,
-              letterSpacing: "0.005em",
+              fontSize: "clamp(3.9rem, 6.85vw, 6.9rem)",
+              lineHeight: 0.97,
+              letterSpacing: "0.002em",
               margin: 0,
             }}
           >
@@ -98,7 +98,7 @@ export default function MultiHero() {
               color: "var(--color-academy-green)",
               fontSize: "clamp(1rem, 1.8vw, 1.55rem)",
               letterSpacing: "0.09em",
-              margin: "20px 0 0 0",
+              margin: "28px 0 0 0",
             }}
           >
             {MULTI_HERO.sub}
