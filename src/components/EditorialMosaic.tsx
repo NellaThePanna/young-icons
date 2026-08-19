@@ -87,6 +87,7 @@ export default function EditorialMosaic() {
   return (
     <section
       ref={sectionRef}
+      data-section="programme-mosaic"
       className="pt-0 pb-0"
       style={{ backgroundColor: "var(--color-black)" }}
     >
@@ -107,8 +108,9 @@ export default function EditorialMosaic() {
                   src={card.image}
                   alt=""
                   fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
+                  sizes={i === 3 ? "100vw" : "(max-width: 768px) 100vw, 34vw"}
                   className="object-cover"
+                  style={{ objectPosition: i === 3 ? "center 40%" : "center" }}
                 />
               </div>
             </div>
@@ -116,18 +118,7 @@ export default function EditorialMosaic() {
             <div
               className="absolute inset-0 flex flex-col justify-end"
               style={{
-                background:
-                  "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.32) 35%, transparent 65%)",
-                // Blur is masked to the same shape as the scrim so the photo stays crisp above the
-                // text zone and only reads as frosted glass where the tint actually is.
-                backdropFilter: "blur(14px)",
-                WebkitBackdropFilter: "blur(14px)",
-                maskImage:
-                  "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
-                WebkitMaskImage:
-                  "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
-                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)",
-                padding: "28px",
+                padding: "clamp(22px, 2.2vw, 38px)",
                 zIndex: 2,
               }}
             >
@@ -149,7 +140,12 @@ export default function EditorialMosaic() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: "var(--font-weight-bold)",
-                  fontSize: "clamp(1.6rem, 2.5vw, 2.4rem)",
+                  fontSize:
+                    i === 0
+                      ? "clamp(2rem, 2.7vw, 3.1rem)"
+                      : i === 3
+                        ? "clamp(2.3rem, 3.4vw, 4.1rem)"
+                        : "clamp(2rem, 2.9vw, 3.35rem)",
                   color: "var(--color-white)",
                   textTransform: "uppercase",
                   marginBottom: "8px",

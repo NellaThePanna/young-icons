@@ -89,19 +89,21 @@
 .mosaic-grid {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 6px;
+  padding: 6px;
+  background: var(--color-warm-off-white);
 }
 
 .mosaic-grid > a {
-  height: 380px;
+  height: 340px;
 }
 
 @media (min-width: 768px) {
   .mosaic-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 280px 280px;
-    gap: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: minmax(290px, 21vw) minmax(300px, 23vw);
+    gap: 6px;
   }
 
   .mosaic-grid > a {
@@ -110,7 +112,7 @@
 
   .mosaic-early-years {
     grid-column: 1 / 2;
-    grid-row: 1 / 3;
+    grid-row: 1 / 2;
   }
 
   .mosaic-schools {
@@ -124,7 +126,7 @@
   }
 
   .mosaic-camps {
-    grid-column: 2 / 4;
+    grid-column: 1 / 4;
     grid-row: 2 / 3;
   }
 }

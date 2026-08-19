@@ -4,26 +4,13 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { HOME_STATS, HOME_PARTNERS } from "@/content/home"
+import { HOME_PARTNERS } from "@/content/home"
 
-function MapPin() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      style={{ display: "inline-block", marginRight: 6, verticalAlign: "-2px" }}
-    >
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  )
-}
+const STATS = [
+  { value: "45+", label: "EDUCATIONAL\nPARTNERS", isLocation: false },
+  { value: "900+", label: "CHILDREN\nEVERY WEEK", isLocation: false },
+  { value: "DUBAI +\nABU DHABI", label: "ACROSS THE UAE", isLocation: true },
+] as const
 
 export default function TrustScale() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -32,132 +19,139 @@ export default function TrustScale() {
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top 80%",
+      start: "top 82%",
       once: true,
       invalidateOnRefresh: true,
       onEnter: () => {
-        const items = sectionRef.current?.querySelectorAll(".stat-item, .trust-item") ?? []
+        const items = sectionRef.current?.querySelectorAll(".trust-item") ?? []
         gsap.from(items, {
           opacity: 0,
           y: prefersReduced ? 0 : 20,
-          duration: prefersReduced ? 0.01 : 0.7,
+          duration: prefersReduced ? 0.01 : 0.65,
           ease: "power2.out",
-          stagger: prefersReduced ? 0 : 0.1,
+          stagger: prefersReduced ? 0 : 0.08,
         })
 
         if (!prefersReduced) {
-          HOME_STATS.forEach((stat, i) => {
-            if (!stat.isNumeric) return
-            const el = valueRefs.current[i]
-            const match = stat.value.match(/^(\d+)(.*)$/)
-            if (!el || !match) return
-            const target = parseInt(match[1], 10)
-            const suffix = match[2]
-            const counter = { val: 0 }
+          STATS.forEach((stat, index) => {
+            if (stat.isLocation) return
+            const element = valueRefs.current[index]
+            const target = Number.parseInt(stat.value, 10)
+            if (!element || Number.isNaN(target)) return
+
+            const counter = { value: 0 }
             gsap.to(counter, {
-              val: target,
-              duration: 2,
+              value: target,
+              duration: 1.6,
               ease: "power2.out",
               onUpdate: () => {
-                el.textContent = String(Math.round(counter.val))
-              },
-              onComplete: () => {
-                el.textContent = target + suffix
-                gsap.from(el, {
-                  scale: 1.3,
-                  duration: 0.5,
-                  ease: "back.out(2)",
-                })
+                element.textContent = `${Math.round(counter.value)}+`
               },
             })
           })
         }
       },
     })
+
+    return () => trigger.kill()
   }, { scope: sectionRef })
 
   return (
     <section
       ref={sectionRef}
-      className="px-6"
+      data-section="partner-stats"
+      className="px-6 sm:px-10 lg:px-16"
       style={{
-        backgroundColor: "var(--color-black)",
-        paddingTop: "52px",
-        paddingBottom: "52px",
+        backgroundColor: "var(--color-warm-off-white)",
+        paddingTop: "34px",
+        paddingBottom: "34px",
       }}
     >
-      <div
-        className="mx-auto flex flex-col md:flex-row items-stretch"
-        style={{ maxWidth: "1280px", border: "1px solid rgba(255,255,255,0.12)" }}
-      >
-        <div className="stat-item grid grid-cols-3 shrink-0">
-          {HOME_STATS.map((stat, i) => (
-            <div
-              key={`${stat.value}-${i}`}
-              className="flex flex-col items-center justify-center text-center"
+      <div className="mx-auto border-y" style={{ maxWidth: "1280px", borderColor: "rgba(27,27,27,0.12)" }}>
+        <div className="grid grid-cols-1 gap-y-9 py-9 md:grid-cols-[minmax(0,2.15fr)_repeat(3,minmax(0,1fr))] md:gap-x-8">
+          <div className="trust-item px-0 md:pr-8">
+            <p
+              className="mb-2 text-xs font-semibold tracking-[0.16em]"
+              style={{ color: "var(--color-academy-green)", fontFamily: "var(--font-body)" }}
+            >
+              TRUSTED ACROSS THE UAE.
+            </p>
+            <h2
+              className="uppercase"
               style={{
-                padding: "18px 22px",
-                borderRight: "1px solid rgba(255,255,255,0.12)",
-                minHeight: "96px",
+                fontFamily: "var(--font-display)",
+                fontWeight: "var(--font-weight-bold)",
+                fontSize: "clamp(1.65rem, 2.35vw, 2.5rem)",
+                lineHeight: 0.95,
+                letterSpacing: "-0.01em",
+                color: "var(--color-black)",
               }}
             >
+              PARTNERING WITH LEADING NURSERIES &amp; SCHOOLS.
+            </h2>
+          </div>
+
+          {STATS.map((stat, index) => (
+            <div key={stat.value} className="trust-item flex flex-col justify-start md:pt-1" style={{ minWidth: 0 }}>
               <span
-                ref={(el) => { valueRefs.current[i] = el }}
+                ref={(element) => {
+                  valueRefs.current[index] = element
+                }}
+                className="uppercase"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: "var(--font-weight-bold)",
-                  fontSize: stat.isNumeric ? "36px" : "24px",
+                  fontSize: stat.isLocation ? "clamp(1.65rem, 2.2vw, 2.3rem)" : "clamp(2.3rem, 3.3vw, 3.45rem)",
+                  lineHeight: 0.84,
+                  letterSpacing: "-0.01em",
                   color: "var(--color-academy-green)",
-                  lineHeight: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
+                  whiteSpace: "pre-line",
                 }}
               >
-                {"icon" in stat && stat.icon && <MapPin />}
                 {stat.value}
               </span>
-              {stat.label && (
-                <span
-                  className="mt-1.5"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "11px",
-                    color: "rgba(255,255,255,0.6)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  {stat.label}
-                </span>
-              )}
+              <span
+                className="mt-2 whitespace-pre-line text-[0.64rem] leading-[1.15] tracking-[0.1em]"
+                style={{
+                  color: "rgba(27,27,27,0.78)",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: "var(--font-weight-semibold)",
+                }}
+              >
+                {stat.label}
+              </span>
             </div>
           ))}
         </div>
 
-        {/* Text wordmarks stand in for logo files — replace with approved logo assets from Luke when supplied (Asana task logged) */}
-        <div className="trust-item grid grid-cols-3 grow" style={{ gridTemplateRows: "repeat(2, 1fr)" }}>
-          {HOME_PARTNERS.map((name, i) => (
+        <div
+          className="grid grid-cols-2 border-t sm:grid-cols-3 lg:grid-cols-6"
+          style={{ borderColor: "rgba(27,27,27,0.12)" }}
+          aria-label="Young Icons education partners"
+        >
+          {HOME_PARTNERS.map((partner, index) => (
             <div
-              key={name}
-              className="partner-logo flex items-center justify-center"
+              key={partner}
+              className="trust-item flex min-h-[78px] items-center justify-center px-4 text-center"
               style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "13px",
-                letterSpacing: "0.04em",
-                textAlign: "center",
-                lineHeight: 1.3,
-                color: "var(--color-white)",
-                padding: "16px 14px",
-                minHeight: "96px",
-                borderLeft: "1px solid rgba(255,255,255,0.12)",
-                borderTop: i < 3 ? "none" : "1px solid rgba(255,255,255,0.12)",
+                borderRight: index % 6 !== 5 ? "1px solid rgba(27,27,27,0.1)" : undefined,
               }}
-              aria-label={name}
             >
-              {name}
+              <span
+                className="uppercase"
+                style={{
+                  color: "rgba(27,27,27,0.78)",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: "var(--font-weight-bold)",
+                  fontSize: "0.62rem",
+                  lineHeight: 1.15,
+                  letterSpacing: "0.06em",
+                }}
+              >
+                {partner}
+              </span>
             </div>
           ))}
         </div>
