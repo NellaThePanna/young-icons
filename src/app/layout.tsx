@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Anton, Inter } from 'next/font/google'
+import { Anton, Barlow_Condensed, Inter } from 'next/font/google'
 import './globals.css'
 import '@/styles/tokens.css'
 import LenisProvider from '@/components/providers/LenisProvider'
@@ -8,6 +8,13 @@ const anton = Anton({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-display',
+  display: 'swap',
+})
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-nursery-hero',
   display: 'swap',
 })
 
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject data-gr-* attributes on body before React hydrates */}
-      <body className={`${anton.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body className={`${anton.variable} ${barlowCondensed.variable} ${inter.variable}`} suppressHydrationWarning>
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

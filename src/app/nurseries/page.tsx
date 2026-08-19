@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import NurseryHero from "@/components/NurseryHero"
-import NurseryEditorialPhoto from "@/components/NurseryEditorialPhoto"
 import ApproachRows from "@/components/ApproachRows"
 import WhyYoungIcons from "@/components/WhyYoungIcons"
 import NurseryEnquiryForm from "@/components/NurseryEnquiryForm"
@@ -40,12 +39,11 @@ export default function NurseriesPage() {
       <NavBar />
       <main>
         <NurseryHero />
-        <NurseryEditorialPhoto />
         <ApproachRows />
         <WhyYoungIcons />
         <NurseryEnquiryForm />
       </main>
-      <Footer />
+      <Footer compact />
     </>
   )
 }

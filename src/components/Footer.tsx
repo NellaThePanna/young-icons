@@ -85,7 +85,7 @@ const linkRowStyle: React.CSSProperties = {
   fontSize: "0.875rem",
 }
 
-export default function Footer() {
+export default function Footer({ compact = false }: { compact?: boolean }) {
   const footerRef = useRef<HTMLElement>(null)
   const whatsappHref = `https://wa.me/${FOOTER_NAP.whatsappNumber}?text=${encodeURIComponent(FOOTER_NAP.whatsappMessage)}`
   const year = new Date().getFullYear()
@@ -119,8 +119,8 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} style={{ backgroundColor: "var(--color-near-black)" }}>
-      <div className="mx-auto px-6 py-16" style={{ maxWidth: "1280px" }}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+      <div className={compact ? "mx-auto px-6 py-10 sm:py-12" : "mx-auto px-6 py-16"} style={{ maxWidth: "1280px" }}>
+        <div className={compact ? "grid grid-cols-1 gap-7 md:grid-cols-3 md:gap-8 mb-7" : "grid grid-cols-1 md:grid-cols-3 gap-12 mb-12"}>
 
           {/* Brand */}
           <div className="footer-item">
@@ -266,7 +266,7 @@ export default function Footer() {
         </div>
 
         {/* Follow us */}
-        <div className="footer-item mb-12">
+        <div className={compact ? "footer-item mb-7" : "footer-item mb-12"}>
           <p
             className="mb-4"
             style={{
@@ -300,7 +300,7 @@ export default function Footer() {
         </div>
 
         <div
-          className="footer-item pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm"
+          className={compact ? "footer-item pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm" : "footer-item pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm"}
           style={{
             borderTop: "1px solid rgba(255,255,255,0.08)",
             fontFamily: "var(--font-body)",

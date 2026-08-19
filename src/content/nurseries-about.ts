@@ -109,6 +109,13 @@ export const WHY_YOUNG_ICONS = [
     number: "03",
     label: "TAILORED PROGRAMMES",
     headingLines: ["DESIGNED AROUND YOUR NURSERY,", "YOUR CHILDREN AND YOUR GOALS."],
+    body: "Programmes built around your nursery’s needs, aligned with early years development and learning goals.",
+    points: [
+      { number: "01", label: "PE CURRICULUM", body: "Structured lesson plans with clear learning objectives." },
+      { number: "02", label: "LEARNING OUTCOMES", body: "Every programme has measurable developmental goals." },
+      { number: "03", label: "PROGRESS REPORTS", body: "Track each child’s progress throughout the year." },
+      { number: "04", label: "DIGITAL REGISTRATION & ATTENDANCE", body: "Simple online registration and live attendance tracking." },
+    ],
   },
   {
     id: "fully-managed",
@@ -117,10 +124,10 @@ export const WHY_YOUNG_ICONS = [
     headingLines: ["EVERYTHING,", "TAKEN CARE OF."],
     body: "We manage the details, so your nursery doesn't have to.",
     points: [
-      "[INFORMATION REQUIRED]",
-      "02 PARENT COMMUNICATION",
-      "03 PROGRAMME ADMINISTRATION",
-      "04 REPORTING & SUPPORT",
+      { number: "01", label: "REGISTRATION & PAYMENTS" },
+      { number: "02", label: "PARENT COMMUNICATION" },
+      { number: "03", label: "PROGRAMME ADMINISTRATION" },
+      { number: "04", label: "REPORTING & SUPPORT" },
     ],
   },
 ] as const

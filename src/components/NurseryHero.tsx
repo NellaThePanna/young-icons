@@ -25,18 +25,17 @@ export default function NurseryHero() {
   return (
     <section
       ref={sectionRef}
-      className="px-5 sm:px-8 lg:px-12"
-      style={{ backgroundColor: "#f4f2ec", paddingTop: "clamp(8rem, 13vw, 12.5rem)", paddingBottom: "clamp(3rem, 6vw, 5rem)" }}
+      style={{ backgroundColor: "#f4f2ec", paddingTop: "clamp(5.75rem, 7vw, 7rem)", paddingBottom: "clamp(2rem, 3vw, 3rem)" }}
     >
-      <div className="mx-auto" style={{ maxWidth: "1360px" }}>
+      <div className="mx-auto px-5 sm:px-8 lg:px-12" style={{ maxWidth: "1456px" }}>
         <h1
           data-nursery-hero-reveal
-          className="leading-[0.94] sm:leading-[0.83]"
+          className="leading-[0.98] sm:leading-[0.94]"
           style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(3.4rem, 9.3vw, 9rem)",
-            letterSpacing: "-0.035em",
+            fontFamily: "var(--font-nursery-hero)",
+            fontWeight: 600,
+            fontSize: "clamp(2.4rem, 5.2vw, 4.25rem)",
+            letterSpacing: "-0.025em",
             color: "var(--color-black)",
             textTransform: "uppercase",
             margin: 0,
@@ -51,7 +50,7 @@ export default function NurseryHero() {
           ))}
         </h1>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12" data-nursery-hero-reveal>
+        <div className="mt-8 grid grid-cols-1 gap-7 sm:mt-10 md:grid-cols-2 md:gap-12" data-nursery-hero-reveal>
           <p
             style={{
               fontFamily: "var(--font-body)",
@@ -79,21 +78,22 @@ export default function NurseryHero() {
           </p>
         </div>
 
-        <div
-          className="relative mt-12 overflow-hidden sm:mt-16"
-          data-nursery-hero-reveal
-          style={{ aspectRatio: "16 / 7", minHeight: "260px" }}
-        >
-          <Image
-            src={NURSERY_HERO_V2.image}
-            alt={NURSERY_HERO_V2.imageAlt}
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 92vw"
-            className="object-cover"
-            style={{ objectPosition: "50% 40%" }}
-          />
-        </div>
+      </div>
+
+      <div
+        className="relative mt-8 overflow-hidden sm:mt-10"
+        data-nursery-hero-reveal
+        style={{ aspectRatio: "2.45 / 1", minHeight: "260px" }}
+      >
+        <Image
+          src={NURSERY_HERO_V2.image}
+          alt={NURSERY_HERO_V2.imageAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "50% 40%" }}
+        />
       </div>
     </section>
   )

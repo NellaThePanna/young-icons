@@ -118,21 +118,21 @@ export default function NurseryEnquiryForm() {
   }
 
   return (
-    <section id="enquiry" className="px-5 py-20 text-center sm:px-8 sm:py-28 lg:px-12 lg:py-36" style={{ backgroundColor: "#f4f2ec" }}>
+    <section id="enquiry" className="px-5 pt-8 pb-10 text-center sm:px-8 sm:pt-10 sm:pb-12 lg:px-12 lg:pt-10 lg:pb-12" style={{ backgroundColor: "#f4f2ec", borderTop: "1px solid #d8d5cc", borderBottom: "1px solid #d8d5cc" }}>
       <div className="mx-auto" style={{ maxWidth: "980px" }}>
         <h2
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(3.1rem, 7vw, 7.2rem)",
-            lineHeight: 0.82,
-            letterSpacing: "-0.035em",
+            fontSize: "clamp(3rem, 6.1vw, 6rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.03em",
             margin: 0,
           }}
         >
           <span className="block" style={{ color: "var(--color-black)" }}>LET&apos;S GET YOUR</span>
           <span className="block" style={{ color: "var(--color-academy-green)" }}>NURSERY MOVING.</span>
         </h2>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", letterSpacing: "0.14em", color: "var(--color-black)", margin: "2.2rem 0 1.25rem" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", letterSpacing: "0.14em", color: "var(--color-black)", margin: "1.2rem 0 0.75rem" }}>
           READY TO WORK WITH US?
         </p>
         <button
