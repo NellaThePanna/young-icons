@@ -48,12 +48,11 @@ export const NURSERY_ENQUIRY_CTA = {
 // v2 light editorial rebuild — see NURSERY_HERO / EARLY_YEARS / MOVEMENT_ABC / NURSERY_ACTIVITIES above for the prior dark-hero page version (components kept, unused).
 
 export const NURSERY_HERO_V2 = {
-  smallHeading: "NURSERIES & EARLY YEARS",
-  headingBlack: "WE LEARN DIFFERENTLY",
-  paragraphs: [
-    "Specialist Early Years movement, sports and physical education designed around how young children develop.",
-    "One trusted partner for every stage of their journey.",
-  ],
+  headlineLines: ["WE'RE NEW HERE", "WE LEARN DIFFERENTLY"],
+  leftCopy: "Specialist Early Years movement, sports and physical education designed around how young children develop.",
+  rightCopy: "One trusted partner for every stage of their journey.",
+  image: "/images/placeholder/nursery-basketball.jpg",
+  imageAlt: "Young children taking part in a nursery movement activity",
 } as const
 
 export const NURSERY_EDITORIAL_PHOTO = {
@@ -66,30 +65,28 @@ export const APPROACH_ROWS = [
     id: "play",
     number: "01",
     word: "PLAY",
-    // CLIENT-TO-CONFIRM: questionnaire said "approx 2–6" overall for the nursery age range —
-    // using the per-stage bands from EARLY_YEARS above until client confirms exact ages for this page
-    ages: "AGES 1–3",
-    body: "First movement, balance and coordination through guided, joyful play. Sessions built around curiosity — children learn to move before they know they're learning.",
-    chips: ["MOVEMENT", "BALANCE", "COORDINATION"],
+    ages: "Ages 1–3",
+    body: "Building confidence through movement, exploration and purposeful play.",
     image: "/images/placeholder/ball-skills.jpg",
+    imageAlt: "Young children exploring ball skills through purposeful play",
   },
   {
     id: "learn",
     number: "02",
     word: "LEARN",
-    ages: "AGES 3–4",
+    ages: "Ages 3–4",
     body: "Developing fundamental movement, coordination and early sports skills through active learning, with measurable developmental goals for every session.",
-    chips: ["FUNDAMENTALS", "EARLY SPORTS SKILLS", "ACTIVE LEARNING"],
     image: "/images/placeholder/karate-crawl.jpg",
+    imageAlt: "Young children developing movement coordination through active learning",
   },
   {
     id: "grow",
     number: "03",
     word: "GROW",
-    ages: "AGES 4–6",
+    ages: "Ages 4–6",
     body: "Building confidence, teamwork and a wider range of sports skills through progressive activities that prepare children for school sport and beyond.",
-    chips: ["CONFIDENCE", "TEAMWORK", "PROGRESSION"],
     image: "/images/placeholder/ballet-ribbon.jpg",
+    imageAlt: "Young children developing confidence and sports skills together",
   },
 ] as const
 
@@ -98,33 +95,33 @@ export const WHY_YOUNG_ICONS = [
     id: "one-partner",
     number: "01",
     label: "ONE PARTNER",
-    eyebrow: "ONE PARTNER",
-    heading: "EVERY ACTIVITY, ONE RELATIONSHIP.",
-    body: "One agreement, one coordination point, one accountable team for every movement programme in your nursery.",
+    headingLines: ["EVERY ACTIVITY.", "ONE RELATIONSHIP."],
+    body: "One trusted provider for your nursery's sports and physical activity programmes.",
   },
   {
     id: "multiple-activities",
     number: "02",
     label: "MULTIPLE ACTIVITIES",
-    eyebrow: "MULTIPLE ACTIVITIES",
-    heading: "A WORLD OF ACTIVITIES. ALL IN ONE PLACE.",
-    body: "From ball skills to ballet, our specialist coaches deliver a wide range of engaging activities that help children move, learn and grow.",
+    headingLines: ["A WORLD OF ACTIVITIES.", "ALL IN ONE PLACE."],
   },
   {
     id: "tailored-programmes",
     number: "03",
     label: "TAILORED PROGRAMMES",
-    eyebrow: "TAILORED PROGRAMMES",
-    heading: "DESIGNED AROUND YOUR NURSERY, YOUR CHILDREN AND YOUR GOALS.",
-    body: "Every programme is tailored to your timetable, age groups and learning objectives, ensuring every session supports children's development while fitting seamlessly into your nursery.",
+    headingLines: ["DESIGNED AROUND YOUR NURSERY,", "YOUR CHILDREN AND YOUR GOALS."],
   },
   {
     id: "fully-managed",
     number: "04",
     label: "FULLY MANAGED",
-    eyebrow: "FULLY MANAGED",
-    heading: "WE HANDLE EVERYTHING.",
-    body: "Registration, attendance, parent communication and quality assurance, managed end to end by Young Icons.",
+    headingLines: ["EVERYTHING,", "TAKEN CARE OF."],
+    body: "We manage the details, so your nursery doesn't have to.",
+    points: [
+      "[INFORMATION REQUIRED]",
+      "02 PARENT COMMUNICATION",
+      "03 PROGRAMME ADMINISTRATION",
+      "04 REPORTING & SUPPORT",
+    ],
   },
 ] as const
 
@@ -140,42 +137,12 @@ export const MULTIPLE_ACTIVITIES_TAB = {
 // Gymnastics and Multi-sports stand in with the closest unused placeholder photos (boxing, rugby)
 // until real Young Icons photography arrives — swap these two first.
 export const MULTIPLE_ACTIVITIES_CHIPS = [
-  {
-    label: "Football",
-    caption: "Build skills, confidence and teamwork.",
-    image: "/images/placeholder/activity-football.png",
-    comingSoon: false,
-  },
-  {
-    label: "Gymnastics",
-    caption: "Develop strength, coordination and flexibility.",
-    image: "/images/placeholder/activity-boxing.png",
-    comingSoon: true,
-  },
-  {
-    label: "Ballet",
-    caption: "Encourage creativity, rhythm and expression.",
-    image: "/images/placeholder/ballet-ribbon.jpg",
-    comingSoon: false,
-  },
-  {
-    label: "Karate",
-    caption: "Build discipline, focus and self-confidence.",
-    image: "/images/placeholder/karate-crawl.jpg",
-    comingSoon: false,
-  },
-  {
-    label: "Tennis",
-    caption: "Introduce racket skills through fun and play.",
-    image: "/images/placeholder/tennis-rackets.jpg",
-    comingSoon: false,
-  },
-  {
-    label: "Multi-sports",
-    caption: "A variety of games that build movement and teamwork.",
-    image: "/images/placeholder/activity-rugby.png",
-    comingSoon: true,
-  },
+  { label: "FOOTBALL", image: "/images/placeholder/activity-football.png" },
+  { label: "GYMNASTICS", image: null },
+  { label: "BALLET", image: "/images/placeholder/ballet-ribbon.jpg" },
+  { label: "KARATE", image: "/images/placeholder/karate-crawl.jpg" },
+  { label: "TENNIS", image: "/images/placeholder/tennis-rackets.jpg" },
+  { label: "MULTI-SPORTS", image: null },
 ] as const
 
 export const WHY_CHOOSE_US = {
@@ -233,7 +200,7 @@ export const NURSERY_FORM = {
     "Multiple Services",
     "Other",
   ],
-  submitLabel: "START A CONVERSATION",
+  submitLabel: "SEND ENQUIRY →",
   submittingLabel: "Sending...",
   successMessage: "THANK YOU. WE'LL BE IN TOUCH SOON.",
   errorMessage: "Something went wrong. Please try again.",

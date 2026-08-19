@@ -1,10 +1,7 @@
 "use client"
 
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
-import Image from "next/image"
-import { NURSERY_ENQUIRY_CTA, NURSERY_FORM } from "@/content/nurseries-about"
+import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from "react"
+import { NURSERY_FORM } from "@/content/nurseries-about"
 
 type FormState = {
   nurseryName: string
@@ -31,41 +28,75 @@ const EMPTY_FORM: FormState = {
 }
 
 export default function NurseryEnquiryForm() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState<FormState>(EMPTY_FORM)
   const [status, setStatus] = useState<Status>("idle")
-  const [focusedField, setFocusedField] = useState<keyof FormState | null>(null)
+  const openButtonRef = useRef<HTMLButtonElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
 
-  useGSAP(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    gsap.from(sectionRef.current?.querySelectorAll(".enquiry-item") ?? [], {
-      opacity: 0,
-      y: prefersReduced ? 0 : 32,
-      duration: prefersReduced ? 0.01 : 0.8,
-      ease: "power2.out",
-      stagger: prefersReduced ? 0 : 0.15,
-    })
-  }, { scope: sectionRef })
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+  const closeModal = () => {
+    setIsOpen(false)
+    setStatus("idle")
+    window.setTimeout(() => openButtonRef.current?.focus(), 0)
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  useEffect(() => {
+    if (!isOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0)
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault()
+        closeModal()
+        return
+      }
+
+      if (event.key !== "Tab" || !modalRef.current) return
+      const focusable = Array.from(
+        modalRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href]'
+        )
+      )
+      if (!focusable.length) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener("keydown", onKeyDown)
+    }
+  }, [isOpen])
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = event.target
+    setFormData((current) => ({ ...current, [name]: value }))
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     setStatus("submitting")
 
     try {
-      const res = await fetch("/api/nursery-enquiry", {
+      const response = await fetch("/api/nursery-enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-
-      if (!res.ok) throw new Error("submit failed")
+      if (!response.ok) throw new Error("submit failed")
 
       setStatus("success")
       setFormData(EMPTY_FORM)
@@ -74,296 +105,158 @@ export default function NurseryEnquiryForm() {
     }
   }
 
-  const isSubmitting = status === "submitting"
-
-  const labelStyle = {
-    fontFamily: "var(--font-body)",
-    fontSize: "11px",
-    color: "rgba(0,0,0,0.5)",
-    marginBottom: "4px",
-    display: "block",
-  }
-
-  const getFieldStyle = (name: keyof FormState) => ({
+  const fieldStyle = {
     width: "100%",
-    border: "none",
-    borderBottom: `1px solid ${focusedField === name ? "var(--color-academy-green)" : "rgba(0,0,0,0.18)"}`,
+    border: 0,
+    borderBottom: "1px solid #bcb9b0",
     background: "transparent",
     fontFamily: "var(--font-body)",
-    fontSize: "13px",
-    padding: "4px 2px 8px",
     color: "var(--color-black)",
+    fontSize: "0.95rem",
     outline: "none",
-  })
+    padding: "0.55rem 0",
+  }
 
   return (
-    <section
-      ref={sectionRef}
-      id="enquiry"
-      className="px-6"
-      style={{
-        backgroundColor: "var(--color-white)",
-        borderTop: "2px solid var(--color-academy-green)",
-        paddingTop: "48px",
-        paddingBottom: "48px",
-      }}
-    >
-      <div
-        className="mx-auto grid grid-cols-1 md:grid-cols-[33%_1fr] gap-8 md:gap-10"
-        style={{ maxWidth: "1280px", alignItems: "stretch" }}
-      >
-        <div
-          className="enquiry-item relative flex flex-col justify-end overflow-hidden"
-          style={{ height: "347px", borderRadius: "var(--radius-lg)" }}
+    <section id="enquiry" className="px-5 py-20 text-center sm:px-8 sm:py-28 lg:px-12 lg:py-36" style={{ backgroundColor: "#f4f2ec" }}>
+      <div className="mx-auto" style={{ maxWidth: "980px" }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(3.1rem, 7vw, 7.2rem)",
+            lineHeight: 0.82,
+            letterSpacing: "-0.035em",
+            margin: 0,
+          }}
         >
-          <Image
-            src={NURSERY_ENQUIRY_CTA.image}
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
-            style={{ objectPosition: "31% 9%" }}
-          />
+          <span className="block" style={{ color: "var(--color-black)" }}>LET&apos;S GET YOUR</span>
+          <span className="block" style={{ color: "var(--color-academy-green)" }}>NURSERY MOVING.</span>
+        </h2>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", letterSpacing: "0.14em", color: "var(--color-black)", margin: "2.2rem 0 1.25rem" }}>
+          READY TO WORK WITH US?
+        </p>
+        <button
+          ref={openButtonRef}
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]"
+          style={{
+            background: "transparent",
+            border: 0,
+            borderBottom: "1px solid var(--color-academy-green)",
+            color: "var(--color-academy-green)",
+            cursor: "pointer",
+            fontFamily: "var(--font-body)",
+            fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
+            fontWeight: "var(--font-weight-medium)",
+            letterSpacing: "0.05em",
+            padding: "0 0 0.3rem",
+          }}
+        >
+          START A CONVERSATION →
+        </button>
+      </div>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 sm:px-8"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeModal()
+          }}
+          style={{ backgroundColor: "rgba(11, 11, 11, 0.58)" }}
+        >
           <div
-            className="absolute inset-0"
-            style={{ backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }}
-            aria-hidden="true"
-          />
-          <div className="relative p-8" style={{ zIndex: 2 }}>
-            <p
-              className="mb-4"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontWeight: "var(--font-weight-medium)",
-                fontSize: "0.875rem",
-                color: "rgba(255,255,255,0.85)",
-                textTransform: "uppercase",
-                letterSpacing: "0.15em",
-              }}
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="nursery-enquiry-title"
+            className="relative max-h-full w-full overflow-y-auto p-6 sm:p-10 lg:p-12"
+            style={{ maxWidth: "900px", backgroundColor: "#f4f2ec" }}
+          >
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={closeModal}
+              aria-label="Close enquiry form"
+              className="absolute right-5 top-5 text-2xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-8 sm:top-8"
+              style={{ border: 0, background: "transparent", color: "var(--color-academy-green)", cursor: "pointer" }}
             >
-              {NURSERY_ENQUIRY_CTA.cta}
+              ×
+            </button>
+
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", letterSpacing: "0.14em", color: "var(--color-academy-green)", margin: "0 0 1.3rem" }}>
+              NURSERY ENQUIRY
             </p>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: "var(--font-weight-bold)",
-                fontSize: "clamp(2rem, 4vw, 3rem)",
-                textTransform: "uppercase",
-                lineHeight: 1.1,
-              }}
-            >
-              {/* white, not brand green, on this dark photo overlay — green here measured ~1.6-1.9:1 contrast, failing WCAG */}
-              <span className="block" style={{ color: "var(--color-white)" }}>
-                {NURSERY_ENQUIRY_CTA.headingWhite}
-              </span>
-              <span className="block" style={{ color: "var(--color-white)" }}>
-                {NURSERY_ENQUIRY_CTA.headingGreen}
-              </span>
-            </h2>
+            <h3 id="nursery-enquiry-title" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 5vw, 5.4rem)", lineHeight: 0.84, letterSpacing: "-0.03em", color: "var(--color-black)", margin: "0 0 3rem" }}>
+              START A CONVERSATION.
+            </h3>
+
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2" noValidate>
+              <Field label={NURSERY_FORM.fields.nurseryName} name="nurseryName" value={formData.nurseryName} onChange={handleChange} style={fieldStyle} required />
+              <Field label={NURSERY_FORM.fields.contactName} name="contactName" value={formData.contactName} onChange={handleChange} style={fieldStyle} required />
+              <Field label={NURSERY_FORM.fields.jobRole} name="jobRole" value={formData.jobRole} onChange={handleChange} style={fieldStyle} required />
+              <SelectField label={NURSERY_FORM.fields.location} name="location" value={formData.location} onChange={handleChange} options={NURSERY_FORM.locationOptions} style={fieldStyle} />
+              <Field label={NURSERY_FORM.fields.email} name="email" type="email" value={formData.email} onChange={handleChange} style={fieldStyle} required />
+              <Field label={NURSERY_FORM.fields.phone} name="phone" type="tel" value={formData.phone} onChange={handleChange} style={fieldStyle} required />
+              <SelectField label={NURSERY_FORM.fields.interestedIn} name="interestedIn" value={formData.interestedIn} onChange={handleChange} options={NURSERY_FORM.interestedInOptions} style={fieldStyle} />
+              <label className="sm:col-span-2" style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "0.73rem", color: "var(--color-nursery-stone)" }}>
+                {NURSERY_FORM.fields.message}
+                <textarea name="message" value={formData.message} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical", marginTop: "0.3rem" }} />
+              </label>
+
+              <div className="sm:col-span-2 mt-3 flex flex-col items-start gap-4">
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]"
+                  style={{ backgroundColor: "var(--color-academy-green)", border: 0, color: "var(--color-white)", cursor: status === "submitting" ? "wait" : "pointer", fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.85rem", letterSpacing: "0.08em", padding: "0.95rem 1.25rem" }}
+                >
+                  {status === "submitting" ? NURSERY_FORM.submittingLabel : NURSERY_FORM.submitLabel}
+                </button>
+                {status === "success" && <p role="status" style={{ fontFamily: "var(--font-body)", color: "var(--color-nursery-stone)", margin: 0 }}>Submission received, but enquiry delivery is not configured yet.</p>}
+                {status === "error" && <p role="alert" style={{ fontFamily: "var(--font-body)", color: "#9c2a2a", margin: 0 }}>Something went wrong. Please try again.</p>}
+              </div>
+            </form>
           </div>
         </div>
-
-        <div className="enquiry-item">
-          {status === "success" ? (
-            <p
-              role="status"
-              className="text-lg"
-              style={{ fontFamily: "var(--font-body)", color: "var(--color-black)" }}
-            >
-              {NURSERY_FORM.successMessage}
-            </p>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate>
-              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "12px 20px" }}>
-                <div>
-                  <label htmlFor="nurseryName" style={labelStyle}>
-                    {NURSERY_FORM.fields.nurseryName}
-                  </label>
-                  <input
-                    id="nurseryName"
-                    name="nurseryName"
-                    type="text"
-                    required
-                    value={formData.nurseryName}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("nurseryName")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("nurseryName")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="contactName" style={labelStyle}>
-                    {NURSERY_FORM.fields.contactName}
-                  </label>
-                  <input
-                    id="contactName"
-                    name="contactName"
-                    type="text"
-                    required
-                    value={formData.contactName}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("contactName")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("contactName")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="jobRole" style={labelStyle}>
-                    {NURSERY_FORM.fields.jobRole}
-                  </label>
-                  <input
-                    id="jobRole"
-                    name="jobRole"
-                    type="text"
-                    required
-                    value={formData.jobRole}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("jobRole")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("jobRole")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="location" style={labelStyle}>
-                    {NURSERY_FORM.fields.location}
-                  </label>
-                  <select
-                    id="location"
-                    name="location"
-                    required
-                    value={formData.location}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("location")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("location")}
-                  >
-                    <option value="" disabled>
-                      {NURSERY_FORM.fields.location}
-                    </option>
-                    {NURSERY_FORM.locationOptions.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="email" style={labelStyle}>
-                    {NURSERY_FORM.fields.email}
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("email")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" style={labelStyle}>
-                    {NURSERY_FORM.fields.phone}
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("phone")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("phone")}
-                  />
-                </div>
-
-                <div style={{ gridColumn: "1 / -1" }}>
-                  <label htmlFor="interestedIn" style={labelStyle}>
-                    {NURSERY_FORM.fields.interestedIn}
-                  </label>
-                  <select
-                    id="interestedIn"
-                    name="interestedIn"
-                    required
-                    value={formData.interestedIn}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("interestedIn")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("interestedIn")}
-                  >
-                    <option value="" disabled>
-                      {NURSERY_FORM.fields.interestedIn}
-                    </option>
-                    {NURSERY_FORM.interestedInOptions.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div style={{ gridColumn: "1 / -1" }}>
-                  <label htmlFor="message" style={labelStyle}>
-                    {NURSERY_FORM.fields.message}
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                    style={{ ...getFieldStyle("message"), resize: "vertical", padding: "4px 2px 24px" }}
-                  />
-                </div>
-              </div>
-
-              {status === "error" && (
-                <p
-                  role="alert"
-                  className="text-sm"
-                  style={{ fontFamily: "var(--font-body)", color: "var(--color-black)" }}
-                >
-                  {NURSERY_FORM.errorMessage}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-bold)",
-                  fontSize: "12px",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  color: "var(--color-academy-green)",
-                  background: "none",
-                  border: "none",
-                  padding: 0,
-                  marginTop: "20px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  cursor: isSubmitting ? "not-allowed" : "pointer",
-                  opacity: isSubmitting ? 0.6 : 1,
-                }}
-              >
-                {isSubmitting ? NURSERY_FORM.submittingLabel : NURSERY_FORM.submitLabel}
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
+      )}
     </section>
+  )
+}
+
+function Field({ label, name, value, onChange, style, type = "text", required = false }: {
+  label: string
+  name: keyof FormState
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void
+  style: React.CSSProperties
+  type?: string
+  required?: boolean
+}) {
+  return (
+    <label style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "0.73rem", color: "var(--color-nursery-stone)" }}>
+      {label}
+      <input name={name} type={type} value={value} onChange={onChange} required={required} style={{ ...style, marginTop: "0.3rem" }} />
+    </label>
+  )
+}
+
+function SelectField({ label, name, value, onChange, options, style }: {
+  label: string
+  name: "location" | "interestedIn"
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void
+  options: readonly string[]
+  style: React.CSSProperties
+}) {
+  return (
+    <label style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "0.73rem", color: "var(--color-nursery-stone)" }}>
+      {label}
+      <select name={name} value={value} onChange={onChange} required style={{ ...style, marginTop: "0.3rem" }}>
+        <option value="">Select</option>
+        {options.map((option) => <option key={option} value={option}>{option}</option>)}
+      </select>
+    </label>
   )
 }
