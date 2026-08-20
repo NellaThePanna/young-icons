@@ -1,11 +1,8 @@
 "use client"
 
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { SCHOOLS_FINAL_CTA, SCHOOLS_FORM } from "@/content/schools"
-import { FOOTER_NAP } from "@/content/home"
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react"
+import { SCHOOLS_FORM } from "@/content/schools"
+import { SCHOOLS_EDITORIAL_CTA } from "@/content/schools-activities"
 
 type FormState = {
   fullName: string
@@ -26,52 +23,75 @@ const EMPTY_FORM: FormState = {
 }
 
 export default function SchoolsEnquiryCTA() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState<FormState>(EMPTY_FORM)
   const [status, setStatus] = useState<Status>("idle")
   const [focusedField, setFocusedField] = useState<keyof FormState | null>(null)
+  const openButtonRef = useRef<HTMLButtonElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
 
-  useGSAP(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  const closeModal = () => setIsOpen(false)
 
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top 80%",
-      once: true,
-      invalidateOnRefresh: true,
-      onEnter: () => {
-        const items = sectionRef.current?.querySelectorAll(".schools-enquiry-item") ?? []
-        gsap.from(items, {
-          opacity: 0,
-          y: prefersReduced ? 0 : 32,
-          duration: prefersReduced ? 0.01 : 0.8,
-          ease: "power2.out",
-          stagger: prefersReduced ? 0 : 0.12,
-        })
-      },
-    })
-  }, { scope: sectionRef })
+  useEffect(() => {
+    if (!isOpen) return
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    const previousOverflow = document.body.style.overflow
+    const returnFocusTo = openButtonRef.current
+    document.body.style.overflow = "hidden"
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0)
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault()
+        closeModal()
+        return
+      }
+
+      if (event.key !== "Tab" || !modalRef.current) return
+      const focusable = Array.from(modalRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+      ))
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener("keydown", onKeyDown)
+      returnFocusTo?.focus()
+    }
+  }, [isOpen])
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    setFormData((current) => ({ ...current, [name]: value }))
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     setStatus("submitting")
 
     try {
-      const res = await fetch("/api/school-enquiry", {
+      const payload = {
+        ...formData,
+        ...(formData.message.trim() ? {} : { message: undefined }),
+      }
+      const response = await fetch("/api/school-enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
-
-      if (!res.ok) throw new Error("submit failed")
-
+      if (!response.ok) throw new Error("submit failed")
       setStatus("success")
       setFormData(EMPTY_FORM)
     } catch {
@@ -79,256 +99,110 @@ export default function SchoolsEnquiryCTA() {
     }
   }
 
-  const isSubmitting = status === "submitting"
-  const whatsappHref = `https://wa.me/${FOOTER_NAP.whatsappNumber}?text=${encodeURIComponent(FOOTER_NAP.whatsappMessage)}`
-
   const fieldLabelStyle = {
-    fontFamily: "var(--font-body)",
-    fontSize: "11px",
-    color: "rgba(0,0,0,0.5)",
-    marginBottom: "4px",
     display: "block",
+    fontFamily: "var(--font-body)",
+    fontSize: "0.74rem",
+    letterSpacing: "0.05em",
+    color: "var(--color-nursery-stone)",
   }
 
-  const getFieldStyle = (name: keyof FormState) => ({
+  const fieldStyle = (name: keyof FormState) => ({
     width: "100%",
-    border: "none",
-    borderBottom: `1px solid ${focusedField === name ? "var(--color-academy-green)" : "rgba(0,0,0,0.18)"}`,
+    border: 0,
+    borderBottom: `1px solid ${focusedField === name ? "var(--color-academy-green)" : "#c8c5bc"}`,
     background: "transparent",
     fontFamily: "var(--font-body)",
-    fontSize: "14px",
-    padding: "4px 2px 8px",
-    color: "#111",
+    fontSize: "1rem",
+    color: "var(--color-black)",
     outline: "none",
+    padding: "0.55rem 0",
   })
 
   return (
-    <section
-      ref={sectionRef}
-      className="mx-auto px-6 py-12 lg:px-[88px] lg:py-[74px]"
-      style={{
-        backgroundColor: "var(--color-white)",
-        borderTop: "4px solid var(--color-academy-green)",
-        maxWidth: "1440px",
-      }}
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-12 lg:gap-x-[108px] items-start">
-        <div>
-          <h2
-            className="schools-enquiry-item"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "44px",
-              lineHeight: 1.02,
-              textTransform: "uppercase",
-              marginBottom: "34px",
-            }}
-          >
-            <span className="block" style={{ color: "var(--color-black)" }}>
-              {SCHOOLS_FINAL_CTA.headingBlack}
-            </span>
-            <span className="block" style={{ color: "var(--color-academy-green)" }}>
-              {SCHOOLS_FINAL_CTA.headingGreen}
-            </span>
+    <section className="px-5 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
+      <div className="mx-auto" style={{ maxWidth: "1320px" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.76rem", letterSpacing: "0.12em", color: "var(--color-academy-green)", margin: "0 0 1rem" }}>
+          {SCHOOLS_EDITORIAL_CTA.label}
+        </p>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-center lg:gap-12">
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3.1rem, calc(6.4vw - 12px), 5.7rem)", lineHeight: 0.91, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
+            <span className="block">{SCHOOLS_EDITORIAL_CTA.headingBlack}</span>
+            <span className="block" style={{ color: "var(--color-academy-green)", marginTop: "0.035em" }}>{SCHOOLS_EDITORIAL_CTA.headingGreen}</span>
           </h2>
-
-          <p
-            className="schools-enquiry-item"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "15px",
-              lineHeight: 1.55,
-              color: "rgba(0,0,0,0.68)",
-              maxWidth: "389px",
-              marginBottom: "35px",
-            }}
-          >
-            {SCHOOLS_FINAL_CTA.body}
-          </p>
-
-          <div className="schools-enquiry-item flex flex-wrap items-center" style={{ gap: "12px" }}>
-            <a
-              href="#school-enquiry"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontWeight: "var(--font-weight-bold)",
-                fontSize: "12px",
-                letterSpacing: "0.05em",
-                textTransform: "uppercase",
-                color: "var(--color-white)",
-                backgroundColor: "var(--color-academy-green)",
-                padding: "13px 22px",
-                borderRadius: "8px",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+          <div>
+            <p style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.76rem", letterSpacing: "0.13em", color: "var(--color-black)", margin: "0 0 0.8rem" }}>
+              {SCHOOLS_EDITORIAL_CTA.prompt}
+            </p>
+            <button
+              ref={openButtonRef}
+              type="button"
+              onClick={() => { setStatus("idle"); setIsOpen(true) }}
+              className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]"
+              style={{ border: 0, borderBottom: "1px solid var(--color-academy-green)", background: "transparent", color: "var(--color-academy-green)", cursor: "pointer", fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.95rem", letterSpacing: "0.07em", padding: "0 0 0.35rem" }}
             >
-              {SCHOOLS_FINAL_CTA.ctaPrimary}
-            </a>
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontWeight: "var(--font-weight-bold)",
-                fontSize: "12px",
-                letterSpacing: "0.05em",
-                textTransform: "uppercase",
-                color: "var(--color-near-black)",
-                backgroundColor: "transparent",
-                border: "1.5px solid rgba(0,0,0,0.25)",
-                padding: "11.5px 20px",
-                borderRadius: "8px",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                justifyContent: "center",
-              }}
-            >
-              💬 {SCHOOLS_FINAL_CTA.ctaSecondary}
-            </a>
+              {SCHOOLS_EDITORIAL_CTA.action}
+            </button>
           </div>
         </div>
-
-        <div id="school-enquiry" className="schools-enquiry-item">
-          {status === "success" ? (
-            <p
-              role="status"
-              style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-black)" }}
-            >
-              {SCHOOLS_FORM.successMessage}
-            </p>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate>
-              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "24px 32px" }}>
-                <div>
-                  <label htmlFor="fullName" style={fieldLabelStyle}>
-                    {SCHOOLS_FORM.fields.fullName}*
-                  </label>
-                  <input
-                    id="fullName"
-                    name="fullName"
-                    type="text"
-                    required
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("fullName")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("fullName")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="schoolName" style={fieldLabelStyle}>
-                    {SCHOOLS_FORM.fields.schoolName}*
-                  </label>
-                  <input
-                    id="schoolName"
-                    name="schoolName"
-                    type="text"
-                    required
-                    value={formData.schoolName}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("schoolName")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("schoolName")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" style={fieldLabelStyle}>
-                    {SCHOOLS_FORM.fields.email}*
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("email")}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" style={fieldLabelStyle}>
-                    {SCHOOLS_FORM.fields.phone}*
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("phone")}
-                    onBlur={() => setFocusedField(null)}
-                    style={getFieldStyle("phone")}
-                  />
-                </div>
-
-                <div style={{ gridColumn: "1 / -1" }}>
-                  <label htmlFor="message" style={fieldLabelStyle}>
-                    {SCHOOLS_FORM.fields.message}*
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={2}
-                    value={formData.message}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                    style={{ ...getFieldStyle("message"), resize: "vertical", padding: "4px 2px 24px" }}
-                  />
-                </div>
-              </div>
-
-              {status === "error" && (
-                <p
-                  role="alert"
-                  className="text-sm"
-                  style={{ fontFamily: "var(--font-body)", color: "var(--color-black)", marginTop: "16px" }}
-                >
-                  {SCHOOLS_FORM.errorMessage}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-bold)",
-                  fontSize: "12px",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  color: "var(--color-academy-green)",
-                  background: "none",
-                  border: "none",
-                  padding: 0,
-                  marginTop: "20px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  cursor: isSubmitting ? "not-allowed" : "pointer",
-                  opacity: isSubmitting ? 0.6 : 1,
-                }}
-              >
-                {isSubmitting ? SCHOOLS_FORM.submittingLabel : "Send Message →"}
-              </button>
-            </form>
-          )}
-        </div>
       </div>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 sm:px-8"
+          role="presentation"
+          onMouseDown={(event) => { if (event.target === event.currentTarget) closeModal() }}
+          style={{ backgroundColor: "rgba(12, 14, 12, 0.62)" }}
+        >
+          <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="school-enquiry-title" className="relative max-h-full w-full overflow-y-auto p-6 sm:p-10 lg:p-12" style={{ maxWidth: "900px", backgroundColor: "var(--color-warm-off-white)" }}>
+            <button ref={closeButtonRef} type="button" onClick={closeModal} aria-label="Close school enquiry form" className="absolute right-5 top-5 text-2xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-8 sm:top-8" style={{ border: 0, background: "transparent", color: "var(--color-academy-green)", cursor: "pointer" }}>×</button>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", letterSpacing: "0.14em", color: "var(--color-academy-green)", margin: "0 0 1.25rem" }}>SCHOOL ENQUIRY</p>
+            <h3 id="school-enquiry-title" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 5vw, 5.4rem)", lineHeight: 0.84, letterSpacing: "-0.03em", color: "var(--color-black)", margin: "0 0 2.5rem" }}>START A CONVERSATION.</h3>
+
+            {status === "success" ? (
+              <p role="status" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.5, color: "var(--color-black)", margin: 0 }}>
+                Submission received, but enquiry delivery is not configured yet.
+              </p>
+            ) : (
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2" noValidate>
+                <Field label={SCHOOLS_FORM.fields.fullName} name="fullName" value={formData.fullName} onChange={handleChange} onFocus={() => setFocusedField("fullName")} onBlur={() => setFocusedField(null)} style={fieldStyle("fullName")} required />
+                <Field label={SCHOOLS_FORM.fields.schoolName} name="schoolName" value={formData.schoolName} onChange={handleChange} onFocus={() => setFocusedField("schoolName")} onBlur={() => setFocusedField(null)} style={fieldStyle("schoolName")} required />
+                <Field label={SCHOOLS_FORM.fields.email} name="email" type="email" value={formData.email} onChange={handleChange} onFocus={() => setFocusedField("email")} onBlur={() => setFocusedField(null)} style={fieldStyle("email")} required />
+                <Field label={SCHOOLS_FORM.fields.phone} name="phone" type="tel" value={formData.phone} onChange={handleChange} onFocus={() => setFocusedField("phone")} onBlur={() => setFocusedField(null)} style={fieldStyle("phone")} required />
+                <label className="sm:col-span-2" style={fieldLabelStyle}>
+                  {SCHOOLS_FORM.fields.message}
+                  <textarea name="message" value={formData.message} onChange={handleChange} onFocus={() => setFocusedField("message")} onBlur={() => setFocusedField(null)} rows={3} style={{ ...fieldStyle("message"), resize: "vertical", marginTop: "0.3rem" }} />
+                </label>
+                <div className="sm:col-span-2 mt-2 flex flex-col items-start gap-4">
+                  <button type="submit" disabled={status === "submitting"} className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ backgroundColor: "var(--color-academy-green)", border: 0, color: "var(--color-white)", cursor: status === "submitting" ? "wait" : "pointer", fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.85rem", letterSpacing: "0.08em", padding: "0.95rem 1.25rem" }}>
+                    {status === "submitting" ? SCHOOLS_FORM.submittingLabel : SCHOOLS_FORM.submitLabel}
+                  </button>
+                  {status === "error" && <p role="alert" style={{ fontFamily: "var(--font-body)", color: "#9c2a2a", margin: 0 }}>{SCHOOLS_FORM.errorMessage}</p>}
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </section>
+  )
+}
+
+function Field({ label, name, value, onChange, onFocus, onBlur, style, type = "text", required = false }: {
+  label: string
+  name: keyof FormState
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  onFocus: () => void
+  onBlur: () => void
+  style: React.CSSProperties
+  type?: string
+  required?: boolean
+}) {
+  return (
+    <label style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "0.74rem", letterSpacing: "0.05em", color: "var(--color-nursery-stone)" }}>
+      {label}{required ? "*" : ""}
+      <input name={name} type={type} value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur} required={required} style={{ ...style, marginTop: "0.3rem" }} />
+    </label>
   )
 }

@@ -226,8 +226,7 @@ export const NAV_LINKS: NavItem[] = [
     label: "Schools",
     href: "/schools",
     dropdown: [
-      { label: "Schools Overview", href: "/schools" },
-      { label: "After-School Activity", href: "/schools/asa" },
+      { label: "Our School Activities", href: "/schools" },
       { label: "Facility Management", href: "/facility-management" },
       { label: "Holiday Camps", href: "/schools/holiday-camps" },
     ],
