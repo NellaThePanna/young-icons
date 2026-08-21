@@ -40,7 +40,7 @@ export default function HolidayCampsHero() {
             <rect x={759} y={0} width={525} height={720} />
           </clipPath>
           <clipPath id="hc-camps-clip">
-            <text x={191} y={550} fontFamily="Anton" fontSize={166}>
+            <text x={191} y={550} fontFamily="var(--font-display)" fontSize={166}>
               {SCHOOLS_CAMPS_HERO.headingLine2}
             </text>
           </clipPath>
@@ -58,7 +58,7 @@ export default function HolidayCampsHero() {
           clipPath="url(#hc-right-block)"
         />
 
-        <text x={43} y={362} fontFamily="Anton" fontSize={181} fill="var(--color-black)">
+        <text x={43} y={362} fontFamily="var(--font-display)" fontSize={181} fill="var(--color-black)">
           {SCHOOLS_CAMPS_HERO.headingLine1}
         </text>
 

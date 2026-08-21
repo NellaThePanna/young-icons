@@ -1,27 +1,13 @@
 import type { Metadata } from 'next'
-import { Anton, Barlow_Condensed, Inter, League_Gothic } from 'next/font/google'
+import { Barlow_Condensed, Inter } from 'next/font/google'
 import './globals.css'
 import '@/styles/tokens.css'
 import LenisProvider from '@/components/providers/LenisProvider'
-
-const anton = Anton({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-display',
-  display: 'swap',
-})
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-nursery-hero',
-  display: 'swap',
-})
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-holiday-display',
   display: 'swap',
 })
 
@@ -46,7 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject data-gr-* attributes on body before React hydrates */}
-      <body className={`${anton.variable} ${barlowCondensed.variable} ${leagueGothic.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body
+        className={`${barlowCondensed.variable} ${inter.variable}`}
+        style={{ '--font-display': 'var(--font-nursery-hero)', '--font-holiday-display': 'var(--font-nursery-hero)' } as React.CSSProperties}
+        suppressHydrationWarning
+      >
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
