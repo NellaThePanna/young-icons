@@ -77,16 +77,10 @@ export default function MultipleActivities({ isOpen, onToggle }: MultipleActivit
       </h2>
 
       <div className="grid grid-cols-2 gap-x-2 gap-y-6 sm:grid-cols-3 sm:gap-x-3 lg:grid-cols-6 lg:gap-x-3">
-        {MULTIPLE_ACTIVITIES_CHIPS.map((activity) => (
+        {MULTIPLE_ACTIVITIES_CHIPS.filter((activity) => activity.image).map((activity) => (
           <div key={activity.label}>
             <div className="relative aspect-[4/5] overflow-hidden" style={{ backgroundColor: "var(--color-nursery-off-white)" }}>
-              {activity.image ? (
-                <Image src={activity.image} alt={activity.label} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw" className="object-cover" />
-              ) : (
-                <span className="absolute inset-0 flex items-center justify-center px-3 text-center" style={{ fontFamily: "var(--font-body)", fontSize: "0.67rem", letterSpacing: "0.1em", color: "var(--color-nursery-stone)" }}>
-                  [ASSET REQUIRED]
-                </span>
-              )}
+              <Image src={activity.image!} alt={activity.label} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw" className="object-cover" />
             </div>
             <p className="text-center" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.72rem", letterSpacing: "0.08em", color: "var(--color-black)", margin: "0.8rem 0 0" }}>
               {activity.label}
