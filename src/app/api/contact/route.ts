@@ -51,6 +51,7 @@ export async function POST(req: NextRequest) {
   const name = data.name
   const email = data.email
   const phone = data.phone
+  const programme = typeof data.programme === 'string' ? data.programme : undefined
 
   if (!requireString(name) || !requireString(email) || !requireString(phone)) {
     return NextResponse.json(
@@ -69,9 +70,9 @@ export async function POST(req: NextRequest) {
   try {
     // Wire Resend here when RESEND_API_KEY is available in environment.
     // const resend = new Resend(process.env.RESEND_API_KEY)
-    // await resend.emails.send({ from: '...', to: '...', subject: '...', ... })
+    // await resend.emails.send({ from: '...', to: '...', subject: programme ? `Contact: ${programme}` : 'Contact', ... })
 
-    return NextResponse.json({ success: true }, { status: 200 })
+    return NextResponse.json({ success: true, programme: programme ?? null }, { status: 200 })
   } catch {
     // Full error is logged server-side only — never exposed to client.
     console.error('[contact/route] email send failed')

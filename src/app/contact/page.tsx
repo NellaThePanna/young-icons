@@ -8,11 +8,12 @@ export const metadata: Metadata = {
   description: "Contact Young Icons Sports Academy by form, WhatsApp, or phone.",
 }
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ programme?: string }> }) {
+  const { programme } = await searchParams
   return (
     <>
       <NavBar />
-      <ContactEditorial />
+      <ContactEditorial programme={programme} />
       <Footer compact hideUnverifiedContact />
     </>
   )
