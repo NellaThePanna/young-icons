@@ -118,7 +118,7 @@ export const HOME_PROGRAMME_CARDS = [
     description:
       "After-school sports activity delivered at your child's school by our coaching team.",
     cta: "Learn more",
-    href: "/schools/asa",
+    href: "/schools",
   },
   {
     name: "Holiday Camps",
