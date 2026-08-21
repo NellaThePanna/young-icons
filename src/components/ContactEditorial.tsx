@@ -17,7 +17,7 @@ function WhatsAppIcon() { return <svg width="30" height="30" viewBox="0 0 448 51
 function PhoneIcon() { return <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 5c0 8.28 6.72 15 15 15l2-4-5-3-2 2c-2.5-1.2-4.3-3-5.5-5.5l2-2-3-5-4 2Z"/></svg> }
 function Arrow() { return <span aria-hidden="true" style={{ fontSize: "2rem", fontWeight: 300, lineHeight: 1 }}>→</span> }
 
-export default function ContactEditorial({ programme }: { programme?: string }) {
+export default function ContactEditorial() {
   const [isOpen, setIsOpen] = useState(false)
   const [form, setForm] = useState<ContactState>(emptyForm)
   const [status, setStatus] = useState<Status>("idle")
@@ -48,7 +48,7 @@ export default function ContactEditorial({ programme }: { programme?: string }) 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); setStatus("submitting")
     try {
-      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(programme ? { ...form, programme } : form) })
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) })
       if (!response.ok) throw new Error("submit failed")
       setStatus("success"); setForm(emptyForm)
     } catch { setStatus("error") }
@@ -104,7 +104,6 @@ export default function ContactEditorial({ programme }: { programme?: string }) 
           <button ref={closeRef} type="button" aria-label="Close contact form" onClick={close} className="absolute right-5 top-5 text-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ border: 0, background: "transparent", color: "var(--color-academy-green)", cursor: "pointer" }}>×</button>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.12em", color: "var(--color-academy-green)", margin: 0 }}>CONTACT YOUNG ICONS</p>
           <h2 id="contact-modal-title" style={{ ...displayStyle, color: "var(--color-near-black)", fontSize: "clamp(3rem, 6vw, 5.6rem)", lineHeight: 0.86, margin: "1rem 0 2rem" }}>START A CONVERSATION.</h2>
-          {programme && <p style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "var(--color-near-black)", margin: "-1.3rem 0 2rem" }}>Regarding: <strong>{programme}</strong></p>}
           {status === "success" ? <div role="status"><p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.55, margin: 0 }}>Your form was accepted. For an immediate response, please use WhatsApp or call us directly.</p></div> :
             <form onSubmit={submit} className="grid grid-cols-1 gap-7 sm:grid-cols-2" noValidate>
               <Field label="YOUR NAME" name="name" value={form.name} onChange={handleChange} required />

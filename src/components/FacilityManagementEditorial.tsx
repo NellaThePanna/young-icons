@@ -1,10 +1,20 @@
+"use client"
+
 import Image from "next/image"
-import Link from "next/link"
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react"
 
 const displayStyle = {
   fontFamily: "var(--font-display)",
   letterSpacing: "-0.025em",
 }
+
+type ConsultState = { name: string; email: string; phone: string; message: string }
+type Status = "idle" | "submitting" | "success" | "error"
+const emptyForm: ConsultState = { name: "", email: "", phone: "", message: "" }
+const labelStyle: React.CSSProperties = { display: "block", color: "var(--color-near-black)", fontFamily: "var(--font-body)", fontSize: "0.73rem", fontWeight: 700, letterSpacing: "0.08em" }
+const fieldStyle: React.CSSProperties = { width: "100%", border: 0, borderBottom: "1px solid rgba(12,14,12,0.35)", background: "transparent", borderRadius: 0, color: "var(--color-near-black)", fontFamily: "var(--font-body)", fontSize: "1rem", outline: "none", padding: "0.7rem 0" }
+
+function Field({ label, name, value, onChange, type = "text", required = false }: { label: string; name: keyof ConsultState; value: string; onChange: (event: ChangeEvent<HTMLInputElement>) => void; type?: string; required?: boolean }) { return <label style={labelStyle}>{label}<input name={name} type={type} value={value} onChange={onChange} required={required} style={{ ...fieldStyle, marginTop: "0.45rem" }} /></label> }
 
 function Arrow() {
   return <span aria-hidden="true" style={{ fontSize: "2rem", fontWeight: 300, lineHeight: 1 }}>→</span>
@@ -31,6 +41,43 @@ const services = [
 ]
 
 export default function FacilityManagementEditorial() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [form, setForm] = useState<ConsultState>(emptyForm)
+  const [status, setStatus] = useState<Status>("idle")
+  const openerRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) return
+    const previousOverflow = document.body.style.overflow
+    const returnFocusTo = openerRef.current
+    document.body.style.overflow = "hidden"
+    window.setTimeout(() => closeRef.current?.focus(), 0)
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setIsOpen(false); return }
+      if (event.key !== "Tab" || !dialogRef.current) return
+      const focusable = Array.from(dialogRef.current.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'))
+      if (!focusable.length) return
+      const first = focusable[0]; const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKeyDown); returnFocusTo?.focus() }
+  }, [isOpen])
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); setStatus("submitting")
+    try {
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, programme: "Facility Management" }) })
+      if (!response.ok) throw new Error("submit failed")
+      setStatus("success"); setForm(emptyForm)
+    } catch { setStatus("error") }
+  }
+  const close = () => setIsOpen(false)
+
   return (
     <main style={{ backgroundColor: "var(--color-warm-off-white)", color: "var(--color-near-black)" }}>
       <section className="relative isolate overflow-hidden" style={{ minHeight: "clamp(430px, 47vw, 685px)", backgroundColor: "#0c0e0c" }}>
@@ -95,9 +142,25 @@ export default function FacilityManagementEditorial() {
             <span className="block" style={{ marginTop: "0.1em" }}>YOUR SPORTS FACILITY?</span>
           </h2>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.55, margin: "1.45rem auto 1.85rem", maxWidth: "440px" }}>Let&apos;s discuss how we can manage and elevate<br className="hidden sm:block" /> your facility to the highest standard.</p>
-          <Link href="/contact?programme=Facility%20Management" className="inline-flex items-center gap-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ backgroundColor: "var(--color-academy-green)", color: "var(--color-white)", fontFamily: "var(--font-body)", fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.08em", padding: "1rem 1.3rem", textDecoration: "none" }}>REQUEST A CONSULTATION <span aria-hidden="true" style={{ fontSize: "1.25rem", lineHeight: 0 }}>→</span></Link>
+          <button ref={openerRef} type="button" onClick={() => { setStatus("idle"); setIsOpen(true) }} className="inline-flex items-center gap-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ border: 0, backgroundColor: "var(--color-academy-green)", color: "var(--color-white)", cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.08em", padding: "1rem 1.3rem" }}>REQUEST A CONSULTATION <span aria-hidden="true" style={{ fontSize: "1.25rem", lineHeight: 0 }}>→</span></button>
         </div>
       </section>
+
+      {isOpen && <div role="presentation" className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8" style={{ backgroundColor: "rgba(12,14,12,0.68)" }} onMouseDown={(event) => { if (event.target === event.currentTarget) close() }}>
+        <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="facility-modal-title" className="relative max-h-full w-full overflow-y-auto p-6 sm:p-10" style={{ maxWidth: "760px", backgroundColor: "var(--color-warm-off-white)" }}>
+          <button ref={closeRef} type="button" aria-label="Close facility consultation form" onClick={close} className="absolute right-5 top-5 text-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ border: 0, background: "transparent", color: "var(--color-academy-green)", cursor: "pointer" }}>×</button>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.12em", color: "var(--color-academy-green)", margin: 0 }}>FACILITY MANAGEMENT</p>
+          <h2 id="facility-modal-title" style={{ ...displayStyle, color: "var(--color-near-black)", fontSize: "clamp(3rem, 6vw, 5.6rem)", lineHeight: 0.86, margin: "1rem 0 2rem" }}>REQUEST A CONSULTATION.</h2>
+          {status === "success" ? <div role="status"><p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.55, margin: 0 }}>Your form was accepted. For an immediate response, please use WhatsApp or call us directly.</p></div> :
+            <form onSubmit={submit} className="grid grid-cols-1 gap-7 sm:grid-cols-2" noValidate>
+              <Field label="YOUR NAME" name="name" value={form.name} onChange={handleChange} required />
+              <Field label="EMAIL ADDRESS" name="email" type="email" value={form.email} onChange={handleChange} required />
+              <Field label="PHONE NUMBER" name="phone" type="tel" value={form.phone} onChange={handleChange} required />
+              <label className="sm:col-span-2" style={labelStyle}>MESSAGE (OPTIONAL)<textarea name="message" value={form.message} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical", marginTop: "0.45rem" }} /></label>
+              <div className="sm:col-span-2 flex flex-col items-start gap-4"><button type="submit" disabled={status === "submitting"} className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ border: 0, backgroundColor: "var(--color-academy-green)", color: "var(--color-white)", cursor: status === "submitting" ? "wait" : "pointer", fontFamily: "var(--font-body)", fontSize: "0.84rem", fontWeight: 700, letterSpacing: "0.08em", padding: "1rem 1.35rem" }}>{status === "submitting" ? "SENDING…" : "SEND MESSAGE"}</button>{status === "error" && <p role="alert" style={{ color: "#9c2a2a", fontFamily: "var(--font-body)", margin: 0 }}>Something went wrong. Please try again, or use WhatsApp.</p>}</div>
+            </form>}
+        </div>
+      </div>}
     </main>
   )
 }
