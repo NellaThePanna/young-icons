@@ -18,7 +18,9 @@ Referenced from CLAUDE.md. Load this when drafting an orchestrator prompt, makin
 
 ## The loop — how a change actually ships
 
-Cowork (plans/drafts) → orchestrator/Claude Code (executes, reports back with real verification) → Cowork (independently verifies via direct Read/Grep/bash, not just the report) → [when merging to master] Codex review (`/codex:review`, catches code-level issues the above steps don't) → merge + push to `master` → Vercel deploys. Every step verifies the one before it; no step trusts a self-report without checking.
+Cowork (plans/drafts) → orchestrator/Claude Code (executes, reports back with real verification) → Cowork (independently verifies via direct Read/Grep/bash, not just the report) → [when merging to master] Codex review (`/codex:review`, catches code-level issues the above steps don't) → open a pull request into `master` (direct pushes to `master` are blocked by branch protection, added 2026-08-01) → GitHub Actions CI (`.github/workflows/ci.yml`: `npm run type-check` + `npm run lint`) must report passing on the PR before the merge button unlocks → merge → Vercel deploys. Every step verifies the one before it; no step trusts a self-report without checking.
+
+CI and Codex review are two different gates, not a replacement for each other: CI is mechanical and automatic (types, lint) and hard-blocks the merge on failure — it has no opinion on whether the code does the right thing. Codex review is a judgment pass on logic/content/security that a human still has to read and act on; it doesn't block anything by itself. Run both on every merge to master — a passing CI check does not skip the Codex review step, and a completed Codex review does not skip CI.
 
 12. When a client-provided document (docx, brief, spec) is given after other content has already been confirmed or shipped for the same section, the document is the final word — it supersedes earlier confirmed content/copy, not the other way around. Flag the supersession clearly when it happens (so the older, now-replaced version isn't silently lost), but don't ask which one wins — the newest doc always wins.
 
