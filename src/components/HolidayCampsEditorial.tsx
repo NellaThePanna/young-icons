@@ -163,7 +163,7 @@ export default function HolidayCampsEditorial() {
               <p style={{ color: "var(--color-academy-green)", fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "0.72rem", letterSpacing: "0.075em", margin: "0 0 0.35rem" }}>UPCOMING CAMPS</p>
               <h2 id="upcoming-camps-heading" style={{ ...displayStyle, color: "var(--color-black)", fontSize: "clamp(2.85rem, 5.4vw, 6.45rem)", lineHeight: 0.88, margin: 0 }}><span className="block lg:inline">FIND YOUR NEXT</span><span className="block lg:ml-[0.16em] lg:inline" style={{ marginTop: "0.12em" }}>ADVENTURE.</span></h2>
             </div>
-            <div className="mb-0.5 flex shrink-0 gap-2 sm:mb-1"><ArrowButton direction="previous" onClick={previousCamp} /><ArrowButton direction="next" onClick={nextCamp} /></div>
+            <div className="mb-0.5 flex shrink-0 gap-2 sm:mb-1 md:hidden"><ArrowButton direction="previous" onClick={previousCamp} /><ArrowButton direction="next" onClick={nextCamp} /></div>
           </div>
 
           <div className="mt-6 hidden grid-cols-3 gap-5 md:grid">

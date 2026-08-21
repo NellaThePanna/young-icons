@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation"
+import { permanentRedirect } from "next/navigation"
 
 export const metadata = {
   title: "Our School Activities | Young Icons",
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function SchoolsASAPage() {
-  redirect("/schools")
+  permanentRedirect("/schools")
 }
