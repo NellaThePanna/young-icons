@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Archivo } from "next/font/google"
 import NavBar from "@/components/NavBar"
 import HeroHome from "@/components/HeroHome"
 import EditorialMosaic from "@/components/EditorialMosaic"
@@ -7,6 +8,13 @@ import TrustScale from "@/components/TrustScale"
 import FinalCTA from "@/components/FinalCTA"
 import Footer from "@/components/Footer"
 import { HOME_HERO, FINAL_CTA } from "@/content/home"
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-landing-display",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Young Icons Sports Academy Dubai | Free Trial",
@@ -40,7 +48,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <NavBar />
-      <main>
+      <main className={archivo.variable}>
         <HeroHome
           words={HOME_HERO.words}
           wordColors={HOME_HERO.wordColors}

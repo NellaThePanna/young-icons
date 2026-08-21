@@ -85,7 +85,7 @@ export default function WhoWeAre() {
               ref={headingRef}
               className="mb-8 uppercase"
               style={{
-                fontFamily: "var(--font-display)",
+                fontFamily: "var(--font-landing-display)",
                 fontWeight: "var(--font-weight-bold)",
                 fontSize: "clamp(3.1rem, 5.45vw, 6.65rem)",
                 color: "var(--color-black)",

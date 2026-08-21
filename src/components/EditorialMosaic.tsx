@@ -123,7 +123,7 @@ export default function EditorialMosaic() {
               }}
             >
               <p
-                className="mb-1"
+                className="mb-2"
                 style={{
                   fontFamily: "var(--font-body)",
                   fontWeight: "var(--font-weight-medium)",
@@ -138,7 +138,7 @@ export default function EditorialMosaic() {
               <h3
                 ref={(el) => { headingRefs.current[i] = el }}
                 style={{
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--font-landing-display)",
                   fontWeight: "var(--font-weight-bold)",
                   fontSize:
                     i === 0
@@ -146,6 +146,7 @@ export default function EditorialMosaic() {
                       : i === 3
                         ? "clamp(2.3rem, 3.4vw, 4.1rem)"
                         : "clamp(2rem, 2.9vw, 3.35rem)",
+                  lineHeight: 0.95,
                   color: "var(--color-white)",
                   textTransform: "uppercase",
                   marginBottom: "8px",
