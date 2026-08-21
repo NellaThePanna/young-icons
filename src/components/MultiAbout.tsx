@@ -96,7 +96,7 @@ export default function MultiAbout() {
             <h2
               className="uppercase"
               style={{
-                fontFamily: "var(--font-body)",
+                fontFamily: "var(--font-display)",
                 fontWeight: "var(--font-weight-bold)",
                 fontSize: "clamp(2.5rem, 4.2vw, 4.25rem)",
                 lineHeight: 0.98,
