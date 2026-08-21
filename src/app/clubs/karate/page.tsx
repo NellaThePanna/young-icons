@@ -34,9 +34,9 @@ export default function KaratePage() {
       <ComingSoonPage
         smallHeading="YOUNG ICONS KARATE"
         words={["FOCUS.", "DISCIPLINE.", "GROW."]}
-        wordColors={["white", "white", "green"]}
-        sub="A new Young Icons Karate experience is coming soon to Dubai."
-        image="/images/placeholder/karate-crawl.jpg"
+        subLines={["A new Young Icons Karate experience", "is coming soon to Dubai."]}
+        image="/images/placeholder/karate-coming-soon-hero.jpg"
+        imageAlt="Young boy in a white karate gi practising a forward punch in a dojo"
         programmeName="Karate"
       />
     </>

@@ -34,9 +34,9 @@ export default function BalletPage() {
       <ComingSoonPage
         smallHeading="YOUNG ICONS BALLET"
         words={["MOVE.", "CREATE.", "GROW."]}
-        wordColors={["white", "white", "green"]}
-        sub="A new Young Icons Ballet experience is coming soon to Dubai."
-        image="/images/placeholder/ballet-ribbon.jpg"
+        subLines={["BALLET, THE YOUNG ICONS WAY.", "COMING SOON TO DUBAI."]}
+        image="/images/placeholder/ballet-coming-soon-hero.jpg"
+        imageAlt="Young ballerina in a pale pink tutu practising in a sunlit ballet studio"
         programmeName="Ballet"
       />
     </>
