@@ -127,7 +127,7 @@ export default function HolidayCampsEditorial() {
             <ul className="hidden items-center gap-x-6 lg:flex" style={{ listStyle: "none", margin: 0, padding: 0 }}>
               {PRIMARY_NAV_LINKS.map((link) => <li key={link.href}><Link href={link.href} style={{ borderBottom: link.href === "/schools/holiday-camps" ? "2px solid var(--color-academy-green)" : "2px solid transparent", color: link.href === "/schools/holiday-camps" ? "var(--color-academy-green)" : "rgba(255,255,255,0.75)", display: "block", fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: "var(--font-weight-medium)", letterSpacing: "normal", padding: "0 0 0.25rem", textDecoration: "none" }}>{link.label}</Link></li>)}
             </ul>
-            <a href={CLASSCARD_URL} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex" style={{ color: "var(--color-white)", fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: "var(--font-weight-bold)", letterSpacing: "normal", textDecoration: "underline", textUnderlineOffset: "0.24em" }}>REGISTER</a>
+            <a href={CLASSCARD_URL} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-block text-sm px-5 py-2 rounded-full" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", color: "var(--color-white)", backgroundColor: "var(--color-academy-green)", textDecoration: "none" }}>FIND A CLASS</a>
             <button type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)} className="inline-flex items-center gap-2 lg:hidden" style={{ border: 0, background: "transparent", color: "var(--color-white)", cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: "var(--font-weight-medium)", letterSpacing: "normal", padding: "0.5rem 0" }}>
               <span>{menuOpen ? "CLOSE" : "MENU"}</span><span aria-hidden="true" style={{ fontSize: "1rem", lineHeight: 1 }}>{menuOpen ? "×" : "☰"}</span>
             </button>
@@ -139,11 +139,12 @@ export default function HolidayCampsEditorial() {
           </div>
         </div>
         {menuOpen && (
-          <nav className="fixed inset-0 z-40 flex items-start bg-[var(--color-warm-off-white)] px-6 pt-24 sm:px-10 lg:px-16" aria-label="Holiday camps navigation">
+          <nav className="fixed inset-0 z-40 flex flex-col items-start bg-[var(--color-warm-off-white)] px-6 pt-24 sm:px-10 lg:px-16" aria-label="Holiday camps navigation">
             <button type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} className="absolute right-6 top-6 h-11 w-11 sm:right-10 sm:top-8 lg:right-16" style={{ border: 0, background: "transparent", color: "var(--color-black)", cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "1.7rem", lineHeight: 1 }}>×</button>
             <div className="flex max-w-3xl flex-wrap gap-x-8 gap-y-5">
               {PRIMARY_NAV_LINKS.map((link) => <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} style={{ color: "var(--color-black)", textDecoration: "none", fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 1.8vw, 1.3rem)", fontWeight: 600, letterSpacing: "0.03em" }}>{link.label}</Link>)}
             </div>
+            <a href={CLASSCARD_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="mt-8 block w-full max-w-3xl text-center text-sm rounded-full py-4 px-6" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", color: "var(--color-white)", backgroundColor: "var(--color-academy-green)", textDecoration: "none" }}>FIND A CLASS</a>
           </nav>
         )}
       </section>

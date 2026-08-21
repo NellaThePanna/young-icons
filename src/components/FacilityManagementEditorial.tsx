@@ -11,6 +11,7 @@ const displayStyle = {
 type ConsultState = { name: string; email: string; phone: string; message: string }
 type Status = "idle" | "submitting" | "success" | "error"
 const emptyForm: ConsultState = { name: "", email: "", phone: "", message: "" }
+const modalHeadingStyle: React.CSSProperties = { fontFamily: "var(--font-nursery-hero)", fontWeight: 700, color: "var(--color-near-black)", fontSize: "clamp(2.4rem, 5.2vw, 4.25rem)", lineHeight: 0.92, letterSpacing: "0.005em", wordSpacing: "0.06em", textAlign: "center", margin: "0 0 2rem" }
 const labelStyle: React.CSSProperties = { display: "block", color: "var(--color-near-black)", fontFamily: "var(--font-body)", fontSize: "0.73rem", fontWeight: 700, letterSpacing: "0.08em" }
 const fieldStyle: React.CSSProperties = { width: "100%", border: 0, borderBottom: "1px solid rgba(12,14,12,0.35)", background: "transparent", borderRadius: 0, color: "var(--color-near-black)", fontFamily: "var(--font-body)", fontSize: "1rem", outline: "none", padding: "0.7rem 0" }
 
@@ -150,7 +151,10 @@ export default function FacilityManagementEditorial() {
         <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="facility-modal-title" className="relative max-h-full w-full overflow-y-auto p-6 sm:p-10" style={{ maxWidth: "760px", backgroundColor: "var(--color-warm-off-white)" }}>
           <button ref={closeRef} type="button" aria-label="Close facility consultation form" onClick={close} className="absolute right-5 top-5 text-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]" style={{ border: 0, background: "transparent", color: "var(--color-academy-green)", cursor: "pointer" }}>×</button>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.12em", color: "var(--color-academy-green)", margin: 0 }}>FACILITY MANAGEMENT</p>
-          <h2 id="facility-modal-title" style={{ ...displayStyle, color: "var(--color-near-black)", fontSize: "clamp(3rem, 6vw, 5.6rem)", lineHeight: 0.86, margin: "1rem 0 2rem" }}>REQUEST A CONSULTATION.</h2>
+          <h2 id="facility-modal-title" style={modalHeadingStyle}>
+            <span className="block">REQUEST A</span>
+            <span className="block" style={{ marginTop: "0.12em" }}>CONSULTATION.</span>
+          </h2>
           {status === "success" ? <div role="status"><p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.55, margin: 0 }}>Your form was accepted. For an immediate response, please use WhatsApp or call us directly.</p></div> :
             <form onSubmit={submit} className="grid grid-cols-1 gap-7 sm:grid-cols-2" noValidate>
               <Field label="YOUR NAME" name="name" value={form.name} onChange={handleChange} required />
