@@ -85,10 +85,14 @@ const linkRowStyle: React.CSSProperties = {
   fontSize: "0.875rem",
 }
 
-export default function Footer({ compact = false }: { compact?: boolean }) {
+export default function Footer({ compact = false, hideUnverifiedContact = false }: { compact?: boolean; hideUnverifiedContact?: boolean }) {
   const footerRef = useRef<HTMLElement>(null)
   const whatsappHref = `https://wa.me/${FOOTER_NAP.whatsappNumber}?text=${encodeURIComponent(FOOTER_NAP.whatsappMessage)}`
   const year = new Date().getFullYear()
+  const hasVerifiedEmail = !FOOTER_NAP.email.startsWith("[")
+  const visibleSocials = hideUnverifiedContact
+    ? FOOTER_SOCIAL.filter((social) => !social.href.startsWith("["))
+    : FOOTER_SOCIAL
 
   const socialIcons: Record<string, React.ReactNode> = {
     Instagram: <InstagramIcon />,
@@ -232,15 +236,17 @@ export default function Footer({ compact = false }: { compact?: boolean }) {
                   {FOOTER_NAP.locationLine}
                 </span>
               </IconRow>
-              <IconRow icon={<MailIcon />}>
-                <a
-                  href={FOOTER_NAP.email.startsWith("[") ? undefined : `mailto:${FOOTER_NAP.email}`}
-                  className="footer-contact-link"
-                  style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem" }}
-                >
-                  {FOOTER_NAP.email}
-                </a>
-              </IconRow>
+              {(!hideUnverifiedContact || hasVerifiedEmail) && (
+                <IconRow icon={<MailIcon />}>
+                  <a
+                    href={hasVerifiedEmail ? `mailto:${FOOTER_NAP.email}` : undefined}
+                    className="footer-contact-link"
+                    style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem" }}
+                  >
+                    {FOOTER_NAP.email}
+                  </a>
+                </IconRow>
+              )}
               <IconRow icon={<PhoneIcon />}>
                 <a
                   href={`tel:${FOOTER_NAP.phone}`}
@@ -281,7 +287,7 @@ export default function Footer({ compact = false }: { compact?: boolean }) {
             Follow Us
           </p>
           <div className="flex items-center gap-4">
-            {FOOTER_SOCIAL.map((social) => (
+            {visibleSocials.map((social) => (
               <a
                 key={social.label}
                 href={social.href}

@@ -227,7 +227,7 @@ export const NAV_LINKS: NavItem[] = [
     href: "/schools",
     dropdown: [
       { label: "Our School Activities", href: "/schools" },
-      { label: "Facility Management", href: "/facility-management" },
+      { label: "Facility Management", href: "/schools/facility-management" },
       { label: "Holiday Camps", href: "/schools/holiday-camps" },
     ],
   },
@@ -276,7 +276,7 @@ export const FOOTER_LINKS = [
   { label: "Schools", href: "/schools" },
   { label: "Clubs", href: "/clubs/multi-sports" },
   { label: "Holiday Camps", href: "/schools/holiday-camps" },
-  { label: "Facility Management", href: "/facility-management" },
+  { label: "Facility Management", href: "/schools/facility-management" },
   { label: "About Us", href: "/about/who-we-are" },
   { label: "Contact", href: "/contact" },
 ] as const
