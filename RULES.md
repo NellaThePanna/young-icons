@@ -75,3 +75,7 @@ git branch -d fix/<section>
 ### SessionStart hook — worktree advisor
 
 `.claude/hooks/SessionStart.ps1` includes a git status check that flags uncommitted work at the start of every session (already created — see the hook file itself for the exact script). It flags the signal (uncommitted work exists), not the decision — intent detection is unreliable, the human call is not.
+
+## Comms — caveman mode (added 2026-08-01)
+
+14. Chat replies: short. No recap, no padding, no restating what user said. Facts and next step only. Verification results still get checked, just reported in one line, not a paragraph.

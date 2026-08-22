@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Young Icons — Holiday Camps hero full editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --color-academy-green: #1a7a47; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, sans-serif; background: #d8d8d2; }
+
+  .notice {
+    background: #fff3cd; color: #664d03; font-size: 13px; padding: 10px 20px;
+    text-align: center; border-bottom: 1px solid #e3d8a8;
+  }
+  .notice.danger { background: #ffe0e0; color: #7a1414; border-bottom: 1px solid #e0a0a0; }
+
+  .stage-wrap { padding: 0 380px 60px 20px; display: flex; justify-content: center; }
+  .stage { width: 100%; max-width: 1440px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); position: relative; }
+
+  /* real NavBar mimic — fixed height 65px, matches src/components/NavBar.tsx (position:fixed, z-50) */
+  .navbar-mimic {
+    position: relative; height: 65px; background: #0c0e0c; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 24px; z-index: 10;
+  }
+  .navbar-mimic .brand { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; }
+  .navbar-mimic .tag {
+    color: #ff6b6b; font-family: 'Inter', sans-serif; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.08em; border: 1px solid #ff6b6b; padding: 3px 8px; border-radius: 4px;
+  }
+
+  section.hero { width: 100%; background-color: #f5f5f2; position: relative; }
+  svg { display: block; width: 100%; height: auto; }
+
+  .safezone {
+    position: absolute; top: 0; left: 0; right: 0; height: 24px;
+    background: repeating-linear-gradient(45deg, rgba(255,60,60,0.25), rgba(255,60,60,0.25) 8px, rgba(255,60,60,0.1) 8px, rgba(255,60,60,0.1) 16px);
+    pointer-events: none; z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .safezone span {
+    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; color: #7a1414; text-transform: uppercase;
+    background: rgba(255,255,255,0.85); padding: 1px 6px; border-radius: 3px;
+  }
+
+  .panel {
+    position: fixed; top: 0; right: 0; width: 360px; height: 100vh; background: #17181a; color: #fff;
+    overflow-y: auto; padding: 20px; font-family: -apple-system, sans-serif; box-shadow: -4px 0 20px rgba(0,0,0,0.3); z-index: 999;
+  }
+  .panel h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 4px; }
+  .panel .sub { font-size: 11px; color: rgba(255,255,255,0.5); margin: 0 0 16px; line-height: 1.5; }
+  .field { margin-bottom: 12px; }
+  .field label { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.7); margin-bottom: 5px; }
+  .field label .val { color: #6fd39a; font-weight: 700; }
+  .field input[type="range"] { width: 100%; }
+  .readout {
+    background: #0c0d0e; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px;
+    font-family: Consolas, monospace; font-size: 10px; line-height: 1.5; color: #6fd39a; white-space: pre;
+    margin-bottom: 14px; max-height: 240px; overflow-y: auto;
+  }
+  .btnrow { display: flex; gap: 8px; margin-bottom: 16px; }
+  button.reset, button.copy {
+    flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 10px; border-radius: 6px; cursor: pointer;
+  }
+  button.copy { border-color: var(--color-academy-green); background: var(--color-academy-green); }
+  button.copy.copied { background: #0c0d0e; }
+  .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 14px 0; }
+  .grouplabel { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .warn { font-size: 10px; color: #ff8a8a; margin-top: -4px; margin-bottom: 10px; display: none; }
+  .warn.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="notice">Sandbox for font embedding is down — Anton/Inter pulled from Google Fonts CDN. Values below are exact regardless.</div>
+<div class="notice danger">The dark bar at the very top is a real-scale mimic of NavBar.tsx (position:fixed, 65px, z-50). The red-striped band right below it is the danger zone — if any letter enters it, it'll collide with the real fixed nav on the live site. Keep text clear of both.</div>
+
+<div class="stage-wrap">
+  <div class="stage">
+    <div class="navbar-mimic">
+      <span class="brand">Young Icons</span>
+      <span class="tag">NavBar — fixed, 65px</span>
+    </div>
+    <section class="hero">
+      <div class="safezone"><span>Danger zone — text must clear this</span></div>
+      <svg id="heroSvg" viewBox="0 150 1280 420" width="100%" style="display:block; height:auto;">
+        <defs>
+          <image id="hc-camps-photo" href="../../public/images/placeholder/holiday-camps-hero.jpg"
+                 x="-64" y="-120" width="1408" height="1056" preserveAspectRatio="xMidYMid slice" />
+          <clipPath id="hc-right-block">
+            <rect x="759" y="0" width="525" height="720" />
+          </clipPath>
+          <clipPath id="hc-camps-clip">
+            <text x="106" y="553" font-family="Anton" font-size="215" id="campsClipText">CAMPS</text>
+          </clipPath>
+        </defs>
+
+        <rect x="0" y="0" width="1280" height="720" fill="#f5f5f2" />
+
+        <image id="rightPanelImg" href="../../public/images/placeholder/holiday-camps-hero.jpg"
+               x="759" y="0" width="577.5" height="792"
+               preserveAspectRatio="xMinYMid slice" clip-path="url(#hc-right-block)" />
+
+        <text x="106" y="348" font-family="Anton" font-size="215" fill="#000" id="holidayText">HOLIDAY</text>
+
+        <use href="#hc-camps-photo" clip-path="url(#hc-camps-clip)" />
+      </svg>
+    </section>
+  </div>
+</div>
+
+<div class="panel">
+  <h1>Holiday Camps hero — full editor</h1>
+  <p class="sub">Frame, text move + resize, image pan + zoom. Watch the danger-zone stripe at the top.</p>
+
+  <div class="readout" id="readout"></div>
+  <div class="btnrow">
+    <button class="reset" id="resetBtn">Reset</button>
+    <button class="copy" id="copyBtn">Copy values</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Frame (viewBox)</div>
+  <div class="field">
+    <label>Frame height <span class="val" id="vHeight">420</span></label>
+    <input type="range" id="viewHeight" min="380" max="720" value="420">
+  </div>
+  <div class="field">
+    <label>Vertical crop offset <span class="val" id="vOffset">150</span></label>
+    <input type="range" id="viewOffset" min="-150" max="150" value="150">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">HOLIDAY text — move + resize</div>
+  <div class="field"><label>X <span class="val" id="vHolidayX">106</span></label><input type="range" id="holidayX" min="-100" max="300" value="106"></div>
+  <div class="field"><label>Y (baseline) <span class="val" id="vHolidayY">348</span></label><input type="range" id="holidayY" min="200" max="600" value="348"></div>
+  <div class="field"><label>Font size <span class="val" id="vHolidaySize">215</span></label><input type="range" id="holidaySize" min="100" max="260" value="215"></div>
+  <p class="warn" id="warnHoliday">⚠ HOLIDAY is entering the danger zone</p>
+
+  <div class="divider"></div>
+  <div class="grouplabel">CAMPS (photo-clip text) — move + resize</div>
+  <div class="field"><label>X <span class="val" id="vCampsX">106</span></label><input type="range" id="campsX" min="-100" max="300" value="106"></div>
+  <div class="field"><label>Y (baseline) <span class="val" id="vCampsY">553</span></label><input type="range" id="campsY" min="400" max="800" value="553"></div>
+  <div class="field"><label>Font size <span class="val" id="vCampsSize">215</span></label><input type="range" id="campsSize" min="100" max="260" value="215"></div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Background photo (behind CAMPS) — pan + zoom</div>
+  <div class="field"><label>Zoom <span class="val" id="vBgZoom">110%</span></label><input type="range" id="bgZoom" min="100" max="180" value="110"></div>
+  <div class="field"><label>Pan X <span class="val" id="vBgPanX">-64</span></label><input type="range" id="bgPanX" min="-300" max="300" value="-64"></div>
+  <div class="field"><label>Pan Y <span class="val" id="vBgPanY">-120</span></label><input type="range" id="bgPanY" min="-400" max="100" value="-120"></div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Right-panel photo — pan + zoom (block stays 759,0,525,720)</div>
+  <div class="field"><label>Zoom <span class="val" id="vPanelZoom">110%</span></label><input type="range" id="panelZoom" min="100" max="180" value="110"></div>
+  <div class="field"><label>Pan X <span class="val" id="vPanelPanX">0</span></label><input type="range" id="panelPanX" min="-150" max="150" value="0"></div>
+  <div class="field"><label>Pan Y <span class="val" id="vPanelPanY">0</span></label><input type="range" id="panelPanY" min="-150" max="150" value="0"></div>
+</div>
+
+<script>
+  const svg = document.getElementById('heroSvg');
+  const controls = {
+    viewHeight: document.getElementById('viewHeight'),
+    viewOffset: document.getElementById('viewOffset'),
+    holidayX: document.getElementById('holidayX'),
+    holidayY: document.getElementById('holidayY'),
+    holidaySize: document.getElementById('holidaySize'),
+    campsX: document.getElementById('campsX'),
+    campsY: document.getElementById('campsY'),
+    campsSize: document.getElementById('campsSize'),
+    bgZoom: document.getElementById('bgZoom'),
+    bgPanX: document.getElementById('bgPanX'),
+    bgPanY: document.getElementById('bgPanY'),
+    panelZoom: document.getElementById('panelZoom'),
+    panelPanX: document.getElementById('panelPanX'),
+    panelPanY: document.getElementById('panelPanY'),
+  };
+  const DEFAULTS = {};
+  for (const k in controls) DEFAULTS[k] = controls[k].value;
+
+  function apply() {
+    const v = {};
+    for (const k in controls) v[k] = parseFloat(controls[k].value);
+
+    svg.setAttribute('viewBox', `0 ${v.viewOffset} 1280 ${v.viewHeight}`);
+
+    document.getElementById('holidayText').setAttribute('x', v.holidayX);
+    document.getElementById('holidayText').setAttribute('y', v.holidayY);
+    document.getElementById('holidayText').setAttribute('font-size', v.holidaySize);
+
+    document.getElementById('campsClipText').setAttribute('x', v.campsX);
+    document.getElementById('campsClipText').setAttribute('y', v.campsY);
+    document.getElementById('campsClipText').setAttribute('font-size', v.campsSize);
+
+    const bgW = 1280 * (v.bgZoom / 100);
+    const bgH = 960 * (v.bgZoom / 100);
+    const bgImg = document.getElementById('hc-camps-photo');
+    bgImg.setAttribute('width', bgW);
+    bgImg.setAttribute('height', bgH);
+    bgImg.setAttribute('x', v.bgPanX);
+    bgImg.setAttribute('y', v.bgPanY);
+
+    const panelW = 525 * (v.panelZoom / 100);
+    const panelH = 720 * (v.panelZoom / 100);
+    const panelImg = document.getElementById('rightPanelImg');
+    panelImg.setAttribute('width', panelW);
+    panelImg.setAttribute('height', panelH);
+    panelImg.setAttribute('x', 759 + v.panelPanX);
+    panelImg.setAttribute('y', v.panelPanY);
+
+    for (const k in v) {
+      const label = document.getElementById('v' + k.charAt(0).toUpperCase() + k.slice(1));
+      if (label) label.textContent = (k.includes('Zoom') ? v[k] + '%' : v[k]);
+    }
+
+    // danger-zone check: is HOLIDAY's approximate cap-height top inside the top 24px (in stage px terms)?
+    // rough estimate: glyph top ~= baseline - fontSize*0.78, frame-relative = (that) - viewOffset
+    const holidayTopInFrame = (v.holidayY - v.holidaySize * 0.78) - v.viewOffset;
+    const frameHeightPx = v.viewHeight; // svg units == proportion of rendered height
+    const dangerZoneUnits = (24 / (document.querySelector('.stage').clientWidth * (v.viewHeight / 1280))) * v.viewHeight;
+    document.getElementById('warnHoliday').classList.toggle('show', holidayTopInFrame < dangerZoneUnits + 40);
+
+    document.getElementById('readout').textContent =
+      'viewBox: "0 ' + v.viewOffset + ' 1280 ' + v.viewHeight + '"\n' +
+      'HOLIDAY: x=' + v.holidayX + ' y=' + v.holidayY + ' fontSize=' + v.holidaySize + '\n' +
+      'CAMPS (clip text): x=' + v.campsX + ' y=' + v.campsY + ' fontSize=' + v.campsSize + '\n' +
+      'Background photo: zoom=' + v.bgZoom + '% -> width=' + bgW.toFixed(0) + ' height=' + bgH.toFixed(0) + ' x=' + v.bgPanX + ' y=' + v.bgPanY + '\n' +
+      'Right panel photo: zoom=' + v.panelZoom + '% -> width=' + panelW.toFixed(0) + ' height=' + panelH.toFixed(0) + ' x=' + (759 + v.panelPanX) + ' y=' + v.panelPanY + '\n' +
+      '(right panel clip block stays fixed: x=759 y=0 width=525 height=720 — only the image inside it pans/zooms)';
+  }
+
+  for (const k in controls) controls[k].addEventListener('input', apply);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    for (const k in controls) controls[k].value = DEFAULTS[k];
+    apply();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(document.getElementById('readout').textContent).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy values'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  apply();
+</script>
+
+</body>
+</html>

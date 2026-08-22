@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Young Icons — Holiday Camps hero crop editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+  :root { --color-academy-green: #1a7a47; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, sans-serif; background: #d8d8d2; }
+
+  .notice {
+    background: #fff3cd; color: #664d03; font-size: 13px; padding: 10px 20px;
+    text-align: center; border-bottom: 1px solid #e3d8a8;
+  }
+
+  .stage-wrap { padding: 40px 380px 60px 20px; display: flex; justify-content: center; }
+  .stage { width: 100%; max-width: 1440px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
+
+  section.hero { width: 100%; background-color: #f5f5f2; }
+  svg { display: block; width: 100%; height: auto; }
+
+  .panel {
+    position: fixed; top: 0; right: 0; width: 360px; height: 100vh; background: #17181a; color: #fff;
+    overflow-y: auto; padding: 20px; font-family: -apple-system, sans-serif; box-shadow: -4px 0 20px rgba(0,0,0,0.3); z-index: 999;
+  }
+  .panel h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 4px; }
+  .panel .sub { font-size: 11px; color: rgba(255,255,255,0.5); margin: 0 0 16px; line-height: 1.5; }
+  .field { margin-bottom: 14px; }
+  .field label { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .field label .val { color: #6fd39a; font-weight: 700; }
+  .field input[type="range"] { width: 100%; }
+  .readout {
+    background: #0c0d0e; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px;
+    font-family: Consolas, monospace; font-size: 10.5px; line-height: 1.55; color: #6fd39a; white-space: pre;
+    margin-bottom: 14px; max-height: 220px; overflow-y: auto;
+  }
+  .btnrow { display: flex; gap: 8px; margin-bottom: 18px; }
+  button.reset, button.copy {
+    flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 10px; border-radius: 6px; cursor: pointer;
+  }
+  button.copy { border-color: var(--color-academy-green); background: var(--color-academy-green); }
+  button.copy.copied { background: #0c0d0e; }
+  .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0; }
+  .grouplabel { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<div class="notice">Sandbox for font embedding is down — Anton pulled from Google Fonts CDN. Values below are exact regardless. Width/x-positions are locked everywhere — only vertical (height + pan) controls are exposed, per "shorten top/bottom, not sides."</div>
+
+<div class="stage-wrap">
+  <div class="stage">
+    <section class="hero">
+      <svg id="heroSvg" viewBox="0 0 1280 720" width="100%" style="display:block; height:auto;">
+        <defs>
+          <image id="hc-camps-photo" href="../../public/images/placeholder/holiday-camps-hero.jpg"
+                 x="0" y="-120" width="1280" height="960" preserveAspectRatio="xMidYMid slice" />
+          <clipPath id="hc-right-block">
+            <rect x="759" y="0" width="525" height="720" />
+          </clipPath>
+          <clipPath id="hc-camps-clip">
+            <text x="106" y="567" font-family="Anton" font-size="215" id="campsClipText">CAMPS</text>
+          </clipPath>
+        </defs>
+
+        <rect x="0" y="0" width="1280" height="720" fill="#f5f5f2" />
+
+        <image id="rightPanelImg" href="../../public/images/placeholder/holiday-camps-hero.jpg"
+               x="759" y="0" width="525" height="720"
+               preserveAspectRatio="xMinYMid slice" clip-path="url(#hc-right-block)" />
+
+        <text x="106" y="356" font-family="Anton" font-size="215" fill="#000" id="holidayText">HOLIDAY</text>
+
+        <use href="#hc-camps-photo" clip-path="url(#hc-camps-clip)" />
+      </svg>
+    </section>
+  </div>
+</div>
+
+<div class="panel">
+  <h1>Holiday Camps hero — crop</h1>
+  <p class="sub">Shortens the frame top/bottom only. Width and every x-position stay locked.</p>
+
+  <div class="readout" id="readout"></div>
+  <div class="btnrow">
+    <button class="reset" id="resetBtn">Reset</button>
+    <button class="copy" id="copyBtn">Copy values</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Frame (viewBox — this is the actual shorten control)</div>
+  <div class="field">
+    <label>Frame height <span class="val" id="vHeight">720</span></label>
+    <input type="range" id="viewHeight" min="420" max="720" value="720">
+  </div>
+  <div class="field">
+    <label>Vertical crop offset <span class="val" id="vOffset">0</span></label>
+    <input type="range" id="viewOffset" min="-150" max="150" value="0">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">HOLIDAY text position</div>
+  <div class="field">
+    <label>Baseline Y <span class="val" id="vHolidayY">356</span></label>
+    <input type="range" id="holidayY" min="200" max="500" value="356">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">CAMPS (photo-clip text) position</div>
+  <div class="field">
+    <label>Baseline Y <span class="val" id="vCampsY">567</span></label>
+    <input type="range" id="campsY" min="400" max="700" value="567">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Right-side photo panel — pan only</div>
+  <div class="field">
+    <label>Photo pan Y <span class="val" id="vPanelPan">0</span></label>
+    <input type="range" id="panelPan" min="-200" max="200" value="0">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Background photo (behind CAMPS letters) — pan only</div>
+  <div class="field">
+    <label>Photo pan Y <span class="val" id="vBgPan">-120</span></label>
+    <input type="range" id="bgPan" min="-350" max="100" value="-120">
+  </div>
+</div>
+
+<script>
+  const svg = document.getElementById('heroSvg');
+  const controls = {
+    viewHeight: document.getElementById('viewHeight'),
+    viewOffset: document.getElementById('viewOffset'),
+    holidayY: document.getElementById('holidayY'),
+    campsY: document.getElementById('campsY'),
+    panelPan: document.getElementById('panelPan'),
+    bgPan: document.getElementById('bgPan'),
+  };
+  const DEFAULTS = { viewHeight: 720, viewOffset: 0, holidayY: 356, campsY: 567, panelPan: 0, bgPan: -120 };
+
+  function apply() {
+    const v = {};
+    for (const k in controls) v[k] = parseInt(controls[k].value, 10);
+
+    svg.setAttribute('viewBox', `0 ${v.viewOffset} 1280 ${v.viewHeight}`);
+    document.getElementById('holidayText').setAttribute('y', v.holidayY);
+    document.getElementById('campsClipText').setAttribute('y', v.campsY);
+
+    const panelImg = document.getElementById('rightPanelImg');
+    panelImg.setAttribute('y', v.panelPan);
+    panelImg.setAttribute('height', 720);
+
+    document.getElementById('hc-camps-photo').setAttribute('y', v.bgPan);
+
+    document.getElementById('vHeight').textContent = v.viewHeight;
+    document.getElementById('vOffset').textContent = v.viewOffset;
+    document.getElementById('vHolidayY').textContent = v.holidayY;
+    document.getElementById('vCampsY').textContent = v.campsY;
+    document.getElementById('vPanelPan').textContent = v.panelPan;
+    document.getElementById('vBgPan').textContent = v.bgPan;
+
+    document.getElementById('readout').textContent =
+      'viewBox: "0 ' + v.viewOffset + ' 1280 ' + v.viewHeight + '"  (was "0 0 1280 720")\n' +
+      'HOLIDAY text y: ' + v.holidayY + '  (was 356)\n' +
+      'CAMPS clip text y: ' + v.campsY + '  (was 567)\n' +
+      'right panel image y: ' + v.panelPan + '  (was 0, height stays 720)\n' +
+      'background photo (#hc-camps-photo) y: ' + v.bgPan + '  (was -120)\n' +
+      '—\n' +
+      'x-positions, widths, right-block clip rect: all untouched';
+  }
+
+  for (const k in controls) controls[k].addEventListener('input', apply);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    for (const k in controls) controls[k].value = DEFAULTS[k];
+    apply();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(document.getElementById('readout').textContent).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy values'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  apply();
+</script>
+
+</body>
+</html>

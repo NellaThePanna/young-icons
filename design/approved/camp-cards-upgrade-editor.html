@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Young Icons — Camp Cards upgrade editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-academy-green: #1a7a47;
+    --color-warm-off-white: #f5f5f2;
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-body); background: #d8d8d2; }
+
+  .notice {
+    background: #fff3cd; color: #664d03; font-family: var(--font-body); font-size: 13px;
+    padding: 10px 20px; text-align: center; border-bottom: 1px solid #e3d8a8;
+  }
+  .notice.photo {
+    background: #ffe4d6; color: #7a3410; border-bottom: 1px solid #e0a880;
+  }
+
+  .stage-wrap { padding: 40px 380px 120px 20px; display: flex; justify-content: center; }
+  .stage { width: 100%; max-width: 1440px; background: var(--color-warm-off-white); box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
+
+  section.camps { padding: 80px 24px; }
+  .inner { margin: 0 auto; max-width: 1120px; }
+
+  .eyebrow {
+    font-family: var(--font-body); font-weight: 700; font-size: 13px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--color-academy-green); margin: 0 0 8px;
+  }
+  h2.heading {
+    font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+    color: var(--color-black); margin: 0 0 40px; line-height: 1;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card {
+    background: var(--color-white); border-radius: 8px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .card .photo { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
+  .card .photo img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.92; }
+  .card .body { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .card h3 {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;
+    color: var(--color-black); margin: 0;
+  }
+  .inforow { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; color: rgba(0,0,0,0.7); }
+  .inforow svg { color: var(--color-academy-green); flex-shrink: 0; }
+  .register-now {
+    margin-top: auto; border-radius: 999px; padding: 12px 20px; text-align: center;
+    font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #fff;
+    background: var(--color-academy-green); text-decoration: none;
+  }
+
+  .interest-row { display: flex; justify-content: center; margin-top: 32px; }
+  .register-interest {
+    border-radius: 999px; padding: 12px 24px; font-family: var(--font-body); font-weight: 700;
+    font-size: 14px; color: var(--color-black); background: transparent;
+    border: 1.5px solid rgba(0,0,0,0.25); text-decoration: none; display: inline-flex;
+    align-items: center; gap: 6px;
+  }
+
+  /* editor chrome */
+  .panel {
+    position: fixed; top: 0; right: 0; width: 360px; height: 100vh; background: #17181a; color: #fff;
+    overflow-y: auto; padding: 20px; font-family: var(--font-body); box-shadow: -4px 0 20px rgba(0,0,0,0.3); z-index: 999;
+  }
+  .panel h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 4px; }
+  .panel .sub { font-size: 11px; color: rgba(255,255,255,0.5); margin: 0 0 16px; line-height: 1.5; }
+  .field { margin-bottom: 14px; }
+  .field label { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .field label .val { color: #6fd39a; font-weight: 700; }
+  .field input[type="range"] { width: 100%; }
+  .field input[type="checkbox"] { margin-right: 6px; }
+  .readout {
+    background: #0c0d0e; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px;
+    font-family: Consolas, monospace; font-size: 10.5px; line-height: 1.55; color: #6fd39a; white-space: pre;
+    margin-bottom: 14px; max-height: 200px; overflow-y: auto;
+  }
+  .btnrow { display: flex; gap: 8px; margin-bottom: 18px; }
+  button.reset, button.copy {
+    flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 10px; border-radius: 6px; cursor: pointer;
+  }
+  button.copy { border-color: var(--color-academy-green); background: var(--color-academy-green); }
+  button.copy.copied { background: #0c0d0e; }
+  .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0; }
+  .grouplabel { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+
+  .thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-bottom: 14px; }
+  .thumbs button { padding: 0; border: 2px solid transparent; border-radius: 5px; overflow: hidden; cursor: pointer; background: #000; height: 36px; }
+  .thumbs button.active { border-color: var(--color-academy-green); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; }
+  .thumbs button.active img { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="notice">Sandbox for base64 font embedding is down again — pulling Anton/Inter from Google Fonts CDN. Values are exact regardless.</div>
+<div class="notice photo">All 3 card photos below are STAND-INS from the existing placeholder set — none of the mockup's actual photos (soccer team, painting, tug-of-war) exist in the repo yet. Pick the closest match now, swap for real photography once sourced (tracked separately).</div>
+
+<div class="stage-wrap">
+  <div class="stage">
+    <section class="camps">
+      <div class="inner">
+        <p class="eyebrow" id="eyebrowEl">UPCOMING CAMPS</p>
+        <h2 class="heading" id="headingEl" style="font-size: 2.4rem;">FIND YOUR NEXT ADVENTURE</h2>
+
+        <div class="grid">
+          <div class="card">
+            <div class="photo"><img id="photo0" src="../../public/images/placeholder/activity-football.png" alt=""></div>
+            <div class="body">
+              <h3>Summer Holiday Camp</h3>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-7.1-7-12a7 7 0 1 1 14 0c0 4.9-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Cedar School</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>14 July – 1 August 2025</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Ages 4–12</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>8:30 AM – 2:00 PM</div>
+              <a class="register-now" href="#">Register Now →</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="photo"><img id="photo1" src="../../public/images/placeholder/karate-crawl.jpg" alt=""></div>
+            <div class="body">
+              <h3>October Camp</h3>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-7.1-7-12a7 7 0 1 1 14 0c0 4.9-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Cedar School</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>6 October – 17 October 2025</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Ages 4–12</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>8:30 AM – 2:00 PM</div>
+              <a class="register-now" href="#">Register Now →</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="photo"><img id="photo2" src="../../public/images/placeholder/activity-rugby.png" alt=""></div>
+            <div class="body">
+              <h3>Winter Camp</h3>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-7.1-7-12a7 7 0 1 1 14 0c0 4.9-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Cedar School</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>5 January – 16 January 2026</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Ages 4–12</div>
+              <div class="inforow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>8:30 AM – 2:00 PM</div>
+              <a class="register-now" href="#">Register Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-row" id="interestRow">
+          <a class="register-interest" href="#">Register Your Interest →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="panel">
+  <h1>Camp Cards — upgrade</h1>
+  <p class="sub">Eyebrow + bold header + per-card photo + interest button. Live readout updates as you go.</p>
+
+  <div class="readout" id="readout"></div>
+  <div class="btnrow">
+    <button class="reset" id="resetBtn">Reset</button>
+    <button class="copy" id="copyBtn">Copy values</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Header</div>
+  <div class="field">
+    <label>Heading size <span class="val" id="vHeadSize">2.4rem</span></label>
+    <input type="range" id="headSize" min="18" max="40" value="24">
+  </div>
+  <div class="field">
+    <label><input type="checkbox" id="showEyebrow" checked> Show "UPCOMING CAMPS" eyebrow</label>
+  </div>
+  <div class="field">
+    <label><input type="checkbox" id="showInterest" checked> Show "Register Your Interest" button</label>
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Card 1 photo — Summer Holiday Camp</div>
+  <div class="thumbs" id="thumbs0"></div>
+
+  <div class="grouplabel">Card 2 photo — October Camp</div>
+  <div class="thumbs" id="thumbs1"></div>
+
+  <div class="grouplabel">Card 3 photo — Winter Camp</div>
+  <div class="thumbs" id="thumbs2"></div>
+</div>
+
+<script>
+  const PHOTOS = [
+    "ball-skills.jpg","obstacle-course.jpg","karate-crawl.jpg","ballet-ribbon.jpg","tennis-rackets.jpg",
+    "nursery-basketball.jpg","activity-football.png","activity-rugby.png","activity-boxing.png","holiday-camps-hero.jpg"
+  ];
+  const current = ["activity-football.png", "karate-crawl.jpg", "activity-rugby.png"];
+
+  [0,1,2].forEach(idx => {
+    const el = document.getElementById('thumbs' + idx);
+    PHOTOS.forEach(name => {
+      const btn = document.createElement('button');
+      btn.className = name === current[idx] ? 'active' : '';
+      btn.title = name;
+      const img = document.createElement('img');
+      img.src = '../../public/images/placeholder/' + name;
+      btn.appendChild(img);
+      btn.addEventListener('click', () => {
+        current[idx] = name;
+        el.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('photo' + idx).src = '../../public/images/placeholder/' + name;
+        apply();
+      });
+      el.appendChild(btn);
+    });
+  });
+
+  const controls = {
+    headSize: document.getElementById('headSize'),
+  };
+  const toggles = {
+    showEyebrow: document.getElementById('showEyebrow'),
+    showInterest: document.getElementById('showInterest'),
+  };
+  const DEFAULTS = { headSize: 24, showEyebrow: true, showInterest: true, photos: ["activity-football.png", "karate-crawl.jpg", "activity-rugby.png"] };
+
+  function apply() {
+    const headSize = parseInt(controls.headSize.value, 10);
+    document.getElementById('headingEl').style.fontSize = (headSize / 10) + 'rem';
+    document.getElementById('vHeadSize').textContent = (headSize / 10) + 'rem';
+
+    document.getElementById('eyebrowEl').style.display = toggles.showEyebrow.checked ? 'block' : 'none';
+    document.getElementById('interestRow').style.display = toggles.showInterest.checked ? 'flex' : 'none';
+
+    document.getElementById('readout').textContent =
+      'headingFontSize: ' + (headSize / 10) + 'rem\n' +
+      'showEyebrow ("UPCOMING CAMPS"): ' + toggles.showEyebrow.checked + '\n' +
+      'showRegisterInterest button: ' + toggles.showInterest.checked + '\n' +
+      'card1Photo (Summer): ' + current[0] + '\n' +
+      'card2Photo (October): ' + current[1] + '\n' +
+      'card3Photo (Winter): ' + current[2] + '\n' +
+      '—\n' +
+      '(all 3 photos are stand-ins — real photography not yet sourced)';
+  }
+
+  controls.headSize.addEventListener('input', apply);
+  toggles.showEyebrow.addEventListener('change', apply);
+  toggles.showInterest.addEventListener('change', apply);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    controls.headSize.value = DEFAULTS.headSize;
+    toggles.showEyebrow.checked = DEFAULTS.showEyebrow;
+    toggles.showInterest.checked = DEFAULTS.showInterest;
+    DEFAULTS.photos.forEach((name, idx) => {
+      current[idx] = name;
+      document.getElementById('photo' + idx).src = '../../public/images/placeholder/' + name;
+      const el = document.getElementById('thumbs' + idx);
+      el.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.title === name));
+    });
+    apply();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = document.getElementById('readout').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy values'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  apply();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Young Icons — Nursery Enquiry photo/form resize</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-academy-green: #1a7a47;
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-body); background: #d8d8d2; }
+
+  .notice {
+    background: #fff3cd;
+    color: #664d03;
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e3d8a8;
+  }
+
+  .stage-wrap { padding: 40px 380px 120px 20px; display: flex; justify-content: center; }
+  .stage { width: 100%; max-width: 1440px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
+
+  section.enquiry {
+    padding-left: 24px; padding-right: 24px;
+    background-color: var(--color-white);
+    border-top: 4px solid var(--color-academy-green);
+    padding-top: 48px; padding-bottom: 48px;
+    transition: border-top-width 0.05s;
+  }
+
+  .grid {
+    margin: 0 auto;
+    max-width: 1280px;
+    display: grid;
+    gap: 24px 40px;
+    align-items: stretch;
+  }
+
+  .photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    min-height: 220px;
+  }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+  .photo .content { position: relative; z-index: 2; padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+  .photo .eyebrow {
+    font-family: var(--font-body); font-weight: 500; font-size: 14px; color: rgba(255,255,255,0.85);
+    text-transform: uppercase; letter-spacing: 0.15em; margin: 0 0 12px;
+  }
+  .photo h2 {
+    font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 3.2vw, 3rem);
+    text-transform: uppercase; line-height: 1.1; color: #fff; margin: 0;
+  }
+
+  .formcol form { display: block; }
+  .fgrid { display: grid; grid-template-columns: 1fr 1fr; }
+  .fitem label {
+    display: block; font-family: var(--font-body); color: rgba(0,0,0,0.5); margin-bottom: 4px;
+  }
+  .fitem input, .fitem select, .fitem textarea {
+    width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.18); background: transparent;
+    font-family: var(--font-body); color: #000; outline: none; padding: 4px 2px 8px;
+  }
+  .fitem.full { grid-column: 1 / -1; }
+  .submitbtn {
+    font-family: var(--font-body); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--color-academy-green); background: none; border: none; padding: 0; margin-top: 20px;
+    font-size: 12px; display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  /* ---- editor chrome ---- */
+  .panel {
+    position: fixed; top: 0; right: 0; width: 360px; height: 100vh; background: #17181a; color: #fff;
+    overflow-y: auto; padding: 20px; font-family: var(--font-body); box-shadow: -4px 0 20px rgba(0,0,0,0.3); z-index: 999;
+  }
+  .panel h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 4px; }
+  .panel .sub { font-size: 11px; color: rgba(255,255,255,0.5); margin: 0 0 16px; line-height: 1.5; }
+  .field { margin-bottom: 16px; }
+  .field label { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .field label .val { color: #6fd39a; font-weight: 700; }
+  .field input[type="range"] { width: 100%; }
+  .toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+  .toggle button {
+    flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-family: var(--font-body); font-size: 10px; text-transform: uppercase; padding: 8px 4px; border-radius: 6px; cursor: pointer;
+  }
+  .toggle button.active { background: var(--color-academy-green); border-color: var(--color-academy-green); }
+
+  .readout {
+    background: #0c0d0e; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px;
+    font-family: Consolas, monospace; font-size: 10.5px; line-height: 1.55; color: #6fd39a; white-space: pre;
+    margin-bottom: 14px; max-height: 200px; overflow-y: auto;
+  }
+  .btnrow { display: flex; gap: 8px; margin-bottom: 18px; }
+  button.reset, button.copy {
+    flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 10px; border-radius: 6px; cursor: pointer;
+  }
+  button.copy { border-color: var(--color-academy-green); background: var(--color-academy-green); }
+  button.copy.copied { background: #0c0d0e; }
+  .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0; }
+  .grouplabel { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+
+  .thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 18px; }
+  .thumbs button {
+    padding: 0; border: 2px solid transparent; border-radius: 6px; overflow: hidden; cursor: pointer; background: #000; height: 44px;
+  }
+  .thumbs button.active { border-color: var(--color-academy-green); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; }
+  .thumbs button.active img { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="notice">Sandbox that embeds brand fonts offline is still down — this preview pulls Anton/Inter from Google Fonts CDN (needs internet to render correctly). Values are exact regardless.</div>
+
+<div class="stage-wrap">
+  <div class="stage">
+    <section class="enquiry">
+      <div class="grid" id="grid" style="grid-template-columns: 33% 1fr;">
+        <div class="photo" id="photo" style="height:347px;">
+          <img id="photoImg" src="../../public/images/placeholder/obstacle-course.jpg" alt="" style="object-position:31% 9%;">
+          <div class="overlay"></div>
+          <div class="content">
+            <p class="eyebrow">START A CONVERSATION</p>
+            <h2>LET'S GET YOUR<br>NURSERY MOVING.</h2>
+          </div>
+        </div>
+        <div class="formcol">
+          <form>
+            <div class="fgrid" id="fgrid" style="gap: 12px 20px;">
+              <div class="fitem"><label>Nursery Name</label><input></div>
+              <div class="fitem"><label>Contact Name</label><input></div>
+              <div class="fitem"><label>Job Role</label><input></div>
+              <div class="fitem"><label>Location / Emirate</label><select><option>Location / Emirate</option></select></div>
+              <div class="fitem"><label>Email Address</label><input></div>
+              <div class="fitem"><label>Phone Number</label><input></div>
+              <div class="fitem full"><label>Interested In</label><select><option>Interested In</option></select></div>
+              <div class="fitem full"><label>Message (optional)</label><textarea rows="3"></textarea></div>
+            </div>
+            <button type="button" class="submitbtn">START A CONVERSATION →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="panel">
+  <h1>Nursery Enquiry — photo/form resize</h1>
+  <p class="sub">Pick a photo, resize the panel, form adjusts alongside it. Live readout updates as you go.</p>
+
+  <div class="readout" id="readout"></div>
+  <div class="btnrow">
+    <button class="reset" id="resetBtn">Reset</button>
+    <button class="copy" id="copyBtn">Copy values</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Section border (new — bring it lower/thinner)</div>
+  <div class="field">
+    <label>Top border thickness <span class="val" id="vBorderW">4px</span></label>
+    <input type="range" id="borderW" min="1" max="4" value="4">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Photo — pick one</div>
+  <div class="thumbs" id="thumbs"></div>
+
+  <div class="grouplabel">Photo panel</div>
+  <div class="field">
+    <label>Column width <span class="val" id="vColW">33%</span></label>
+    <input type="range" id="colW" min="28" max="55" value="33">
+  </div>
+  <div class="toggle">
+    <button id="modeStretch">Stretch to form</button>
+    <button id="modeFixed" class="active">Fixed height</button>
+  </div>
+  <div class="field" id="fixedHField" style="display:block;">
+    <label>Fixed height <span class="val" id="vFixedH">347px</span></label>
+    <input type="range" id="fixedH" min="220" max="480" value="347">
+  </div>
+  <div class="field">
+    <label>Crop position X <span class="val" id="vPosX">31%</span></label>
+    <input type="range" id="posX" min="0" max="100" value="31">
+  </div>
+  <div class="field">
+    <label>Crop position Y <span class="val" id="vPosY">9%</span></label>
+    <input type="range" id="posY" min="0" max="100" value="9">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Form density</div>
+  <div class="field">
+    <label>Field row gap <span class="val" id="vFGap">12 / 20px</span></label>
+    <input type="range" id="fGap" min="4" max="40" value="12">
+  </div>
+  <div class="field">
+    <label>Input font size <span class="val" id="vFSize">13px</span></label>
+    <input type="range" id="fSize" min="11" max="16" value="13">
+  </div>
+</div>
+
+<script>
+  const PHOTOS = [
+    "ball-skills.jpg","obstacle-course.jpg","karate-crawl.jpg","ballet-ribbon.jpg","tennis-rackets.jpg",
+    "nursery-basketball.jpg","activity-football.png","activity-rugby.png","activity-boxing.png","holiday-camps-hero.jpg"
+  ];
+  const thumbsEl = document.getElementById('thumbs');
+  let currentPhoto = "obstacle-course.jpg";
+
+  PHOTOS.forEach(name => {
+    const btn = document.createElement('button');
+    btn.className = name === currentPhoto ? 'active' : '';
+    btn.title = name;
+    const img = document.createElement('img');
+    img.src = '../../public/images/placeholder/' + name;
+    btn.appendChild(img);
+    btn.addEventListener('click', () => {
+      currentPhoto = name;
+      document.querySelectorAll('.thumbs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('photoImg').src = '../../public/images/placeholder/' + name;
+      apply();
+    });
+    thumbsEl.appendChild(btn);
+  });
+
+  let heightMode = 'fixed';
+  document.getElementById('modeStretch').addEventListener('click', () => { heightMode = 'stretch'; syncModeButtons(); apply(); });
+  document.getElementById('modeFixed').addEventListener('click', () => { heightMode = 'fixed'; syncModeButtons(); apply(); });
+  function syncModeButtons() {
+    document.getElementById('modeStretch').classList.toggle('active', heightMode === 'stretch');
+    document.getElementById('modeFixed').classList.toggle('active', heightMode === 'fixed');
+    document.getElementById('fixedHField').style.display = heightMode === 'fixed' ? 'block' : 'none';
+  }
+
+  const controls = {
+    borderW: document.getElementById('borderW'),
+    colW: document.getElementById('colW'),
+    fixedH: document.getElementById('fixedH'),
+    posX: document.getElementById('posX'),
+    posY: document.getElementById('posY'),
+    fGap: document.getElementById('fGap'),
+    fSize: document.getElementById('fSize'),
+  };
+  const DEFAULTS = { borderW: 4, colW: 33, fixedH: 347, posX: 31, posY: 9, fGap: 12, fSize: 13, heightMode: 'fixed', photo: 'obstacle-course.jpg' };
+
+  function apply() {
+    const v = {};
+    for (const k in controls) v[k] = parseInt(controls[k].value, 10);
+
+    document.querySelector('section.enquiry').style.borderTopWidth = v.borderW + 'px';
+    document.getElementById('grid').style.gridTemplateColumns = v.colW + '% 1fr';
+    const photoEl = document.getElementById('photo');
+    if (heightMode === 'stretch') {
+      photoEl.style.minHeight = '320px';
+      photoEl.style.height = '100%';
+    } else {
+      photoEl.style.height = v.fixedH + 'px';
+      photoEl.style.minHeight = 'unset';
+    }
+    document.getElementById('photoImg').style.objectPosition = v.posX + '% ' + v.posY + '%';
+    document.getElementById('fgrid').style.gap = v.fGap + 'px ' + (v.fGap + 8) + 'px';
+    document.querySelectorAll('.fitem input, .fitem select, .fitem textarea').forEach(el => {
+      el.style.fontSize = v.fSize + 'px';
+    });
+
+    document.getElementById('vBorderW').textContent = v.borderW + 'px';
+    document.getElementById('vColW').textContent = v.colW + '%';
+    document.getElementById('vFixedH').textContent = v.fixedH + 'px';
+    document.getElementById('vPosX').textContent = v.posX + '%';
+    document.getElementById('vPosY').textContent = v.posY + '%';
+    document.getElementById('vFGap').textContent = v.fGap + ' / ' + (v.fGap + 8) + 'px';
+    document.getElementById('vFSize').textContent = v.fSize + 'px';
+
+    document.getElementById('readout').textContent =
+      'topBorderWidth: ' + v.borderW + 'px\n' +
+      'photo: ' + currentPhoto + '\n' +
+      'columnWidth (photo): ' + v.colW + '%  (form gets ' + (100 - v.colW) + '%)\n' +
+      'heightMode: ' + heightMode + (heightMode === 'fixed' ? ' (' + v.fixedH + 'px)' : ' (matches form height)') + '\n' +
+      'objectPosition: ' + v.posX + '% ' + v.posY + '%\n' +
+      'fieldRowGap: ' + v.fGap + 'px ' + (v.fGap + 8) + 'px\n' +
+      'inputFontSize: ' + v.fSize + 'px\n' +
+      '—\n' +
+      '(previously locked: obstacle-course.jpg, 33% col, fixed 347px, pos 31%/9%, gap 12/20, fontSize 13, border 4px)';
+  }
+
+  for (const k in controls) controls[k].addEventListener('input', apply);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    for (const k in controls) controls[k].value = DEFAULTS[k];
+    heightMode = DEFAULTS.heightMode;
+    currentPhoto = DEFAULTS.photo;
+    syncModeButtons();
+    document.getElementById('photoImg').src = '../../public/images/placeholder/' + currentPhoto;
+    document.querySelectorAll('.thumbs button').forEach(b => b.classList.toggle('active', b.title === currentPhoto));
+    apply();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = document.getElementById('readout').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy values'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  syncModeButtons();
+  apply();
+</script>
+
+</body>
+</html>

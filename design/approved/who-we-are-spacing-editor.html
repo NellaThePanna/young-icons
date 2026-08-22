@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Young Icons — Who We Are spacing editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black: #000000;
+    --color-academy-green: #1a7a47;
+    --color-warm-off-white: #f5f5f2;
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-body); background: #d8d8d2; }
+
+  .notice {
+    background: #fff3cd;
+    color: #664d03;
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e3d8a8;
+  }
+
+  .stage-wrap {
+    padding: 40px 20px 120px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 1440px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+
+  section.who-we-are {
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: var(--color-warm-off-white);
+    overflow: visible;
+  }
+
+  .who-grid {
+    margin: 0 auto;
+    max-width: 1280px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .who-text { display: flex; flex-direction: column; justify-content: center; }
+
+  .who-eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--color-academy-green);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin: 0 0 12px;
+  }
+
+  .who-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--color-black);
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0 0 24px;
+  }
+  .who-heading span { color: var(--color-academy-green); }
+
+  .who-body {
+    font-family: var(--font-body);
+    color: rgba(0,0,0,0.7);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 0 32px;
+  }
+
+  .who-cta {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--color-academy-green);
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .who-photos { position: relative; }
+
+  .who-photo-large {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .who-photo-large img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block;
+  }
+
+  .who-photo-small {
+    position: absolute;
+    width: 45%;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .who-photo-small img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  /* ---- editor chrome ---- */
+  .panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: 320px;
+    height: 100vh;
+    background: #17181a;
+    color: #fff;
+    overflow-y: auto;
+    padding: 20px;
+    font-family: var(--font-body);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+  .panel h1 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 4px;
+  }
+  .panel .sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
+  }
+  .field label .val { color: #6fd39a; font-weight: 700; }
+  .field input[type="range"] { width: 100%; }
+
+  .readout {
+    background: #0c0d0e;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #6fd39a;
+    white-space: pre;
+    margin-bottom: 14px;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .btnrow { display: flex; gap: 8px; margin-bottom: 20px; }
+  button.reset, button.copy {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.copy { border-color: var(--color-academy-green); background: var(--color-academy-green); }
+  button.copy.copied { background: #0c0d0e; }
+
+  .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 18px 0; }
+  .grouplabel { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+
+  .heightline {
+    position: absolute;
+    left: 0; right: 0;
+    border-top: 1px dashed rgba(26,122,71,0.6);
+    pointer-events: none;
+  }
+  .heightline.top { top: 0; }
+  .heightline.bottom { bottom: 0; }
+  .heightline span {
+    position: absolute; right: 4px; top: -18px;
+    font-family: monospace; font-size: 10px; color: var(--color-academy-green); background: #fff; padding: 0 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="notice">Sandbox that embeds brand fonts as base64 is offline right now — this preview pulls Anton/Inter from Google Fonts CDN instead (needs internet to render correctly). Values below are exact regardless. Will re-save with embedded fonts once the sandbox is back.</div>
+
+<div class="stage-wrap">
+  <div class="stage">
+    <section class="who-we-are" id="section" style="position:relative;">
+      <div class="heightline top" id="lineTop"><span id="padTopLabel">80px</span></div>
+      <div class="who-grid" id="grid">
+        <div class="who-text">
+          <p class="who-eyebrow">THIS IS YOUNG ICONS</p>
+          <h2 class="who-heading">BUILT FOR THE WAY CHILDREN <span>MOVE.</span></h2>
+          <p class="who-body">Age-appropriate coaching that builds skills, confidence and a lifelong love of movement.</p>
+          <a class="who-cta" href="#">MEET YOUNG ICONS →</a>
+        </div>
+        <div class="who-photos">
+          <div class="who-photo-large" id="photoLarge">
+            <img src="../../public/images/placeholder/ball-skills.jpg" alt="">
+          </div>
+          <div class="who-photo-small" id="photoSmall">
+            <img src="../../public/images/placeholder/obstacle-course.jpg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="heightline bottom" id="lineBottom"><span id="padBottomLabel">80px</span></div>
+    </section>
+  </div>
+</div>
+
+<div class="panel">
+  <h1>Who We Are — spacing</h1>
+  <p class="sub">Drag to shorten the top/bottom margin. Live readout updates as you move.</p>
+
+  <div class="readout" id="readout"></div>
+
+  <div class="btnrow">
+    <button class="reset" id="resetBtn">Reset</button>
+    <button class="copy" id="copyBtn">Copy values</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Section padding (main ask)</div>
+
+  <div class="field">
+    <label>Padding top <span class="val" id="vPadTop">80px</span></label>
+    <input type="range" id="padTop" min="0" max="120" value="80">
+  </div>
+  <div class="field">
+    <label>Padding bottom <span class="val" id="vPadBottom">80px</span></label>
+    <input type="range" id="padBottom" min="0" max="120" value="80">
+  </div>
+
+  <div class="divider"></div>
+  <div class="grouplabel">Secondary — also affects total height</div>
+
+  <div class="field">
+    <label>Column gap <span class="val" id="vGap">64px</span></label>
+    <input type="range" id="colGap" min="16" max="96" value="64">
+  </div>
+  <div class="field">
+    <label>Large photo height <span class="val" id="vPhotoH">400px</span></label>
+    <input type="range" id="photoH" min="220" max="500" value="400">
+  </div>
+  <div class="field">
+    <label>Small photo height <span class="val" id="vPhotoSH">240px</span></label>
+    <input type="range" id="photoSH" min="140" max="320" value="240">
+  </div>
+</div>
+
+<script>
+  const els = {
+    section: document.getElementById('section'),
+    grid: document.getElementById('grid'),
+    photoLarge: document.getElementById('photoLarge'),
+    photoSmall: document.getElementById('photoSmall'),
+    lineTop: document.getElementById('lineTop'),
+    lineBottom: document.getElementById('lineBottom'),
+    padTopLabel: document.getElementById('padTopLabel'),
+    padBottomLabel: document.getElementById('padBottomLabel'),
+  };
+
+  const controls = {
+    padTop: document.getElementById('padTop'),
+    padBottom: document.getElementById('padBottom'),
+    colGap: document.getElementById('colGap'),
+    photoH: document.getElementById('photoH'),
+    photoSH: document.getElementById('photoSH'),
+  };
+
+  const DEFAULTS = { padTop: 80, padBottom: 80, colGap: 64, photoH: 400, photoSH: 240 };
+
+  function apply() {
+    const v = {};
+    for (const k in controls) v[k] = parseInt(controls[k].value, 10);
+
+    els.section.style.paddingTop = v.padTop + 'px';
+    els.section.style.paddingBottom = v.padBottom + 'px';
+    els.grid.style.gap = v.colGap + 'px';
+    els.photoLarge.style.height = v.photoH + 'px';
+    els.photoSmall.style.height = v.photoSH + 'px';
+    els.photoSmall.style.bottom = '-40px';
+    els.photoSmall.style.left = '-30px';
+
+    els.padTopLabel.textContent = v.padTop + 'px';
+    els.padBottomLabel.textContent = v.padBottom + 'px';
+
+    document.getElementById('vPadTop').textContent = v.padTop + 'px';
+    document.getElementById('vPadBottom').textContent = v.padBottom + 'px';
+    document.getElementById('vGap').textContent = v.colGap + 'px';
+    document.getElementById('vPhotoH').textContent = v.photoH + 'px';
+    document.getElementById('vPhotoSH').textContent = v.photoSH + 'px';
+
+    const totalHeight = v.padTop + v.padBottom + Math.max(v.photoH, 300);
+    document.getElementById('readout').textContent =
+      'paddingTop: ' + v.padTop + 'px\n' +
+      'paddingBottom: ' + v.padBottom + 'px\n' +
+      'columnGap (md): ' + v.colGap + 'px\n' +
+      'photoLarge height: ' + v.photoH + 'px\n' +
+      'photoSmall height: ' + v.photoSH + 'px\n' +
+      '—\n' +
+      'approx. total section height: ' + totalHeight + 'px\n' +
+      '(was 80/80/64/400/240, ~880px)';
+  }
+
+  for (const k in controls) controls[k].addEventListener('input', apply);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    for (const k in controls) controls[k].value = DEFAULTS[k];
+    apply();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = document.getElementById('readout').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy values'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  apply();
+</script>
+
+</body>
+</html>
