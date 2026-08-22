@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import Image from "next/image"
@@ -32,6 +32,26 @@ export default function HeroHome({
   const ctasRef = useRef<HTMLDivElement>(null)
   const curtainLeftRef = useRef<HTMLDivElement>(null)
   const curtainRightRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    // Video is not `autoPlay` — that attribute makes browsers fetch the full
+    // file eagerly during initial HTML parse, competing with LCP. Playing it
+    // programmatically, deferred to the browser's idle time, lets the poster
+    // Image paint (and the hero text render) before the video fetch starts.
+    const idle =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback
+        : (cb: () => void) => setTimeout(cb, 1)
+    const handle = idle(() => {
+      videoRef.current?.play().catch(() => {})
+    })
+    return () => {
+      if (typeof window.cancelIdleCallback === "function" && typeof handle === "number") {
+        window.cancelIdleCallback(handle)
+      }
+    }
+  }, [])
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -149,16 +169,26 @@ export default function HeroHome({
         style={{ top: "-55%", bottom: "-55%", left: 0, right: 0 }}
       >
         {videoSrc ? (
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={imageFallback}
-            src={videoSrc}
-          />
+          <>
+            <Image
+              src={imageFallback}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: "center 30%" }}
+            />
+            <video
+              ref={videoRef}
+              className="absolute inset-0 w-full h-full object-cover"
+              muted
+              loop
+              playsInline
+              preload="none"
+              src={videoSrc}
+            />
+          </>
         ) : (
           <Image
             src={imageFallback}
