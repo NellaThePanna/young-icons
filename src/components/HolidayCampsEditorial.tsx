@@ -123,7 +123,9 @@ export default function HolidayCampsEditorial() {
       <section className="relative" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
         <nav className="relative z-30 px-5 sm:px-8 lg:px-12" aria-label="Holiday camps primary navigation" style={{ backgroundColor: "var(--color-nav-dark)", borderBottom: "2px solid var(--color-academy-green)" }}>
           <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-5">
-            <Link href="/" className="shrink-0" style={{ color: "var(--color-white)", fontFamily: "var(--font-display)", fontSize: "1.125rem", fontWeight: "var(--font-weight-bold)", letterSpacing: "-0.02em", textDecoration: "none" }}>Young Icons</Link>
+            <Link href="/" className="shrink-0">
+              <Image src="/images/brand/young-icons-wordmark-white.png" alt="Young Icons" width={844} height={680} priority className="h-10 w-auto md:h-14" />
+            </Link>
             <ul className="hidden items-center gap-x-6 lg:flex" style={{ listStyle: "none", margin: 0, padding: 0 }}>
               {PRIMARY_NAV_LINKS.map((link) => <li key={link.href}><Link href={link.href} style={{ borderBottom: link.href === "/schools/holiday-camps" ? "2px solid var(--color-academy-green)" : "2px solid transparent", color: link.href === "/schools/holiday-camps" ? "var(--color-academy-green)" : "rgba(255,255,255,0.75)", display: "block", fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: "var(--font-weight-medium)", letterSpacing: "normal", padding: "0 0 0.25rem", textDecoration: "none" }}>{link.label}</Link></li>)}
             </ul>

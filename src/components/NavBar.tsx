@@ -4,6 +4,7 @@ import { useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { CLASSCARD_URL } from "@/lib/config"
@@ -90,17 +91,15 @@ export default function NavBar() {
         style={{ maxWidth: "1280px" }}
         aria-label="Main navigation"
       >
-        <Link
-          href="/"
-          className="text-lg tracking-tight"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: "var(--font-weight-bold)",
-            color: "var(--color-white)",
-            textDecoration: "none",
-          }}
-        >
-          Young Icons
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/images/brand/young-icons-wordmark-white.png"
+            alt="Young Icons"
+            width={844}
+            height={680}
+            priority
+            className="h-10 w-auto md:h-14"
+          />
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">

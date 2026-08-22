@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Image from "next/image"
 import Link from "next/link"
 import { FOOTER_NAP, FOOTER_BRAND, FOOTER_LINKS, FOOTER_SOCIAL } from "@/content/home"
 
@@ -128,35 +129,14 @@ export default function Footer({ compact = false, hideUnverifiedContact = false 
 
           {/* Brand */}
           <div className="footer-item">
-            <div className="flex items-center gap-3 mb-3">
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center justify-center flex-shrink-0"
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "var(--radius-sm)",
-                  backgroundColor: "var(--color-academy-green)",
-                  fontFamily: "var(--font-display)",
-                  fontWeight: "var(--font-weight-bold)",
-                  color: "var(--color-white)",
-                  fontSize: "16px",
-                }}
-              >
-                Y
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: "var(--font-weight-bold)",
-                  fontSize: "1.125rem",
-                  color: "var(--color-white)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {FOOTER_BRAND.wordmark}
-              </span>
+            <div className="mb-3">
+              <Image
+                src="/images/brand/young-icons-wordmark-white.png"
+                alt="Young Icons"
+                width={844}
+                height={680}
+                className="h-24 w-auto md:h-28"
+              />
             </div>
             <p
               className="mb-4"
