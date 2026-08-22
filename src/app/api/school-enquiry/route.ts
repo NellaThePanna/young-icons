@@ -1,21 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const WINDOW_MS = 60 * 60 * 1000
-const MAX_PER_WINDOW = 5
-
-const ipLog = new Map<string, { count: number; resetAt: number }>()
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const entry = ipLog.get(ip)
-  if (!entry || now > entry.resetAt) {
-    ipLog.set(ip, { count: 1, resetAt: now + WINDOW_MS })
-    return true
-  }
-  if (entry.count >= MAX_PER_WINDOW) return false
-  entry.count += 1
-  return true
-}
+import { checkRateLimit } from '@/lib/rate-limit'
 
 function requireString(value: unknown): boolean {
   return typeof value === 'string' && value.trim().length > 0
