@@ -91,7 +91,15 @@ export default function NavBar() {
         style={{ maxWidth: "1280px" }}
         aria-label="Main navigation"
       >
-        <Link href="/" className="shrink-0">
+        <Link href="/" className="shrink-0 flex items-center gap-2.5">
+          <Image
+            src="/images/brand/young-icons-seal-white.png"
+            alt=""
+            width={906}
+            height={905}
+            priority
+            className="h-10 w-auto md:h-14"
+          />
           <Image
             src="/images/brand/young-icons-wordmark-white.png"
             alt="Young Icons"

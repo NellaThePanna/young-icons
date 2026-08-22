@@ -129,7 +129,14 @@ export default function Footer({ compact = false, hideUnverifiedContact = false 
 
           {/* Brand */}
           <div className="footer-item">
-            <div className="mb-3">
+            <div className="mb-3 flex items-center gap-4">
+              <Image
+                src="/images/brand/young-icons-seal-white.png"
+                alt=""
+                width={906}
+                height={905}
+                className="h-24 w-auto md:h-28"
+              />
               <Image
                 src="/images/brand/young-icons-wordmark-white.png"
                 alt="Young Icons"

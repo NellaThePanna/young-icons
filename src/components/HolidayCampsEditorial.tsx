@@ -1,9 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import { useState, type ReactNode } from "react"
-import { NAV_LINKS } from "@/content/home"
 import { CLASSCARD_URL } from "@/lib/config"
 import { SCHOOLS_CAMPS_INTRO } from "@/content/schools-holiday-camps"
 
@@ -12,12 +10,6 @@ const displayStyle = {
   fontWeight: 400,
   letterSpacing: "-0.025em",
 } as const
-
-const PRIMARY_NAV_LINKS = [
-  ...NAV_LINKS.slice(0, 2),
-  { label: "Holiday Camps", href: "/schools/holiday-camps" },
-  ...NAV_LINKS.slice(2),
-]
 
 const CAMPS = [
   {
@@ -113,42 +105,18 @@ function ArrowButton({ direction, onClick }: { direction: "previous" | "next"; o
 }
 
 export default function HolidayCampsEditorial() {
-  const [menuOpen, setMenuOpen] = useState(false)
   const [activeCamp, setActiveCamp] = useState(0)
   const previousCamp = () => setActiveCamp((current) => (current - 1 + CAMPS.length) % CAMPS.length)
   const nextCamp = () => setActiveCamp((current) => (current + 1) % CAMPS.length)
 
   return (
     <main style={{ backgroundColor: "var(--color-warm-off-white)" }}>
-      <section className="relative" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
-        <nav className="relative z-30 px-5 sm:px-8 lg:px-12" aria-label="Holiday camps primary navigation" style={{ backgroundColor: "var(--color-nav-dark)", borderBottom: "2px solid var(--color-academy-green)" }}>
-          <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-5">
-            <Link href="/" className="shrink-0">
-              <Image src="/images/brand/young-icons-wordmark-white.png" alt="Young Icons" width={844} height={680} priority className="h-10 w-auto md:h-14" />
-            </Link>
-            <ul className="hidden items-center gap-x-6 lg:flex" style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {PRIMARY_NAV_LINKS.map((link) => <li key={link.href}><Link href={link.href} style={{ borderBottom: link.href === "/schools/holiday-camps" ? "2px solid var(--color-academy-green)" : "2px solid transparent", color: link.href === "/schools/holiday-camps" ? "var(--color-academy-green)" : "rgba(255,255,255,0.75)", display: "block", fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: "var(--font-weight-medium)", letterSpacing: "normal", padding: "0 0 0.25rem", textDecoration: "none" }}>{link.label}</Link></li>)}
-            </ul>
-            <a href={CLASSCARD_URL} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-block text-sm px-5 py-2 rounded-full" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", color: "var(--color-white)", backgroundColor: "var(--color-academy-green)", textDecoration: "none" }}>FIND A CLASS</a>
-            <button type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)} className="inline-flex items-center gap-2 lg:hidden" style={{ border: 0, background: "transparent", color: "var(--color-white)", cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "0.875rem", fontWeight: "var(--font-weight-medium)", letterSpacing: "normal", padding: "0.5rem 0" }}>
-              <span>{menuOpen ? "CLOSE" : "MENU"}</span><span aria-hidden="true" style={{ fontSize: "1rem", lineHeight: 1 }}>{menuOpen ? "×" : "☰"}</span>
-            </button>
-          </div>
-        </nav>
+      <section className="relative pt-16" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
         <div className="relative w-full overflow-hidden" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
           <div className="relative w-full">
             <Image src="/images/placeholder/holiday-camps-hero-raised-title.png" alt="Young Icons Holiday Camps: children playing football outdoors" width={2560} height={1440} priority sizes="100vw" className="h-auto w-full" />
           </div>
         </div>
-        {menuOpen && (
-          <nav className="fixed inset-0 z-40 flex flex-col items-start bg-[var(--color-warm-off-white)] px-6 pt-24 sm:px-10 lg:px-16" aria-label="Holiday camps navigation">
-            <button type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} className="absolute right-6 top-6 h-11 w-11 sm:right-10 sm:top-8 lg:right-16" style={{ border: 0, background: "transparent", color: "var(--color-black)", cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "1.7rem", lineHeight: 1 }}>×</button>
-            <div className="flex max-w-3xl flex-wrap gap-x-8 gap-y-5">
-              {PRIMARY_NAV_LINKS.map((link) => <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} style={{ color: "var(--color-black)", textDecoration: "none", fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 1.8vw, 1.3rem)", fontWeight: 600, letterSpacing: "0.03em" }}>{link.label}</Link>)}
-            </div>
-            <a href={CLASSCARD_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="mt-8 block w-full max-w-3xl text-center text-sm rounded-full py-4 px-6" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", color: "var(--color-white)", backgroundColor: "var(--color-academy-green)", textDecoration: "none" }}>FIND A CLASS</a>
-          </nav>
-        )}
       </section>
 
       <section className="relative overflow-hidden px-5 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20" style={{ backgroundColor: "#06351f" }}>
