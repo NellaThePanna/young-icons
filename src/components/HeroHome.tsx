@@ -222,7 +222,7 @@ export default function HeroHome({
           aria-label={fullHeading}
           className="tracking-tight mb-10"
           style={{
-            fontFamily: "var(--font-landing-display)",
+            fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
             lineHeight: 0.92,
             textTransform: "uppercase",

@@ -138,7 +138,7 @@ export default function EditorialMosaic() {
               <h3
                 ref={(el) => { headingRefs.current[i] = el }}
                 style={{
-                  fontFamily: "var(--font-landing-display)",
+                  fontFamily: "var(--font-display)",
                   fontWeight: "var(--font-weight-bold)",
                   fontSize:
                     i === 0

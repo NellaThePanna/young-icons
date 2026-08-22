@@ -81,7 +81,7 @@ export default function TrustScale() {
             <h2
               className="uppercase"
               style={{
-                fontFamily: "var(--font-landing-display)",
+                fontFamily: "var(--font-display)",
                 fontWeight: "var(--font-weight-bold)",
                 fontSize: "clamp(1.65rem, 2.35vw, 2.5rem)",
                 lineHeight: 0.95,

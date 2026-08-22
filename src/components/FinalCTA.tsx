@@ -210,7 +210,7 @@ export default function FinalCTA({
         <h2
           className="mb-6"
           style={{
-            fontFamily: "var(--font-landing-display)",
+            fontFamily: "var(--font-display)",
             fontWeight: "var(--font-weight-bold)",
             fontSize: "clamp(3rem, 6vw, 5rem)",
             textTransform: "uppercase",
