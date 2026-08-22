@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { createRateLimiter } from '@/lib/rate-limit'
+
+const checkRateLimit = createRateLimiter()
 
 function requireString(value: unknown): boolean {
   return typeof value === 'string' && value.trim().length > 0

@@ -7,16 +7,22 @@
 const WINDOW_MS = 60 * 60 * 1000
 const MAX_PER_WINDOW = 5
 
-const ipLog = new Map<string, { count: number; resetAt: number }>()
+// Each caller gets its own Map via createRateLimiter() — routes stay independent
+// (5/hour per IP per route, matching pre-dedup behavior), only the checking logic
+// is shared. A single shared Map here would silently pool every route's quota
+// together, which is a real behavior change, not a refactor.
+export function createRateLimiter() {
+  const ipLog = new Map<string, { count: number; resetAt: number }>()
 
-export function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const entry = ipLog.get(ip)
-  if (!entry || now > entry.resetAt) {
-    ipLog.set(ip, { count: 1, resetAt: now + WINDOW_MS })
+  return function checkRateLimit(ip: string): boolean {
+    const now = Date.now()
+    const entry = ipLog.get(ip)
+    if (!entry || now > entry.resetAt) {
+      ipLog.set(ip, { count: 1, resetAt: now + WINDOW_MS })
+      return true
+    }
+    if (entry.count >= MAX_PER_WINDOW) return false
+    entry.count += 1
     return true
   }
-  if (entry.count >= MAX_PER_WINDOW) return false
-  entry.count += 1
-  return true
 }
