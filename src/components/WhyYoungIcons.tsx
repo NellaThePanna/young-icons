@@ -11,16 +11,6 @@ const LIME = "#9ad64d"
 
 type CardItem = typeof WHY_YOUNG_ICONS[number]
 
-// nova-debt: no dedicated Tailored Programmes photography exists yet —
-// reusing an existing site placeholder until real Young Icons photography arrives.
-const CARD_IMAGE: Record<string, string | null> = {
-  "tailored-programmes": "/images/placeholder/obstacle-course.jpg",
-}
-
-const CARD_IMAGE_POSITION: Record<string, string> = {
-  "tailored-programmes": "50% 30%",
-}
-
 // nova-debt: real "teacher and children" photo (referenced as
 // 04-fully-managed-teacher-and-children.png in the handoff doc) was never supplied —
 // reusing the existing obstacle-course.jpg placeholder until it arrives.
@@ -69,6 +59,28 @@ const MUSIC_COPY = {
       bodyPrimary: "A progressive early-years music programme with weekly specialist-led sessions throughout the term.",
       bodySecondary: "Progressive music learning tailored to your nursery.",
     },
+  ],
+}
+
+// Approved Tailored Programmes selected-state copy and geometry
+// (tailored-programmes-handoff package, 2026-08-25, tailored-programmes-final-settings.json).
+// Footer cell widths (34% / 25% / 41%) are a deliberate approved asymmetry — the drag-editor's
+// default is equal thirds, but the exported settings moved the boundary off-center.
+const TAILORED_PROGRAMMES_IMAGE = "/images/placeholder/tailored-programmes-classroom-clean.png"
+const TAILORED_PROGRAMMES_COPY = {
+  headingLines: ["DESIGNED", "AROUND YOUR", "NURSERY,", "YOUR CHILDREN", "AND YOUR GOALS."],
+  body: "Programmes built around your nursery's needs, aligned with early years development and learning goals.",
+  railEyebrow: "NURSERY-FUNDED PROGRAMMES",
+  programmes: [
+    { icon: "clipboard" as const, title: "PE CURRICULUM", body: "Structured lesson plans with clear learning objectives." },
+    { icon: "target" as const, title: "LEARNING OUTCOMES", body: "Every programme has measurable developmental goals." },
+    { icon: "bars" as const, title: "PROGRESS REPORTS", body: "Track each child's progress throughout the year." },
+    { icon: "card" as const, title: "DIGITAL REGISTRATION & ATTENDANCE", body: "Simple online registration and live attendance tracking." },
+  ],
+  footerCells: [
+    { icon: "note" as const, label: "PLAY", width: 34 },
+    { icon: "smile" as const, label: "LEARN", width: 25 },
+    { icon: "star" as const, label: "GROW", width: 41 },
   ],
 }
 
@@ -185,17 +197,6 @@ function Icon({ icon, className }: { icon: IconKey; className: string }) {
     </svg>
   )
 }
-
-const panelHeadingStyle = {
-  fontFamily: "var(--font-nursery-hero)",
-  fontWeight: 600,
-  fontSize: "clamp(2.05rem, 3.5vw, 3.85rem)",
-  lineHeight: 0.97,
-  letterSpacing: "-0.012em",
-  wordSpacing: "0.05em",
-  color: "#fff",
-  margin: 0,
-} as const
 
 export default function WhyYoungIcons() {
   const [selectedId, setSelectedId] = useState<string | null>("one-partner")
@@ -337,154 +338,15 @@ function DetailPanel({
     return <MusicPanel onClose={onClose} closeButtonRef={closeButtonRef} />
   }
 
+  if (item.id === "tailored-programmes") {
+    return <TailoredProgrammesPanel onClose={onClose} closeButtonRef={closeButtonRef} />
+  }
+
   if (item.id === "fully-managed" && "points" in item) {
     return <FullyManagedPanel item={item} onClose={onClose} closeButtonRef={closeButtonRef} />
   }
 
-  const image = CARD_IMAGE[item.id]
-  const imagePosition = CARD_IMAGE_POSITION[item.id] ?? "50% 50%"
-  const points = "points" in item ? item.points : undefined
-
-  return (
-    <div
-      id="why-young-icons-panel"
-      role="region"
-      aria-label={item.label}
-      className="relative mt-6 overflow-hidden rounded-md sm:mt-8"
-      style={{ border: `1px solid ${HAIRLINE}`, backgroundColor: ECRU }}
-    >
-      <button
-        ref={closeButtonRef}
-        type="button"
-        onClick={onClose}
-        aria-label={`Close ${item.label} detail`}
-        className="absolute right-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full text-xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-6 sm:top-6"
-        style={{ border: "1px solid var(--color-black)", background: "transparent", color: "var(--color-black)", cursor: "pointer" }}
-      >
-        ×
-      </button>
-
-      {/* Mobile / tablet — stacked */}
-      <div className="lg:hidden">
-        {image && (
-          <div
-            className="relative h-[280px] w-full sm:h-[340px]"
-            style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: imagePosition }}
-          />
-        )}
-        <div className="px-6 py-9 sm:px-8" style={{ backgroundColor: DEEP_GREEN, color: "#fff" }}>
-          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.1rem" }}>
-            {item.number} — {item.label}
-          </p>
-          <h2 style={{ ...panelHeadingStyle, fontSize: "clamp(1.9rem, 9vw, 3rem)" }}>
-            {item.headingLines.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </h2>
-          {"body" in item && item.body && (
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "0.95rem",
-                lineHeight: 1.45,
-                color: "#fff",
-                maxWidth: "420px",
-                margin: "1.35rem 0 0",
-                borderTop: "1px solid rgba(255,255,255,0.35)",
-                paddingTop: "1.1rem",
-              }}
-            >
-              {item.body}
-            </p>
-          )}
-        </div>
-        <div className="px-6 py-8 sm:px-8">{points && <DetailList points={points} />}</div>
-        <PlayLearnGrowRail />
-      </div>
-
-      {/* Desktop — overlay layout */}
-      <div className="hidden lg:flex" style={{ minHeight: "620px" }}>
-        <div className="relative flex-[68]">
-          {image && (
-            <div className="absolute inset-0" style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: imagePosition }} />
-          )}
-          <div
-            className="absolute inset-y-0 left-0 z-10 flex flex-col justify-between px-9 pb-[108px] pt-11 xl:px-12"
-            style={{
-              width: image ? "58%" : "100%",
-              backgroundColor: DEEP_GREEN,
-              color: "#fff",
-              clipPath: image ? "polygon(0 0, 92% 0, 80% 100%, 0 100%)" : "none",
-            }}
-          >
-            <div>
-              <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.4rem" }}>
-                {item.number} — {item.label}
-              </p>
-              <h2 style={panelHeadingStyle}>
-                {item.headingLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h2>
-            </div>
-            {"body" in item && item.body && (
-              <p
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "clamp(0.95rem, 1.1vw, 1.05rem)",
-                  lineHeight: 1.45,
-                  color: "#fff",
-                  maxWidth: image ? "300px" : "460px",
-                  margin: 0,
-                  borderTop: "1px solid rgba(255,255,255,0.35)",
-                  paddingTop: "1.1rem",
-                }}
-              >
-                {item.body}
-              </p>
-            )}
-          </div>
-          <PlayLearnGrowRail floating />
-        </div>
-
-        <div className="relative flex-[32] px-8 pb-8 pt-16 xl:px-9">{points && <DetailList points={points} />}</div>
-      </div>
-    </div>
-  )
-}
-
-function DetailList({ points }: { points: ReadonlyArray<{ number: string; icon: IconKey; label: string; body: string }> }) {
-  return (
-    <div>
-      {points.map((point, index) => (
-        <div
-          key={point.number}
-          className="grid items-start gap-3 py-4"
-          style={{ gridTemplateColumns: "26px 44px minmax(0,1fr)", borderBottom: `1px solid ${HAIRLINE}`, borderTop: index === 0 ? `1px solid ${HAIRLINE}` : undefined }}
-        >
-          <span
-            className="flex h-[25px] w-[25px] items-center justify-center rounded-full"
-            style={{ border: "1px solid #8cae9c", color: DEEP_GREEN, fontFamily: "var(--font-body)", fontSize: "0.65rem" }}
-          >
-            {point.number}
-          </span>
-          <span className="flex h-11 w-11 items-center justify-center rounded" style={{ backgroundColor: "#eeeee8", color: DEEP_GREEN }}>
-            <Icon icon={point.icon} className="h-6 w-6" />
-          </span>
-          <div>
-            <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 600, fontSize: "0.92rem", lineHeight: 1.15, letterSpacing: "-0.01em", color: "var(--color-black)", margin: "0.1rem 0 0.35rem" }}>
-              {point.label}
-            </h3>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", lineHeight: 1.35, color: "var(--color-nursery-stone)", margin: 0 }}>{point.body}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return null
 }
 
 function PlayLearnGrowRail({ floating = false }: { floating?: boolean }) {
@@ -1086,6 +948,185 @@ function MusicRail() {
                 {programme.bodySecondary}
               </p>
             </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function TailoredProgrammesPanel({
+  onClose,
+  closeButtonRef,
+}: {
+  onClose: () => void
+  closeButtonRef: React.RefObject<HTMLButtonElement | null>
+}) {
+  return (
+    <div
+      id="why-young-icons-panel"
+      role="region"
+      aria-label="Tailored Programmes"
+      className="relative mt-6 overflow-hidden rounded-md sm:mt-8"
+      style={{ border: `1px solid ${HAIRLINE}`, backgroundColor: ECRU }}
+    >
+      <button
+        ref={closeButtonRef}
+        type="button"
+        onClick={onClose}
+        aria-label="Close Tailored Programmes detail"
+        className="absolute right-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full text-xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-6 sm:top-6"
+        style={{ border: "1px solid var(--color-black)", background: "transparent", color: "var(--color-black)", cursor: "pointer" }}
+      >
+        ×
+      </button>
+
+      {/* Mobile / tablet — stacked */}
+      <div className="lg:hidden">
+        <div className="px-6 py-9 sm:px-8" style={{ backgroundColor: DEEP_GREEN, color: "#fff" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.1rem" }}>
+            04 — Tailored Programmes
+          </p>
+          <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "clamp(1.9rem, 9vw, 2.8rem)", lineHeight: 0.94, letterSpacing: "-0.02em", margin: 0, textTransform: "uppercase" }}>
+            {TAILORED_PROGRAMMES_COPY.headingLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </h2>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.45, color: "#fff", maxWidth: "420px", margin: "1.35rem 0 0", borderTop: "1px solid rgba(255,255,255,0.35)", paddingTop: "1.1rem" }}>
+            {TAILORED_PROGRAMMES_COPY.body}
+          </p>
+        </div>
+        <div className="relative h-[240px] w-full overflow-hidden sm:h-[300px]" style={{ aspectRatio: "4 / 3" }}>
+          <Image
+            src={TAILORED_PROGRAMMES_IMAGE}
+            alt="Teacher guiding five nursery children through a classroom learning activity"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: "100% 8.182888761355988%" }}
+          />
+        </div>
+        <TailoredProgrammesFooter />
+        <div className="px-6 py-8 sm:px-8">
+          <TailoredProgrammesRail />
+        </div>
+      </div>
+
+      {/* Desktop — 654px composition */}
+      <div className="hidden lg:flex" style={{ height: "654px" }}>
+        <div className="relative flex flex-1 flex-col" style={{ flex: "0 0 75%" }}>
+          <div className="relative flex" style={{ height: "559.375px" }}>
+            <div
+              className="relative flex flex-col justify-center px-9 xl:px-11"
+              style={{
+                flex: "0 0 42.6667%",
+                zIndex: 2,
+                backgroundColor: DEEP_GREEN,
+                color: "#fff",
+                clipPath: "polygon(0 0, 100% 0, calc(100% - 44px) 100%, 0 100%)",
+              }}
+            >
+              <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.1rem" }}>
+                04 — Tailored Programmes
+              </p>
+              <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "44px", lineHeight: 0.94, letterSpacing: "-0.02em", margin: 0, textTransform: "uppercase", maxWidth: "217px" }}>
+                {TAILORED_PROGRAMMES_COPY.headingLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </h2>
+              <span aria-hidden="true" className="block" style={{ width: "72%", height: "1px", backgroundColor: "rgba(154,214,77,0.65)", margin: "1.2rem 0" }} />
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", lineHeight: 1.45, color: "#fff", maxWidth: "214px", margin: 0 }}>
+                {TAILORED_PROGRAMMES_COPY.body}
+              </p>
+            </div>
+            <div className="relative overflow-hidden" style={{ flex: "1 1 0%", marginLeft: "-44px", zIndex: 1 }}>
+              <Image
+                src={TAILORED_PROGRAMMES_IMAGE}
+                alt="Teacher guiding five nursery children through a classroom learning activity"
+                fill
+                sizes="43vw"
+                className="object-cover"
+                style={{ objectPosition: "100% 8.182888761355988%" }}
+              />
+            </div>
+          </div>
+          <TailoredProgrammesFooter />
+        </div>
+
+        <div className="relative overflow-y-auto px-8 py-7 xl:px-9" style={{ flex: "0 0 25%", backgroundColor: ECRU }}>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: DEEP_GREEN, margin: "0 0 0.4rem" }}>
+            {TAILORED_PROGRAMMES_COPY.railEyebrow}
+          </p>
+          <span aria-hidden="true" className="mb-4 block" style={{ width: "36px", height: "2px", backgroundColor: DEEP_GREEN }} />
+          <TailoredProgrammesRail />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TailoredProgrammesFooter() {
+  return (
+    <div className="flex" style={{ height: "94.6249885559082px", backgroundColor: DEEP_GREEN, color: "#fff" }}>
+      {TAILORED_PROGRAMMES_COPY.footerCells.map((cell, index) => (
+        <div
+          key={cell.label}
+          className="flex items-center justify-center"
+          style={{
+            flex: `0 0 ${cell.width}%`,
+            gap: "8px",
+            borderRight: index < TAILORED_PROGRAMMES_COPY.footerCells.length - 1 ? "1px solid rgba(154,214,77,0.55)" : undefined,
+            transform: "translateY(20px)",
+          }}
+        >
+          <span style={{ color: LIME }}>
+            <Icon icon={cell.icon} className="h-7 w-7" />
+          </span>
+          <span style={{ fontFamily: "var(--font-body)", fontSize: "1.125rem", fontWeight: 800, letterSpacing: "0.02em" }}>{cell.label}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function TailoredProgrammesRail() {
+  return (
+    <div>
+      {TAILORED_PROGRAMMES_COPY.programmes.map((programme, index) => (
+        <div
+          key={programme.title}
+          className="grid items-start"
+          style={{
+            gridTemplateColumns: "30px 68px 1fr",
+            gap: "16px",
+            padding: "24px 0",
+            borderBottom: `1px solid ${HAIRLINE}`,
+            borderTop: index === 0 ? `1px solid ${HAIRLINE}` : undefined,
+          }}
+        >
+          <span
+            className="flex h-[27px] w-[27px] items-center justify-center rounded-full"
+            style={{ border: `1px solid ${DEEP_GREEN}`, color: DEEP_GREEN, fontFamily: "var(--font-body)", fontSize: "0.68rem" }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span
+            className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl"
+            style={{ backgroundColor: "#ECEBE4", color: DEEP_GREEN }}
+          >
+            <Icon icon={programme.icon} className="h-[34px] w-[34px]" />
+          </span>
+          <div>
+            <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 700, fontSize: "0.95rem", lineHeight: 1.15, letterSpacing: "-0.01em", color: "var(--color-black)", margin: "0.1rem 0 0.5rem", textTransform: "uppercase" }}>
+              {programme.title}
+            </h3>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.81rem", lineHeight: 1.45, color: "var(--color-nursery-stone)", margin: 0 }}>
+              {programme.body}
+            </p>
           </div>
         </div>
       ))}
