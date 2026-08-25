@@ -118,21 +118,25 @@ export default function NurseryEnquiryForm() {
   }
 
   return (
-    <section id="enquiry" className="px-5 pt-8 pb-10 text-center sm:px-8 sm:pt-10 sm:pb-12 lg:px-12 lg:pt-10 lg:pb-12" style={{ backgroundColor: "#f4f2ec", borderTop: "1px solid #d8d5cc", borderBottom: "1px solid #d8d5cc" }}>
+    <section id="enquiry" className="px-5 pt-9 pb-6 text-center sm:px-8 sm:pt-10 sm:pb-7 lg:px-12 lg:pt-12 lg:pb-8" style={{ backgroundColor: "#f4f2ec" }}>
       <div className="mx-auto" style={{ maxWidth: "980px" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", fontSize: "0.72rem", letterSpacing: "0.14em", color: "var(--color-black)", margin: "0 0 1rem" }}>
+          05 — LET&apos;S WORK TOGETHER
+        </p>
         <h2
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-anton)",
+            fontWeight: 400,
             fontSize: "clamp(3rem, 6.1vw, 6rem)",
-            lineHeight: 0.92,
-            letterSpacing: "-0.03em",
+            lineHeight: 0.95,
+            letterSpacing: "-0.01em",
             margin: 0,
           }}
         >
           <span className="block" style={{ color: "var(--color-black)" }}>LET&apos;S GET YOUR</span>
           <span className="block" style={{ color: "var(--color-academy-green)" }}>NURSERY MOVING.</span>
         </h2>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", letterSpacing: "0.14em", color: "var(--color-black)", margin: "1.2rem 0 0.75rem" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", letterSpacing: "0.14em", color: "var(--color-black)", margin: "1rem 0 0.6rem" }}>
           READY TO WORK WITH US?
         </p>
         <button
@@ -171,28 +175,28 @@ export default function NurseryEnquiryForm() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="nursery-enquiry-title"
-            className="relative max-h-full w-full overflow-y-auto p-6 sm:p-10 lg:p-12"
-            style={{ maxWidth: "900px", backgroundColor: "#f4f2ec" }}
+            className="relative min-h-0 w-full overflow-y-auto rounded-2xl p-6 sm:p-9 lg:p-10"
+            style={{ maxWidth: "720px", maxHeight: "85vh", backgroundColor: "#f4f2ec" }}
           >
             <button
               ref={closeButtonRef}
               type="button"
               onClick={closeModal}
               aria-label="Close enquiry form"
-              className="absolute right-5 top-5 text-2xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-8 sm:top-8"
-              style={{ border: 0, background: "transparent", color: "var(--color-academy-green)", cursor: "pointer" }}
+              className="absolute right-5 top-5 text-2xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-6 sm:top-6"
+              style={{ border: 0, background: "transparent", color: "var(--color-black)", cursor: "pointer" }}
             >
               ×
             </button>
 
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", letterSpacing: "0.14em", color: "var(--color-academy-green)", margin: "0 0 1.3rem" }}>
-              NURSERY ENQUIRY
-            </p>
-            <h3 id="nursery-enquiry-title" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 5vw, 5.4rem)", lineHeight: 0.84, letterSpacing: "-0.03em", color: "var(--color-black)", margin: "0 0 3rem" }}>
-              START A CONVERSATION.
+            <h3 id="nursery-enquiry-title" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", fontSize: "1.4rem", letterSpacing: "-0.01em", color: "var(--color-black)", margin: "0 0 0.4rem" }}>
+              START A CONVERSATION
             </h3>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "var(--color-nursery-stone)", margin: "0 0 2rem" }}>
+              Fill in your details and we&apos;ll be in touch.
+            </p>
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2" noValidate>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2" noValidate>
               <Field label={NURSERY_FORM.fields.nurseryName} name="nurseryName" value={formData.nurseryName} onChange={handleChange} style={fieldStyle} required />
               <Field label={NURSERY_FORM.fields.contactName} name="contactName" value={formData.contactName} onChange={handleChange} style={fieldStyle} required />
               <Field label={NURSERY_FORM.fields.jobRole} name="jobRole" value={formData.jobRole} onChange={handleChange} style={fieldStyle} required />
@@ -202,15 +206,33 @@ export default function NurseryEnquiryForm() {
               <SelectField label={NURSERY_FORM.fields.interestedIn} name="interestedIn" value={formData.interestedIn} onChange={handleChange} options={NURSERY_FORM.interestedInOptions} style={fieldStyle} />
               <label className="sm:col-span-2" style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "0.73rem", color: "var(--color-nursery-stone)" }}>
                 {NURSERY_FORM.fields.message}
-                <textarea name="message" value={formData.message} onChange={handleChange} rows={3} style={{ ...fieldStyle, resize: "vertical", marginTop: "0.3rem" }} />
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={3}
+                  style={{
+                    width: "100%",
+                    border: "1px solid #bcb9b0",
+                    borderRadius: "6px",
+                    background: "transparent",
+                    fontFamily: "var(--font-body)",
+                    color: "var(--color-black)",
+                    fontSize: "0.95rem",
+                    outline: "none",
+                    resize: "vertical",
+                    padding: "0.6rem 0.7rem",
+                    marginTop: "0.3rem",
+                  }}
+                />
               </label>
 
-              <div className="sm:col-span-2 mt-3 flex flex-col items-start gap-4">
+              <div className="sm:col-span-2 mt-3 flex flex-col items-stretch gap-4">
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]"
-                  style={{ backgroundColor: "var(--color-academy-green)", border: 0, color: "var(--color-white)", cursor: status === "submitting" ? "wait" : "pointer", fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.85rem", letterSpacing: "0.08em", padding: "0.95rem 1.25rem" }}
+                  className="rounded-md text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]"
+                  style={{ backgroundColor: "var(--color-academy-green)", border: 0, color: "var(--color-white)", cursor: status === "submitting" ? "wait" : "pointer", fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.9rem", letterSpacing: "0.08em", padding: "1rem 1.25rem" }}
                 >
                   {status === "submitting" ? NURSERY_FORM.submittingLabel : NURSERY_FORM.submitLabel}
                 </button>

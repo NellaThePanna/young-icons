@@ -117,13 +117,13 @@ function Spread({
         ×
       </button>
 
-      <div className="flex flex-col justify-between gap-8 px-6 py-9 sm:px-9 sm:py-11 lg:gap-10 lg:px-12 lg:py-14" style={{ order: isLearn ? 2 : 1 }}>
+      <div className="flex flex-col px-6 py-9 sm:px-9 sm:py-11 lg:px-12 lg:py-14" style={{ order: isLearn ? 2 : 1 }}>
         <div className="flex items-center justify-between" style={{ color: GREEN, fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-bold)", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>
           <span>Our Approach</span>
           <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ backgroundColor: GREEN }} />
         </div>
 
-        <div>
+        <div className="flex flex-1 flex-col justify-center">
           <p style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(1.6rem, 2.4vw, 2.6rem)", lineHeight: 1, letterSpacing: "-0.025em", color: GREEN, margin: "0 0 0.4rem" }}>
             {item.number}
           </p>

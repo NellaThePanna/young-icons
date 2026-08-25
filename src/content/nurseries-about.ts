@@ -108,7 +108,7 @@ export const WHY_YOUNG_ICONS = [
   {
     id: "multiple-activities",
     number: "02",
-    label: "MOVEMENT & SPORT",
+    label: "MULTIPLE ACTIVITIES",
     headingLines: ["A WORLD OF ACTIVITIES.", "ALL IN ONE PLACE."],
     body: NURSERY_ACTIVITIES.body,
   },

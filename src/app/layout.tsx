@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Urbanist, Inter } from 'next/font/google'
+import { Urbanist, Inter, Anton } from 'next/font/google'
 import './globals.css'
 import '@/styles/tokens.css'
 import LenisProvider from '@/components/providers/LenisProvider'
@@ -18,6 +18,13 @@ const inter = Inter({
   display: 'swap',
 })
 
+const anton = Anton({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-anton',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Young Icons Sports Academy Dubai | Free Trial',
   description:
@@ -33,7 +40,7 @@ export default function RootLayout({
     <html lang="en">
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject data-gr-* attributes on body before React hydrates */}
       <body
-        className={`${urbanist.variable} ${inter.variable}`}
+        className={`${urbanist.variable} ${inter.variable} ${anton.variable}`}
         style={{ '--font-display': 'var(--font-nursery-hero)', '--font-holiday-display': 'var(--font-nursery-hero)' } as React.CSSProperties}
         suppressHydrationWarning
       >
