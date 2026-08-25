@@ -90,6 +90,7 @@ export const APPROACH_ROWS = [
   },
 ] as const
 
+// Point/detail icon keys map to the shared outlined SVG set in WhyYoungIcons.tsx (DetailIcon).
 export const WHY_YOUNG_ICONS = [
   {
     id: "one-partner",
@@ -97,37 +98,56 @@ export const WHY_YOUNG_ICONS = [
     label: "ONE PARTNER",
     headingLines: ["EVERY ACTIVITY.", "ONE RELATIONSHIP."],
     body: "One trusted provider for your nursery's sports and physical activity programmes.",
+    points: [
+      { number: "01", icon: "partner", label: "ONE TRUSTED PROVIDER", body: "One consistent relationship for every activity." },
+      { number: "02", icon: "clipboard", label: "MULTIPLE PROGRAMMES", body: "A joined-up programme rather than separate suppliers." },
+      { number: "03", icon: "people", label: "CONSISTENT QUALITY", body: "The same specialist approach across every session." },
+      { number: "04", icon: "clock", label: "SAVES YOU TIME", body: "Less administration, more time for your nursery." },
+    ],
   },
   {
     id: "multiple-activities",
     number: "02",
-    label: "MULTIPLE ACTIVITIES",
+    label: "MOVEMENT & SPORT",
     headingLines: ["A WORLD OF ACTIVITIES.", "ALL IN ONE PLACE."],
+    body: NURSERY_ACTIVITIES.body,
+  },
+  {
+    id: "music",
+    number: "03",
+    label: "MUSIC",
+    headingLines: ["MUSIC.", "MOVEMENT.", "DISCOVERY."],
+    body: "A playful early-years music programme where children explore rhythm, sound, instruments, singing and movement.",
+    points: [
+      { number: "01", icon: "note", label: "30-MINUTE SESSION", body: "A standalone music experience designed for early years." },
+      { number: "02", icon: "calendar", label: "4-WEEK PROGRAMME", body: "A short progressive introduction to music." },
+      { number: "03", icon: "clock", label: "ONGOING PROGRAMME", body: "Progressive music learning tailored to your nursery." },
+    ],
   },
   {
     id: "tailored-programmes",
-    number: "03",
+    number: "04",
     label: "TAILORED PROGRAMMES",
     headingLines: ["DESIGNED AROUND YOUR NURSERY,", "YOUR CHILDREN AND YOUR GOALS."],
     body: "Programmes built around your nursery’s needs, aligned with early years development and learning goals.",
     points: [
-      { number: "01", label: "PE CURRICULUM", body: "Structured lesson plans with clear learning objectives." },
-      { number: "02", label: "LEARNING OUTCOMES", body: "Every programme has measurable developmental goals." },
-      { number: "03", label: "PROGRESS REPORTS", body: "Track each child’s progress throughout the year." },
-      { number: "04", label: "DIGITAL REGISTRATION & ATTENDANCE", body: "Simple online registration and live attendance tracking." },
+      { number: "01", icon: "clipboard", label: "PE CURRICULUM", body: "Structured lesson plans with clear learning objectives." },
+      { number: "02", icon: "target", label: "LEARNING OUTCOMES", body: "Every programme has measurable developmental goals." },
+      { number: "03", icon: "bars", label: "PROGRESS REPORTS", body: "Track each child’s progress throughout the year." },
+      { number: "04", icon: "card", label: "DIGITAL REGISTRATION & ATTENDANCE", body: "Simple online registration and live attendance tracking." },
     ],
   },
   {
     id: "fully-managed",
-    number: "04",
+    number: "05",
     label: "FULLY MANAGED",
     headingLines: ["EVERYTHING,", "TAKEN CARE OF."],
     body: "We manage the details, so your nursery doesn't have to.",
     points: [
-      { number: "01", label: "REGISTRATION & PAYMENTS" },
-      { number: "02", label: "PARENT COMMUNICATION" },
-      { number: "03", label: "PROGRAMME ADMINISTRATION" },
-      { number: "04", label: "REPORTING & SUPPORT" },
+      { number: "01", icon: "clipboard", label: "REGISTRATION & PAYMENTS", body: "Simple online registration and payment processing." },
+      { number: "02", icon: "chat", label: "PARENT COMMUNICATION", body: "Clear updates and reminders to keep parents informed." },
+      { number: "03", icon: "calendar", label: "PROGRAMME ADMINISTRATION", body: "We handle scheduling, resources and staffing for every session." },
+      { number: "04", icon: "bars", label: "REPORTING & SUPPORT", body: "Track progress and receive ongoing support from our team." },
     ],
   },
 ] as const
