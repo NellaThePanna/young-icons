@@ -88,10 +88,10 @@ export default function EditorialMosaic() {
     <section
       ref={sectionRef}
       data-section="programme-mosaic"
-      className="pt-0 pb-0"
-      style={{ backgroundColor: "var(--color-black)" }}
+      className="px-4 pb-0 sm:px-8 lg:px-12"
+      style={{ backgroundColor: "var(--color-black)", marginTop: "-32px", position: "relative", zIndex: 2 }}
     >
-      <div className="mosaic-grid">
+      <div className="mosaic-grid mx-auto" style={{ maxWidth: "1600px" }}>
         {EXPLORE_CARDS.map((card, i) => (
           <Link
             key={card.label}
@@ -122,19 +122,6 @@ export default function EditorialMosaic() {
                 zIndex: 2,
               }}
             >
-              <p
-                className="mb-2"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-medium)",
-                  fontSize: "11px",
-                  color: "var(--color-academy-green)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.15em",
-                }}
-              >
-                {card.label}
-              </p>
               <h3
                 ref={(el) => { headingRefs.current[i] = el }}
                 style={{
@@ -149,21 +136,11 @@ export default function EditorialMosaic() {
                   lineHeight: 0.95,
                   color: "var(--color-white)",
                   textTransform: "uppercase",
-                  marginBottom: "8px",
+                  margin: 0,
                 }}
               >
                 {card.heading}
               </h3>
-              <span
-                className="mosaic-card-cta inline-flex items-center"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "13px",
-                  color: "var(--color-white)",
-                }}
-              >
-                {card.cta} →
-              </span>
             </div>
           </Link>
         ))}

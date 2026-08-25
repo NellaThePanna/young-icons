@@ -276,34 +276,40 @@ export default function HeroHome({
           ))}
         </h1>
 
-        <div ref={ctasRef} className="flex flex-wrap items-center justify-center gap-4">
+        <div ref={ctasRef} className="flex flex-wrap items-center justify-center gap-8 sm:gap-10">
           <a
             href={CLASSCARD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-cta rounded-full px-8 py-4 text-base text-center"
+            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
+              fontSize: "1rem",
+              letterSpacing: "0.04em",
               color: "var(--color-white)",
               backgroundColor: "var(--color-academy-green)",
               textDecoration: "none",
+              padding: "0.85rem 1.75rem",
             }}
           >
-            {ctaPrimary}
+            {ctaPrimary} →
           </a>
           <Link
             href="/schools"
-            className="btn-cta rounded-full px-8 py-4 text-base text-center"
+            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
+              fontSize: "1rem",
+              letterSpacing: "0.04em",
               color: "var(--color-white)",
-              border: "1.5px solid rgba(255,255,255,0.3)",
               textDecoration: "none",
+              borderBottom: "1px solid rgba(255,255,255,0.5)",
+              paddingBottom: "0.3rem",
             }}
           >
-            {ctaSecondary}
+            {ctaSecondary} →
           </Link>
         </div>
       </div>

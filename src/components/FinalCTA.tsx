@@ -35,27 +35,10 @@ export default function FinalCTA({
 }: FinalCTAProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const headingLineRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const auroraRefs = useRef<(HTMLDivElement | null)[]>([])
   const eyebrowUnderlineRef = useRef<HTMLSpanElement>(null)
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-    if (!prefersReduced) {
-      const blobs = auroraRefs.current.filter(Boolean) as HTMLDivElement[]
-      const durations = [4, 5, 4.5]
-      blobs.forEach((blob, i) => {
-        gsap.to(blob, {
-          x: 30,
-          y: -20,
-          scale: 1.15,
-          duration: durations[i % durations.length],
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        })
-      })
-    }
 
     if (prefersReduced) return
 
@@ -106,8 +89,7 @@ export default function FinalCTA({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full flex items-center justify-center px-6"
-      style={{ minHeight: "70vh" }}
+      className="relative flex min-h-[88vh] w-full items-center justify-center px-6 lg:min-h-[62vh]"
     >
       <div className="absolute inset-0">
         <Image
@@ -116,62 +98,13 @@ export default function FinalCTA({
           fill
           sizes="100vw"
           className="object-cover"
-          style={{ objectPosition: "center 20%" }}
-        />
-      </div>
-
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ zIndex: 1, pointerEvents: "none" }}
-        aria-hidden="true"
-      >
-        <div
-          ref={(el) => { auroraRefs.current[0] = el }}
-          className="absolute rounded-full"
-          style={{
-            width: "420px",
-            height: "420px",
-            top: "-15%",
-            left: "-8%",
-            backgroundColor: "var(--color-academy-green)",
-            filter: "blur(70px)",
-            opacity: 0.55,
-            mixBlendMode: "screen",
-          }}
-        />
-        <div
-          ref={(el) => { auroraRefs.current[1] = el }}
-          className="absolute rounded-full"
-          style={{
-            width: "460px",
-            height: "460px",
-            bottom: "-18%",
-            right: "-10%",
-            backgroundColor: "var(--color-gulf-blue)",
-            filter: "blur(70px)",
-            opacity: 0.5,
-            mixBlendMode: "screen",
-          }}
-        />
-        <div
-          ref={(el) => { auroraRefs.current[2] = el }}
-          className="absolute rounded-full"
-          style={{
-            width: "360px",
-            height: "360px",
-            top: "35%",
-            left: "38%",
-            backgroundColor: "var(--color-academy-green)",
-            filter: "blur(70px)",
-            opacity: 0.4,
-            mixBlendMode: "screen",
-          }}
+          style={{ objectPosition: "38% 30%" }}
         />
       </div>
 
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: "rgba(0,0,0,0.6)", zIndex: 2 }}
+        style={{ backgroundColor: "rgba(4,41,26,0.42)", zIndex: 2 }}
         aria-hidden="true"
       />
 
@@ -235,47 +168,55 @@ export default function FinalCTA({
           )}
         </h2>
 
-        <p
-          className="final-cta-item mx-auto mb-10"
-          style={{
-            fontFamily: "var(--font-body)",
-            color: "rgba(255,255,255,0.7)",
-            maxWidth: "560px",
-            lineHeight: 1.6,
-          }}
-        >
-          {sub}
-        </p>
+        {sub && (
+          <p
+            className="final-cta-item mx-auto mb-10"
+            style={{
+              fontFamily: "var(--font-body)",
+              color: "rgba(255,255,255,0.7)",
+              maxWidth: "560px",
+              lineHeight: 1.6,
+            }}
+          >
+            {sub}
+          </p>
+        )}
 
-        <div className="final-cta-item flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="final-cta-item flex flex-wrap items-center justify-center gap-8 sm:gap-10">
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-cta rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
+            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
+              fontSize: "1rem",
+              letterSpacing: "0.04em",
               color: "var(--color-white)",
               backgroundColor: "var(--color-academy-green)",
               textDecoration: "none",
+              padding: "0.85rem 1.75rem",
             }}
           >
-            {ctaPrimary}
+            {ctaPrimary} →
           </a>
           {ctaSecondary && (
             <Link
               href={secondaryHref}
-              className="btn-cta rounded-full px-8 py-4 text-base w-full sm:w-auto text-center"
+              className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-bold)",
+                fontSize: "1rem",
+                letterSpacing: "0.04em",
                 color: "var(--color-white)",
-                border: "1.5px solid rgba(255,255,255,0.3)",
                 textDecoration: "none",
+                borderBottom: "1px solid rgba(255,255,255,0.5)",
+                paddingBottom: "0.3rem",
               }}
             >
-              {ctaSecondary}
+              {ctaSecondary} →
             </Link>
           )}
         </div>

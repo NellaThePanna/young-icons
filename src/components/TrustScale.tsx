@@ -4,7 +4,11 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { HOME_PARTNERS } from "@/content/home"
+import { SplitText } from "gsap/SplitText"
+import Image from "next/image"
+import { HOME_PARTNER_LOGOS } from "@/content/home"
+
+const HEADLINE_LINES = ["BUILT", "FOR THE WAY", "CHILDREN", "MOVE."] as const
 
 const STATS = [
   { value: "45+", label: "EDUCATIONAL\nPARTNERS", isLocation: false },
@@ -14,10 +18,12 @@ const STATS = [
 
 export default function TrustScale() {
   const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([])
 
   useGSAP(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    let split: SplitText | null = null
 
     const trigger = ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -25,6 +31,17 @@ export default function TrustScale() {
       once: true,
       invalidateOnRefresh: true,
       onEnter: () => {
+        split = headingRef.current ? new SplitText(headingRef.current, { type: "words" }) : null
+        if (split) {
+          gsap.from(split.words, {
+            opacity: 0,
+            y: prefersReduced ? 0 : 24,
+            duration: prefersReduced ? 0.01 : 0.68,
+            ease: "power2.out",
+            stagger: prefersReduced ? 0 : 0.07,
+          })
+        }
+
         const items = sectionRef.current?.querySelectorAll(".trust-item") ?? []
         gsap.from(items, {
           opacity: 0,
@@ -32,6 +49,7 @@ export default function TrustScale() {
           duration: prefersReduced ? 0.01 : 0.65,
           ease: "power2.out",
           stagger: prefersReduced ? 0 : 0.08,
+          delay: prefersReduced ? 0 : 0.2,
         })
 
         if (!prefersReduced) {
@@ -55,30 +73,61 @@ export default function TrustScale() {
       },
     })
 
-    return () => trigger.kill()
+    return () => {
+      trigger.kill()
+      split?.revert()
+    }
   }, { scope: sectionRef })
 
   return (
     <section
       ref={sectionRef}
       data-section="partner-stats"
-      className="px-6 sm:px-10 lg:px-16"
-      style={{
-        backgroundColor: "var(--color-warm-off-white)",
-        paddingTop: "34px",
-        paddingBottom: "34px",
-      }}
+      className="py-10 sm:py-14"
+      style={{ backgroundColor: "#F4F1EB" }}
     >
-      <div className="mx-auto border-y" style={{ maxWidth: "1280px", borderColor: "rgba(27,27,27,0.12)" }}>
-        <div className="grid grid-cols-1 gap-y-9 py-9 md:grid-cols-[minmax(0,2.15fr)_repeat(3,minmax(0,1fr))] md:gap-x-8">
-          <div className="trust-item px-0 md:pr-8">
+      <div
+        className="mx-auto"
+        style={{
+          maxWidth: "1440px",
+          padding: "0 clamp(24px, 4vw, 72px)",
+        }}
+      >
+        <h2
+          ref={headingRef}
+          className="uppercase"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: "var(--font-weight-bold)",
+            fontSize: "clamp(2.6rem, 5vw, 4.75rem)",
+            lineHeight: 0.94,
+            letterSpacing: "-0.015em",
+            color: "var(--color-black)",
+            margin: 0,
+          }}
+        >
+          {HEADLINE_LINES.map((line) => (
+            <span
+              key={line}
+              className="block"
+              style={{ color: line === "MOVE." ? "var(--color-academy-green)" : undefined }}
+            >
+              {line}
+            </span>
+          ))}
+        </h2>
+
+        <div className="my-8 border-t sm:my-10" style={{ borderColor: "rgba(27,27,27,0.14)" }} />
+
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 min-[700px]:grid-cols-[minmax(0,2.15fr)_repeat(3,minmax(0,1fr))] min-[700px]:items-center min-[700px]:gap-x-8 min-[700px]:gap-y-0">
+          <div className="trust-item col-span-2 min-[700px]:col-span-1 min-[700px]:pr-8">
             <p
               className="mb-2 text-xs font-semibold tracking-[0.16em]"
               style={{ color: "var(--color-academy-green)", fontFamily: "var(--font-body)" }}
             >
               TRUSTED ACROSS THE UAE.
             </p>
-            <h2
+            <h3
               className="uppercase"
               style={{
                 fontFamily: "var(--font-display)",
@@ -87,14 +136,23 @@ export default function TrustScale() {
                 lineHeight: 0.95,
                 letterSpacing: "-0.01em",
                 color: "var(--color-black)",
+                margin: 0,
               }}
             >
               PARTNERING WITH LEADING NURSERIES &amp; SCHOOLS.
-            </h2>
+            </h3>
           </div>
 
           {STATS.map((stat, index) => (
-            <div key={stat.value} className="trust-item flex flex-col justify-start md:pt-1" style={{ minWidth: 0 }}>
+            <div
+              key={stat.value}
+              className="trust-item flex flex-col justify-center"
+              style={{
+                minWidth: 0,
+                borderLeft: index > 0 ? "1px solid rgba(27,27,27,0.14)" : undefined,
+                paddingLeft: index > 0 ? "1.5rem" : undefined,
+              }}
+            >
               <span
                 ref={(element) => {
                   valueRefs.current[index] = element
@@ -127,31 +185,24 @@ export default function TrustScale() {
         </div>
 
         <div
-          className="grid grid-cols-2 border-t sm:grid-cols-3 lg:grid-cols-6"
-          style={{ borderColor: "rgba(27,27,27,0.12)" }}
+          className="trust-item mt-8 grid grid-cols-2 divide-x divide-y rounded sm:mt-10 min-[700px]:grid-cols-3 min-[1100px]:grid-cols-6 min-[1100px]:divide-y-0"
+          style={{ border: "1px solid rgba(27,27,27,0.14)", borderColor: "rgba(27,27,27,0.14)" }}
           aria-label="Young Icons education partners"
         >
-          {HOME_PARTNERS.map((partner, index) => (
+          {HOME_PARTNER_LOGOS.map((partner) => (
             <div
-              key={partner}
-              className="trust-item flex min-h-[78px] items-center justify-center px-4 text-center"
-              style={{
-                borderRight: index % 6 !== 5 ? "1px solid rgba(27,27,27,0.1)" : undefined,
-              }}
+              key={partner.name}
+              className="relative flex items-center justify-center"
+              style={{ height: "104px", borderColor: "rgba(27,27,27,0.14)" }}
             >
-              <span
-                className="uppercase"
-                style={{
-                  color: "rgba(27,27,27,0.78)",
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-bold)",
-                  fontSize: "0.62rem",
-                  lineHeight: 1.15,
-                  letterSpacing: "0.06em",
-                }}
-              >
-                {partner}
-              </span>
+              <Image
+                src={partner.src}
+                alt={partner.name}
+                fill
+                sizes="180px"
+                className="object-contain"
+                style={{ objectPosition: "center", filter: "grayscale(1)", padding: "18px 28px" }}
+              />
             </div>
           ))}
         </div>

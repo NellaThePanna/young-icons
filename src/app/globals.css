@@ -91,7 +91,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 6px;
-  background: var(--color-warm-off-white);
+  background: #ffffff;
 }
 
 .mosaic-grid > a {

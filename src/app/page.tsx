@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import NavBar from "@/components/NavBar"
 import HeroHome from "@/components/HeroHome"
 import EditorialMosaic from "@/components/EditorialMosaic"
-import WhoWeAre from "@/components/WhoWeAre"
 import TrustScale from "@/components/TrustScale"
 import FinalCTA from "@/components/FinalCTA"
 import Footer from "@/components/Footer"
@@ -50,7 +49,6 @@ export default function HomePage() {
           imageFallback={HOME_HERO.imageFallback}
         />
         <EditorialMosaic />
-        <WhoWeAre />
         <TrustScale />
         <FinalCTA
           smallHeading=""

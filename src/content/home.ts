@@ -179,6 +179,16 @@ export const HOME_PARTNERS = [
   "Jumeirah",
 ] as const
 
+// Approved monochrome partner logo files, supplied 2026-08-25 (Landing_Page_Complete_Claude_Code_Package_v1).
+export const HOME_PARTNER_LOGOS = [
+  { name: "Cedar School", src: "/images/brand/partners/cedar-school.png" },
+  { name: "Chubby Cheeks Nursery", src: "/images/brand/partners/chubby-cheeks-nursery.png" },
+  { name: "Citizens School", src: "/images/brand/partners/citizens-school.png" },
+  { name: "British Home Nursery", src: "/images/brand/partners/british-home-nursery.png" },
+  { name: "Dubai British School Jumeira", src: "/images/brand/partners/dubai-british-school-jumeira.png" },
+  { name: "Swiss International Scientific School Dubai", src: "/images/brand/partners/swiss-international-scientific-school.png" },
+] as const
+
 export const PARTNERS_SECTION = {
   eyebrow: "TRUSTED ACROSS THE UAE",
   heading: "PARTNERING WITH LEADING NURSERIES & SCHOOLS",
@@ -205,12 +215,12 @@ export const HOME_CTA_BAND = {
 } as const
 
 export const FINAL_CTA = {
-  headingWhite: "READY TO",
-  headingGreen: "MOVE?",
-  sub: "Find a Young Icons class or discover how we can work with your nursery or school.",
+  headingWhite: "READY TO MOVE?",
+  headingGreen: "",
+  sub: "",
   ctaPrimary: "FIND A CLASS",
   ctaSecondary: "WORK WITH US",
-  image: "/images/placeholder/ball-skills.jpg",
+  image: "/images/placeholder/ready-to-move-children-running.jpg",
 } as const
 
 export type NavDropdownItem = { label: string; href: string }
@@ -258,8 +268,8 @@ export const FOOTER_NAP = {
   address: "[CLIENT: full Dubai address required]",
   locationLine: "Dubai • Abu Dhabi / United Arab Emirates",
   phone: "+971 55 172 6530",
-  // CLIENT-TO-CONFIRM: do not publish info@youngicons.ae — unverified mockup guess
-  email: "[CLIENT: email TBC]",
+  // Supplied 2026-08-25 (Landing_Page_Complete_Claude_Code_Package_v1 master prompt, footer spec).
+  email: "Luke@youngiconsacademy.com",
   whatsappNumber: "971551726530",
   whatsappMessage: "Hi, I'd like to find out more about Young Icons Sports Academy.",
 } as const
@@ -282,7 +292,7 @@ export const FOOTER_LINKS = [
 ] as const
 
 export const FOOTER_SOCIAL = [
-  { label: "Instagram", href: "[CLIENT: Instagram URL]" },
+  { label: "Instagram", href: "https://instagram.com/youngicons_UAE" },
   { label: "Facebook", href: "[CLIENT: Facebook URL]" },
   { label: "LinkedIn", href: "[CLIENT: LinkedIn URL]" },
 ] as const
