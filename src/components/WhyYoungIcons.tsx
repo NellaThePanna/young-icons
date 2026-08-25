@@ -14,7 +14,6 @@ type CardItem = typeof WHY_YOUNG_ICONS[number]
 // nova-debt: no dedicated Tailored Programmes photography exists yet —
 // reusing an existing site placeholder until real Young Icons photography arrives.
 const CARD_IMAGE: Record<string, string | null> = {
-  music: null,
   "tailored-programmes": "/images/placeholder/obstacle-course.jpg",
 }
 
@@ -43,6 +42,36 @@ const ONE_PARTNER_COPY = {
   ],
 }
 
+// Approved Music selected-state copy (music-handoff package, 2026-08-25).
+// The "20-MINUTE SESSION" title vs "30-minute" body wording is a known inconsistency
+// in the supplied copy — the handoff explicitly says not to silently correct it.
+const MUSIC_IMAGE = "/images/placeholder/Music_Teacher_Children_Web.webp"
+const MUSIC_COPY = {
+  headingLines: ["MUSIC.", "MOVEMENT.", "DISCOVERY."],
+  body: "A playful early-years music programme where children explore rhythm, sound, instruments, singing and movement through specialist-led sessions.",
+  railEyebrow: "NURSERY-FUNDED PROGRAMMES",
+  programmes: [
+    {
+      icon: "note" as const,
+      title: "20-MINUTE SESSION",
+      bodyPrimary: "A standalone 30-minute music experience designed especially for early years.",
+      bodySecondary: "Perfect for enrichment days, special events, themed weeks or as an introduction to Icons in Rhythm.",
+    },
+    {
+      icon: "calendar" as const,
+      title: "4-WEEK PROGRAMME",
+      bodyPrimary: "A short progressive introduction to music with one 30-minute specialist-led session each week.",
+      bodySecondary: "Children explore a different element of music each week.",
+    },
+    {
+      icon: "infinity" as const,
+      title: "ONGOING / TERM PROGRAMME",
+      bodyPrimary: "A progressive early-years music programme with weekly specialist-led sessions throughout the term.",
+      bodySecondary: "Progressive music learning tailored to your nursery.",
+    },
+  ],
+}
+
 // Approved selected-state copy for the Movement & Sport mosaic (nursery-movement-sport-final-handoff,
 // FINAL_SETTINGS.json). Kept local here rather than in nurseries-about.ts per that handoff's scope.
 const MOVEMENT_SPORT_COPY = {
@@ -65,7 +94,7 @@ const MOVEMENT_BOTTOM_TILES: MosaicTileData[] = [
   { src: "/images/nursery/movement-sport/gymnastics.jpg", cropX: 50, cropY: 28, bubbleX: 47, icon: "ribbon", title: "Gymnastics" },
 ]
 
-type IconKey = "clipboard" | "chat" | "calendar" | "bars" | "partner" | "people" | "clock" | "note" | "target" | "card" | "smile" | "star" | "ball" | "ribbon" | "motion"
+type IconKey = "clipboard" | "chat" | "calendar" | "bars" | "partner" | "people" | "clock" | "note" | "target" | "card" | "smile" | "star" | "ball" | "ribbon" | "motion" | "infinity"
 
 const ICON_PATHS: Record<IconKey, ReactNode> = {
   clipboard: (
@@ -141,6 +170,12 @@ const ICON_PATHS: Record<IconKey, ReactNode> = {
     <path d="M6 11c4.5 0 4.5 6.5 9 6.5S18.5 11 23 11M6 21c4.5 0 4.5-6.5 9-6.5s4.5 6.5 9 6.5" />
   ),
   motion: <path d="M7 22 14 15 7 8M15 22l7-7-7-7" />,
+  infinity: (
+    <>
+      <circle cx="11" cy="16" r="6" />
+      <circle cx="21" cy="16" r="6" />
+    </>
+  ),
 }
 
 function Icon({ icon, className }: { icon: IconKey; className: string }) {
@@ -296,6 +331,10 @@ function DetailPanel({
 
   if (item.id === "multiple-activities") {
     return <MovementSportPanel onClose={onClose} closeButtonRef={closeButtonRef} />
+  }
+
+  if (item.id === "music") {
+    return <MusicPanel onClose={onClose} closeButtonRef={closeButtonRef} />
   }
 
   if (item.id === "fully-managed" && "points" in item) {
@@ -906,6 +945,150 @@ function OnePartnerPanel({
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+function MusicPanel({
+  onClose,
+  closeButtonRef,
+}: {
+  onClose: () => void
+  closeButtonRef: React.RefObject<HTMLButtonElement | null>
+}) {
+  return (
+    <div
+      id="why-young-icons-panel"
+      role="region"
+      aria-label="Music"
+      className="relative mt-6 overflow-hidden rounded-md sm:mt-8"
+      style={{ border: `1px solid ${HAIRLINE}`, backgroundColor: ECRU }}
+    >
+      <button
+        ref={closeButtonRef}
+        type="button"
+        onClick={onClose}
+        aria-label="Close Music detail"
+        className="absolute right-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full text-xl leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:right-6 sm:top-6"
+        style={{ border: "1px solid var(--color-black)", background: "transparent", color: "var(--color-black)", cursor: "pointer" }}
+      >
+        ×
+      </button>
+
+      {/* Mobile / tablet — stacked */}
+      <div className="lg:hidden">
+        <div className="px-6 py-9 sm:px-8" style={{ backgroundColor: DEEP_GREEN, color: "#fff" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.1rem" }}>
+            03 — Music
+          </p>
+          <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "clamp(1.9rem, 9vw, 2.8rem)", lineHeight: 0.98, letterSpacing: "-0.02em", margin: 0, textTransform: "uppercase" }}>
+            {MUSIC_COPY.headingLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </h2>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.45, color: "#fff", maxWidth: "420px", margin: "1.35rem 0 0", borderTop: "1px solid rgba(255,255,255,0.35)", paddingTop: "1.1rem" }}>
+            {MUSIC_COPY.body}
+          </p>
+        </div>
+        <div className="relative h-[240px] w-full overflow-hidden sm:h-[300px]">
+          <Image src={MUSIC_IMAGE} alt="Early-years music teacher playing instruments with four nursery children." fill sizes="100vw" className="object-cover" style={{ objectPosition: "50% 37%" }} />
+        </div>
+        <PlayLearnGrowRail />
+        <div className="px-6 py-8 sm:px-8">
+          <MusicRail />
+        </div>
+      </div>
+
+      {/* Desktop — 520px composition */}
+      <div className="hidden lg:flex" style={{ height: "520px" }}>
+        <div className="relative flex flex-1 flex-col" style={{ flex: "0 0 69%" }}>
+          <div className="relative flex" style={{ height: "434px" }}>
+            <div
+              className="relative flex flex-col justify-center px-9 xl:px-11"
+              style={{
+                flex: "0 0 40%",
+                zIndex: 2,
+                backgroundColor: DEEP_GREEN,
+                color: "#fff",
+                clipPath: "polygon(0 0, 100% 0, calc(100% - 39px) 100%, 0 100%)",
+              }}
+            >
+              <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.1rem" }}>
+                03 — Music
+              </p>
+              <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "clamp(2.2rem, 3.2vw, 59px)", lineHeight: 0.98, letterSpacing: "-0.02em", margin: 0, textTransform: "uppercase", maxWidth: "212px" }}>
+                {MUSIC_COPY.headingLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </h2>
+              <span aria-hidden="true" className="block" style={{ width: "78%", height: "1px", backgroundColor: "rgba(255,255,255,0.55)", margin: "1.2rem 0" }} />
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", lineHeight: 1.45, color: "#fff", maxWidth: "230px", margin: 0 }}>
+                {MUSIC_COPY.body}
+              </p>
+            </div>
+            <div className="relative overflow-hidden" style={{ flex: "1 1 0%", marginLeft: "-39px", zIndex: 1 }}>
+              <Image
+                src={MUSIC_IMAGE}
+                alt="Early-years music teacher playing instruments with four nursery children."
+                fill
+                sizes="69vw"
+                className="object-cover"
+                style={{ objectPosition: "50% 37%" }}
+              />
+            </div>
+          </div>
+          <div style={{ height: "86px" }}>
+            <PlayLearnGrowRail />
+          </div>
+        </div>
+
+        <div className="relative overflow-y-auto px-7 py-5 xl:px-8" style={{ flex: "0 0 31%", backgroundColor: ECRU }}>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", color: DEEP_GREEN, margin: "0 0 0.4rem" }}>
+            {MUSIC_COPY.railEyebrow}
+          </p>
+          <span aria-hidden="true" className="mb-3 block" style={{ width: "40px", height: "2px", backgroundColor: LIME }} />
+          <MusicRail />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MusicRail() {
+  return (
+    <div className="flex flex-col" style={{ gap: "6px" }}>
+      {MUSIC_COPY.programmes.map((programme) => (
+        <div
+          key={programme.title}
+          className="rounded-md"
+          style={{ border: `1px solid ${HAIRLINE}`, backgroundColor: "#fff", padding: "8px" }}
+        >
+          <div className="flex items-start gap-2">
+            <span
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+              style={{ backgroundColor: DEEP_GREEN, color: "#fff" }}
+            >
+              <Icon icon={programme.icon} className="h-3.5 w-3.5" />
+            </span>
+            <div>
+              <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 600, fontSize: "0.76rem", lineHeight: 1.1, letterSpacing: "-0.01em", color: "var(--color-black)", margin: "0.1rem 0 0.25rem" }}>
+                {programme.title}
+              </h3>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.68rem", lineHeight: 1.3, color: "var(--color-nursery-stone)", margin: 0 }}>
+                {programme.bodyPrimary}
+              </p>
+              <span aria-hidden="true" className="my-1 block" style={{ width: "20px", height: "1.5px", backgroundColor: "var(--color-academy-green)" }} />
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.68rem", lineHeight: 1.3, color: "var(--color-nursery-stone)", margin: 0 }}>
+                {programme.bodySecondary}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
