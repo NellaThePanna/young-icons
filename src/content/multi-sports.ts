@@ -37,7 +37,7 @@ export const MULTI_ABOUT = {
 
 export const MULTI_PHOTO_BAND = {
   // Temporary project asset: an approved wide hoops/activity-station scene is still required for an exact match.
-  image: "/images/placeholder/obstacle-course.jpg",
+  image: "/images/clubs/multi-sports-clean-photo-enhanced.png",
 } as const
 
 export const MULTI_LOCATION_CTA = {

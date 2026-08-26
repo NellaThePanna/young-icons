@@ -34,7 +34,7 @@ export default function MultiPhotoBand() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ height: "clamp(270px, 28vw, 420px)" }}
+      style={{ height: "clamp(88px, 22.5vw, 324px )" }}
     >
       <Image
         src={MULTI_PHOTO_BAND.image}
