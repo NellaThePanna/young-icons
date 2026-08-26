@@ -6,7 +6,6 @@ import { FOOTER_NAP } from "@/content/home"
 
 const WHATSAPP_HREF = `https://wa.me/${FOOTER_NAP.whatsappNumber}?text=${encodeURIComponent(FOOTER_NAP.whatsappMessage)}`
 
-const displayStyle = { fontFamily: "var(--font-display)", letterSpacing: "-0.025em" }
 const modalHeadingStyle: React.CSSProperties = { fontFamily: "var(--font-nursery-hero)", fontWeight: 700, color: "var(--color-near-black)", fontSize: "clamp(2.4rem, 5.2vw, 4.25rem)", lineHeight: 0.92, letterSpacing: "0.005em", wordSpacing: "0.06em", textAlign: "center", margin: "0 0 2rem" }
 
 type ContactState = { name: string; email: string; phone: string; message: string }
@@ -16,7 +15,22 @@ const emptyForm: ContactState = { name: "", email: "", phone: "", message: "" }
 function ChatIcon() { return <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M20 15.5a3 3 0 0 1-3 3H9l-4 3v-3.6a3 3 0 0 1-2-2.8v-8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z"/><path d="M7 10h10M7 13.5h6"/></svg> }
 function WhatsAppIcon() { return <svg width="30" height="30" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> }
 function PhoneIcon() { return <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 5c0 8.28 6.72 15 15 15l2-4-5-3-2 2c-2.5-1.2-4.3-3-5.5-5.5l2-2-3-5-4 2Z"/></svg> }
+// Same line-icon conventions already used in Footer.tsx (MailIcon / InstagramIcon).
+function MailIcon() { return <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 6 8 7 8-7" /></svg> }
+function InstagramIcon() { return <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg> }
 function Arrow() { return <span aria-hidden="true" style={{ fontSize: "2rem", fontWeight: 300, lineHeight: 1 }}>→</span> }
+
+// Supplied 2026-08-26 for the Contact page contact-information panel specifically — distinct from
+// FOOTER_NAP, which drives the footer/WhatsApp elsewhere on this page and must stay unchanged.
+const CONTACT_PANEL = {
+  phone: "+971 56 827 3348",
+  phoneHref: "tel:+971568273348",
+  email: "hello@young-icons.com",
+  instagramHandle: "@youngicons_ae",
+  // Client-supplied exact spelling — deliberately distinct from FOOTER_SOCIAL's
+  // "youngicons_UAE" entry, which is a different handle, not a casing variant.
+  instagramHref: "https://instagram.com/youngicons_ae",
+} as const
 
 export default function ContactEditorial() {
   const [isOpen, setIsOpen] = useState(false)
@@ -62,7 +76,17 @@ export default function ContactEditorial() {
         <Image src="/images/placeholder/contact-football-editorial-hero.jpg" alt="Young football player controlling a ball on a bright court" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "center" }} />
         <div className="relative z-10 flex min-h-[520px] flex-col justify-end pb-10 sm:min-h-[610px] sm:pb-14 lg:min-h-[675px] lg:pb-20">
           <div style={{ maxWidth: "min(48vw, 650px)" }} className="max-w-[92%]">
-            <h1 style={{ ...displayStyle, color: "#06452f", fontSize: "clamp(4.15rem, 8.45vw, 9.6rem)", lineHeight: 0.83, margin: 0 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-anton)",
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                color: "#06452f",
+                fontSize: "clamp(4.15rem, 8.45vw, 9.6rem)",
+                lineHeight: 0.83,
+                margin: 0,
+              }}
+            >
               <span className="block">LET&apos;S GET</span>
               <span className="block" style={{ marginTop: "0.095em" }}>THINGS</span>
               <span className="block" style={{ marginTop: "0.095em" }}>MOVING.</span>
@@ -88,14 +112,26 @@ export default function ContactEditorial() {
         <div className="mx-auto grid max-w-[1260px] grid-cols-1 gap-12 lg:grid-cols-[1fr_minmax(340px,0.85fr)] lg:items-end lg:gap-24">
           <div>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.08em", margin: 0 }}>DUBAI • ABU DHABI</p>
-            <h2 style={{ ...displayStyle, color: "#06452f", fontSize: "clamp(3.4rem, 5.8vw, 6.5rem)", lineHeight: 0.86, margin: "1rem 0 0" }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-anton)",
+                fontWeight: 400,
+                color: "#06452f",
+                fontSize: "clamp(2.2rem, 3.4vw, 3.6rem)",
+                lineHeight: 0.9,
+                letterSpacing: "-0.005em",
+                textTransform: "uppercase",
+                margin: "1rem 0 0",
+              }}
+            >
               <span className="block">PROGRAMMES</span>
-              <span className="block" style={{ marginTop: "0.1em" }}>ACROSS THE UAE.</span>
+              <span className="block" style={{ marginTop: "0.08em" }}>ACROSS THE UAE.</span>
             </h2>
           </div>
           <div className="border-t" style={{ borderColor: "rgba(12,14,12,0.18)" }}>
-            <ContactDetail icon={<PhoneIcon />} label="CALL" value={FOOTER_NAP.phone} href={`tel:${FOOTER_NAP.phone}`} />
-            <ContactDetail icon={<WhatsAppIcon />} label="WHATSAPP" value={FOOTER_NAP.phone} href={WHATSAPP_HREF} external />
+            <ContactDetail icon={<PhoneIcon />} label="PHONE" value={CONTACT_PANEL.phone} href={CONTACT_PANEL.phoneHref} />
+            <ContactDetail icon={<MailIcon />} label="EMAIL" value={CONTACT_PANEL.email} href={`mailto:${CONTACT_PANEL.email}`} />
+            <ContactDetail icon={<InstagramIcon />} label="INSTAGRAM" value={CONTACT_PANEL.instagramHandle} href={CONTACT_PANEL.instagramHref} external />
           </div>
         </div>
       </section>
