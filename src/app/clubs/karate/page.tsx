@@ -35,7 +35,7 @@ export default function KaratePage() {
         smallHeading="YOUNG ICONS KARATE"
         words={["FOCUS.", "DISCIPLINE.", "GROW."]}
         subLines={["A new Young Icons Karate experience", "is coming soon to Dubai."]}
-        image="/images/placeholder/karate-coming-soon-hero.jpg"
+        image="/images/clubs/karate-clean-photo.png"
         imageAlt="Young boy in a white karate gi practising a forward punch in a dojo"
         programmeName="Karate"
         backgroundPosition="center 15%"
