@@ -41,7 +41,7 @@ export default function RootLayout({
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject data-gr-* attributes on body before React hydrates */}
       <body
         className={`${urbanist.variable} ${inter.variable} ${anton.variable}`}
-        style={{ '--font-display': 'var(--font-nursery-hero)', '--font-holiday-display': 'var(--font-nursery-hero)' } as React.CSSProperties}
+        style={{ '--font-display': 'var(--font-nursery-hero)', '--font-holiday-display': 'var(--font-anton)' } as React.CSSProperties}
         suppressHydrationWarning
       >
         <LenisProvider>{children}</LenisProvider>

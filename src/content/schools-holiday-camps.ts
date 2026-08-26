@@ -1,7 +1,9 @@
 export const SCHOOLS_CAMPS_HERO = {
   headingLine1: "HOLIDAY",
   headingLine2: "CAMPS",
-  image: "/images/placeholder/holiday-camps-hero.jpg",
+  image: "/images/holiday-camps/holiday-camps-hero-photo.png",
+  taglineLine1: "ACTIVE HOLIDAYS.",
+  taglineLine2: "LASTING MEMORIES.",
 } as const
 
 export const SCHOOLS_CAMPS_INTRO = {
@@ -11,10 +13,10 @@ export const SCHOOLS_CAMPS_INTRO = {
 } as const
 
 export const SCHOOLS_CAMPS_UPCOMING = {
-  heading: "FIND YOUR NEXT ADVENTURE",
+  heading: "HOLIDAY CAMPS",
   camps: [
     {
-      name: "Summer Holiday Camp",
+      name: "Summer Camp",
       venue: "Cedar School",
       dates: "14 July - 1 August 2025",
       ages: "Ages 4-12",
