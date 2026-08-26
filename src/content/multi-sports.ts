@@ -1,8 +1,7 @@
 export const MULTI_HERO = {
-  headingLines: ["PLAY.", "LEARN.", "GROW."],
-  sub: "MULTI-SPORTS CLUB",
-  // Temporary project asset: a landscape approved replacement is still required for an exact match.
-  image: "/images/placeholder/activity-football.png",
+  image: "/images/clubs/multi-sports-anton-typography.png",
+  imageWidth: 1805,
+  imageHeight: 871,
 } as const
 
 export const MULTI_ABOUT = {
