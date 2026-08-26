@@ -35,9 +35,11 @@ export default function BalletPage() {
         smallHeading="YOUNG ICONS BALLET"
         words={["MOVE.", "CREATE.", "GROW."]}
         subLines={["BALLET, THE YOUNG ICONS WAY.", "COMING SOON TO DUBAI."]}
-        image="/images/placeholder/ballet-coming-soon-hero.jpg"
-        imageAlt="Young ballerina in a pale pink tutu practising in a sunlit ballet studio"
+        image="/images/clubs/ballet-clean-photo.png"
+        imageAlt="Young ballerina in a pale pink tutu practising in a ballet studio"
         programmeName="Ballet"
+        backgroundPosition="center 3%"
+        enlargedCta
       />
     </>
   )

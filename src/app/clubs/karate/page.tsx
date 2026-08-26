@@ -38,6 +38,9 @@ export default function KaratePage() {
         image="/images/placeholder/karate-coming-soon-hero.jpg"
         imageAlt="Young boy in a white karate gi practising a forward punch in a dojo"
         programmeName="Karate"
+        backgroundPosition="center 15%"
+        mobileBackgroundPosition="78% center"
+        enlargedCta
       />
     </>
   )

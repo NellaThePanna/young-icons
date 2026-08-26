@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, type ChangeEvent, type FormEvent } from "react"
-import Image from "next/image"
 import NavBar from "@/components/NavBar"
 import Footer from "@/components/Footer"
 
@@ -12,6 +11,10 @@ interface ComingSoonPageProps {
   image: string
   imageAlt: string
   programmeName: "Ballet" | "Karate"
+  backgroundPosition?: string
+  mobileBackgroundPosition?: string
+  /** Narrowly-scoped CTA/form typography bump — opt-in per page so it never affects pages that don't pass it. */
+  enlargedCta?: boolean
 }
 
 type FormState = {
@@ -30,30 +33,6 @@ const EMPTY_FORM: FormState = {
   phone: "",
   childAge: "",
   location: "",
-}
-
-// Club hero type standard: all major display lines use deliberate, non-colliding spacing and a shared left/top alignment across programme pages.
-const CLUB_HERO_TYPE_STANDARD = {
-  desktopLeftInset: "clamp(3.5rem, 4.25vw, 5rem)",
-  desktopTopInset: "clamp(5rem, 5vw, 6rem)",
-  headlineSize: "clamp(3.75rem, 5vw, 6rem)",
-  headlineLineHeight: 1.02,
-  thirdLineGap: "0.14em",
-  labelToHeadlineGap: "0.65rem",
-  headlineToSupportingCopyGap: "1.25rem",
-  periodSpacing: "0.13em",
-} as const
-
-function DisplayWord({ word }: { word: string }) {
-  const hasPeriod = word.endsWith(".")
-  const wordBody = hasPeriod ? word.slice(0, -1) : word
-
-  return (
-    <>
-      {wordBody}
-      {hasPeriod && <span style={{ marginLeft: CLUB_HERO_TYPE_STANDARD.periodSpacing }}>.</span>}
-    </>
-  )
 }
 
 const FIELD_DEFINITIONS: Array<{
@@ -75,6 +54,9 @@ export default function ComingSoonPage({
   image,
   imageAlt,
   programmeName,
+  backgroundPosition = "center center",
+  mobileBackgroundPosition = "center center",
+  enlargedCta = false,
 }: ComingSoonPageProps) {
   const [formData, setFormData] = useState<FormState>(EMPTY_FORM)
   const [status, setStatus] = useState<Status>("idle")
@@ -110,64 +92,148 @@ export default function ComingSoonPage({
     <>
       <NavBar />
       <main style={{ backgroundColor: "var(--color-black)" }}>
+        {/* Desktop/tablet hero */}
         <section
-          className="relative isolate overflow-hidden"
+          className="relative isolate hidden overflow-hidden md:block"
           style={{ height: "clamp(36.25rem, 48vw, 43.75rem)", minHeight: "36.25rem" }}
-          aria-labelledby={`${programmeName.toLowerCase()}-coming-soon-heading`}
+          aria-labelledby={`${programmeName.toLowerCase()}-coming-soon-heading-desktop`}
         >
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[68%_16%] sm:object-[64%_20%]"
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition }}
+            role="img"
+            aria-label={imageAlt}
           />
-          <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.62) 38%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.04) 100%)" }} />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(90deg, rgba(4,13,11,0.76) 0%, rgba(4,13,11,0.48) 32%, rgba(4,13,11,0.08) 58%, transparent 72%)" }}
+          />
 
-          <div className="relative z-10 flex h-full items-start px-6 pt-[6.75rem] sm:px-10 sm:pt-[7.25rem] lg:px-[clamp(3.5rem,4.25vw,5rem)] lg:pt-[clamp(5rem,5vw,6rem)]">
-            <div className="max-w-[32rem]">
+          <div className="relative z-10 flex h-full items-center" style={{ paddingLeft: "6.5%" }}>
+            <div style={{ maxWidth: "39%" }}>
               <p
-                className="mb-0"
+                className="m-0"
                 style={{
-                  color: "var(--color-academy-green)",
-                  fontFamily: "var(--font-body)",
-                  fontSize: "clamp(0.68rem, 0.85vw, 0.84rem)",
-                  fontWeight: "var(--font-weight-bold)",
-                  letterSpacing: "0.09em",
-                  marginBottom: CLUB_HERO_TYPE_STANDARD.labelToHeadlineGap,
+                  fontFamily: "Arial, Inter, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  lineHeight: 1.2,
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                  color: "#087A45",
+                  marginBottom: "14px",
                 }}
               >
                 {smallHeading}
               </p>
 
               <h1
-                id={`${programmeName.toLowerCase()}-coming-soon-heading`}
+                id={`${programmeName.toLowerCase()}-coming-soon-heading-desktop`}
                 className="m-0"
                 style={{
-                  color: "var(--color-white)",
-                  fontFamily: "var(--font-display)",
-                  fontSize: CLUB_HERO_TYPE_STANDARD.headlineSize,
-                  fontWeight: "var(--font-weight-bold)",
-                  letterSpacing: "-0.025em",
-                  lineHeight: CLUB_HERO_TYPE_STANDARD.headlineLineHeight,
+                  fontFamily: "var(--font-anton)",
+                  fontWeight: 400,
+                  fontSize: "clamp(58px, 6.1vw, 92px)",
+                  lineHeight: 0.92,
+                  letterSpacing: "-0.01em",
                   textTransform: "uppercase",
+                  textAlign: "left",
+                  color: "#F7F5EF",
                 }}
               >
-                <span className="block"><DisplayWord word={words[0]} /></span>
-                <span className="block"><DisplayWord word={words[1]} /></span>
-                <span className="block" style={{ color: "var(--color-academy-green)", marginTop: CLUB_HERO_TYPE_STANDARD.thirdLineGap }}><DisplayWord word={words[2]} /></span>
+                <span className="block">{words[0]}</span>
+                <span className="block">{words[1]}</span>
+                <span className="block" style={{ color: "#087A45" }}>{words[2]}</span>
               </h1>
 
               <p
-                className="mb-0"
+                className="m-0"
                 style={{
-                  color: "var(--color-white)",
-                  fontFamily: "var(--font-body)",
-                  fontSize: "clamp(0.91rem, 1.25vw, 1.1rem)",
-                  fontWeight: "var(--font-weight-medium)",
-                  lineHeight: 1.48,
-                  marginTop: CLUB_HERO_TYPE_STANDARD.headlineToSupportingCopyGap,
+                  fontFamily: "Arial, Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  lineHeight: 1.65,
+                  textAlign: "left",
+                  color: "#F7F5EF",
+                  marginTop: "24px",
+                }}
+              >
+                <span className="block">{subLines[0]}</span>
+                <span className="block">{subLines[1]}</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Mobile hero */}
+        <section
+          className="relative isolate overflow-hidden md:hidden"
+          style={{ minHeight: "620px", height: "clamp(620px, 105svh, 700px)" }}
+          aria-labelledby={`${programmeName.toLowerCase()}-coming-soon-heading-mobile`}
+        >
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: mobileBackgroundPosition }}
+            role="img"
+            aria-label={imageAlt}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(0deg, rgba(4,13,11,0.9) 0%, rgba(4,13,11,0.7) 30%, rgba(4,13,11,0.25) 60%, transparent 82%), linear-gradient(90deg, rgba(4,13,11,0.55) 0%, transparent 55%)",
+            }}
+          />
+
+          <div className="relative z-10 flex h-full items-end" style={{ paddingLeft: "6.5%", paddingRight: "6.5%", paddingBottom: "48px" }}>
+            <div style={{ width: "88%", maxWidth: "none" }}>
+              <p
+                className="m-0"
+                style={{
+                  fontFamily: "Arial, Inter, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  lineHeight: 1.2,
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                  color: "#087A45",
+                  marginBottom: "14px",
+                }}
+              >
+                {smallHeading}
+              </p>
+
+              <h1
+                id={`${programmeName.toLowerCase()}-coming-soon-heading-mobile`}
+                className="m-0"
+                style={{
+                  fontFamily: "var(--font-anton)",
+                  fontWeight: 400,
+                  fontSize: "clamp(48px, 15vw, 70px)",
+                  lineHeight: 0.92,
+                  letterSpacing: "-0.01em",
+                  textTransform: "uppercase",
+                  textAlign: "left",
+                  color: "#F7F5EF",
+                }}
+              >
+                <span className="block">{words[0]}</span>
+                <span className="block">{words[1]}</span>
+                <span className="block" style={{ color: "#087A45" }}>{words[2]}</span>
+              </h1>
+
+              <p
+                className="m-0"
+                style={{
+                  fontFamily: "Arial, Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  lineHeight: 1.65,
+                  textAlign: "left",
+                  color: "#F7F5EF",
+                  marginTop: "24px",
                 }}
               >
                 <span className="block">{subLines[0]}</span>
@@ -182,17 +248,17 @@ export default function ComingSoonPage({
           aria-labelledby={`${programmeName.toLowerCase()}-interest-heading`}
           style={{ backgroundColor: "var(--color-black)" }}
         >
-          <div className="mx-auto" style={{ maxWidth: "34rem" }}>
+          <div className="mx-auto" style={{ maxWidth: enlargedCta ? "40rem" : "34rem" }}>
             <div className="text-center">
               <h2
                 id={`${programmeName.toLowerCase()}-interest-heading`}
-                className="m-0"
+                className={enlargedCta ? "m-0 md:whitespace-nowrap" : "m-0"}
                 style={{
                   color: "var(--color-white)",
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(2.6rem, 4.5vw, 4.25rem)",
-                  fontWeight: "var(--font-weight-bold)",
-                  letterSpacing: "-0.035em",
+                  fontFamily: enlargedCta ? "var(--font-anton)" : "var(--font-display)",
+                  fontSize: enlargedCta ? "clamp(2.15rem, 5.4vw, 5.1rem)" : "clamp(2.6rem, 4.5vw, 4.25rem)",
+                  fontWeight: enlargedCta ? 400 : "var(--font-weight-bold)",
+                  letterSpacing: enlargedCta ? "-0.01em" : "-0.035em",
                   lineHeight: 0.94,
                   textTransform: "uppercase",
                 }}
@@ -230,7 +296,7 @@ export default function ComingSoonPage({
                       style={{
                         color: "rgba(255,255,255,0.66)",
                         fontFamily: "var(--font-body)",
-                        fontSize: "0.72rem",
+                        fontSize: enlargedCta ? "0.8rem" : "0.72rem",
                         fontWeight: "var(--font-weight-medium)",
                         letterSpacing: "0.1em",
                       }}
@@ -251,7 +317,7 @@ export default function ComingSoonPage({
                         border: "1px solid rgba(255,255,255,0.2)",
                         color: "var(--color-white)",
                         fontFamily: "var(--font-body)",
-                        fontSize: "1rem",
+                        fontSize: enlargedCta ? "1.1rem" : "1rem",
                       }}
                     />
                   </div>
