@@ -91,7 +91,7 @@ export default function MultiLocationCTA() {
             {MULTI_LOCATION_CTA.ctaEyebrow}
           </p>
           <p
-            className="max-w-[340px]"
+            className="max-w-[230px]"
             style={{ fontFamily: "var(--font-body)", color: "rgba(27,27,27,0.74)", fontSize: "0.9rem", lineHeight: 1.55, margin: "0 0 16px 0" }}
           >
             {MULTI_LOCATION_CTA.ctaBody}

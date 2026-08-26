@@ -96,11 +96,11 @@ export default function MultiAbout() {
             <h2
               className="uppercase"
               style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: "var(--font-weight-bold)",
+                fontFamily: "var(--font-anton)",
+                fontWeight: 400,
                 fontSize: "clamp(2.5rem, 4.2vw, 4.25rem)",
-                lineHeight: 0.98,
-                letterSpacing: "-0.04em",
+                lineHeight: 0.9,
+                letterSpacing: "-0.005em",
                 color: "var(--color-black)",
                 margin: 0,
               }}
@@ -111,7 +111,7 @@ export default function MultiAbout() {
             </h2>
           </div>
 
-          <div className="multi-about-item flex items-center lg:border-l lg:pl-16" style={{ borderColor: "rgba(27,27,27,0.16)" }}>
+          <div className="multi-about-item flex items-start lg:border-l lg:pl-16" style={{ borderColor: "rgba(27,27,27,0.16)" }}>
             <p
               style={{
                 fontFamily: "var(--font-body)",
