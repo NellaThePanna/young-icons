@@ -7,8 +7,8 @@ export const SCHOOLS_ACTIVITIES_HERO = {
   ],
   body: "We manage your school's complete activity programme—from planning and staffing to parent bookings, attendance and programme delivery.",
   scrollLabel: "SCROLL TO EXPLORE",
-  image: "/images/placeholder/karate-crawl.jpg",
-  imageAlt: "Young Icons coach leading children in an indoor school activity session",
+  image: "/images/schools/school-coaching-banner-2400x1000.webp",
+  imageAlt: "Young Icons coach kneeling and talking with a group of school children in an indoor sports hall",
 } as const
 
 export const SCHOOLS_EDITORIAL_ROWS = [
@@ -27,8 +27,8 @@ export const SCHOOLS_EDITORIAL_ROWS = [
       { title: "Programme Delivery", body: "High-quality sessions delivered consistently, week after week." },
     ],
     closingLines: ["We deliver the programme.", "You focus on education."],
-    image: "/images/placeholder/obstacle-course.jpg",
-    imageAlt: "Young Icons coach guiding children through an indoor activity session",
+    image: "/images/schools/school-coaching-banner-2400x1000.webp",
+    imageAlt: "Young Icons coach kneeling and talking with a group of school children in an indoor sports hall",
   },
   {
     id: "activities",
@@ -39,26 +39,26 @@ export const SCHOOLS_EDITORIAL_ROWS = [
     categories: [
       {
         title: "INDIVIDUAL SPORTS",
-        image: "/images/placeholder/karate-crawl.jpg",
-        imageAlt: "Children practising racket skills with a Young Icons coach",
+        image: "/images/schools/individual-sports-tennis.png",
+        imageAlt: "A boy in Young Icons kit playing tennis on court",
         activities: ["Tennis", "Swimming", "Gymnastics"],
       },
       {
         title: "TEAM SPORTS",
-        image: "/images/placeholder/activity-football.png",
-        imageAlt: "Children playing football with a Young Icons coach",
+        image: "/images/schools/team-sports-football.png",
+        imageAlt: "Boys in Young Icons kits playing football",
         activities: ["Football", "Basketball", "Rugby", "Volleyball", "Netball", "Indoor Hockey"],
       },
       {
         title: "MARTIAL ARTS",
-        image: "/images/placeholder/activity-boxing.png",
-        imageAlt: "Children taking part in a boxing session with a Young Icons coach",
+        image: "/images/schools/martial-arts-karate.png",
+        imageAlt: "A boy in a karate gi in a fighting stance",
         activities: ["Boxing", "Karate", "Jiu-Jitsu"],
       },
       {
         title: "DANCE & MOVEMENT",
-        image: "/images/placeholder/ball-skills.jpg",
-        imageAlt: "Children exploring dance and movement with an instructor",
+        image: "/images/schools/dance-and-movement.png",
+        imageAlt: "Girls dancing with arms raised in a studio",
         activities: ["Ballet", "Jazz", "Hip Hop", "Cheerleading"],
       },
     ],
