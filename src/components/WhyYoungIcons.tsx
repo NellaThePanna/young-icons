@@ -13,8 +13,8 @@ type CardItem = typeof WHY_YOUNG_ICONS[number]
 
 // nova-debt: real "teacher and children" photo (referenced as
 // 04-fully-managed-teacher-and-children.png in the handoff doc) was never supplied —
-// reusing the existing obstacle-course.jpg placeholder until it arrives.
-const FULLY_MANAGED_IMAGE = "/images/placeholder/obstacle-course.jpg"
+// sharing the Tailored Programmes classroom photo until it arrives.
+const FULLY_MANAGED_IMAGE = "/images/placeholder/tailored-programmes-classroom-clean.png"
 
 // Approved One Partner selected-state copy (one-partner-handoff package, 2026-08-25).
 // AI-generated photograph explicitly approved by the client for this state only.
@@ -361,11 +361,11 @@ function PlayLearnGrowRail({ floating = false }: { floating?: boolean }) {
       className={floating ? "absolute inset-x-0 bottom-0 z-20 flex" : "flex"}
       style={{ width: floating ? "68%" : "100%", height: "76px", backgroundColor: DEEP_GREEN, color: "#fff" }}
     >
-      {items.map((rowItem, index) => (
+      {items.map((rowItem) => (
         <span
           key={rowItem.label}
           className="flex flex-1 items-center justify-center gap-2 px-2"
-          style={{ borderRight: index < items.length - 1 ? "1px solid rgba(255,255,255,0.35)" : undefined, fontSize: "0.85rem", fontWeight: 700 }}
+          style={{ fontSize: "0.85rem", fontWeight: 700 }}
         >
           <span style={{ color: LIME }}>
             <Icon icon={rowItem.icon} className="h-5 w-5" />
@@ -635,7 +635,7 @@ function FullyManagedPanel({
           />
         </div>
 
-        <div className="relative overflow-y-auto px-9 pb-8 pt-16" style={{ flex: "1 1 0%", backgroundColor: ECRU }}>
+        <div className="relative overflow-y-auto px-7 pb-6 pt-12 xl:px-9 xl:pb-8 xl:pt-16" style={{ flex: "1 1 0%", backgroundColor: ECRU }}>
           <button
             ref={closeButtonRef}
             type="button"
@@ -647,7 +647,7 @@ function FullyManagedPanel({
             ×
           </button>
           <div style={{ transform: "translate(-7px, -2px)" }}>
-            <FullyManagedRows points={points} />
+            <FullyManagedRows points={points} compact />
           </div>
         </div>
       </div>
@@ -680,7 +680,7 @@ function FullyManagedRail() {
   )
 }
 
-function FullyManagedRows({ points }: { points: readonly FullyManagedPoint[] }) {
+function FullyManagedRows({ points, compact = false }: { points: readonly FullyManagedPoint[]; compact?: boolean }) {
   return (
     <div>
       {points.map((point, index) => (
@@ -688,8 +688,8 @@ function FullyManagedRows({ points }: { points: readonly FullyManagedPoint[] }) 
           key={point.number}
           className="flex items-start gap-3"
           style={{
-            paddingTop: index === 0 ? 0 : "19px",
-            paddingBottom: "19px",
+            paddingTop: index === 0 ? 0 : compact ? "13px" : "19px",
+            paddingBottom: compact ? "13px" : "19px",
             borderBottom: index < points.length - 1 ? `1px solid ${HAIRLINE}` : undefined,
           }}
         >
@@ -698,10 +698,10 @@ function FullyManagedRows({ points }: { points: readonly FullyManagedPoint[] }) 
             <Icon icon={point.icon} className="h-4 w-4" />
           </span>
           <div>
-            <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 600, fontSize: "17px", lineHeight: 1.15, color: "var(--color-black)", margin: "0 0 0.3rem" }}>
+            <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 600, fontSize: compact ? "15.5px" : "17px", lineHeight: compact ? 1.12 : 1.15, color: "var(--color-black)", margin: compact ? "0 0 0.22rem" : "0 0 0.3rem" }}>
               {point.label}
             </h3>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "10.25px", lineHeight: 1.4, color: "var(--color-nursery-stone)", margin: 0 }}>{point.body}</p>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: compact ? "10px" : "10.25px", lineHeight: compact ? 1.32 : 1.4, color: "var(--color-nursery-stone)", margin: 0 }}>{point.body}</p>
           </div>
         </div>
       ))}
@@ -923,32 +923,39 @@ function MusicPanel({
 
 function MusicRail() {
   return (
-    <div className="flex flex-col" style={{ gap: "6px" }}>
-      {MUSIC_COPY.programmes.map((programme) => (
+    <div className="flex flex-col">
+      {MUSIC_COPY.programmes.map((programme, index) => (
         <div
           key={programme.title}
-          className="rounded-md"
-          style={{ border: `1px solid ${HAIRLINE}`, backgroundColor: "#fff", padding: "8px" }}
+          className="grid items-start grid-cols-[30px_52px_minmax(0,1fr)] gap-3 py-4 lg:grid-cols-[24px_44px_minmax(0,1fr)] lg:gap-2 lg:py-2"
+          style={{
+            borderBottom: `1px solid ${HAIRLINE}`,
+            borderTop: index === 0 ? `1px solid ${HAIRLINE}` : undefined,
+          }}
         >
-          <div className="flex items-start gap-2">
-            <span
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
-              style={{ backgroundColor: DEEP_GREEN, color: "#fff" }}
-            >
-              <Icon icon={programme.icon} className="h-3.5 w-3.5" />
-            </span>
-            <div>
-              <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 600, fontSize: "0.76rem", lineHeight: 1.1, letterSpacing: "-0.01em", color: "var(--color-black)", margin: "0.1rem 0 0.25rem" }}>
-                {programme.title}
-              </h3>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.68rem", lineHeight: 1.3, color: "var(--color-nursery-stone)", margin: 0 }}>
-                {programme.bodyPrimary}
-              </p>
-              <span aria-hidden="true" className="my-1 block" style={{ width: "20px", height: "1.5px", backgroundColor: "var(--color-academy-green)" }} />
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.68rem", lineHeight: 1.3, color: "var(--color-nursery-stone)", margin: 0 }}>
-                {programme.bodySecondary}
-              </p>
-            </div>
+          <span
+            className="flex h-[27px] w-[27px] items-center justify-center rounded-full"
+            style={{ border: `1px solid ${DEEP_GREEN}`, color: DEEP_GREEN, fontFamily: "var(--font-body)", fontSize: "0.68rem" }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span
+            className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl lg:h-[44px] lg:w-[44px]"
+            style={{ backgroundColor: "#ECEBE4", color: DEEP_GREEN }}
+          >
+            <Icon icon={programme.icon} className="h-[26px] w-[26px] lg:h-[22px] lg:w-[22px]" />
+          </span>
+          <div className="min-w-0">
+            <h3 className="mb-2 lg:mb-1" style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 700, fontSize: "0.86rem", lineHeight: 1.12, letterSpacing: "-0.01em", color: "var(--color-black)", marginTop: "0.1rem", textTransform: "uppercase", overflowWrap: "break-word" }}>
+              {programme.title}
+            </h3>
+            <p className="text-[0.72rem] leading-[1.32] lg:text-[0.66rem] lg:leading-[1.22]" style={{ fontFamily: "var(--font-body)", color: "var(--color-nursery-stone)", margin: 0, overflowWrap: "break-word" }}>
+              {programme.bodyPrimary}
+            </p>
+            <span aria-hidden="true" className="my-1 block" style={{ width: "20px", height: "1.5px", backgroundColor: "var(--color-academy-green)" }} />
+            <p className="text-[0.72rem] leading-[1.32] lg:text-[0.66rem] lg:leading-[1.22]" style={{ fontFamily: "var(--font-body)", color: "var(--color-nursery-stone)", margin: 0, overflowWrap: "break-word" }}>
+              {programme.bodySecondary}
+            </p>
           </div>
         </div>
       ))}
@@ -1073,13 +1080,13 @@ function TailoredProgrammesPanel({
 function TailoredProgrammesFooter() {
   return (
     <div className="flex" style={{ height: "94.6249885559082px", backgroundColor: DEEP_GREEN, color: "#fff" }}>
-      {TAILORED_PROGRAMMES_COPY.footerCells.map((cell, index) => (
+      {TAILORED_PROGRAMMES_COPY.footerCells.map((cell) => (
         <div
           key={cell.label}
           className="flex items-center justify-center gap-1.5 sm:gap-2"
           style={{
             flex: `0 0 ${cell.width}%`,
-            borderRight: index < TAILORED_PROGRAMMES_COPY.footerCells.length - 1 ? "1px solid rgba(154,214,77,0.55)" : undefined,
+
             transform: "translateY(20px)",
           }}
         >
