@@ -405,11 +405,11 @@ function MovementSportPanel({
 
       <div className="flex flex-col lg:flex-row">
         <div
-          className="flex flex-col justify-center px-6 py-10 sm:px-9 sm:py-12 lg:w-[35%] lg:px-10 lg:py-0"
+          className="flex flex-col justify-center px-6 py-10 sm:px-9 sm:py-12 lg:w-[35%] lg:justify-start lg:px-10 lg:py-0 lg:pt-[63px]"
           style={{ backgroundColor: DEEP_GREEN, color: "#fff" }}
         >
-          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 0.9rem" }}>
-            Multiple Activities
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 0.9rem" }}>
+            02 — MULTIPLE ACTIVITIES
           </p>
           <h2
             style={{
@@ -595,13 +595,14 @@ function FullyManagedPanel({
       {/* Desktop — exact 530px three-field composition */}
       <div className="hidden lg:flex" style={{ height: "530px" }}>
         <div
-          className="relative flex flex-col justify-center"
+          className="relative flex flex-col justify-start"
           style={{
             flex: "0 0 30%",
             backgroundColor: DEEP_GREEN,
             color: "#fff",
             zIndex: 2,
             clipPath: "polygon(0 0, 100% 0, calc(100% - 72px) 100%, 0 100%)",
+            paddingTop: "55px",
           }}
         >
           <div className="px-10" style={{ transform: "translate(-20px, 8px)" }}>
@@ -1019,7 +1020,7 @@ function TailoredProgrammesPanel({
         <div className="relative flex flex-1 flex-col" style={{ flex: "0 0 75%" }}>
           <div className="relative flex" style={{ height: "559.375px" }}>
             <div
-              className="relative flex flex-col justify-center px-9 xl:px-11"
+              className="relative flex flex-col justify-start px-2 pt-[63px] xl:px-11"
               style={{
                 flex: "0 0 42.6667%",
                 zIndex: 2,
@@ -1031,7 +1032,7 @@ function TailoredProgrammesPanel({
               <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 1.1rem" }}>
                 04 — Tailored Programmes
               </p>
-              <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "44px", lineHeight: 0.94, letterSpacing: "-0.02em", margin: 0, textTransform: "uppercase", maxWidth: "217px" }}>
+              <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "44px", lineHeight: 0.94, letterSpacing: "-0.02em", margin: 0, textTransform: "uppercase" }}>
                 {TAILORED_PROGRAMMES_COPY.headingLines.map((line) => (
                   <span key={line} className="block">
                     {line}
