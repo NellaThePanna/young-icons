@@ -32,8 +32,8 @@ export default function NurseryHero() {
           data-nursery-hero-reveal
           className="leading-[0.98] sm:leading-[0.94]"
           style={{
-            fontFamily: "var(--font-nursery-hero)",
-            fontWeight: 600,
+            fontFamily: "var(--font-holiday-display), Impact, sans-serif",
+            fontWeight: 400,
             fontSize: "clamp(2.4rem, 5.2vw, 4.25rem)",
             letterSpacing: "-0.025em",
             color: "var(--color-black)",

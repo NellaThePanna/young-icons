@@ -69,7 +69,7 @@ export default function ApproachRows() {
               >
                 <span className="flex items-baseline gap-4 sm:gap-7">
                   <span style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", fontWeight: "var(--font-weight-medium)", color: GREEN }}>{row.number}</span>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.15rem, calc(6vw - 4px), 5.55rem)", lineHeight: 0.85, letterSpacing: "-0.025em", color: "var(--color-black)" }}>
+                  <span style={{ fontFamily: "var(--font-holiday-display), Impact, sans-serif", fontWeight: 400, fontSize: "clamp(2.15rem, calc(6vw - 4px), 5.55rem)", lineHeight: 0.85, letterSpacing: "-0.025em", color: "var(--color-black)" }}>
                     {row.word}.
                   </span>
                 </span>
