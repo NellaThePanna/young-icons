@@ -78,6 +78,8 @@ export const SCHOOLS_TRUSTED_PARTNERS = {
     { primary: "ACROSS THE UAE", secondary: ["AND GROWING"] },
   ],
   heading: "TRUSTED BY SCHOOLS ACROSS THE UAE.",
+  logosImage: "/images/schools/00-all-school-logos-white.png",
+  logosImageAlt: "Logos of partner schools: Citizens International School, Hartland International School, Nord Anglia International School, Dubai British School, Swiss International Scientific School Dubai, and Fairgreen International School",
 } as const
 
 export const SCHOOLS_EDITORIAL_CTA = {
