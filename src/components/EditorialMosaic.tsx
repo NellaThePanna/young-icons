@@ -15,6 +15,9 @@ const PARALLAX_TRAVEL = [5, 20, 38] as const
 // the card bounds mid-scroll, exposing the section's black background as a gap.
 const IMAGE_OVERHANG_PX = 60
 
+// Clubs and Holiday Camps sit high in frame — a centred crop cuts the children's heads
+const CARD_OBJECT_POSITION = ["center", "center", "center 15%", "center 22%"] as const
+
 const MOSAIC_LAYOUT = [
   "mosaic-early-years",
   "mosaic-schools",
@@ -88,10 +91,10 @@ export default function EditorialMosaic() {
     <section
       ref={sectionRef}
       data-section="programme-mosaic"
-      className="px-4 pb-0 sm:px-8 lg:px-12"
-      style={{ backgroundColor: "var(--color-black)", marginTop: "-32px", position: "relative", zIndex: 2 }}
+      className="pb-0"
+      style={{ backgroundColor: "var(--color-white)", marginTop: "-32px", position: "relative", zIndex: 2 }}
     >
-      <div className="mosaic-grid mx-auto" style={{ maxWidth: "1600px" }}>
+      <div className="mosaic-grid">
         {EXPLORE_CARDS.map((card, i) => (
           <Link
             key={card.label}
@@ -110,7 +113,7 @@ export default function EditorialMosaic() {
                   fill
                   sizes={i === 3 ? "100vw" : "(max-width: 768px) 100vw, 34vw"}
                   className="object-cover"
-                  style={{ objectPosition: i === 3 ? "center 40%" : "center" }}
+                  style={{ objectPosition: CARD_OBJECT_POSITION[i] }}
                 />
               </div>
             </div>

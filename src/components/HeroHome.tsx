@@ -250,11 +250,11 @@ export default function HeroHome({
       <div className="relative max-w-5xl w-full mx-auto text-center" style={{ zIndex: 2 }}>
         <h1
           aria-label={fullHeading}
-          className="tracking-tight mb-10"
+          className="tracking-tight mb-8"
           style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: "var(--font-weight-bold)",
-            lineHeight: 0.92,
+            fontFamily: "var(--font-anton)",
+            fontWeight: 400,
+            lineHeight: 0.9,
             textTransform: "uppercase",
           }}
         >
@@ -264,7 +264,7 @@ export default function HeroHome({
               ref={(el) => { wordRefs.current[i] = el }}
               className="block"
               style={{
-                fontSize: "clamp(3.5rem, 11vw, 9.5rem)",
+                fontSize: "clamp(3.25rem, 9vw, 7.5rem)",
                 color:
                   wordColors[i] === "green"
                     ? "var(--color-academy-green)"
