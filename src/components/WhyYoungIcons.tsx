@@ -68,7 +68,7 @@ const MUSIC_COPY = {
 // default is equal thirds, but the exported settings moved the boundary off-center.
 const TAILORED_PROGRAMMES_IMAGE = "/images/placeholder/tailored-programmes-classroom-clean.png"
 const TAILORED_PROGRAMMES_COPY = {
-  headingLines: ["DESIGNED", "AROUND YOUR", "NURSERY,", "YOUR CHILDREN", "AND YOUR GOALS."],
+  headingLines: ["DESIGNED", "AROUND YOUR", "NURSERY", "YOUR CHILDREN", "AND YOUR GOALS."],
   body: "Programmes built around your nursery's needs, aligned with early years development and learning goals.",
   railEyebrow: "NURSERY-FUNDED PROGRAMMES",
   programmes: [
@@ -1057,7 +1057,7 @@ function TailoredProgrammesPanel({
           <TailoredProgrammesFooter />
         </div>
 
-        <div className="relative overflow-y-auto px-8 py-7 xl:px-9" style={{ flex: "0 0 25%", backgroundColor: ECRU }}>
+        <div className="relative flex flex-col overflow-y-auto px-3 py-7 xl:px-9" style={{ flex: "0 0 25%", backgroundColor: ECRU }}>
           <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: DEEP_GREEN, margin: "0 0 0.4rem" }}>
             {TAILORED_PROGRAMMES_COPY.railEyebrow}
           </p>
@@ -1075,18 +1075,17 @@ function TailoredProgrammesFooter() {
       {TAILORED_PROGRAMMES_COPY.footerCells.map((cell, index) => (
         <div
           key={cell.label}
-          className="flex items-center justify-center"
+          className="flex items-center justify-center gap-1.5 sm:gap-2"
           style={{
             flex: `0 0 ${cell.width}%`,
-            gap: "8px",
             borderRight: index < TAILORED_PROGRAMMES_COPY.footerCells.length - 1 ? "1px solid rgba(154,214,77,0.55)" : undefined,
             transform: "translateY(20px)",
           }}
         >
           <span style={{ color: LIME }}>
-            <Icon icon={cell.icon} className="h-7 w-7" />
+            <Icon icon={cell.icon} className="h-6 w-6 sm:h-7 sm:w-7" />
           </span>
-          <span style={{ fontFamily: "var(--font-body)", fontSize: "1.125rem", fontWeight: 800, letterSpacing: "0.02em" }}>{cell.label}</span>
+          <span className="text-base sm:text-lg" style={{ fontFamily: "var(--font-body)", fontWeight: 800, letterSpacing: "0.02em" }}>{cell.label}</span>
         </div>
       ))}
     </div>
@@ -1095,15 +1094,12 @@ function TailoredProgrammesFooter() {
 
 function TailoredProgrammesRail() {
   return (
-    <div>
+    <div className="flex flex-1 flex-col justify-between">
       {TAILORED_PROGRAMMES_COPY.programmes.map((programme, index) => (
         <div
           key={programme.title}
-          className="grid items-start"
+          className="grid items-start grid-cols-[30px_68px_minmax(0,1fr)] gap-4 py-6 lg:grid-cols-[26px_52px_minmax(0,1fr)] lg:gap-2 lg:py-3"
           style={{
-            gridTemplateColumns: "30px 68px 1fr",
-            gap: "16px",
-            padding: "24px 0",
             borderBottom: `1px solid ${HAIRLINE}`,
             borderTop: index === 0 ? `1px solid ${HAIRLINE}` : undefined,
           }}
@@ -1115,16 +1111,16 @@ function TailoredProgrammesRail() {
             {String(index + 1).padStart(2, "0")}
           </span>
           <span
-            className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl"
+            className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl lg:h-[52px] lg:w-[52px]"
             style={{ backgroundColor: "#ECEBE4", color: DEEP_GREEN }}
           >
-            <Icon icon={programme.icon} className="h-[34px] w-[34px]" />
+            <Icon icon={programme.icon} className="h-[34px] w-[34px] lg:h-[26px] lg:w-[26px]" />
           </span>
-          <div>
-            <h3 style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 700, fontSize: "0.95rem", lineHeight: 1.15, letterSpacing: "-0.01em", color: "var(--color-black)", margin: "0.1rem 0 0.5rem", textTransform: "uppercase" }}>
+          <div className="min-w-0">
+            <h3 className="mb-2 lg:mb-1" style={{ fontFamily: "var(--font-nursery-hero)", fontWeight: 700, fontSize: "0.95rem", lineHeight: 1.15, letterSpacing: "-0.01em", color: "var(--color-black)", marginTop: "0.1rem", textTransform: "uppercase", overflowWrap: "break-word" }}>
               {programme.title}
             </h3>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.81rem", lineHeight: 1.45, color: "var(--color-nursery-stone)", margin: 0 }}>
+            <p className="text-[0.81rem] leading-[1.45] lg:text-[0.76rem] lg:leading-[1.3]" style={{ fontFamily: "var(--font-body)", color: "var(--color-nursery-stone)", margin: 0, overflowWrap: "break-word" }}>
               {programme.body}
             </p>
           </div>
