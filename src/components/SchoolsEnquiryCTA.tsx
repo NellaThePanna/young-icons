@@ -126,7 +126,7 @@ export default function SchoolsEnquiryCTA() {
           {SCHOOLS_EDITORIAL_CTA.label}
         </p>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-center lg:gap-12">
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3.1rem, calc(6.4vw - 12px), 5.7rem)", lineHeight: 0.91, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
+          <h2 style={{ fontFamily: "var(--font-holiday-display), Impact, sans-serif", fontWeight: 400, fontSize: "clamp(3.1rem, calc(6.4vw - 12px), 5.7rem)", lineHeight: 0.91, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
             <span className="block">{SCHOOLS_EDITORIAL_CTA.headingBlack}</span>
             <span className="block" style={{ color: "var(--color-academy-green)", marginTop: "0.035em" }}>{SCHOOLS_EDITORIAL_CTA.headingGreen}</span>
           </h2>

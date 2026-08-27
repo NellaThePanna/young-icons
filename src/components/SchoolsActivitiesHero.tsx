@@ -18,10 +18,11 @@ export default function SchoolsActivitiesHero() {
           {SCHOOLS_ACTIVITIES_HERO.label}
         </p>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-end lg:gap-14">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start md:gap-14">
           <h1
             style={{
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--font-holiday-display), Impact, sans-serif",
+              fontWeight: 400,
               fontSize: "clamp(2.2rem, calc(5.65vw - 18px), 4.3875rem)",
               lineHeight: 0.9,
               letterSpacing: "-0.03em",
@@ -36,7 +37,7 @@ export default function SchoolsActivitiesHero() {
             ))}
           </h1>
 
-          <div className="lg:pb-2">
+          <div>
             <p
               style={{
                 fontFamily: "var(--font-body)",

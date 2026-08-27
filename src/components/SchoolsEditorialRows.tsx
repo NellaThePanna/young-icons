@@ -51,9 +51,9 @@ export default function SchoolsEditorialRows() {
               >
                 <span className="flex items-center gap-5 sm:gap-9">
                   <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.7rem, 3vw, 3rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, calc(5.3vw - 7px), 4.9125rem)", lineHeight: 0.88, letterSpacing: "-0.025em", color: "var(--color-black)" }}>{row.closedTitle}</span>
+                  <span style={{ fontFamily: "var(--font-holiday-display), Impact, sans-serif", fontWeight: 400, fontSize: "clamp(2rem, calc(5.3vw - 7px), 4.9125rem)", lineHeight: 0.88, letterSpacing: "-0.025em", color: "var(--color-black)" }}>{row.closedTitle}</span>
                 </span>
-                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1" style={{ color: "var(--color-academy-green)", fontSize: "clamp(1.4rem, 2.2vw, 2rem)" }}>↘</span>
+                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1" style={{ color: "var(--color-academy-green)", fontSize: "clamp(1.6rem, 2.5vw, 2.25rem)" }}>↘</span>
               </button>
             )
           }
@@ -70,7 +70,7 @@ export default function SchoolsEditorialRows() {
                 style={{ background: "transparent", border: 0, cursor: "pointer" }}
               >
                 <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.7rem, 3vw, 3rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
-                <h2 style={{ fontFamily: "var(--font-display)", fontSize: row.id === "manage" ? "clamp(1.8rem, calc(4.4vw - 7px), 4.0625rem)" : "clamp(2rem, calc(6vw - 14px), 5.325rem)", lineHeight: 0.96, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
+                <h2 style={{ fontFamily: "var(--font-holiday-display), Impact, sans-serif", fontWeight: 400, fontSize: row.id === "manage" ? "clamp(1.8rem, calc(4.4vw - 7px), 4.0625rem)" : "clamp(2rem, calc(6vw - 14px), 5.325rem)", lineHeight: 0.96, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
                   {row.headingLines.map((line, lineIndex) => <span className="block" key={line} style={{ marginTop: lineIndex === 0 ? 0 : "0.15em" }}>{line}</span>)}
                 </h2>
                 <p className="hidden lg:block" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.5, color: "var(--color-black)", margin: "0.45rem 0 0", maxWidth: "300px" }}>{row.body}</p>

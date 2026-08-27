@@ -110,7 +110,7 @@ export default function NavBar() {
           />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
+        <ul className="hidden md:flex items-center gap-5 lg:gap-8 list-none m-0 p-0">
           {NAV_LINKS.map((link) => {
             const active = isActive(link)
             return (
@@ -177,7 +177,7 @@ export default function NavBar() {
           href={CLASSCARD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-block text-sm px-5 py-2 rounded-full"
+          className="hidden md:inline-block whitespace-nowrap text-sm px-3 lg:px-5 py-2 rounded-full"
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: "var(--font-weight-bold)",
