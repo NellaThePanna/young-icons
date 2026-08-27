@@ -39,24 +39,28 @@ export const SCHOOLS_EDITORIAL_ROWS = [
     categories: [
       {
         title: "INDIVIDUAL SPORTS",
+        tagline: "Build skills. Build confidence.",
         image: "/images/schools/individual-sports-tennis.png",
         imageAlt: "A boy in Young Icons kit playing tennis on court",
         activities: ["Tennis", "Swimming", "Gymnastics"],
       },
       {
         title: "TEAM SPORTS",
+        tagline: "Play together. Achieve together.",
         image: "/images/schools/team-sports-football.png",
         imageAlt: "Boys in Young Icons kits playing football",
         activities: ["Football", "Basketball", "Rugby", "Volleyball", "Netball", "Indoor Hockey"],
       },
       {
         title: "MARTIAL ARTS",
+        tagline: "Discipline today. Strength for life.",
         image: "/images/schools/martial-arts-karate.png",
         imageAlt: "A boy in a karate gi in a fighting stance",
         activities: ["Boxing", "Karate", "Jiu-Jitsu"],
       },
       {
         title: "DANCE & MOVEMENT",
+        tagline: "Express yourself. Move with confidence.",
         image: "/images/schools/dance-and-movement.png",
         imageAlt: "Girls dancing with arms raised in a studio",
         activities: ["Ballet", "Jazz", "Hip Hop", "Cheerleading"],
