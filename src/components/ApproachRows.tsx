@@ -14,8 +14,6 @@ export default function ApproachRows() {
   const rowRefs = useRef<Record<string, HTMLButtonElement | null>>({})
   const closeButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  const activeItem = activeId ? APPROACH_ROWS.find((row) => row.id === activeId) ?? null : null
-
   useEffect(() => {
     if (activeId) closeButtonRef.current?.focus()
   }, [activeId])
@@ -55,33 +53,34 @@ export default function ApproachRows() {
           {APPROACH_ROWS.map((row) => {
             const isActive = activeId === row.id
             return (
-              <button
-                key={row.id}
-                ref={(el) => {
-                  rowRefs.current[row.id] = el
-                }}
-                type="button"
-                onClick={() => setActiveId(isActive ? null : row.id)}
-                aria-expanded={isActive}
-                aria-controls="approach-spread"
-                className="group flex w-full items-baseline justify-between gap-5 py-3 text-left transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:py-5"
-                style={{ borderTop: 0, borderLeft: 0, borderRight: 0, borderBottom: `1px solid ${HAIRLINE}`, backgroundColor: isActive ? "#fff" : "transparent", cursor: "pointer" }}
-              >
-                <span className="flex items-baseline gap-4 sm:gap-7">
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", fontWeight: "var(--font-weight-medium)", color: GREEN }}>{row.number}</span>
-                  <span style={{ fontFamily: "var(--font-holiday-display), Impact, sans-serif", fontWeight: 400, fontSize: "clamp(2.15rem, calc(6vw - 4px), 5.55rem)", lineHeight: 0.85, letterSpacing: "-0.025em", color: "var(--color-black)" }}>
-                    {row.word}.
+              <div key={row.id}>
+                <button
+                  ref={(el) => {
+                    rowRefs.current[row.id] = el
+                  }}
+                  type="button"
+                  onClick={() => setActiveId(isActive ? null : row.id)}
+                  aria-expanded={isActive}
+                  aria-controls={`approach-spread-${row.id}`}
+                  className="group flex w-full items-baseline justify-between gap-5 py-3 text-left transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:py-5"
+                  style={{ borderTop: 0, borderLeft: 0, borderRight: 0, borderBottom: `1px solid ${HAIRLINE}`, backgroundColor: isActive ? "#fff" : "transparent", cursor: "pointer" }}
+                >
+                  <span className="flex items-baseline gap-4 sm:gap-7">
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", fontWeight: "var(--font-weight-medium)", color: GREEN }}>{row.number}</span>
+                    <span style={{ fontFamily: "var(--font-holiday-display), Impact, sans-serif", fontWeight: 400, fontSize: "clamp(2.15rem, calc(6vw - 4px), 5.55rem)", lineHeight: 0.85, letterSpacing: "-0.025em", color: "var(--color-black)" }}>
+                      {row.word}.
+                    </span>
                   </span>
-                </span>
-                <span aria-hidden="true" className="pt-2 transition-transform duration-200 group-hover:translate-x-1" style={{ fontFamily: "var(--font-body)", color: GREEN, fontSize: "1.15rem" }}>
-                  {isActive ? "↑" : "+"}
-                </span>
-              </button>
+                  <span aria-hidden="true" className="pt-2 transition-transform duration-200 group-hover:translate-x-1" style={{ fontFamily: "var(--font-body)", color: GREEN, fontSize: "1.15rem" }}>
+                    {isActive ? "↑" : "+"}
+                  </span>
+                </button>
+
+                {isActive && <Spread item={row} onClose={handleClose} closeButtonRef={closeButtonRef} />}
+              </div>
             )
           })}
         </div>
-
-        {activeItem && <Spread item={activeItem} onClose={handleClose} closeButtonRef={closeButtonRef} />}
       </div>
     </section>
   )
@@ -100,10 +99,10 @@ function Spread({
 
   return (
     <div
-      id="approach-spread"
+      id={`approach-spread-${item.id}`}
       role="region"
       aria-label={`${item.word} approach detail`}
-      className="relative mt-6 grid grid-cols-1 overflow-hidden sm:mt-8 lg:grid-cols-2"
+      className="relative mb-6 mt-6 grid grid-cols-1 overflow-hidden sm:mb-8 sm:mt-8 lg:grid-cols-2"
       style={{ border: `1px solid ${HAIRLINE}`, backgroundColor: "#fff" }}
     >
       <button
