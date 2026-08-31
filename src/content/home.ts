@@ -250,16 +250,6 @@ export const NAV_LINKS: NavItem[] = [
       { label: "Karate — Coming Soon", href: "/clubs/karate" },
     ],
   },
-  {
-    label: "About",
-    href: "/about/who-we-are",
-    dropdown: [
-      { label: "Who We Are", href: "/about/who-we-are" },
-      { label: "What We Do", href: "/about/what-we-do" },
-      { label: "Meet the Team", href: "/about/meet-the-team" },
-    ],
-  },
-  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ] as const
 
@@ -287,7 +277,6 @@ export const FOOTER_LINKS = [
   { label: "Clubs", href: "/clubs/multi-sports" },
   { label: "Holiday Camps", href: "/schools/holiday-camps" },
   { label: "Facility Management", href: "/schools/facility-management" },
-  { label: "About Us", href: "/about/who-we-are" },
   { label: "Contact", href: "/contact" },
 ] as const
 
