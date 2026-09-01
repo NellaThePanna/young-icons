@@ -16,6 +16,15 @@ const STATS = [
   { value: "DUBAI +\nABU DHABI", label: "ACROSS THE UAE", isLocation: true },
 ] as const
 
+const LOGO_FRAMES: Record<string, { width: string; height: string }> = {
+  "Cedar School": { width: "70px", height: "54px" },
+  "Chubby Cheeks Nursery": { width: "118px", height: "50px" },
+  "Citizens School": { width: "132px", height: "44px" },
+  "British Home Nursery": { width: "92px", height: "52px" },
+  "Dubai British School Jumeira": { width: "118px", height: "50px" },
+  "Swiss International Scientific School Dubai": { width: "68px", height: "58px" },
+}
+
 export default function TrustScale() {
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -95,13 +104,13 @@ export default function TrustScale() {
       >
         <h2
           ref={headingRef}
-          className="uppercase"
+          className="partner-hero-heading uppercase"
           style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(2.6rem, 5vw, 4.75rem)",
-            lineHeight: 0.94,
-            letterSpacing: "-0.015em",
+            fontFamily: "var(--font-anton)",
+            fontWeight: 400,
+            fontSize: "clamp(3rem, 5.9vw, 5.65rem)",
+            lineHeight: 0.9,
+            letterSpacing: 0,
             color: "var(--color-black)",
             margin: 0,
           }}
@@ -122,19 +131,19 @@ export default function TrustScale() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 min-[700px]:grid-cols-[minmax(0,2.15fr)_repeat(3,minmax(0,1fr))] min-[700px]:items-center min-[700px]:gap-x-8 min-[700px]:gap-y-0">
           <div className="trust-item col-span-2 min-[700px]:col-span-1 min-[700px]:pr-8">
             <p
-              className="mb-2 text-xs font-semibold tracking-[0.16em]"
-              style={{ color: "var(--color-academy-green)", fontFamily: "var(--font-body)" }}
+              className="mb-2 text-xs uppercase"
+              style={{ color: "var(--color-academy-green)", fontFamily: "var(--font-anton)", fontWeight: 400, letterSpacing: 0 }}
             >
               TRUSTED ACROSS THE UAE.
             </p>
             <h3
               className="uppercase"
               style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: "var(--font-weight-bold)",
+                fontFamily: "var(--font-anton)",
+                fontWeight: 400,
                 fontSize: "clamp(1.65rem, 2.35vw, 2.5rem)",
                 lineHeight: 0.95,
-                letterSpacing: "-0.01em",
+                letterSpacing: 0,
                 color: "var(--color-black)",
                 margin: 0,
               }}
@@ -159,11 +168,11 @@ export default function TrustScale() {
                 }}
                 className="uppercase"
                 style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: "var(--font-weight-bold)",
+                  fontFamily: "var(--font-anton)",
+                  fontWeight: 400,
                   fontSize: stat.isLocation ? "clamp(1.65rem, 2.2vw, 2.3rem)" : "clamp(2.3rem, 3.3vw, 3.45rem)",
                   lineHeight: 0.84,
-                  letterSpacing: "-0.01em",
+                  letterSpacing: 0,
                   color: "var(--color-academy-green)",
                   whiteSpace: "pre-line",
                 }}
@@ -171,11 +180,14 @@ export default function TrustScale() {
                 {stat.value}
               </span>
               <span
-                className="mt-2 whitespace-pre-line text-[0.64rem] leading-[1.15] tracking-[0.1em]"
+                className="mt-2 whitespace-pre-line uppercase"
                 style={{
                   color: "rgba(27,27,27,0.78)",
-                  fontFamily: "var(--font-body)",
-                  fontWeight: "var(--font-weight-semibold)",
+                  fontFamily: "var(--font-anton)",
+                  fontWeight: 400,
+                  fontSize: "0.64rem",
+                  lineHeight: 1.15,
+                  letterSpacing: 0,
                 }}
               >
                 {stat.label}
@@ -185,26 +197,27 @@ export default function TrustScale() {
         </div>
 
         <div
-          className="trust-item mt-8 grid grid-cols-2 divide-x divide-y rounded sm:mt-10 min-[700px]:grid-cols-3 min-[1100px]:grid-cols-6 min-[1100px]:divide-y-0"
-          style={{ border: "1px solid rgba(27,27,27,0.14)", borderColor: "rgba(27,27,27,0.14)" }}
+          className="trust-item partner-logo-row mt-12 grid grid-cols-2 sm:grid-cols-3 min-[1024px]:grid-cols-6"
           aria-label="Young Icons education partners"
         >
-          {HOME_PARTNER_LOGOS.map((partner) => (
-            <div
-              key={partner.name}
-              className="relative flex items-center justify-center"
-              style={{ height: "104px", borderColor: "rgba(27,27,27,0.14)" }}
-            >
-              <Image
-                src={partner.src}
-                alt={partner.name}
-                fill
-                sizes="180px"
-                className="object-contain"
-                style={{ objectPosition: "center", filter: "grayscale(1)", padding: "18px 28px" }}
-              />
-            </div>
-          ))}
+          {HOME_PARTNER_LOGOS.map((partner) => {
+            const frame = LOGO_FRAMES[partner.name] ?? { width: "110px", height: "50px" }
+
+            return (
+              <div key={partner.name} className="partner-logo-cell flex items-center justify-center">
+                <div className="partner-logo-frame relative" style={frame}>
+                  <Image
+                    src={partner.src}
+                    alt={partner.name}
+                    fill
+                    sizes="(max-width: 640px) 36vw, (max-width: 1024px) 24vw, 132px"
+                    className="object-contain"
+                    style={{ objectPosition: "center", filter: "grayscale(1)" }}
+                  />
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

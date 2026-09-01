@@ -33,7 +33,7 @@ const organizationSchema = {
 
 export default function HomePage() {
   return (
-    <>
+    <div className="landing-page landing-anton">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -61,6 +61,6 @@ export default function HomePage() {
         />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
