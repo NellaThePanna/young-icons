@@ -264,7 +264,7 @@ export default function HeroHome({
               ref={(el) => { wordRefs.current[i] = el }}
               className="block"
               style={{
-                fontSize: "clamp(3.5rem, 11vw, 9.5rem)",
+                fontSize: "clamp(3.5rem, 11vw, 7.8rem)",
                 color:
                   wordColors[i] === "green"
                     ? "var(--color-academy-green)"
