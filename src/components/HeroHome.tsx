@@ -281,7 +281,7 @@ export default function HeroHome({
             href={CLASSCARD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="text-center landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
@@ -297,7 +297,7 @@ export default function HeroHome({
           </a>
           <Link
             href="/schools"
-            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="text-center landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",

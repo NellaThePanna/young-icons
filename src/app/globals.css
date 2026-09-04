@@ -531,6 +531,21 @@
   font-weight: 400 !important;
 }
 
+.landing-anton .landing-inter-400 {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+}
+
+.landing-anton .landing-inter-500 {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+}
+
+.landing-anton .landing-inter-700 {
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+}
+
 .landing-anton .partner-logo-row {
   align-items: center;
   gap: clamp(18px, 2.45vw, 38px);

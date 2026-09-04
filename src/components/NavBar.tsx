@@ -109,7 +109,7 @@ export default function NavBar() {
               <li key={link.href} className="relative group">
                 <Link
                   href={link.href}
-                  className="text-sm inline-flex items-center"
+                  className="text-sm inline-flex items-center landing-inter-500"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-medium)",
@@ -144,7 +144,7 @@ export default function NavBar() {
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="block text-sm hover:text-[var(--color-academy-green)]"
+                            className="block text-sm hover:text-[var(--color-academy-green)] landing-inter-400"
                             style={{
                               padding: "12px 16px",
                               fontFamily: "var(--font-body)",
@@ -169,7 +169,7 @@ export default function NavBar() {
           href={CLASSCARD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-block text-sm px-5 py-2 rounded-full"
+          className="hidden md:inline-block text-sm px-5 py-2 rounded-full landing-inter-700"
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: "var(--font-weight-bold)",
@@ -236,7 +236,7 @@ export default function NavBar() {
                     <Link
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="text-lg"
+                      className="text-lg landing-inter-500"
                       style={{
                         fontFamily: "var(--font-body)",
                         fontWeight: "var(--font-weight-medium)",
@@ -257,7 +257,7 @@ export default function NavBar() {
                   <button
                     onClick={() => toggleMobileDropdown(link.label)}
                     aria-expanded={expanded}
-                    className="flex items-center justify-between w-full text-lg"
+                    className="flex items-center justify-between w-full text-lg landing-inter-500"
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: "var(--font-weight-medium)",
@@ -280,7 +280,7 @@ export default function NavBar() {
                           <Link
                             href={item.href}
                             onClick={() => setOpen(false)}
-                            className="text-base block"
+                            className="text-base block landing-inter-400"
                             style={{
                               fontFamily: "var(--font-body)",
                               fontWeight: "var(--font-weight-regular)",
@@ -303,7 +303,7 @@ export default function NavBar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="block mt-8 text-center rounded-full py-4 px-6"
+            className="block mt-8 text-center rounded-full py-4 px-6 landing-inter-700"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",

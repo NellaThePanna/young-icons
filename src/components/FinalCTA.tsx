@@ -192,10 +192,10 @@ export default function FinalCTA({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-center rounded-full px-5 py-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="text-center rounded-full px-5 py-2 text-sm landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
-              fontFamily: "var(--font-anton)",
-              fontWeight: 400,
+              fontFamily: "var(--font-body)",
+              fontWeight: 700,
               color: "var(--color-white)",
               backgroundColor: "var(--color-academy-green)",
               textDecoration: "none",
@@ -207,10 +207,10 @@ export default function FinalCTA({
           {ctaSecondary && (
             <Link
               href={secondaryHref}
-              className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="text-center landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               style={{
-                fontFamily: "var(--font-anton)",
-                fontWeight: 400,
+                fontFamily: "var(--font-body)",
+                fontWeight: 700,
                 fontSize: "1rem",
                 letterSpacing: "0.045em",
                 wordSpacing: "0.08em",
