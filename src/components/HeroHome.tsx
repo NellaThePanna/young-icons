@@ -250,11 +250,11 @@ export default function HeroHome({
       <div className="relative max-w-5xl w-full mx-auto text-center" style={{ zIndex: 2 }}>
         <h1
           aria-label={fullHeading}
-          className="tracking-tight mb-8"
+          className="tracking-tight mb-10"
           style={{
             fontFamily: "var(--font-anton)",
-            fontWeight: 400,
-            lineHeight: 0.9,
+            fontWeight: "var(--font-weight-bold)",
+            lineHeight: 0.92,
             textTransform: "uppercase",
           }}
         >
@@ -264,7 +264,7 @@ export default function HeroHome({
               ref={(el) => { wordRefs.current[i] = el }}
               className="block"
               style={{
-                fontSize: "clamp(3.25rem, 9vw, 7.5rem)",
+                fontSize: "clamp(3.5rem, 11vw, 7.8rem)",
                 color:
                   wordColors[i] === "green"
                     ? "var(--color-academy-green)"
@@ -281,7 +281,7 @@ export default function HeroHome({
             href={CLASSCARD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="text-center landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",
@@ -297,7 +297,7 @@ export default function HeroHome({
           </a>
           <Link
             href="/schools"
-            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="text-center landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",

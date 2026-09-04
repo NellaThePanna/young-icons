@@ -91,33 +91,25 @@ export default function NavBar() {
         style={{ maxWidth: "1280px" }}
         aria-label="Main navigation"
       >
-        <Link href="/" className="shrink-0 flex items-center gap-2.5">
-          <Image
-            src="/images/brand/young-icons-seal-white.png"
-            alt=""
-            width={906}
-            height={905}
-            priority
-            className="h-10 w-auto md:h-14"
-          />
+        <Link href="/" className="shrink-0 flex items-center">
           <Image
             src="/images/brand/young-icons-wordmark-white.png"
             alt="Young Icons"
             width={844}
             height={680}
             priority
-            className="h-10 w-auto md:h-14"
+            className="h-8 w-auto md:h-10"
           />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-5 lg:gap-8 list-none m-0 p-0">
+        <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
           {NAV_LINKS.map((link) => {
             const active = isActive(link)
             return (
               <li key={link.href} className="relative group">
                 <Link
                   href={link.href}
-                  className="text-sm inline-flex items-center"
+                  className="text-sm inline-flex items-center landing-inter-500"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-medium)",
@@ -152,7 +144,7 @@ export default function NavBar() {
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="block text-sm hover:text-[var(--color-academy-green)]"
+                            className="block text-sm hover:text-[var(--color-academy-green)] landing-inter-400"
                             style={{
                               padding: "12px 16px",
                               fontFamily: "var(--font-body)",
@@ -177,7 +169,7 @@ export default function NavBar() {
           href={CLASSCARD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-block whitespace-nowrap text-sm px-3 lg:px-5 py-2 rounded-full"
+          className="hidden md:inline-block text-sm px-5 py-2 rounded-full landing-inter-700"
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: "var(--font-weight-bold)",
@@ -244,7 +236,7 @@ export default function NavBar() {
                     <Link
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="text-lg"
+                      className="text-lg landing-inter-500"
                       style={{
                         fontFamily: "var(--font-body)",
                         fontWeight: "var(--font-weight-medium)",
@@ -265,7 +257,7 @@ export default function NavBar() {
                   <button
                     onClick={() => toggleMobileDropdown(link.label)}
                     aria-expanded={expanded}
-                    className="flex items-center justify-between w-full text-lg"
+                    className="flex items-center justify-between w-full text-lg landing-inter-500"
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: "var(--font-weight-medium)",
@@ -288,7 +280,7 @@ export default function NavBar() {
                           <Link
                             href={item.href}
                             onClick={() => setOpen(false)}
-                            className="text-base block"
+                            className="text-base block landing-inter-400"
                             style={{
                               fontFamily: "var(--font-body)",
                               fontWeight: "var(--font-weight-regular)",
@@ -311,7 +303,7 @@ export default function NavBar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="block mt-8 text-center rounded-full py-4 px-6"
+            className="block mt-8 text-center rounded-full py-4 px-6 landing-inter-700"
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: "var(--font-weight-bold)",

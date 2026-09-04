@@ -89,7 +89,8 @@ export default function FinalCTA({
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[88vh] w-full items-center justify-center px-6 lg:min-h-[62vh]"
+      className="relative flex w-full items-center overflow-hidden"
+      style={{ minHeight: "clamp(250px, 21vw, 280px)" }}
     >
       <div className="absolute inset-0">
         <Image
@@ -108,7 +109,10 @@ export default function FinalCTA({
         aria-hidden="true"
       />
 
-      <div className="relative text-center" style={{ zIndex: 3, maxWidth: "780px" }}>
+      <div
+        className="relative mx-auto w-full text-left"
+        style={{ zIndex: 3, maxWidth: "1440px", padding: "0 clamp(24px, 4vw, 72px)" }}
+      >
         {smallHeading && (
           <p
             className="final-cta-item mb-4"
@@ -141,13 +145,14 @@ export default function FinalCTA({
         )}
 
         <h2
-          className="mb-6"
+          className="mb-5"
           style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: "var(--font-weight-bold)",
-            fontSize: "clamp(3rem, 6vw, 5rem)",
+            fontFamily: "var(--font-anton)",
+            fontWeight: 400,
+            fontSize: "clamp(2.35rem, 4vw, 3.55rem)",
             textTransform: "uppercase",
-            lineHeight: 1.05,
+            lineHeight: 1,
+            letterSpacing: "0.01em",
           }}
         >
           <span
@@ -170,33 +175,31 @@ export default function FinalCTA({
 
         {sub && (
           <p
-            className="final-cta-item mx-auto mb-10"
+            className="final-cta-item mb-8"
             style={{
-              fontFamily: "var(--font-body)",
+              fontFamily: "var(--font-anton)",
               color: "rgba(255,255,255,0.7)",
               maxWidth: "560px",
-              lineHeight: 1.6,
+              lineHeight: 1.5,
             }}
           >
             {sub}
           </p>
         )}
 
-        <div className="final-cta-item flex flex-wrap items-center justify-center gap-8 sm:gap-10">
+        <div className="final-cta-item flex flex-wrap items-center justify-start gap-7 sm:gap-10">
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="text-center rounded-full px-5 py-2 text-sm landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             style={{
               fontFamily: "var(--font-body)",
-              fontWeight: "var(--font-weight-bold)",
-              fontSize: "1rem",
-              letterSpacing: "0.04em",
+              fontWeight: 700,
               color: "var(--color-white)",
               backgroundColor: "var(--color-academy-green)",
               textDecoration: "none",
-              padding: "0.85rem 1.75rem",
+              wordSpacing: "0.08em",
             }}
           >
             {ctaPrimary} →
@@ -204,16 +207,17 @@ export default function FinalCTA({
           {ctaSecondary && (
             <Link
               href={secondaryHref}
-              className="text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="text-center landing-inter-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               style={{
                 fontFamily: "var(--font-body)",
-                fontWeight: "var(--font-weight-bold)",
+                fontWeight: 700,
                 fontSize: "1rem",
-                letterSpacing: "0.04em",
+                letterSpacing: "0.045em",
+                wordSpacing: "0.08em",
                 color: "var(--color-white)",
                 textDecoration: "none",
                 borderBottom: "1px solid rgba(255,255,255,0.5)",
-                paddingBottom: "0.3rem",
+                paddingBottom: "0.28rem",
               }}
             >
               {ctaSecondary} →

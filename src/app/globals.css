@@ -102,7 +102,7 @@
   .mosaic-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: minmax(250px, 19vw) minmax(260px, 20vw);
+    grid-template-rows: minmax(290px, 21vw) minmax(300px, 23vw);
     gap: 6px;
   }
 
@@ -239,6 +239,7 @@
 }
 
 .footer-contact-row {
+  min-width: 0;
   transition: transform 0.25s ease;
 }
 
@@ -255,11 +256,10 @@
 }
 
 .footer-contact-link {
+  overflow-wrap: anywhere;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.25s ease;
-  min-width: 0;
-  overflow-wrap: anywhere;
 }
 
 .footer-contact-row:hover .footer-contact-link {
@@ -524,5 +524,80 @@
 @media (prefers-reduced-motion: reduce) {
   .arrow-bounce {
     animation-play-state: paused;
+  }
+}
+
+.landing-anton,
+.landing-anton :where(h1, h2, h3, h4, h5, h6, p, a, button, span, li, small, dt, dd, label) {
+  font-family: var(--font-anton) !important;
+  font-weight: 400 !important;
+}
+
+.landing-anton .landing-inter-400 {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+}
+
+.landing-anton .landing-inter-500 {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+}
+
+.landing-anton .landing-inter-700 {
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+}
+
+.landing-anton .partner-logo-row {
+  align-items: center;
+  gap: clamp(18px, 2.45vw, 38px);
+  justify-items: center;
+}
+
+.landing-anton .partner-logo-cell {
+  min-width: 0;
+  height: clamp(58px, 6vw, 72px);
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .landing-anton .partner-logo-row {
+    gap: 16px 24px;
+  }
+
+  .landing-anton .partner-logo-frame {
+    transform: scale(0.86);
+  }
+}
+
+.landing-anton .trust-location-value {
+  white-space: normal;
+}
+
+@media (min-width: 900px) {
+  .landing-anton .trust-location-value {
+    white-space: nowrap;
+  }
+}
+
+.landing-anton .trust-stat-divider {
+  border-left: 0;
+  padding-left: 0;
+}
+
+@media (min-width: 700px) {
+  .landing-anton .trust-stat-divider {
+    border-left: 1px solid rgba(27,27,27,0.34);
+    padding-left: clamp(1rem, 2vw, 1.75rem);
+  }
+}
+
+.landing-anton .partner-hero-heading {
+  width: min(100%, 680px);
+}
+
+@media (min-width: 1024px) {
+  .landing-anton .partner-hero-heading {
+    width: 48%;
   }
 }
