@@ -1,0 +1,77 @@
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1805 / 871;
+  overflow: hidden;
+  background: #050505;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.copy {
+  position: absolute;
+  left: clamp(24px, 5vw, 88px);
+  top: clamp(16px, 8%, 72px);
+  width: min(60vw, 54rem);
+  color: var(--color-white);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-anton);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 9.4vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.title span + span {
+  margin-top: 0.1em;
+}
+
+.subtitle {
+  margin: 24px 0 0;
+  font-family: var(--font-anton);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1.65vw, 1.75rem);
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--color-academy-green);
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .copy {
+    left: clamp(24px, 5vw, 88px);
+    top: clamp(16px, 8%, 72px);
+    width: min(60vw, 54rem);
+  }
+
+  .title {
+    font-size: clamp(5rem, 8vw, 9rem);
+    line-height: 0.98;
+    letter-spacing: 0.02em;
+  }
+
+  .subtitle {
+    margin-top: 26px;
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subtitle {
+    margin-top: 28px;
+  }
+}
