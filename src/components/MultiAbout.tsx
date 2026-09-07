@@ -21,17 +21,16 @@ function FootballIcon() {
   )
 }
 
-function SprintIcon() {
+function AgilityIcon() {
   return (
     <svg className="h-12 w-12 sm:h-14 sm:w-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="30" cy="9.8" r="4.1" />
-      <path d="M25.9 16.8 21 24.2l7.1 5.6" />
-      <path d="m21 24.2-7.9 3.1" />
-      <path d="m28.1 29.8-5.2 10.7" />
-      <path d="m28.1 29.8 6.6 5.2 6.5 3.6" />
-      <path d="m29 18.8 5.2 5.5 6.4 2.2" />
-      <path d="M8 39.8h8" />
-      <path d="M9.2 32h5.4" />
+      <path d="M12 37.5h9" />
+      <path d="m14.5 24.5-4 13h12l-4-13h-4Z" />
+      <path d="M27 37.5h9" />
+      <path d="m29.5 24.5-4 13h12l-4-13h-4Z" />
+      <path d="M17 21c5-6 10-6 15 0" />
+      <path d="M31.2 15.2 32 21l-5.8-.8" />
+      <path d="m16 13 4-4 4 4-4 4-4-4Z" />
     </svg>
   )
 }
@@ -39,9 +38,11 @@ function SprintIcon() {
 function SmileIcon() {
   return (
     <svg className="h-12 w-12 sm:h-14 sm:w-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M18 8.5h8v6a3 3 0 1 0 0 6v6h-6a3 3 0 1 1-6 0H8v-8h6a3 3 0 1 0 0-6H8v-4h10Z" />
-      <path d="M30 21.5h10v8h-6a3 3 0 1 0 0 6h6v4H28v-6a3 3 0 1 0-6 0v6H12v-9" />
-      <path d="M30 21.5v6" />
+      <path d="M13 9h10v6a3 3 0 1 0 6 0V9h6v10h-6a3 3 0 1 0 0 6h6v10H25v-6a3 3 0 1 0-6 0v6H9V25h6a3 3 0 1 0 0-6H9v-6a4 4 0 0 1 4-4Z" />
+      <path d="M23 9v8" />
+      <path d="M9 25h8" />
+      <path d="M31 25h4" />
+      <path d="M25 31v4" />
     </svg>
   )
 }
@@ -61,10 +62,11 @@ function GroupIcon() {
 
 const ICONS: Record<string, () => ReactElement> = {
   football: FootballIcon,
-  sprint: SprintIcon,
+  sprint: AgilityIcon,
   smile: SmileIcon,
   group: GroupIcon,
 }
+
 const TITLE_LINES: Record<string, [string, string]> = {
   "NEW SPORT EVERY WEEK": ["NEW SPORT EVERY", "WEEK"],
   "BUILD FUNDAMENTAL SKILLS": ["BUILD FUNDAMENTAL", "SKILLS"],
@@ -169,31 +171,37 @@ export default function MultiAbout() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4" style={{ borderColor: "rgba(27,27,27,0.14)" }}>
           {MULTI_ABOUT.cards.map((card, index) => {
             const Icon = ICONS[card.icon]
+            const titleLines = TITLE_LINES[card.heading]
+
             return (
               <div
                 key={card.heading}
-                className={`multi-about-item grid min-h-[320px] grid-rows-[66px_2.65em_37px_1fr] justify-items-center px-6 py-8 text-center sm:min-h-[326px] sm:px-8 lg:min-h-[322px] lg:px-8 lg:py-2 ${index > 0 ? "border-t" : ""} ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index === 1 ? "sm:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-t-0" : ""}`}
+                className={`multi-about-item grid min-h-[320px] grid-rows-[66px_40px_18px_1px_18px_1fr] justify-items-center px-6 py-8 text-center sm:min-h-[326px] sm:px-8 lg:min-h-[322px] lg:px-8 lg:py-2 ${index > 0 ? "border-t" : ""} ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index === 1 ? "sm:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-t-0" : ""}`}
                 style={{ borderColor: "rgba(27,27,27,0.14)" }}
               >
                 <div className="flex items-start justify-center" style={{ width: "56px", height: "66px", color: "var(--color-academy-green)" }}>
                   <Icon />
                 </div>
                 <h3
-                  className="flex flex-col items-center justify-start uppercase"
+                  className="grid grid-rows-[20px_20px] items-start justify-items-center uppercase"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-bold)",
                     fontSize: "1rem",
-                    lineHeight: 1.25,
+                    lineHeight: "20px",
                     color: "var(--color-black)",
                     margin: 0,
                     width: "210px",
                     maxWidth: "210px",
+                    height: "40px",
                   }}
                 >
-                  {(TITLE_LINES[card.heading] ?? [card.heading, ""]).map((line) => line && <span key={line} className="block whitespace-nowrap">{line}</span>)}
+                  <span className="block h-5 whitespace-nowrap">{titleLines[0]}</span>
+                  <span className="block h-5 whitespace-nowrap">{titleLines[1]}</span>
                 </h3>
-                <div aria-hidden="true" className="self-center" style={{ width: "36px", height: "1px", backgroundColor: "var(--color-academy-green)" }} />
+                <div aria-hidden="true" />
+                <div aria-hidden="true" style={{ width: "36px", height: "1px", backgroundColor: "var(--color-academy-green)" }} />
+                <div aria-hidden="true" />
                 <p
                   style={{
                     fontFamily: "var(--font-body)",
