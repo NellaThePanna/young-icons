@@ -36,13 +36,23 @@ export default function MultiPhotoBand() {
       className="relative overflow-hidden"
       style={{ height: "clamp(270px, 28vw, 420px)" }}
     >
+      <style jsx global>{`
+        .multi-photo-band-image {
+          object-position: center 22%;
+        }
+
+        @media (max-width: 767px) {
+          .multi-photo-band-image {
+            object-position: center 18%;
+          }
+        }
+      `}</style>
       <Image
         src={MULTI_PHOTO_BAND.image}
         alt="Children taking part in a Young Icons multi-sports activity session"
         fill
         sizes="100vw"
-        className="object-cover"
-        style={{ objectPosition: "center 42%" }}
+        className="multi-photo-band-image object-cover"
       />
     </section>
   )

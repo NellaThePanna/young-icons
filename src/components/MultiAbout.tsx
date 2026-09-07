@@ -8,56 +8,97 @@ import { MULTI_ABOUT } from "@/content/multi-sports"
 
 function FootballIcon() {
   return (
-    <svg className="h-11 w-11 sm:h-12 sm:w-12" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className="h-12 w-12 sm:h-14 sm:w-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="24" cy="24" r="17" />
-      <path d="m24 14 7 5-2.7 8h-8.6L17 19l7-5Z" />
-      <path d="m17 19-5.4-4M31 19l5.4-4M19.7 27 16 36M28.3 27 32 36M16 36l-5.4-3.6M32 36l5.4-3.6" />
+      <path d="m24 13.5 7.4 5.4-2.8 8.7h-9.2l-2.8-8.7 7.4-5.4Z" />
+      <path d="M16.6 18.9 11.2 15" />
+      <path d="m31.4 18.9 5.4-3.9" />
+      <path d="m19.4 27.6-3.6 8.6" />
+      <path d="m28.6 27.6 3.6 8.6" />
+      <path d="M15.8 36.2 10.4 32" />
+      <path d="m32.2 36.2 5.4-4.2" />
     </svg>
   )
 }
 
-function SprintIcon() {
+function AgilityIcon() {
   return (
-    <svg className="h-11 w-11 sm:h-12 sm:w-12" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="29" cy="10" r="4" />
-      <path d="m21 18 8 3 5 8 7 4" />
-      <path d="m25 24-7 5-7 1" />
-      <path d="m27 25-4 8-6 8" />
-      <path d="m32 30-2 7h10" />
-      <path d="M8 38h7M9 30h5" />
+    <svg className="h-12 w-12 sm:h-14 sm:w-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 37.5h9" />
+      <path d="m14.5 24.5-4 13h12l-4-13h-4Z" />
+      <path d="M27 37.5h9" />
+      <path d="m29.5 24.5-4 13h12l-4-13h-4Z" />
+      <path d="M17 21c5-6 10-6 15 0" />
+      <path d="M31.2 15.2 32 21l-5.8-.8" />
+      <path d="m16 13 4-4 4 4-4 4-4-4Z" />
     </svg>
   )
 }
 
 function SmileIcon() {
   return (
-    <svg className="h-11 w-11 sm:h-12 sm:w-12" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="24" cy="24" r="17" />
-      <path d="m21 17 10 7-10 7V17Z" />
-      <path d="M16 31.5c2 3 4.7 4.5 8 4.5s6-1.5 8-4.5" />
-      <path d="M16.5 18.5h.1M31.5 18.5h.1" />
+    <svg className="h-12 w-12 sm:h-14 sm:w-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M13 9h10v6a3 3 0 1 0 6 0V9h6v10h-6a3 3 0 1 0 0 6h6v10H25v-6a3 3 0 1 0-6 0v6H9V25h6a3 3 0 1 0 0-6H9v-6a4 4 0 0 1 4-4Z" />
+      <path d="M23 9v8" />
+      <path d="M9 25h8" />
+      <path d="M31 25h4" />
+      <path d="M25 31v4" />
     </svg>
   )
 }
 
 function GroupIcon() {
   return (
-    <svg className="h-11 w-11 sm:h-12 sm:w-12" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="24" cy="15" r="5" />
-      <circle cx="12.5" cy="19" r="4" />
-      <circle cx="35.5" cy="19" r="4" />
-      <path d="M14 40c.9-8.2 4.4-13 10-13s9.1 4.8 10 13" />
-      <path d="M4 39c.7-6.2 3.7-9.8 8.5-9.8 2.2 0 4 .8 5.4 2.2" />
-      <path d="M30.1 31.4c1.4-1.4 3.2-2.2 5.4-2.2 4.8 0 7.8 3.6 8.5 9.8" />
+    <svg className="h-12 w-12 sm:h-14 sm:w-14" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="24" cy="14.5" r="5" />
+      <circle cx="12.2" cy="18.5" r="4.2" />
+      <circle cx="35.8" cy="18.5" r="4.2" />
+      <path d="M14.5 40.5c1-8.2 4.2-12.3 9.5-12.3s8.5 4.1 9.5 12.3" />
+      <path d="M4.5 39.5c.8-6.1 3.5-9.2 8-9.2 2 0 3.7.6 5.1 1.9" />
+      <path d="M30.4 32.2c1.4-1.3 3.1-1.9 5.1-1.9 4.5 0 7.2 3.1 8 9.2" />
     </svg>
   )
 }
 
 const ICONS: Record<string, () => ReactElement> = {
   football: FootballIcon,
-  sprint: SprintIcon,
+  sprint: AgilityIcon,
   smile: SmileIcon,
   group: GroupIcon,
+}
+
+const TITLE_LINES: Record<string, [string, string]> = {
+  "NEW SPORT EVERY WEEK": ["NEW SPORT EVERY", "WEEK"],
+  "BUILD FUNDAMENTAL SKILLS": ["BUILD FUNDAMENTAL", "SKILLS"],
+  "LEARN THROUGH PLAY": ["LEARN THROUGH", "PLAY"],
+  "SMALL GROUP COACHING": ["SMALL GROUP", "COACHING"],
+}
+
+const DESCRIPTION_LINES: Record<string, [string, string, string, string]> = {
+  "NEW SPORT EVERY WEEK": [
+    "Discover a variety of sports and",
+    "activities that keep children",
+    "engaged, motivated and excited",
+    "to learn.",
+  ],
+  "BUILD FUNDAMENTAL SKILLS": [
+    "Develop agility, balance,",
+    "coordination and strength",
+    "through movement and",
+    "play.",
+  ],
+  "LEARN THROUGH PLAY": [
+    "Fun games and challenges that",
+    "build confidence, teamwork and",
+    "a positive attitude towards sport",
+    "and activity.",
+  ],
+  "SMALL GROUP COACHING": [
+    "Qualified coaches provide",
+    "personalised attention in a safe,",
+    "inclusive and supportive",
+    "environment.",
+  ],
 }
 
 export default function MultiAbout() {
@@ -106,8 +147,8 @@ export default function MultiAbout() {
                 fontFamily: "var(--font-anton)",
                 fontWeight: 400,
                 fontSize: "clamp(2.5rem, 4.2vw, 4.25rem)",
-                lineHeight: 0.9,
-                letterSpacing: "-0.005em",
+                lineHeight: 0.98,
+                letterSpacing: 0,
                 color: "var(--color-black)",
                 margin: 0,
               }}
@@ -118,7 +159,7 @@ export default function MultiAbout() {
             </h2>
           </div>
 
-          <div className="multi-about-item flex items-start lg:border-l lg:pl-16" style={{ borderColor: "rgba(27,27,27,0.16)" }}>
+          <div className="multi-about-item flex items-center lg:border-l lg:pl-16" style={{ borderColor: "rgba(27,27,27,0.16)" }}>
             <p
               style={{
                 fontFamily: "var(--font-body)",
@@ -157,41 +198,54 @@ export default function MultiAbout() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4" style={{ borderColor: "rgba(27,27,27,0.14)" }}>
           {MULTI_ABOUT.cards.map((card, index) => {
             const Icon = ICONS[card.icon]
+            const titleLines = TITLE_LINES[card.heading]
+            const descriptionLines = DESCRIPTION_LINES[card.heading]
+
             return (
               <div
                 key={card.heading}
-                className={`multi-about-item grid min-h-[320px] grid-rows-[58px_4.1em_37px_1fr] justify-items-center px-6 py-8 text-center sm:min-h-[318px] sm:px-8 lg:min-h-[314px] lg:px-8 lg:py-2 ${index > 0 ? "border-t" : ""} ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index === 1 ? "sm:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-t-0" : ""}`}
+                className={`multi-about-item grid min-h-[322px] grid-rows-[66px_44px_20px_1px_20px_88px] justify-items-center border-t px-6 py-8 text-center sm:px-8 lg:border-t-0 lg:px-8 lg:py-8 ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index > 0 ? "lg:border-l" : ""}`}
                 style={{ borderColor: "rgba(27,27,27,0.14)" }}
               >
-                <div className="flex items-start justify-center" style={{ width: "52px", height: "58px", color: "var(--color-academy-green)" }}>
+                <div className="flex items-start justify-center" style={{ width: "56px", height: "66px", color: "var(--color-academy-green)" }}>
                   <Icon />
                 </div>
                 <h3
-                  className="flex items-center justify-center uppercase"
+                  className="grid grid-rows-[22px_22px] items-start justify-items-center uppercase"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-bold)",
                     fontSize: "1rem",
-                    lineHeight: 1.25,
+                    lineHeight: "22px",
                     color: "var(--color-black)",
                     margin: 0,
-                    maxWidth: "170px",
+                    width: "210px",
+                    maxWidth: "210px",
+                    height: "44px",
                   }}
                 >
-                  {card.heading}
+                  <span className="block h-[22px] whitespace-nowrap text-center">{titleLines[0]}</span>
+                  <span className="block h-[22px] whitespace-nowrap text-center">{titleLines[1]}</span>
                 </h3>
-                <div aria-hidden="true" className="self-center" style={{ width: "36px", height: "1px", backgroundColor: "var(--color-academy-green)" }} />
+                <div aria-hidden="true" />
+                <div aria-hidden="true" style={{ width: "36px", height: "1px", backgroundColor: "var(--color-academy-green)" }} />
+                <div aria-hidden="true" />
                 <p
+                  className="grid grid-rows-[repeat(4,22px)] justify-items-center"
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: "clamp(0.88rem, 0.78vw, 0.94rem)",
-                    lineHeight: 1.6,
+                    fontSize: "0.94rem",
+                    lineHeight: "22px",
                     color: "rgba(27,27,27,0.74)",
                     margin: 0,
+                    width: "220px",
                     maxWidth: "220px",
+                    height: "88px",
                   }}
                 >
-                  {card.body}
+                  {descriptionLines.map((line) => (
+                    <span key={line} className="block h-[22px] whitespace-nowrap text-center">{line}</span>
+                  ))}
                 </p>
               </div>
             )
