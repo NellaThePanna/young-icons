@@ -144,11 +144,11 @@ export default function MultiAbout() {
             <h2
               className="uppercase"
               style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: "var(--font-weight-bold)",
+                fontFamily: "var(--font-anton)",
+                fontWeight: 400,
                 fontSize: "clamp(2.5rem, 4.2vw, 4.25rem)",
                 lineHeight: 0.98,
-                letterSpacing: "-0.04em",
+                letterSpacing: 0,
                 color: "var(--color-black)",
                 margin: 0,
               }}
@@ -204,46 +204,47 @@ export default function MultiAbout() {
             return (
               <div
                 key={card.heading}
-                className={`multi-about-item grid min-h-[320px] grid-rows-[66px_40px_18px_1px_18px_auto] lg:grid-rows-[66px_40px_18px_1px_18px_88px] justify-items-center px-6 py-8 text-center sm:min-h-[326px] sm:px-8 lg:min-h-[322px] lg:px-8 lg:py-2 ${index > 0 ? "border-t" : ""} ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index === 1 ? "sm:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-t-0" : ""}`}
+                className={`multi-about-item grid min-h-[322px] grid-rows-[66px_44px_20px_1px_20px_88px] justify-items-center border-t px-6 py-8 text-center sm:px-8 lg:border-t-0 lg:px-8 lg:py-8 ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index > 0 ? "lg:border-l" : ""}`}
                 style={{ borderColor: "rgba(27,27,27,0.14)" }}
               >
                 <div className="flex items-start justify-center" style={{ width: "56px", height: "66px", color: "var(--color-academy-green)" }}>
                   <Icon />
                 </div>
                 <h3
-                  className="grid grid-rows-[20px_20px] items-start justify-items-center uppercase"
+                  className="grid grid-rows-[22px_22px] items-start justify-items-center uppercase"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: "var(--font-weight-bold)",
                     fontSize: "1rem",
-                    lineHeight: "20px",
+                    lineHeight: "22px",
                     color: "var(--color-black)",
                     margin: 0,
                     width: "210px",
                     maxWidth: "210px",
-                    height: "40px",
+                    height: "44px",
                   }}
                 >
-                  <span className="block h-5 whitespace-nowrap text-center">{titleLines[0]}</span>
-                  <span className="block h-5 whitespace-nowrap text-center">{titleLines[1]}</span>
+                  <span className="block h-[22px] whitespace-nowrap text-center">{titleLines[0]}</span>
+                  <span className="block h-[22px] whitespace-nowrap text-center">{titleLines[1]}</span>
                 </h3>
                 <div aria-hidden="true" />
                 <div aria-hidden="true" style={{ width: "36px", height: "1px", backgroundColor: "var(--color-academy-green)" }} />
                 <div aria-hidden="true" />
                 <p
-                  className="grid auto-rows-auto justify-items-center lg:grid-rows-[repeat(4,22px)]"
+                  className="grid grid-rows-[repeat(4,22px)] justify-items-center"
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: "clamp(0.88rem, 0.78vw, 0.94rem)",
+                    fontSize: "0.94rem",
                     lineHeight: "22px",
                     color: "rgba(27,27,27,0.74)",
                     margin: 0,
                     width: "220px",
                     maxWidth: "220px",
+                    height: "88px",
                   }}
                 >
                   {descriptionLines.map((line) => (
-                    <span key={line} className="block min-h-[22px] text-center lg:whitespace-nowrap">{line}</span>
+                    <span key={line} className="block h-[22px] whitespace-nowrap text-center">{line}</span>
                   ))}
                 </p>
               </div>
