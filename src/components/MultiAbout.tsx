@@ -74,6 +74,33 @@ const TITLE_LINES: Record<string, [string, string]> = {
   "SMALL GROUP COACHING": ["SMALL GROUP", "COACHING"],
 }
 
+const DESCRIPTION_LINES: Record<string, [string, string, string, string]> = {
+  "NEW SPORT EVERY WEEK": [
+    "Discover a variety of sports and",
+    "activities that keep children",
+    "engaged, motivated and excited",
+    "to learn.",
+  ],
+  "BUILD FUNDAMENTAL SKILLS": [
+    "Develop agility, balance,",
+    "coordination and strength",
+    "through movement and",
+    "play.",
+  ],
+  "LEARN THROUGH PLAY": [
+    "Fun games and challenges that",
+    "build confidence, teamwork and",
+    "a positive attitude towards sport",
+    "and activity.",
+  ],
+  "SMALL GROUP COACHING": [
+    "Qualified coaches provide",
+    "personalised attention in a safe,",
+    "inclusive and supportive",
+    "environment.",
+  ],
+}
+
 export default function MultiAbout() {
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -172,11 +199,12 @@ export default function MultiAbout() {
           {MULTI_ABOUT.cards.map((card, index) => {
             const Icon = ICONS[card.icon]
             const titleLines = TITLE_LINES[card.heading]
+            const descriptionLines = DESCRIPTION_LINES[card.heading]
 
             return (
               <div
                 key={card.heading}
-                className={`multi-about-item grid min-h-[320px] grid-rows-[66px_40px_18px_1px_18px_1fr] justify-items-center px-6 py-8 text-center sm:min-h-[326px] sm:px-8 lg:min-h-[322px] lg:px-8 lg:py-2 ${index > 0 ? "border-t" : ""} ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index === 1 ? "sm:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-t-0" : ""}`}
+                className={`multi-about-item grid min-h-[320px] grid-rows-[66px_40px_18px_1px_18px_auto] lg:grid-rows-[66px_40px_18px_1px_18px_88px] justify-items-center px-6 py-8 text-center sm:min-h-[326px] sm:px-8 lg:min-h-[322px] lg:px-8 lg:py-2 ${index > 0 ? "border-t" : ""} ${index === 1 || index === 3 ? "sm:border-l" : ""} ${index === 1 ? "sm:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-t-0" : ""}`}
                 style={{ borderColor: "rgba(27,27,27,0.14)" }}
               >
                 <div className="flex items-start justify-center" style={{ width: "56px", height: "66px", color: "var(--color-academy-green)" }}>
@@ -196,23 +224,27 @@ export default function MultiAbout() {
                     height: "40px",
                   }}
                 >
-                  <span className="block h-5 whitespace-nowrap">{titleLines[0]}</span>
-                  <span className="block h-5 whitespace-nowrap">{titleLines[1]}</span>
+                  <span className="block h-5 whitespace-nowrap text-center">{titleLines[0]}</span>
+                  <span className="block h-5 whitespace-nowrap text-center">{titleLines[1]}</span>
                 </h3>
                 <div aria-hidden="true" />
                 <div aria-hidden="true" style={{ width: "36px", height: "1px", backgroundColor: "var(--color-academy-green)" }} />
                 <div aria-hidden="true" />
                 <p
+                  className="grid auto-rows-auto justify-items-center lg:grid-rows-[repeat(4,22px)]"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize: "clamp(0.88rem, 0.78vw, 0.94rem)",
-                    lineHeight: 1.6,
+                    lineHeight: "22px",
                     color: "rgba(27,27,27,0.74)",
                     margin: 0,
+                    width: "220px",
                     maxWidth: "220px",
                   }}
                 >
-                  {card.body}
+                  {descriptionLines.map((line) => (
+                    <span key={line} className="block min-h-[22px] text-center lg:whitespace-nowrap">{line}</span>
+                  ))}
                 </p>
               </div>
             )
