@@ -1,28 +1,6 @@
 import Image from "next/image"
 import { SCHOOLS_ACTIVITIES_HERO } from "@/content/schools-activities"
 
-const scrollArrowClassName = "h-[34px] w-[34px] md:h-[38px] md:w-[38px] lg:h-[42px] lg:w-[42px]"
-
-function ScrollArrowIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      width={32}
-      height={32}
-      className={scrollArrowClassName}
-      style={{ color: "var(--color-academy-green)", flexShrink: 0 }}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 4v14" />
-      <path d="m6.5 12.5 5.5 5.5 5.5-5.5" />
-    </svg>
-  )
-}
 export default function SchoolsActivitiesHero() {
   return (
     <section className="px-5 pt-20 sm:px-8 sm:pt-22 lg:px-12 lg:pt-22" style={{ backgroundColor: "var(--color-warm-off-white)" }}>
@@ -77,7 +55,7 @@ export default function SchoolsActivitiesHero() {
               className="inline-flex items-center gap-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47]"
               style={{ textDecoration: "none", color: "var(--color-black)" }}
             >
-              <ScrollArrowIcon />
+              <span aria-hidden="true" style={{ color: "var(--color-academy-green)", fontSize: "1.1rem", lineHeight: 1 }}>↓</span>
               <span style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.66rem", letterSpacing: "0.14em" }}>
                 {SCHOOLS_ACTIVITIES_HERO.scrollLabel}
               </span>

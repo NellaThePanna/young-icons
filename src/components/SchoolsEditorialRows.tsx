@@ -4,6 +4,28 @@ import { useId, useState } from "react"
 import Image from "next/image"
 import { SCHOOLS_EDITORIAL_ROWS } from "@/content/schools-activities"
 
+const editorialRowArrowClassName = "h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
+
+function EditorialRowArrow() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 20 20"
+      width={64}
+      height={64}
+      className={editorialRowArrowClassName}
+      style={{ color: "var(--color-academy-green)", flexShrink: 0 }}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.35"
+      strokeLinecap="square"
+      strokeLinejoin="miter"
+    >
+      <path d="M3 3l14 14" />
+      <path d="M17 5v12H5" />
+    </svg>
+  )
+}
 function ServiceIcon({ index }: { index: number }) {
   const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.55, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
 
@@ -46,14 +68,16 @@ export default function SchoolsEditorialRows() {
                 aria-expanded="false"
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(index)}
-                className="group flex w-full items-center justify-between gap-5 border-y border-[#d8d5cc] py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:py-6"
+                className="group flex w-full items-center justify-between gap-4 border-y border-[#d8d5cc] py-4 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:py-5"
                 style={{ background: "transparent", borderRight: 0, borderLeft: 0, cursor: "pointer", marginTop: index === 0 ? 0 : "-1px" }}
               >
-                <span className="flex items-center gap-5 sm:gap-9">
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.7rem, 3vw, 3rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, calc(5.3vw - 7px), 4.9125rem)", lineHeight: 0.88, letterSpacing: "-0.025em", color: "var(--color-black)" }}>{row.closedTitle}</span>
+                <span className="flex items-center gap-4 sm:gap-7">
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.35rem, 2.35vw, 2.25rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
+                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.6rem, calc(4.25vw - 5px), 3.85rem)", lineHeight: 0.9, letterSpacing: "-0.025em", color: "var(--color-black)" }}>{row.closedTitle}</span>
                 </span>
-                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1" style={{ color: "var(--color-academy-green)", fontSize: "clamp(1.4rem, 2.2vw, 2rem)" }}>↘</span>
+                <span aria-hidden="true" className="mr-1 flex shrink-0 items-center justify-center transition-transform duration-200 group-hover:translate-x-1 sm:mr-2 lg:mr-3">
+                  <EditorialRowArrow />
+                </span>
               </button>
             )
           }
@@ -69,7 +93,7 @@ export default function SchoolsEditorialRows() {
                 className="grid w-full grid-cols-[auto_1fr_auto] items-start gap-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:gap-7 lg:grid-cols-[auto_minmax(0,1fr)_300px_auto]"
                 style={{ background: "transparent", border: 0, cursor: "pointer" }}
               >
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.7rem, 3vw, 3rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.35rem, 2.35vw, 2.25rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
                 <h2 style={{ fontFamily: "var(--font-display)", fontSize: row.id === "manage" ? "clamp(1.8rem, calc(4.4vw - 7px), 4.0625rem)" : "clamp(2rem, calc(6vw - 14px), 5.325rem)", lineHeight: 0.96, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
                   {row.headingLines.map((line, lineIndex) => <span className="block" key={line} style={{ marginTop: lineIndex === 0 ? 0 : "0.15em" }}>{line}</span>)}
                 </h2>
@@ -139,3 +163,4 @@ export default function SchoolsEditorialRows() {
     </section>
   )
 }
+
