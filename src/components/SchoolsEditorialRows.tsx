@@ -73,7 +73,7 @@ export default function SchoolsEditorialRows() {
               >
                 <span className="flex items-center gap-4 sm:gap-7">
                   <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.35rem, 2.35vw, 2.25rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.6rem, calc(4.25vw - 5px), 3.85rem)", lineHeight: 0.9, letterSpacing: "-0.025em", color: "var(--color-black)" }}>{row.closedTitle}</span>
+                  <span style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: "clamp(1.6rem, calc(4.25vw - 5px), 3.85rem)", lineHeight: 0.9, letterSpacing: "0.005em", color: "var(--color-black)" }}>{row.closedTitle}</span>
                 </span>
                 <span aria-hidden="true" className="mr-1 flex shrink-0 items-center justify-center transition-transform duration-200 group-hover:translate-x-1 sm:mr-2 lg:mr-3">
                   <EditorialRowArrow />
@@ -90,15 +90,15 @@ export default function SchoolsEditorialRows() {
                 aria-expanded="true"
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(null)}
-                className="grid w-full grid-cols-[auto_1fr_auto] items-start gap-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:gap-7 lg:grid-cols-[auto_minmax(0,1fr)_300px_auto]"
+                className="grid w-full grid-cols-[auto_1fr_auto] items-start gap-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a7a47] sm:gap-7 lg:grid-cols-[auto_minmax(0,430px)_300px_minmax(0,1fr)_auto]"
                 style={{ background: "transparent", border: 0, cursor: "pointer" }}
               >
                 <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.35rem, 2.35vw, 2.25rem)", fontWeight: "var(--font-weight-medium)", color: "var(--color-academy-green)" }}>{row.number}</span>
-                <h2 style={{ fontFamily: "var(--font-display)", fontSize: row.id === "manage" ? "clamp(1.8rem, calc(4.4vw - 7px), 4.0625rem)" : "clamp(2rem, calc(6vw - 14px), 5.325rem)", lineHeight: 0.96, letterSpacing: "-0.03em", color: "var(--color-black)", margin: 0 }}>
+                <h2 style={{ fontFamily: "var(--font-anton)", fontWeight: 400, fontSize: row.id === "manage" ? "clamp(1.8rem, calc(4.4vw - 7px), 4.0625rem)" : "clamp(2rem, calc(6vw - 14px), 5.325rem)", lineHeight: 0.96, letterSpacing: "0.005em", color: "var(--color-black)", margin: 0 }}>
                   {row.headingLines.map((line, lineIndex) => <span className="block" key={line} style={{ marginTop: lineIndex === 0 ? 0 : "0.15em" }}>{line}</span>)}
                 </h2>
-                <p className="hidden lg:block" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.5, color: "var(--color-black)", margin: "0.45rem 0 0", maxWidth: "300px" }}>{row.body}</p>
-                <span aria-hidden="true" style={{ color: "var(--color-academy-green)", fontSize: "clamp(1.4rem, 2.2vw, 2rem)", lineHeight: 1 }}>↑</span>
+                <p className="hidden lg:col-start-3 lg:block" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.5, color: "var(--color-black)", margin: "0.45rem 0 0", maxWidth: "300px" }}>{row.body}</p>
+                <span aria-hidden="true" className="lg:col-start-5" style={{ color: "var(--color-academy-green)", fontSize: "clamp(1.4rem, 2.2vw, 2rem)", lineHeight: 1 }}>↑</span>
               </button>
 
               <p className="mt-6 max-w-xl lg:hidden" style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: 1.5, color: "var(--color-black)", marginBottom: 0 }}>{row.body}</p>
