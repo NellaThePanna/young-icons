@@ -167,7 +167,10 @@ export default function SchoolsEditorialRows() {
                           </div>
                           <h3 className="mt-4" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 1.9vw, 2rem)", lineHeight: 0.9, letterSpacing: "-0.02em", color: "var(--color-black)", marginBottom: "0.3rem" }}>{category.title}</h3>
                           <p style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.85rem", lineHeight: 1.35, color: "var(--color-academy-green)", margin: "0 0 0.7rem" }}>{category.tagline}</p>
-                          <ul className="m-0 list-disc pl-5 marker:text-current" style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", lineHeight: 1.65, color: "var(--color-black)" }}>
+                          <ul
+                            className={`m-0 list-disc pl-5 marker:text-current ${category.activities.length >= 5 ? "grid grid-cols-1 gap-x-4 gap-y-0 sm:grid-cols-2" : ""}`}
+                            style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", lineHeight: 1.65, color: "var(--color-black)" }}
+                          >
                             {category.activities.map((activity) => <li key={activity}>{activity}</li>)}
                           </ul>
                         </article>
