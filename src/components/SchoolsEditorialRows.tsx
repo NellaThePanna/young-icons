@@ -41,6 +41,33 @@ function ServiceIcon({ index }: { index: number }) {
   )
 }
 
+function CategoryIcon({ index }: { index: number }) {
+  const common = { fill: "none" as const, stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
+
+  return (
+    <svg viewBox="0 0 24 24" className="h-full w-full" {...common}>
+      {index === 0 && <><ellipse cx="12" cy="9" rx="6" ry="7" /><line x1="12" y1="16" x2="12" y2="21" /><line x1="9" y1="21" x2="15" y2="21" /></>}
+      {index === 1 && <><circle cx="8" cy="8" r="2.5" /><path d="M3 19c.4-3 2-4.5 5-4.5s4.6 1.5 5 4.5" /><circle cx="17" cy="9" r="2" /><path d="M14.5 19c.3-2.3 1.5-3.5 3.5-3.5" /></>}
+      {index === 2 && <><path d="M8 11V8a2 2 0 1 1 4 0" /><path d="M12 10.5V7.5a2 2 0 1 1 4 0v1" /><path d="M16 9.5V8a1.7 1.7 0 1 1 3.4 0v5.5c0 3-2 5.5-5.5 5.5H11c-2 0-3-1-4-2.3L4.8 14a1.4 1.4 0 0 1 2-2l1.2 1" /></>}
+      {index === 3 && <><circle cx="12" cy="5" r="2" /><path d="M12 7v6l-3.5 5M12 13l4 4M12 10l-4-2M12 10l4.5-1.5" /></>}
+    </svg>
+  )
+}
+
+function CategoryIconBadge({ index }: { index: number }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="absolute z-10 flex items-center justify-center rounded-full text-white"
+      style={{ left: "-12px", bottom: "-12px", width: "50px", height: "50px", backgroundColor: "var(--color-academy-green)", boxShadow: "0 2px 6px rgba(0,0,0,0.25)" }}
+    >
+      <span className="block h-6 w-6">
+        <CategoryIcon index={index} />
+      </span>
+    </span>
+  )
+}
+
 function AtomIcon() {
   return (
     <span aria-hidden="true" className="block h-7 w-7 shrink-0" style={{ color: "var(--color-academy-green)" }}>
@@ -132,11 +159,18 @@ export default function SchoolsEditorialRows() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                       {row.categories.map((category, categoryIndex) => (
                         <article key={category.title} className={`pb-8 pt-0 sm:px-5 ${categoryIndex > 0 ? "border-t border-[#d8d5cc] sm:border-l sm:border-t-0" : ""} ${categoryIndex === 3 ? "lg:pr-0" : ""}`}>
-                          <div className="relative overflow-hidden" style={{ height: "clamp(160px, 10vw, 185px)" }}>
-                            <Image src={category.image} alt={category.imageAlt} fill sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 25vw" className="object-cover" style={{ objectPosition: "50% 38%" }} />
+                          <div className="relative" style={{ height: "clamp(160px, 10vw, 185px)" }}>
+                            <div className="absolute inset-0 overflow-hidden">
+                              <Image src={category.image} alt={category.imageAlt} fill sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 25vw" className="object-cover" style={{ objectPosition: "50% 38%" }} />
+                            </div>
+                            <CategoryIconBadge index={categoryIndex} />
                           </div>
-                          <h3 className="mt-4" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 1.9vw, 2rem)", lineHeight: 0.9, letterSpacing: "-0.02em", color: "var(--color-black)", marginBottom: "0.8rem" }}>{category.title}</h3>
-                          <ul className="m-0 list-disc pl-5 marker:text-current" style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", lineHeight: 1.65, color: "var(--color-black)" }}>
+                          <h3 className="mt-4" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 1.9vw, 2rem)", lineHeight: 0.9, letterSpacing: "-0.02em", color: "var(--color-black)", marginBottom: "0.3rem" }}>{category.title}</h3>
+                          <p style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.85rem", lineHeight: 1.35, color: "var(--color-academy-green)", margin: "0 0 0.7rem" }}>{category.tagline}</p>
+                          <ul
+                            className={`m-0 list-disc pl-5 marker:text-current ${category.activities.length >= 5 ? "grid grid-cols-1 gap-x-4 gap-y-0 sm:grid-cols-2" : ""}`}
+                            style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", lineHeight: 1.65, color: "var(--color-black)" }}
+                          >
                             {category.activities.map((activity) => <li key={activity}>{activity}</li>)}
                           </ul>
                         </article>
