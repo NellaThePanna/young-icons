@@ -183,8 +183,8 @@ export default function SchoolsEditorialRows() {
                         <p style={{ fontFamily: "var(--font-body)", fontSize: "0.92rem", lineHeight: 1.45, color: "var(--color-black)", margin: 0 }}>{row.stem.body}</p>
                       </div>
                     </div>
-                    <p className="mt-5 flex items-center gap-4" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.92rem", color: "var(--color-black)", marginBottom: 0 }}>
-                      <span aria-hidden="true" style={{ color: "var(--color-academy-green)", fontSize: "1.5rem" }}>→</span>
+                    <p className="mt-5 flex items-center gap-4 px-4 sm:px-6" style={{ fontFamily: "var(--font-body)", fontWeight: "var(--font-weight-medium)", fontSize: "0.92rem", color: "var(--color-black)", marginBottom: 0 }}>
+                      <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center" style={{ color: "var(--color-academy-green)", fontSize: "1.5rem" }}>→</span>
                       {row.closingLine}
                     </p>
                   </div>
