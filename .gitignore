@@ -13,3 +13,5 @@ out/
 *.key
 *.tsbuildinfo
 .reality-check-tmp/
+
+.vercel

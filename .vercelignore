@@ -1,0 +1,6 @@
+design/
+.git/
+.reality-check-tmp/
+node_modules/
+.next/
+.vercel/
