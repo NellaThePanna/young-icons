@@ -75,7 +75,7 @@ function ChevronRightIcon() {
 function InfoRow({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span style={{ color: "var(--color-academy-green)", flexShrink: 0 }}>{icon}</span>
+      <span style={{ color: "var(--color-black)", flexShrink: 0 }}>{icon}</span>
       <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(0,0,0,0.7)" }}>
         {label}
       </span>
@@ -182,26 +182,6 @@ export default function CampCards() {
             >
               <ChevronRightIcon />
             </button>
-            <div
-              style={{
-                width: "48px",
-                height: "48px",
-                borderRadius: "50%",
-                border: "1px solid var(--color-black)",
-                background: "var(--color-white)",
-                padding: "6px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src="/images/holiday-camps/young-icons-circle-logo.png"
-                alt="Young Icons"
-                fill
-                className="object-contain"
-                sizes="48px"
-              />
-            </div>
           </div>
         </div>
 

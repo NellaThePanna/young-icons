@@ -13,7 +13,7 @@ export const SCHOOLS_CAMPS_INTRO = {
 } as const
 
 export const SCHOOLS_CAMPS_UPCOMING = {
-  heading: "HOLIDAY CAMPS",
+  heading: "FIND YOUR NEXT ADVENTURE.",
   camps: [
     {
       name: "Summer Camp",
