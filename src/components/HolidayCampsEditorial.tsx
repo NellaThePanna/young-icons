@@ -13,7 +13,7 @@ const displayStyle = {
 
 function BellIcon() {
   return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
       <path d="M13.73 21a2 2 0 0 1-3.46 0" />
     </svg>
@@ -46,7 +46,7 @@ export default function HolidayCampsEditorial() {
           backgroundColor: "#06351f",
         }}
       >
-        <div className="relative z-10 mx-auto grid max-w-[1320px] grid-cols-1 gap-6 sm:grid-cols-[auto_1px_auto] sm:items-center sm:gap-10 sm:justify-start">
+        <div className="relative z-10 mx-auto grid max-w-[1320px] grid-cols-1 gap-6 sm:grid-cols-[auto_1px_auto] sm:items-center sm:gap-16">
           <div className="flex items-center gap-4">
             <span style={{ color: "var(--color-warm-off-white)", flexShrink: 0 }}>
               <BellIcon />
