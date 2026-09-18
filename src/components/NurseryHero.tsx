@@ -28,56 +28,58 @@ export default function NurseryHero() {
       style={{ backgroundColor: "#f4f2ec", paddingTop: "clamp(5.75rem, 7vw, 7rem)", paddingBottom: "clamp(2rem, 3vw, 3rem)" }}
     >
       <div className="mx-auto px-5 sm:px-8 lg:px-12" style={{ maxWidth: "1456px" }}>
-        <h1
-          data-nursery-hero-reveal
-          className="leading-[0.98] sm:leading-[0.94]"
-          style={{
-            fontFamily: "var(--font-holiday-display), Impact, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(2.4rem, 5.2vw, 4.25rem)",
-            letterSpacing: "-0.025em",
-            color: "var(--color-black)",
-            textTransform: "uppercase",
-            margin: 0,
-          }}
-        >
-          {NURSERY_HERO_V2.headlineLines.map((line, index) => (
-            <span key={line} className="block">
-              {line}
-              <span style={{ color: "var(--color-academy-green)", marginLeft: "0.08em" }}>.</span>
-              {index === 0 && <br className="hidden" />}
-            </span>
-          ))}
-        </h1>
-
-        <div className="mt-8 grid grid-cols-1 gap-7 sm:mt-10 md:grid-cols-2 md:gap-12" data-nursery-hero-reveal>
-          <p
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+          <h1
+            data-nursery-hero-reveal
+            className="leading-[0.98] sm:leading-[0.94]"
             style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(1rem, 1.25vw, 1.2rem)",
-              lineHeight: 1.52,
+              fontFamily: "var(--font-holiday-display), Impact, sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(2.4rem, 5.2vw, 4.25rem)",
+              letterSpacing: "-0.025em",
               color: "var(--color-black)",
-              maxWidth: "430px",
+              textTransform: "uppercase",
               margin: 0,
             }}
           >
-            {NURSERY_HERO_V2.leftCopy}
-          </p>
-          <p
-            className="md:justify-self-end"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(1rem, 1.25vw, 1.2rem)",
-              lineHeight: 1.52,
-              color: "var(--color-nursery-stone)",
-              maxWidth: "390px",
-              margin: 0,
-            }}
-          >
-            {NURSERY_HERO_V2.rightCopy}
-          </p>
-        </div>
+            {NURSERY_HERO_V2.headlineLines.map((line, index) => (
+              <span key={line} className="block">
+                {line}
+                <span style={{ color: "var(--color-academy-green)", marginLeft: "0.08em" }}>.</span>
+                {index === 0 && <br className="hidden" />}
+              </span>
+            ))}
+          </h1>
 
+          <div className="flex justify-end" data-nursery-hero-reveal>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-4" style={{ maxWidth: "560px" }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "clamp(0.8rem, 0.95vw, 0.95rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.7,
+                  color: "var(--color-black)",
+                  margin: 0,
+                }}
+              >
+                {NURSERY_HERO_V2.leftCopy}
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "clamp(0.8rem, 0.95vw, 0.95rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.7,
+                  color: "var(--color-nursery-stone)",
+                  margin: 0,
+                }}
+              >
+                {NURSERY_HERO_V2.rightCopy}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div

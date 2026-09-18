@@ -50,7 +50,7 @@ export const NURSERY_ENQUIRY_CTA = {
 export const NURSERY_HERO_V2 = {
   headlineLines: ["WE'RE NEW HERE", "WE LEARN DIFFERENTLY"],
   leftCopy: "Specialist Early Years movement, sports and physical education designed around how young children develop.",
-  rightCopy: "One trusted partner for every stage of their journey.",
+  rightCopy: "One trusted partner bringing movement, sport and music together for your nursery.",
   image: "/images/placeholder/nursery-basketball.jpg",
   imageAlt: "Young children taking part in a nursery movement activity",
 } as const
